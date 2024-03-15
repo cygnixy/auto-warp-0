@@ -1,0 +1,91 @@
+/* setting */
+{% set stealth = False %}
+{% set bookmark_jump = True %}
+{% set push_button_yes = False %}
+-> main {
+    @repeat_until_success -> {
+        @fail_is_success -> {
+            @! is_docking?()
+            @! is_undocking?()
+            ? {
+                {% if push_button_yes %}
+                push_message_boxes
+                {% endif %}
+                on_space
+                on_station
+            }
+        }
+        /* exit condition */
+        -> {
+            in_station?()
+            @! is_route_set?()
+        }
+    }
+}
+-> push_message_boxes {
+    is_message_boxes?()
+    push_message_boxes()
+}
+-> on_station {
+    @! is_session_change?()
+    in_station?()
+    is_route_set?()
+    is_undock_button_ready?()
+    push_undock_button()
+}
+-> on_space {
+    @! in_station?()
+    ? {
+        move
+        {% if stealth %}
+        stealth
+        {% endif %}
+    }
+}
+-> move {
+    is_warp_ready?()
+    @! is_warp?()
+    @! is_jump?()
+    ? {
+        {% if bookmark_jump %}
+        open_dock_bookmarks_menu
+        open_undock_bookmarks_menu
+        {% endif %}
+        open_route_menu
+        warp
+    }
+}
+-> stealth {
+    is_stealth_ready?()
+    @! is_stealth?()
+    is_warp?()
+    stealth()
+}
+-> open_undock_bookmarks_menu {
+    is_menu_ready?()
+    @! is_warp_in_menu?()
+    is_state_undock?()
+    has_bookmark_undock?()
+    open_undock_bookmarks_menu()
+}
+-> open_dock_bookmarks_menu {
+    is_menu_ready?()
+    @! is_warp_in_menu?()
+    @! is_state_bookmark?()
+    has_bookmark_dock?()
+    is_last_system?()
+    open_dock_bookmarks_menu()
+}
+-> open_route_menu {
+    is_menu_ready?()
+    @! is_dock_or_jump_or_warp_in_menu?()
+    open_route_menu()
+}
+-> warp {
+    is_dock_or_jump_or_warp_in_menu?()
+    ? {
+        push_dock()
+        push_jump_throught_stargate()
+        push_warp_bookmark()
+    }
+}

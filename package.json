@@ -1,0 +1,9 @@
+{
+    "name": "auto-warp-0",
+    "publisher": "Cygnixy Team",
+    "description": "Bot for auto-warping",
+    "repository": {
+        "url": "https://github.com/cygnixy/auto-warp-0.git"
+    },
+    "version": "0.1.0"
+}
