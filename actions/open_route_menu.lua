@@ -5,6 +5,7 @@ if eve.info_panel_container and eve.info_panel_container.info_panel_route then
         if region ~= nil then
             local move_x = region.x + region.width // 2
             local move_y = region.y + region.height // 2
+            lock()
             info(string.format("MOVE MOUSE: %d %d", move_x, move_y))
             mouse_move(move_x, move_y)
             sleep(50)

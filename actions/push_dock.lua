@@ -11,6 +11,7 @@ if eve.context_menus ~= nil and #eve.context_menus > 0 and #eve.context_menus[1]
             local now = os.time()
             bb_set("warp", now)
             bb_set("state", "warp")
+            unlock()
             return "Success"
         end
     end

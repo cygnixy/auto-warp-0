@@ -4,6 +4,7 @@ if eve.standalone_bookmark_window and eve.standalone_bookmark_window.entries the
             local region = entry[2]
             local move_x = region.x + region.width // 2
             local move_y = region.y + region.height // 2
+            lock()
             info(string.format("MOVE MOUSE: %d %d", move_x, move_y))
             mouse_move(move_x, move_y)
             sleep(50)
