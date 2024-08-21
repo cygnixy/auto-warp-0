@@ -1,7 +1,8 @@
-/* setting */
-{% set stealth = False %}
-{% set bookmark_jump = True %}
-{% set push_button_yes = False %}
+/* <settings> */
+{% set stealth = false %}
+{% set bookmark_jump = true %}
+{% set push_button_yes = false %}
+/* </settings> */
 -> main {
     @repeat_until_success -> {
         @fail_is_success -> {
