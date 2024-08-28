@@ -1,5 +1,5 @@
 /* <settings> */
-{% set stealth = false %}
+{% set stealth = true %}
 {% set bookmark_jump = true %}
 {% set push_button_yes = false %}
 /* </settings> */
