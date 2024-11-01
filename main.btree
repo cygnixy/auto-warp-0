@@ -9,7 +9,7 @@ push_button_yes = true
             @! is_docking?()
             @! is_undocking?()
             ? {
-                push_message_boxes
+                @if(push_button_yes) push_message_boxes
                 on_space
                 on_station
             }
@@ -21,7 +21,7 @@ push_button_yes = true
         }
     }
 }
-@if(push_button_yes) -> push_message_boxes {
+-> push_message_boxes {
     is_message_boxes?()
     push_message_boxes()
 }
@@ -36,7 +36,7 @@ push_button_yes = true
     @! in_station?()
     ? {
         move
-        stealth
+        @if(stealth) stealth
     }
 }
 -> move {
@@ -44,26 +44,26 @@ push_button_yes = true
     @! is_warp?()
     @! is_jump?()
     ? {
-        open_dock_bookmarks_menu
-        open_undock_bookmarks_menu
+        @if(bookmark_jump) open_dock_bookmarks_menu
+        @if(bookmark_jump) open_undock_bookmarks_menu
         open_route_menu
         warp
     }
 }
-@if(stealth) -> stealth {
+-> stealth {
     is_stealth_ready?()
     @! is_stealth?()
     is_warp?()
     stealth()
 }
-@if(bookmark_jump) -> open_undock_bookmarks_menu {
+-> open_undock_bookmarks_menu {
     is_menu_ready?()
     @! is_warp_in_menu?()
     is_state_undock?()
     has_bookmark_undock?()
     open_undock_bookmarks_menu()
 }
-@if(bookmark_jump) -> open_dock_bookmarks_menu {
+-> open_dock_bookmarks_menu {
     is_menu_ready?()
     @! is_warp_in_menu?()
     @! is_state_bookmark?()
