@@ -1,17 +1,15 @@
-/* <settings> */
-{% set stealth = true %}
-{% set bookmark_jump = true %}
-{% set push_button_yes = true %}
-/* </settings> */
+
+stealth = true
+bookmark_jump = true
+push_button_yes = true
+
 -> main {
     @repeat_until_success -> {
         @fail_is_success -> {
             @! is_docking?()
             @! is_undocking?()
             ? {
-                {% if push_button_yes %}
                 push_message_boxes
-                {% endif %}
                 on_space
                 on_station
             }
@@ -23,7 +21,7 @@
         }
     }
 }
--> push_message_boxes {
+@if(push_button_yes) -> push_message_boxes {
     is_message_boxes?()
     push_message_boxes()
 }
@@ -38,9 +36,7 @@
     @! in_station?()
     ? {
         move
-        {% if stealth %}
         stealth
-        {% endif %}
     }
 }
 -> move {
@@ -48,28 +44,26 @@
     @! is_warp?()
     @! is_jump?()
     ? {
-        {% if bookmark_jump %}
         open_dock_bookmarks_menu
         open_undock_bookmarks_menu
-        {% endif %}
         open_route_menu
         warp
     }
 }
--> stealth {
+@if(stealth) -> stealth {
     is_stealth_ready?()
     @! is_stealth?()
     is_warp?()
     stealth()
 }
--> open_undock_bookmarks_menu {
+@if(bookmark_jump) -> open_undock_bookmarks_menu {
     is_menu_ready?()
     @! is_warp_in_menu?()
     is_state_undock?()
     has_bookmark_undock?()
     open_undock_bookmarks_menu()
 }
--> open_dock_bookmarks_menu {
+@if(bookmark_jump) -> open_dock_bookmarks_menu {
     is_menu_ready?()
     @! is_warp_in_menu?()
     @! is_state_bookmark?()
