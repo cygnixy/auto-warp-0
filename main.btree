@@ -1,7 +1,7 @@
 
-stealth = true
-bookmark_jump = true
-push_button_yes = true
+stealth = false
+bookmark_jump = false
+push_button_yes = false
 
 -> main {
     @repeat_until_success -> {

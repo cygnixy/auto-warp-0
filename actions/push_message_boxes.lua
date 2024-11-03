@@ -1,5 +1,5 @@
 if eve.message_boxes and #eve.message_boxes > 0 and eve.message_boxes[1].buttons then
-    for _, button in ipairs(eve.message_boxes[1].buttons) do
+    for _, button in eve.message_boxes[1].buttons do
         if button.label == "Yes" and button.region ~= nil then
             local move_x = button.region.x + button.region.width // 2
             local move_y = button.region.y + button.region.height // 2

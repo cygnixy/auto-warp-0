@@ -1,4 +1,4 @@
-local stealthTime = bb_get("stealth")
+local stealthTime = bb_get("stealth_start")
 if stealthTime ~= nil then
     local currentTime = os.time()
     local elapsed = currentTime - stealthTime
