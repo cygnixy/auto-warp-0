@@ -1,5 +1,5 @@
 if eve.hero_notification and eve.hero_notification.texts then
-    for _, text in ipairs(eve.hero_notification.texts) do
+    for _, text in eve.hero_notification.texts do
         if text == "Undocking" then
             return "Success"
         end

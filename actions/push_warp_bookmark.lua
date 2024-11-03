@@ -1,5 +1,5 @@
 if eve.context_menus and #eve.context_menus > 0 and eve.context_menus[1].entries and #eve.context_menus[1].entries > 0 then
-    for _, entry in ipairs(eve.context_menus[1].entries) do
+    for _, entry in eve.context_menus[1].entries do
         if string.find(entry.text, "Warp to") and entry.enabled then
             local move_x = entry.region.x + entry.region.width // 2
             local move_y = entry.region.y + entry.region.height // 2
