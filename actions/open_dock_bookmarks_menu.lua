@@ -4,6 +4,7 @@ function M.main(args)
     if eve.standalone_bookmark_window and eve.standalone_bookmark_window.entries then
         for _, entry in eve.standalone_bookmark_window.entries do
             if entry and entry[1] and string.find(entry[1], "Dock") then
+                window_focus()
                 local region = entry[2]
                 local move_x = region.x + region.width // 2
                 local move_y = region.y + region.height // 2
