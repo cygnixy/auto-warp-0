@@ -3,7 +3,7 @@ local M = {}
 function M.main(args)
     if eve.context_menus and #eve.context_menus > 0 and eve.context_menus[1].entries and #eve.context_menus[1].entries > 0 then
         for _, entry in eve.context_menus[1].entries do
-            if entry.text and entry.enabled and entry.text == "Jump through stargate" then
+            if entry.text and entry.enabled and (entry.text == "Jump through stargate" or entry.text == "Dock" or string.find(entry.text, "Warp to")) then
                 local move_x = entry.region.x + entry.region.width // 2
                 local move_y = entry.region.y + entry.region.height // 2
                 info(string.format("MOVE MOUSE: %d %d", move_x, move_y))
@@ -18,7 +18,7 @@ function M.main(args)
             end
         end
     end
-    return "Failure"
+    return "Running"
 end
 
 return M
