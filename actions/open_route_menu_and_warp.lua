@@ -6,7 +6,6 @@ function M.main(args)
         if route.route_element_marker and #route.route_element_marker > 0 then
             local region = route.route_element_marker[1].region
             if region ~= nil then
-                window_focus()
                 local move_x = region.x + region.width // 2
                 local move_y = region.y + region.height // 2
                 info(string.format("MOVE MOUSE: %d %d", move_x, move_y))
@@ -16,7 +15,6 @@ function M.main(args)
                 info("CLICK Mouse Button Right")
                 sleep(200)
                 update_eve()
-                info(package.path)
                 local push_jump_or_dock_or_warp = require("push_jump_or_dock_or_warp")
                 local result = push_jump_or_dock_or_warp.main()
                 return result
