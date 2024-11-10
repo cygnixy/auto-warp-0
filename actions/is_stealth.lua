@@ -1,8 +1,14 @@
-if eve.shipui and eve.shipui.offensive_buff_button_names then
-    for _, buff_name in eve.shipui.offensive_buff_button_names do
-        if buff_name == "CloakDefense" then
-            return "Success"
+local M = {}
+
+function M.main(args)
+    if eve.shipui and eve.shipui.offensive_buff_button_names then
+        for _, buff_name in eve.shipui.offensive_buff_button_names do
+            if buff_name == "CloakDefense" then
+                return "Success"
+            end
         end
     end
+    return "Failure"
 end
-return "Failure"
+
+return M
