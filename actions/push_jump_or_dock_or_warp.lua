@@ -13,7 +13,6 @@ function M.main(args)
         local entry = helpers.find_entry_by_priority(entries, target_texts_with_match)
 
         if entry then
-            window_focus()
             local move_x = entry.region.x + entry.region.width // 2
             local move_y = entry.region.y + entry.region.height // 2
             info(string.format("MOVE MOUSE: %d %d", move_x, move_y))

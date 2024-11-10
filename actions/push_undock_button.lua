@@ -4,7 +4,6 @@ function M.main(args)
     if eve.station_window and eve.station_window.buttons then
         local undock_button = eve.station_window.buttons["Undock"]
         if undock_button ~= nil then
-            window_focus()
             local move_x = undock_button.x + undock_button.width // 2
             local move_y = undock_button.y + undock_button.height // 2
             info(string.format("MOVE MOUSE: %d %d", move_x, move_y))
