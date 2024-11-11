@@ -7,3 +7,6 @@ function M.main(args)
     end
 
     return "Failure"
+end
+
+return M
