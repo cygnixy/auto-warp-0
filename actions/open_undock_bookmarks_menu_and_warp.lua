@@ -12,10 +12,11 @@ function M.main(args)
                 sleep(50)
                 mouse_click_right()
                 info("CLICK Mouse Button Right")
-                local now = os.time()
-                bb_set("open_menu", now)
                 sleep(200)
-                return "Success"
+                update_eve()
+                local push_jump_or_dock_or_warp = require("push_jump_or_dock_or_warp")
+                local result = push_jump_or_dock_or_warp.main()
+                return result
             end
         end
     end

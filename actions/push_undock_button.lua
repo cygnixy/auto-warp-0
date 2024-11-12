@@ -12,8 +12,8 @@ function M.main(args)
             mouse_click_left()
             info("CLICK Mouse Button Left")
             local now = os.time()
-            bb_set("undock", now)
-            bb_set("state", "undock")
+            bb_set("undock_timestamp", now)
+            bb_set("_state", "undock")
             return "Success"
         end
     end
