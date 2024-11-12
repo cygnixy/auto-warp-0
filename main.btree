@@ -28,7 +28,7 @@ push_button_yes = false
     @! is_session_change?()
     in_station?()
     is_route_set?()
-    is_undock_button_ready?()
+    is_timer_elapsed?("undock_timestamp", 3)
     push_undock_button()
 }
 -> on_space {
@@ -39,33 +39,27 @@ push_button_yes = false
     }
 }
 -> move {
-    is_warp_ready?()
+    is_timer_elapsed?("warp_timestamp", 3)
     @! is_warp?()
     @! is_jump?()
     ? {
-        @if(bookmark_jump) open_dock_bookmarks_menu
-        @if(bookmark_jump) open_undock_bookmarks_menu
+        @if(bookmark_jump) dock_bookmark
+        @if(bookmark_jump) undock_bookmark
         open_route_menu_and_warp()
     }
 }
 -> stealth {
-    is_stealth_ready?()
+    is_timer_elapsed?("stealth_timestamp", 3)
     @! is_stealth?()
     is_warp?()
     stealth()
 }
--> open_undock_bookmarks_menu {
-    is_menu_ready?()
-    @! is_warp_in_menu?()
-    is_state_undock?()
-    has_bookmark_undock?()
-    open_undock_bookmarks_menu()
-}
--> open_dock_bookmarks_menu {
-    is_menu_ready?()
-    @! is_warp_in_menu?()
-    @! is_state_bookmark?()
-    has_bookmark_dock?()
+-> dock_bookmark {
+    is_state?("warp")
     is_last_system?()
-    open_dock_bookmarks_menu()
+    open_dock_bookmarks_menu_and_warp()
+}
+-> undock_bookmark {
+    is_state?("undock")
+    open_undock_bookmarks_menu_and_warp()
 }

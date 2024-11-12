@@ -21,8 +21,8 @@ function M.main(args)
             mouse_click_left()
             info("CLICK Mouse Button Left")
             local now = os.time()
-            bb_set("warp", now)
-            bb_set("state", "warp")
+            bb_set("warp_timestamp", now)
+            bb_set("_state", "warp")
             return "Success"
         end
     end

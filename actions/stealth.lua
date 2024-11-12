@@ -5,7 +5,7 @@ function M.main(args)
     press_key(vkF1)
     info("PUSHED F1")
     local now = os.time()
-    bb_set("stealth_start", now)
+    bb_set("stealth_timestamp", now)
     return "Success"
 end
 
