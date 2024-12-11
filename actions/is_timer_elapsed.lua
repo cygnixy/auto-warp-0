@@ -4,7 +4,7 @@ local M = {}
 -- args[1]: The blackboard key for retrieving the timestamp of the event (e.g., "openMenu").
 -- args[2]: The threshold time in seconds. If the elapsed time exceeds this threshold, the function returns "Success".
 function M.main(args)
-    local openMenuTime = bb_get(args[1])
+    local openMenuTime = cygnixy.bb_get(args[1])
     if openMenuTime ~= nil then
         local currentTime = os.time()
         local elapsed = currentTime - openMenuTime
