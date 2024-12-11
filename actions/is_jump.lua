@@ -1,8 +1,8 @@
 local M = {}
 
 function M.main(args)
-    if eve.shipui and eve.shipui.indication and eve.shipui.indication.maneuver_type then
-        local maneuver_type = eve.shipui.indication.maneuver_type
+    if cygnixy.eve.shipui and cygnixy.eve.shipui.indication and cygnixy.eve.shipui.indication.maneuver_type then
+        local maneuver_type = cygnixy.eve.shipui.indication.maneuver_type
         if maneuver_type == "Jump" then
             return "Success"
         else

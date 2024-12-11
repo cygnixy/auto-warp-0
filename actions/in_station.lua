@@ -1,7 +1,7 @@
 local M = {}
 
 function M.main(args)
-    if eve.station_window and eve.station_window.buttons then
+    if cygnixy.eve.station_window and cygnixy.eve.station_window.buttons then
         return "Success"
     end
     return "Failure"
