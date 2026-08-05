@@ -20,33 +20,16 @@ local M = {}
 --
 -- Done when neither is on screen, which is also true when there was nothing to
 -- close — a route that was already set is reached without any search at all.
-local WAIT_SECONDS = 10
-local SINCE = "set_route_close_search_since"
+-- Nothing here is timed. An earlier version gave each window ten seconds and
+-- then flew on regardless, which is a clock deciding what only the client can:
+-- the results window closes when its Close button is pressed, and if a press
+-- does not land the answer is to press again, not to count. The ways out are
+-- the ones the client offers — the window gone, or no button to close it with.
 
 local function done()
-    cygnixy.bb_set(SINCE, 0)
+    log.forget("close_results")
+    log.forget("close_panel")
     return "Success"
-end
-
--- Gives up after the deadline, and gives up with Success.
---
--- The route is already set by the time this runs; failing the command here
--- would throw away the work over a window that refuses to shut. The operator
--- is told, the flight goes on with the window in the way.
-local function waiting(what)
-    local since = cygnixy.bb_get(SINCE)
-    local now = os.time()
-    if since == nil or since == 0 then
-        cygnixy.bb_set(SINCE, now)
-        return "Running"
-    end
-    if now - since > WAIT_SECONDS then
-        cygnixy.bb_set(SINCE, 0)
-        log.warn("route", what .. " would not close within " .. WAIT_SECONDS ..
-            "s — flying on with it on screen")
-        return "Success"
-    end
-    return "Running"
 end
 
 function M.main(args)
@@ -61,7 +44,9 @@ function M.main(args)
             log.repeated("close_results", "debug", "route",
                 "the results window was not closed: " .. tostring(err))
         end
-        return waiting("the results window")
+        -- Running either way: the window is still on screen this tick, and
+        -- the next one reads whether the press took.
+        return "Running"
     end
 
     if results and results.groups and #results.groups > 0 then
@@ -88,7 +73,7 @@ function M.main(args)
         log.repeated("close_panel", "debug", "route",
             "the search panel was not closed: " .. tostring(err))
     end
-    return waiting("the search panel")
+    return "Running"
 end
 
 return M

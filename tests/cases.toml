@@ -220,7 +220,7 @@ name = "the row named exactly right is right-clicked and Set Destination chosen"
 fixture = "tests/fixtures/search_row_menu_open.json"
 action = "set_route_choose"
 args = ["Jita"]
-expect = "Success"
+expect = "Running"
 log_contains = [
     "open_menu right_click region",
     "open_menu chose \"Set Destination\"",
@@ -273,16 +273,11 @@ action = "set_route_show_route"
 expect = "Success"
 
 [[case]]
-name = "the route has appeared: the command is done"
+name = "the route has appeared: the choice is done, whoever's press did it"
 fixture = "tests/fixtures/route_already_set.json"
-action = "set_route_confirm"
+action = "set_route_choose"
+args = ["Jita"]
 expect = "Success"
-
-[[case]]
-name = "no route yet: wait for the client, do not fail the mission"
-fixture = "tests/fixtures/search_closed.json"
-action = "set_route_confirm"
-expect = "Running"
 
 # --- set_route: putting the search away --------------------------------------
 
@@ -419,3 +414,31 @@ log_contains = [
     "bb_set log_chose = String(\"\")",
     "bb_set log_route_menu = String(\"\")",
 ]
+
+# --- reacting instead of timing ----------------------------------------------
+
+[[case]]
+name = "an unanswered order is given again, not timed out"
+fixtures = [
+    "tests/fixtures/search_row_menu_open.json",
+    "tests/fixtures/search_row_menu_open.json",
+    "tests/fixtures/search_row_menu_open.json",
+]
+action = "set_route_choose"
+args = ["Jita"]
+expect = "Running"
+log_contains = [
+    "warn: route: destination set to \"Jita\" — 3 times now, still trying",
+]
+
+[[case]]
+name = "a window still on screen is pressed again, however long it has been there"
+fixtures = [
+    "tests/fixtures/search_groups_collapsed.json",
+    "tests/fixtures/search_groups_collapsed.json",
+    "tests/fixtures/search_groups_collapsed.json",
+    "tests/fixtures/search_groups_collapsed.json",
+]
+action = "set_route_close_search"
+expect = "Running"
+log_contains = ["click(960, 706"]

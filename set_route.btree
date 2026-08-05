@@ -44,15 +44,12 @@
                     set_route_type_destination(destination)
                     set_route_collapse_groups()
                     set_route_expand_category(destination_kind)
+                    /* Succeeds on the route appearing, not on the press
+                       landing: between the two the client says nothing, so a
+                       step that trusted the press would hand the flight a
+                       route that was never set. It orders again while the
+                       route is missing and the row is still there. */
                     set_route_choose(destination)
-
-                    /* The click chose "Set Destination"; this waits for the
-                       client to agree. Without it the command reports success
-                       on a press that may have landed anywhere, and the flight
-                       starts with no route to follow — but the check has to
-                       wait rather than judge, because the route is drawn a
-                       moment after the press, not during it. */
-                    set_route_confirm()
                 }
             }
         }
@@ -60,7 +57,7 @@
         /* The search has done its work; from here on it is only in the way.
            This sits outside the branch above on purpose: it runs on the
            "already set" path too, and so clears a window left open by an
-           earlier mission stopped between the choice and the confirmation. */
+           earlier mission that was stopped mid-search. */
         set_route_close_search()
     }
 }
