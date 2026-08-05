@@ -1,0 +1,22 @@
+{
+    "station_window": null,
+    "info_panel_container": null,
+    "session_time_indicator": { "display": false, "hint": "" },
+    "hero_notification": { "texts": [] },
+    "shipui": null,
+    "message_boxes": [],
+    "context_menus": [],
+    "standalone_bookmark_window": null,
+    "locations_window": {
+        "entries": [
+            ["Undock spot", { "x": 282, "y": 147, "width": 514, "height": 300 }],
+            ["Dock spot", { "x": 282, "y": 147, "width": 514, "height": 300 }],
+            ["Safe spot", { "x": 282, "y": 147, "width": 514, "height": 300 }]
+        ]
+    },
+    "stacking": {
+        "client_area": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+        "modal_active": false,
+        "window_stack": []
+    }
+}

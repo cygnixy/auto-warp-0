@@ -1,0 +1,23 @@
+{
+    "station_window": null,
+    "info_panel_container": {
+        "info_panel_route": {
+            "next_system": "New Caldari",
+            "route_element_marker": [
+                { "region": { "x": 98, "y": 260, "width": 8, "height": 8 } }
+            ]
+        }
+    },
+    "session_time_indicator": { "display": true, "hint": "Session changing" },
+    "hero_notification": { "texts": [] },
+    "shipui": null,
+    "message_boxes": [],
+    "context_menus": [],
+    "standalone_bookmark_window": null,
+    "locations_window": null,
+    "stacking": {
+        "client_area": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+        "modal_active": false,
+        "window_stack": []
+    }
+}

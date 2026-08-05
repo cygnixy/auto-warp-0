@@ -1,0 +1,115 @@
+# Expectations for `bot-harness` from the Cygnixy workspace:
+#
+#   bot-harness <this repository>
+#
+# Each case loads a fixture (an interface snapshot as get_interface returns
+# it), runs one action against stubbed cygnixy.*, and checks the outcome and
+# what the bot did along the way. The fixtures are synthetic and minimal: they
+# carry exactly the fields the actions read, nothing personal, nothing extra.
+
+# --- conditions ------------------------------------------------------------
+
+[[case]]
+name = "docked: the station window is recognised"
+fixture = "tests/fixtures/docked_with_route.json"
+action = "in_station"
+expect = "Success"
+
+[[case]]
+name = "in space: no station window means not docked"
+fixture = "tests/fixtures/in_space_warping.json"
+action = "in_station"
+expect = "Failure"
+
+[[case]]
+name = "a set route is recognised by its markers"
+fixture = "tests/fixtures/docked_with_route.json"
+action = "is_route_set"
+expect = "Success"
+
+[[case]]
+name = "warping is recognised"
+fixture = "tests/fixtures/in_space_warping.json"
+action = "is_warp"
+expect = "Success"
+
+[[case]]
+name = "warping is not a jump"
+fixture = "tests/fixtures/in_space_warping.json"
+action = "is_jump"
+expect = "Failure"
+
+[[case]]
+name = "approaching counts as movement"
+fixture = "tests/fixtures/approaching_station.json"
+action = "is_approach"
+expect = "Success"
+
+[[case]]
+name = "a session change is recognised"
+fixture = "tests/fixtures/session_changing.json"
+action = "is_session_change"
+expect = "Success"
+
+[[case]]
+name = "no session change while docked"
+fixture = "tests/fixtures/docked_with_route.json"
+action = "is_session_change"
+expect = "Failure"
+
+[[case]]
+name = "an empty message-box list is not a message box"
+fixture = "tests/fixtures/docked_with_route.json"
+action = "is_message_boxes"
+expect = "Failure"
+
+[[case]]
+name = "an absent timer counts as elapsed"
+fixture = "tests/fixtures/docked_with_route.json"
+action = "is_timer_elapsed"
+args = ["warp_timestamp", 3]
+expect = "Success"
+
+# --- actions ---------------------------------------------------------------
+
+[[case]]
+name = "docked with a route: the undock button is pressed by path"
+fixture = "tests/fixtures/docked_with_route.json"
+action = "push_undock_button"
+expect = "Success"
+log_contains = [
+    "click_path(\"station_window.buttons.Undock\"",
+    "bb_set _state = String(\"undock\")",
+]
+
+[[case]]
+name = "the route marker menu offers the gate and it is chosen"
+fixture = "tests/fixtures/route_menu_open.json"
+action = "open_route_menu_and_warp"
+expect = "Success"
+log_contains = [
+    "click_path(\"info_panel_container.info_panel_route.route_element_marker[0].region\", \"right\")",
+    "CHOSE: Jump Through Stargate",
+    "bb_set _state = String(\"warp\")",
+]
+
+[[case]]
+name = "no menu opens: the action keeps running and says so"
+fixture = "tests/fixtures/docked_with_route.json"
+action = "open_route_menu_and_warp"
+expect = "Running"
+log_contains = ["no context menu opened"]
+
+[[case]]
+name = "bookmark rows sharing one region are refused, not guessed at"
+fixture = "tests/fixtures/bookmark_rows_share_region.json"
+action = "open_dock_bookmarks_menu_and_warp"
+expect = "Failure"
+log_contains = ["not addressable"]
+
+[[case]]
+name = "stealth presses F1 and records the time"
+fixture = "tests/fixtures/in_space_warping.json"
+action = "stealth"
+expect = "Success"
+log_contains = ["press_key(112.0,)", "bb_set stealth_timestamp"]
