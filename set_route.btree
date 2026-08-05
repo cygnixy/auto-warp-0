@@ -17,13 +17,13 @@
 
         -> {
             /* Nothing to look for — the mission was given no destination. */
-            set_route_has_destination?()
+            set_route_has_destination?(destination)
             @! is_session_change?()
 
             ? {
                 set_route_open_search()
                 set_route_clear_field()
-                set_route_type_destination()
+                set_route_type_destination(destination)
                 set_route_collapse_groups()
                 set_route_expand_category(destination_kind)
                 set_route_choose(destination)
