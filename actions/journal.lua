@@ -1,4 +1,5 @@
 local log = require("log")
+local state = require("state")
 
 local M = {}
 
@@ -27,6 +28,7 @@ local PLACE = "journal_place"
 local SYSTEM = "journal_system"
 local JUMPS = "journal_jumps"
 local ROUTE = "journal_route"
+local PHASE = "journal_phase"
 
 -- Names arrive as empty strings from a panel that is present but has nothing
 -- to say, and as empty tables from one that is absent altogether.
@@ -54,10 +56,23 @@ function M.main(args)
         end
     end
 
-    -- Where the ship is, told the same way the tree tells it (in_station), so
-    -- that the log and the behaviour can never disagree about it.
-    local station_window = cygnixy.eve.station_window
-    local now_place = (station_window and station_window.buttons) and "station" or "space"
+    -- The phase, read from the same module the tree acts on, so the log and
+    -- the behaviour can never disagree about what is going on.
+    local phase = state.phase()
+    local was_phase = cygnixy.bb_get(PHASE)
+    if phase ~= was_phase then
+        -- Debug, not info: phases change several times a jump and the reader
+        -- following the mission does not need them. The reader hunting a
+        -- fault needs nothing else.
+        log.debug("phase", tostring(was_phase == nil and "-" or was_phase) .. " -> " .. phase)
+        cygnixy.bb_set(PHASE, phase)
+    end
+
+    -- Silence is not space. During a session change and in the unknown the
+    -- client says nothing about where the ship is, and taking that for space
+    -- would have the log announce an undocking every time the screen went
+    -- black between systems.
+    local now_place = state.place(phase) or cygnixy.bb_get(PLACE)
 
     local panel = cygnixy.eve.info_panel_container
     local location = panel and panel.info_panel_location_info
@@ -90,7 +105,7 @@ function M.main(args)
     end
 
     local was_place = cygnixy.bb_get(PLACE)
-    if text(was_place) and now_place ~= was_place then
+    if text(was_place) and now_place ~= nil and now_place ~= was_place then
         moved = true
         if now_place == "space" then
             log.info("flight", "undocked into " .. (now_system or "space"))
@@ -106,7 +121,9 @@ function M.main(args)
             end
         end
     end
-    cygnixy.bb_set(PLACE, now_place)
+    if now_place ~= nil then
+        cygnixy.bb_set(PLACE, now_place)
+    end
 
     if moved then
         -- The orders that got the ship here worked; the next complaint about

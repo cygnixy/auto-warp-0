@@ -27,7 +27,9 @@ function M.after_chosen(entry, state)
     -- lines with nothing to say they were the same order repeated.
     log.repeated("chose", "info", "flight",
         "ordered " .. tostring(entry.text) .. " from the menu")
-    cygnixy.bb_set("warp_timestamp", os.time())
+    -- _state is intent — what was last ordered — and the bookmark branches
+    -- read it to know which leg they are on. It is not a phase: the phase is
+    -- what the client shows, and the two must not be confused again.
     cygnixy.bb_set("_state", state or "warp")
 end
 

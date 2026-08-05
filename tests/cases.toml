@@ -442,3 +442,72 @@ fixtures = [
 action = "set_route_close_search"
 expect = "Running"
 log_contains = ["click(960, 706"]
+
+# --- the phase: one answer to "what is going on" ------------------------------
+
+[[case]]
+name = "a hangar is a hangar even though the ship panel is drawn there too"
+fixture = "tests/fixtures/search_station_row_live.json"
+action = "phase_is"
+args = ["docked"]
+expect = "Success"
+
+[[case]]
+name = "in space with nothing happening is the phase that may be given orders"
+fixture = "tests/fixtures/journal_space_jita.json"
+action = "phase_is"
+args = ["adrift"]
+expect = "Success"
+
+[[case]]
+name = "a warping ship is not adrift"
+fixture = "tests/fixtures/in_space_warping.json"
+action = "phase_is"
+args = ["adrift"]
+expect = "Failure"
+
+[[case]]
+name = "the client announcing an undocking is not a client with nothing to say"
+fixture = "tests/fixtures/phase_undocking.json"
+action = "phase_is"
+args = ["undocking"]
+expect = "Success"
+
+[[case]]
+name = "docking is read from the announcement, before the hangar appears"
+fixture = "tests/fixtures/phase_docking.json"
+action = "phase_is"
+args = ["docking"]
+expect = "Success"
+
+[[case]]
+name = "a session change is its own phase, not an absence of others"
+fixture = "tests/fixtures/session_changing.json"
+action = "phase_is"
+args = ["session"]
+expect = "Success"
+
+[[case]]
+name = "a client saying nothing is unknown, and unknown is not free to act"
+fixture = "tests/fixtures/phase_unknown.json"
+action = "phase_is"
+args = ["adrift", "docked"]
+expect = "Failure"
+
+[[case]]
+name = "the unknown is named, so the tree can wait in it deliberately"
+fixture = "tests/fixtures/phase_unknown.json"
+action = "phase_is"
+args = ["unknown"]
+expect = "Success"
+
+[[case]]
+name = "silence between systems is not an undocking"
+fixtures = [
+    "tests/fixtures/journal_docked_jita.json",
+    "tests/fixtures/phase_unknown.json",
+    "tests/fixtures/journal_docked_jita.json",
+]
+action = "journal"
+expect = "Success"
+log_contains = ["debug: phase: docked -> unknown"]

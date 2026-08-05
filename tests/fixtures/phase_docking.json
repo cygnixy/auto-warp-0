@@ -24,7 +24,9 @@
   "hint": ""
  },
  "hero_notification": {
-  "texts": []
+  "texts": [
+   "Docking"
+  ]
  },
  "shipui": {
   "hitpoints_percent": {
@@ -32,9 +34,7 @@
    "shield": 100,
    "structure": 100
   },
-  "indication": {
-   "maneuver_type": null
-  }
+  "indication": null
  },
  "message_boxes": [],
  "context_menus": [],

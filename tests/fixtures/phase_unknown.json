@@ -26,16 +26,7 @@
  "hero_notification": {
   "texts": []
  },
- "shipui": {
-  "hitpoints_percent": {
-   "armor": 100,
-   "shield": 100,
-   "structure": 100
-  },
-  "indication": {
-   "maneuver_type": null
-  }
- },
+ "shipui": null,
  "message_boxes": [],
  "context_menus": [],
  "standalone_bookmark_window": null,

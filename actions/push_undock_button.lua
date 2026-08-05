@@ -22,7 +22,6 @@ function M.main(args)
     end
 
     log.forget("undock")
-    cygnixy.bb_set("undock_timestamp", os.time())
     cygnixy.bb_set("_state", "undock")
     return "Success"
 end
