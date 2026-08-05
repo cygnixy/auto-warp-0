@@ -279,3 +279,25 @@ name = "no route yet: wait for the client, do not fail the mission"
 fixture = "tests/fixtures/search_closed.json"
 action = "set_route_confirm"
 expect = "Running"
+
+# --- set_route: putting the search away --------------------------------------
+
+[[case]]
+name = "the results window is closed once the route is set"
+fixture = "tests/fixtures/search_groups_collapsed.json"
+action = "set_route_close_search"
+expect = "Running"
+log_contains = ["click(960, 706"]
+
+[[case]]
+name = "with the window gone the panel is toggled shut"
+fixture = "tests/fixtures/search_open_empty.json"
+action = "set_route_close_search"
+expect = "Running"
+log_contains = ["click_path(\"info_panel_container.icons.search\""]
+
+[[case]]
+name = "nothing left open is nothing to close"
+fixture = "tests/fixtures/search_closed.json"
+action = "set_route_close_search"
+expect = "Success"

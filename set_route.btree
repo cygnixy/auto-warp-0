@@ -56,5 +56,11 @@
                 }
             }
         }
+
+        /* The search has done its work; from here on it is only in the way.
+           This sits outside the branch above on purpose: it runs on the
+           "already set" path too, and so clears a window left open by an
+           earlier mission stopped between the choice and the confirmation. */
+        set_route_close_search()
     }
 }
