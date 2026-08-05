@@ -267,3 +267,15 @@ name = "a shown route block is left alone: the icon is a toggle"
 fixture = "tests/fixtures/route_already_set.json"
 action = "set_route_show_route"
 expect = "Success"
+
+[[case]]
+name = "the route has appeared: the command is done"
+fixture = "tests/fixtures/route_already_set.json"
+action = "set_route_confirm"
+expect = "Success"
+
+[[case]]
+name = "no route yet: wait for the client, do not fail the mission"
+fixture = "tests/fixtures/search_closed.json"
+action = "set_route_confirm"
+expect = "Running"

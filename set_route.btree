@@ -46,11 +46,13 @@
                     set_route_expand_category(destination_kind)
                     set_route_choose(destination)
 
-                    /* The click chose "Set Destination"; this is the client
-                       agreeing. Without it the command reports success on a
-                       press that may have landed anywhere, and the flight
-                       starts with no route to follow. */
-                    is_route_set?()
+                    /* The click chose "Set Destination"; this waits for the
+                       client to agree. Without it the command reports success
+                       on a press that may have landed anywhere, and the flight
+                       starts with no route to follow — but the check has to
+                       wait rather than judge, because the route is drawn a
+                       moment after the press, not during it. */
+                    set_route_confirm()
                 }
             }
         }
