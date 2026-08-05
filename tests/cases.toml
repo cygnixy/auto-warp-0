@@ -402,18 +402,28 @@ expect = "Running"
 log_contains = ["warn: route: waiting for the foreground before focusing the search field — 3 times now"]
 
 [[case]]
-name = "a jump clears the count of orders given, so the next leg starts fresh"
+name = "any change of phase clears the count of orders given"
+fixtures = [
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/in_space_warping.json",
+]
+action = "journal"
+expect = "Success"
+log_contains = [
+    "debug: phase: adrift -> warping",
+    "bb_set log_chose = String(\"\")",
+    "bb_set log_route_menu = String(\"\")",
+]
+
+[[case]]
+name = "a jump is still counted when the client changes the system under the ship"
 fixtures = [
     "tests/fixtures/journal_space_jita.json",
     "tests/fixtures/journal_space_perimeter.json",
 ]
 action = "journal"
 expect = "Success"
-log_contains = [
-    "info: flight: jumped into Perimeter",
-    "bb_set log_chose = String(\"\")",
-    "bb_set log_route_menu = String(\"\")",
-]
+log_contains = ["info: flight: jumped into Perimeter"]
 
 # --- reacting instead of timing ----------------------------------------------
 

@@ -66,6 +66,16 @@ function M.main(args)
         -- fault needs nothing else.
         log.debug("phase", tostring(was_phase == nil and "-" or was_phase) .. " -> " .. phase)
         cygnixy.bb_set(PHASE, phase)
+
+        -- A phase change is proof the client is answering, and the counters
+        -- that turn a repeated line into a warning mean "the same thing to no
+        -- effect". On 2026-08-05 at 18:51 the third order to jump was warned
+        -- about one second after the warp it had caused ended — the orders had
+        -- all worked, on three separate gates, and only the count was kept
+        -- across them. Any change of phase clears it; a bot that is truly
+        -- stuck changes phase not at all.
+        log.forget("chose")
+        log.forget("route_menu")
     end
 
     -- Silence is not space. During a session change and in the unknown the
@@ -78,15 +88,6 @@ function M.main(args)
     local location = panel and panel.info_panel_location_info
     local now_system = location and text(location.current_solar_system_name)
 
-    -- Whether the ship got anywhere this tick. The counters that turn a
-    -- repeated line into a warning mean "the same thing to no effect", and
-    -- only this action can tell effect from repetition: the tactics see one
-    -- gate at a time and give every one of them the same order. On 2026-08-05
-    -- at 17:53 the third "Jump Through Stargate" was warned about ten seconds
-    -- after the jump it had caused, because nobody had told the counter that
-    -- the ship had moved.
-    local moved = false
-
     -- A jump is seen, not performed: the name in the location panel changes
     -- when the client finishes the session change, whoever ordered it and
     -- however many attempts it took.
@@ -98,7 +99,6 @@ function M.main(args)
             "flight",
             "jumped into " .. now_system .. " — " .. tostring(log.jumps(jumps)) .. " so far"
         )
-        moved = true
     end
     if now_system then
         cygnixy.bb_set(SYSTEM, now_system)
@@ -106,7 +106,6 @@ function M.main(args)
 
     local was_place = cygnixy.bb_get(PLACE)
     if text(was_place) and now_place ~= nil and now_place ~= was_place then
-        moved = true
         if now_place == "space" then
             log.info("flight", "undocked into " .. (now_system or "space"))
         else
@@ -125,12 +124,7 @@ function M.main(args)
         cygnixy.bb_set(PLACE, now_place)
     end
 
-    if moved then
-        -- The orders that got the ship here worked; the next complaint about
-        -- them starts from one, not from where the last leg left off.
-        log.forget("chose")
-        log.forget("route_menu")
-    end
+
 
     local route = panel and panel.info_panel_route
     local markers = (route and route.route_element_marker) and #route.route_element_marker or 0
