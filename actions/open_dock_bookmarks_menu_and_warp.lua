@@ -1,29 +1,24 @@
+local bookmarks = require("bookmarks")
+local pointer = require("pointer")
+local warp_choice = require("warp_choice")
+
 local M = {}
 
 function M.main(args)
-    if cygnixy.eve.standalone_bookmark_window and cygnixy.eve.standalone_bookmark_window.entries then
-        for _, entry in cygnixy.eve.standalone_bookmark_window.entries do
-            if entry and entry[1] and string.find(entry[1], "Dock") then
-                local region = entry[2]
-                local move_x = region.x + region.width // 2
-                local move_y = region.y + region.height // 2
-                cygnixy.info(string.format("MOVE MOUSE: %d %d", move_x, move_y))
-                cygnixy.mouse_move(move_x, move_y)
-                cygnixy.sleep(50)
-                cygnixy.mouse_click_right()
-                cygnixy.info("CLICK Mouse Button Right")
-                cygnixy.sleep(200)
-                cygnixy.update_eve()
-                local push_jump_or_dock_or_warp = require("push_jump_or_dock_or_warp")
-                local result = push_jump_or_dock_or_warp.main()
-                if result == "Success" then
-                    cygnixy.bb_set("_state", "dock")
-                end
-                return result
-            end
-        end
+    local bookmark, why = bookmarks.find("dock")
+    if bookmark == nil then
+        cygnixy.info("DOCK BOOKMARK: " .. tostring(why))
+        return "Failure"
     end
-    return "Failure"
+
+    local entry, err = pointer.open_menu_and_choose(bookmark.region, warp_choice.choices)
+    if entry == nil then
+        cygnixy.info("DOCK BOOKMARK MENU: " .. tostring(err))
+        return "Failure"
+    end
+
+    warp_choice.after_chosen(entry, "dock")
+    return "Success"
 end
 
 return M

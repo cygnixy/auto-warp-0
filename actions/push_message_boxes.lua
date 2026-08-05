@@ -1,19 +1,26 @@
+local pointer = require("pointer")
+
 local M = {}
 
+-- The buttons of a message box arrive as pairs of the node and its caption, not
+-- as records with `label` and `region` fields. This action read fields that were
+-- never there, found nothing to press, and answered Failure on every box the
+-- client put up.
 function M.main(args)
-    if cygnixy.eve.message_boxes and #cygnixy.eve.message_boxes > 0 and cygnixy.eve.message_boxes[1].buttons then
-        for _, button in cygnixy.eve.message_boxes[1].buttons do
-            if button.label == "Yes" and button.region ~= nil then
-                local move_x = button.region.x + button.region.width // 2
-                local move_y = button.region.y + button.region.height // 2
-                cygnixy.info(string.format("MOVE MOUSE: %d %d", move_x, move_y))
-                cygnixy.mouse_move(move_x, move_y)
-                cygnixy.sleep(50)
-                cygnixy.mouse_click_left()
-                cygnixy.info("CLICK Mouse Button Left")
-                cygnixy.sleep(50)
-                return "Success"
+    local boxes = cygnixy.eve.message_boxes
+    if not (boxes and #boxes > 0 and boxes[1].buttons) then
+        return "Failure"
+    end
+
+    for _, button in ipairs(boxes[1].buttons) do
+        local node, label = button[1], button[2]
+        if label == "Yes" and node and node.region then
+            local pressed, err = pointer.click(node.region)
+            if not pressed then
+                cygnixy.info("MESSAGE BOX: " .. tostring(err))
+                return "Failure"
             end
+            return "Success"
         end
     end
     return "Failure"

@@ -1,27 +1,43 @@
+local pointer = require("pointer")
+local warp_choice = require("warp_choice")
+
 local M = {}
 
-function M.main(args)
-    if cygnixy.eve.info_panel_container and cygnixy.eve.info_panel_container.info_panel_route then
-        local route = cygnixy.eve.info_panel_container.info_panel_route
-        if route.route_element_marker and #route.route_element_marker > 0 then
-            local region = route.route_element_marker[1].region
-            if region ~= nil then
-                local move_x = region.x + region.width // 2
-                local move_y = region.y + region.height // 2
-                cygnixy.info(string.format("MOVE MOUSE: %d %d", move_x, move_y))
-                cygnixy.mouse_move(move_x, move_y)
-                cygnixy.sleep(50)
-                cygnixy.mouse_click_right()
-                cygnixy.info("CLICK Mouse Button Right")
-                cygnixy.sleep(200)
-                cygnixy.update_eve()
-                local push_jump_or_dock_or_warp = require("push_jump_or_dock_or_warp")
-                local result = push_jump_or_dock_or_warp.main()
-                return result
-            end
-        end
+-- Markers are addressed by path rather than by the regions read out of them:
+-- along a path the click point is worked out with the windows lying over the
+-- info panel taken into account, and a marker is eight pixels across — a window
+-- over its corner is enough to swallow the click.
+--
+-- All of them are offered, in the order the panel lists them, because the first
+-- is not always the gate: on the leg into a system the panel carries two, and
+-- the leading one is the system just reached.
+local function marker_paths(count)
+    local paths = {}
+    for index = 1, count do
+        paths[index] = string.format(
+            "info_panel_container.info_panel_route.route_element_marker[%d].region",
+            index - 1
+        )
     end
-    return "Running"
+    return paths
+end
+
+function M.main(args)
+    local panel = cygnixy.eve.info_panel_container
+    local route = panel and panel.info_panel_route
+    if not (route and route.route_element_marker and #route.route_element_marker > 0) then
+        return "Running"
+    end
+
+    local paths = marker_paths(#route.route_element_marker)
+    local entry, err = pointer.open_menu_and_choose(paths, warp_choice.choices)
+    if entry == nil then
+        cygnixy.info("ROUTE MENU: " .. tostring(err))
+        return "Running"
+    end
+
+    warp_choice.after_chosen(entry)
+    return "Success"
 end
 
 return M
