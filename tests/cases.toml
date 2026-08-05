@@ -88,7 +88,8 @@ fixture = "tests/fixtures/route_menu_open.json"
 action = "open_route_menu_and_warp"
 expect = "Success"
 log_contains = [
-    "click_path(\"info_panel_container.info_panel_route.route_element_marker[0].region\", \"right\")",
+    "open_menu right_click \"info_panel_container.info_panel_route.route_element_marker[0].region\"",
+    "open_menu chose \"Jump Through Stargate\"",
     "CHOSE: Jump Through Stargate",
     "bb_set _state = String(\"warp\")",
 ]
