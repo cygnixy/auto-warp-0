@@ -48,11 +48,49 @@ function M.main(args)
     -- the gesture cost a second, and the bot waits as before. Either way the
     -- next run answers the question with evidence.
     if state.phase() == state.SESSION then
+        -- The panel must have caught up with the jump first.
+        --
+        -- The trial of 20:27 answered the old question and found a different
+        -- one. Menus do open during a session change: the order given while
+        -- undocking was taken, and the ship left for the gate six seconds
+        -- early. But after a jump the route panel still describes the leg just
+        -- flown, and its markers open menus for a station left behind — "Show
+        -- Info, Save Location..., Remove Waypoint", nothing to fly by.
+        --
+        -- The panel says so itself. Until it catches up, the waypoint it names
+        -- as next is the system the ship is already in; when it names the one
+        -- beyond, it has been redrawn and its markers point where the ship is
+        -- going. On the last leg the two are equal for real, and no probe is
+        -- made -- the dock order is given a moment later, from adrift, as it
+        -- always was.
+        local panel = cygnixy.eve.info_panel_container
+        local route = panel and panel.info_panel_route
+        local location = panel and panel.info_panel_location_info
+        local next_stop = route and route.next_system
+        local here = location and location.current_solar_system_name
+        if type(next_stop) ~= "string" or next_stop == "" or next_stop == here then
+            cygnixy.bb_set("panel_fresh", 0)
+            return "Running"
+        end
+
+        -- And it must hold. A panel redrawn this very tick is a panel still
+        -- being redrawn: the waypoint arrives before the markers under it are
+        -- in their places, and a menu opened between the two belongs to
+        -- whatever was there before. So the new state is watched for a tick
+        -- before it is trusted -- patience counted in looks at the client
+        -- rather than in seconds.
+        local fresh = (cygnixy.bb_get("panel_fresh") or 0) + 1
+        cygnixy.bb_set("panel_fresh", fresh)
+        if fresh < 2 then
+            return "Running"
+        end
+
         if (cygnixy.bb_get("phase_try") or 0) == 1 then
             return "Running"
         end
         cygnixy.bb_set("phase_try", 1)
-        log.debug("flight", "trying the route marker during the session change")
+        cygnixy.bb_set("panel_fresh", 0)
+        log.debug("flight", "the route panel has caught up and held; trying it mid-session")
     end
 
     -- An order of ours is outstanding, and the ship is moving: it is being
