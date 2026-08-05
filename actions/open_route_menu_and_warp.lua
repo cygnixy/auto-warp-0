@@ -1,4 +1,5 @@
 local log = require("log")
+local state = require("state")
 local pointer = require("pointer")
 local warp_choice = require("warp_choice")
 
@@ -34,6 +35,26 @@ end
 local PATIENCE = 10
 
 function M.main(args)
+    -- The session change is being tested, and tested cheaply.
+    --
+    -- The tree waited it out because the client "opens no context menu while
+    -- the session is changing" — written down long ago and never measured.
+    -- The wait costs nine and a half seconds after every jump: twenty-eight
+    -- seconds of the four-and-a-half-minute flight of 20:14, a tenth of it.
+    --
+    -- So one probe per session change, not one per tick. If the menu opens,
+    -- the ship is on its way to the next gate eight seconds early and the log
+    -- says "ordered". If it does not, the log says "no context menu opened",
+    -- the gesture cost a second, and the bot waits as before. Either way the
+    -- next run answers the question with evidence.
+    if state.phase() == state.SESSION then
+        if (cygnixy.bb_get("phase_try") or 0) == 1 then
+            return "Running"
+        end
+        cygnixy.bb_set("phase_try", 1)
+        log.debug("flight", "trying the route marker during the session change")
+    end
+
     -- An order of ours is outstanding, and the ship is moving: it is being
     -- obeyed, and a second order would only interrupt the first. Speed alone
     -- would not do — a ship pushed out of a station moves with nothing

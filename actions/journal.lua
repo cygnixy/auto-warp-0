@@ -86,6 +86,11 @@ function M.main(args)
         log.forget("chose")
         log.forget("route_menu")
 
+        -- A new phase earns one fresh attempt at ordering. It matters for the
+        -- session change, where the tree is allowed a single probe rather
+        -- than one per tick: see open_route_menu_and_warp.
+        cygnixy.bb_set("phase_try", 0)
+
         -- An order ends where the client says it ended, and only some phases
         -- say that. "Jump through stargate" covers the warp and the jump both:
         -- arriving at the gate is the middle of it, not the end. Clearing the

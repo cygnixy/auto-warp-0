@@ -51,7 +51,11 @@
    guards this replaces could each say what was not happening; none could say
    the client was ready, so between them sat a three-second timer guessing. */
 -> move {
-    phase_is?("adrift")
+    /* session is here on trial: the client is said to refuse context menus
+       while it changes, and the wait costs nine seconds after every jump.
+       The action probes once per session change and reports what happened;
+       if the claim holds, this word comes back out. */
+    phase_is?("adrift", "session")
     ? {
         @if(bookmark_jump) dock_bookmark
         @if(bookmark_jump) undock_bookmark

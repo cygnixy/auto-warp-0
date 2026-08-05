@@ -682,3 +682,26 @@ expect = "Success"
 [[case.log_counts]]
 needle = "info: route: the client is showing the route"
 times = 1
+
+# --- the session change, on trial ---------------------------------------------
+
+[[case]]
+name = "the session change is probed once, not once per tick"
+fixtures = [
+    "tests/fixtures/session_changing.json",
+    "tests/fixtures/session_changing.json",
+    "tests/fixtures/session_changing.json",
+    "tests/fixtures/session_changing.json",
+]
+action = "open_route_menu_and_warp"
+expect = "Running"
+[[case.log_counts]]
+needle = "open_menu right_click"
+times = 1
+
+[[case]]
+name = "a settled ship is not rationed: it may be ordered whenever it is free"
+fixture = "tests/fixtures/route_menu_open.json"
+action = "open_route_menu_and_warp"
+expect = "Success"
+log_contains = ["open_menu chose \"Jump Through Stargate\""]
