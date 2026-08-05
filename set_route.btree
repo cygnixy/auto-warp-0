@@ -1,40 +1,57 @@
 /* Strategic command: set the route to a named station or solar system.
  *
- * Success means the route panel carries markers. That is also the first
+ * Success means the route panel carries markers — the command confirms its
+ * work rather than trusting the click that did it. That is also the first
  * condition, which makes the command idempotent: a route already set is a
  * command already done, and a mission restarted mid-flight does not throw
  * away the route the ship is following.
  *
- * The steps below are the client's own order, learned the hard way: the
- * magnifier is a toggle, the panel keeps its region in the tree even when
- * closed, and the results window buries the wanted category under hundreds of
- * character names until the groups are collapsed. */
+ * The route block of the info panel is opened first, and it is opened whether
+ * or not a destination was given: everything downstream reads the route from
+ * that block — is_route_set, the markers the ship is steered by, the exit
+ * condition of the whole flight — and while it is collapsed a route that
+ * exists looks exactly like a route that does not.
+ *
+ * The steps are the client's own order, learned the hard way: the magnifier is
+ * a toggle, the panel keeps its region in the tree even when closed, and the
+ * results window buries the wanted category under hundreds of character names
+ * until the groups are collapsed. */
 
 -> set_route {
-    ? {
-        /* Already there: nothing to do. */
-        is_route_set?()
+    ->* {
+        set_route_show_route()
 
-        -> {
-            /* Nothing to look for — the mission was given no destination. */
-            set_route_has_destination?(destination)
-            @! is_session_change?()
+        ? {
+            /* Already there: nothing to do. */
+            is_route_set?()
 
-            /* A memory sequence, and it has to be one. A fallback would end
-               at the first step that succeeds — opening the panel, and the
-               command would call itself done having typed nothing. A plain
-               sequence would re-run every step each tick, and two of these
-               steps undo each other: collapsing the groups is done when no
-               category is expanded, expanding one is done when a category
-               is, so the pair would fight forever. Memory keeps the finished
-               steps finished. */
-            ->* {
-                set_route_open_search()
-                set_route_clear_field()
-                set_route_type_destination(destination)
-                set_route_collapse_groups()
-                set_route_expand_category(destination_kind)
-                set_route_choose(destination)
+            -> {
+                /* Nothing to look for — the mission was given no destination. */
+                set_route_has_destination?(destination)
+                @! is_session_change?()
+
+                /* A memory sequence, and it has to be one. A fallback would end
+                   at the first step that succeeds — opening the panel, and the
+                   command would call itself done having typed nothing. A plain
+                   sequence would re-run every step each tick, and two of these
+                   steps undo each other: collapsing the groups is done when no
+                   category is expanded, expanding one is done when a category
+                   is, so the pair would fight forever. Memory keeps the finished
+                   steps finished. */
+                ->* {
+                    set_route_open_search()
+                    set_route_clear_field()
+                    set_route_type_destination(destination)
+                    set_route_collapse_groups()
+                    set_route_expand_category(destination_kind)
+                    set_route_choose(destination)
+
+                    /* The click chose "Set Destination"; this is the client
+                       agreeing. Without it the command reports success on a
+                       press that may have landed anywhere, and the flight
+                       starts with no route to follow. */
+                    is_route_set?()
+                }
             }
         }
     }

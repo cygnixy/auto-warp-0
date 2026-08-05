@@ -252,3 +252,18 @@ name = "a route already set is a command already done"
 fixture = "tests/fixtures/route_already_set.json"
 action = "is_route_set"
 expect = "Success"
+
+# --- set_route: the route block ---------------------------------------------
+
+[[case]]
+name = "a collapsed route block is opened by its icon"
+fixture = "tests/fixtures/route_block_hidden.json"
+action = "set_route_show_route"
+expect = "Running"
+log_contains = ["click_path(\"info_panel_container.icons.route\""]
+
+[[case]]
+name = "a shown route block is left alone: the icon is a toggle"
+fixture = "tests/fixtures/route_already_set.json"
+action = "set_route_show_route"
+expect = "Success"
