@@ -1,4 +1,5 @@
 local log = require("log")
+local press = require("press")
 local pointer = require("pointer")
 
 local M = {}
@@ -13,6 +14,10 @@ local M = {}
 function M.main(args)
     local search = cygnixy.eve.info_panel_search
     if search and search.display == true then
+        -- Already open -- whether this action opened it, an earlier mission
+        -- did, or the operator did. The icon is a toggle: pressing it now
+        -- would close the very panel that is wanted.
+        press.done("open_search")
         return "Success"
     end
 
@@ -22,7 +27,15 @@ function M.main(args)
         return "Failure"
     end
 
+    -- The panel is not open and the icon is a toggle: press it once and let
+    -- the client answer. Pressing every tick would open and close it in turn,
+    -- which is how the closing half of this pair spent twenty-two seconds on
+    -- 2026-08-05.
+    if press.pending("open_search") then
+        return "Running"
+    end
     local clicked, err = pointer.click("info_panel_container.icons.search")
+    press.made("open_search")
     if not clicked then
         if pointer.transient(err) then
             log.repeated("open_search", "debug", "route",

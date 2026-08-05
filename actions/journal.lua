@@ -46,6 +46,15 @@ function M.main(args)
     if (cygnixy.bb_get(STARTED) or 0) == 0 then
         cygnixy.bb_set(STARTED, 1)
         cygnixy.bb_set(JUMPS, 0)
+        -- The versions first, and in the mission's own log rather than the
+        -- application's: a log read an hour later is read to answer "what was
+        -- flying, and on what", and until 2026-08-05 it could not.
+        log.info(
+            "mission",
+            "auto-warp-0 " .. tostring(cygnixy.bot_version) ..
+                " on cygnixy " .. tostring(cygnixy.version)
+        )
+
         if text(destination) then
             log.info(
                 "mission",
@@ -146,6 +155,13 @@ function M.main(args)
     local route = panel and panel.info_panel_route
     local markers = (route and route.route_element_marker) and #route.route_element_marker or 0
     local before = cygnixy.bb_get(ROUTE) or 0
+
+    -- Silence is not an empty route. The panel blanks for a moment while the
+    -- client changes session, and on 2026-08-05 that made the journal announce
+    -- the route a second time, mid-flight, as though it had just been set.
+    if markers == 0 and (phase == state.SESSION or phase == state.UNKNOWN) then
+        markers = before
+    end
     if markers > 0 and before == 0 then
         local next_stop = route and text(route.next_system)
         if next_stop then

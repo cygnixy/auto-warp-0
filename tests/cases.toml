@@ -289,11 +289,13 @@ expect = "Running"
 log_contains = ["click(960, 706"]
 
 [[case]]
-name = "with the window gone the panel is toggled shut"
+name = "with the results window gone the panel is left alone: the magnifier is a toggle"
 fixture = "tests/fixtures/search_open_empty.json"
 action = "set_route_close_search"
-expect = "Running"
-log_contains = ["click_path(\"info_panel_container.icons.search\""]
+expect = "Success"
+[[case.log_counts]]
+needle = "click_path(\"info_panel_container.icons.search\""
+times = 0
 
 [[case]]
 name = "nothing left open is nothing to close"
@@ -310,6 +312,7 @@ action = "journal"
 args = ["Jita IV - Moon 4 - Caldari Navy Assembly Plant", "station"]
 expect = "Success"
 log_contains = [
+    "info: mission: auto-warp-0 0.0.0-harness on cygnixy 0.0.0-harness",
     "info: mission: bound for Jita IV - Moon 4 - Caldari Navy Assembly Plant, looked up among the stations",
     "info: route: the client is showing the route; next waypoint Perimeter",
 ]
@@ -586,13 +589,13 @@ log_contains = ["open_menu chose \"Jump Through Stargate\""]
 # --- a press is not an order --------------------------------------------------
 
 [[case]]
-name = "the magnifier is pressed once, then left alone while the client answers"
+name = "the magnifier is pressed once to open the search, and not once per tick"
 fixtures = [
-    "tests/fixtures/search_open_empty.json",
-    "tests/fixtures/search_open_empty.json",
-    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_closed.json",
+    "tests/fixtures/search_closed.json",
+    "tests/fixtures/search_closed.json",
 ]
-action = "set_route_close_search"
+action = "set_route_open_search"
 expect = "Running"
 [[case.log_counts]]
 needle = "click_path(\"info_panel_container.icons.search\""
@@ -635,3 +638,28 @@ log_contains = [
 [[case.log_counts]]
 needle = "warn: route: waiting for the foreground before focusing the search field"
 times = 2
+
+[[case]]
+name = "a route panel blanked by a session change is not an answer about the route"
+fixture = "tests/fixtures/session_route_blank.json"
+action = "is_route_set"
+expect = "Running"
+
+[[case]]
+name = "a blank panel with the client settled is an answer: there is no route"
+fixture = "tests/fixtures/route_block_hidden.json"
+action = "is_route_set"
+expect = "Failure"
+
+[[case]]
+name = "the route is not announced twice because the panel blinked"
+fixtures = [
+    "tests/fixtures/journal_docked_jita.json",
+    "tests/fixtures/session_changing.json",
+    "tests/fixtures/journal_docked_jita.json",
+]
+action = "journal"
+expect = "Success"
+[[case.log_counts]]
+needle = "info: route: the client is showing the route"
+times = 1
