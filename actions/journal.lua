@@ -76,6 +76,11 @@ function M.main(args)
         -- stuck changes phase not at all.
         log.forget("chose")
         log.forget("route_menu")
+
+        -- And the order is no longer outstanding: the client has moved on to
+        -- something, which is the answer that was being waited for.
+        cygnixy.bb_set("order_pending", 0)
+        cygnixy.bb_set("order_ticks", 0)
     end
 
     -- Silence is not space. During a session change and in the unknown the

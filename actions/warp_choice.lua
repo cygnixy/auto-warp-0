@@ -31,6 +31,12 @@ function M.after_chosen(entry, state)
     -- read it to know which leg they are on. It is not a phase: the phase is
     -- what the client shows, and the two must not be confused again.
     cygnixy.bb_set("_state", state or "warp")
+
+    -- An order is outstanding until the client shows it has been taken. The
+    -- flag is what lets the next tick tell "the ship is moving because of me"
+    -- from "the ship is moving"; journal clears it on any change of phase.
+    cygnixy.bb_set("order_pending", 1)
+    cygnixy.bb_set("order_ticks", 0)
 end
 
 return M

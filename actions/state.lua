@@ -23,9 +23,7 @@ local M = {}
 --   warping      the ship panel shows the manoeuvre
 --   jumping      likewise, the gate has been taken
 --   approaching  likewise, including Orbit — the ship is closing on something
---   aligning     in space, no manoeuvre shown, but the ship is under way: the
---                order was taken and the client has not caught up with itself
---   adrift       in space, standing still, nothing announced: free to be given
+--   adrift       in space, no manoeuvre, nothing announced: free to be given
 --                an order, and the only phase in which one should be
 --   unknown      none of the above says anything. Between things: wait
 --
@@ -39,7 +37,6 @@ M.SESSION = "session"
 M.WARPING = "warping"
 M.JUMPING = "jumping"
 M.APPROACHING = "approaching"
-M.ALIGNING = "aligning"
 M.ADRIFT = "adrift"
 M.UNKNOWN = "unknown"
 
@@ -97,22 +94,12 @@ function M.phase()
     -- without it the two were the same answer.
     local hitpoints = shipui and shipui.hitpoints_percent
     if present(hitpoints) then
-        -- The speedometer answers "did you take my order?" three seconds
-        -- before the manoeuvre caption does. Measured on 2026-08-05: every
-        -- order took 3.0s to show as Warp, against a tick of 1.15s, so the
-        -- bot gave each one two extra times — fourteen menu gestures for the
-        -- four legs of one flight. A ship that has begun to align is already
-        -- obeying; ordering it again is talking over the client.
-        --
-        -- An unreadable gauge is not a stopped ship. The label does not always
-        -- decode — one reference dump carries binary where "522 m/s" should
-        -- be — and taking that for nought would order over a ship already
-        -- under way. Unknown speed keeps the old behaviour instead: adrift,
-        -- and the order is given.
-        local speed = shipui.speed
-        if type(speed) == "number" and speed > 1.0 then
-            return M.ALIGNING
-        end
+        -- Speed lives here no longer. It says the ship is moving, which is not
+        -- the same as "the order I gave is being obeyed": a ship pushed out of
+        -- a station is moving with nobody having ordered anything, and on
+        -- 2026-08-05 at 19:25 that stopped the bot dead — undocked, drifting,
+        -- and never adrift again. What the speed is good for belongs next to
+        -- the order it is evidence about, in open_route_menu_and_warp.
         return M.ADRIFT
     end
 

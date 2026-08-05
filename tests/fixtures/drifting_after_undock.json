@@ -1,0 +1,85 @@
+{
+ "station_window": null,
+ "info_panel_container": {
+  "info_panel_route": {
+   "next_system": "New Caldari",
+   "route_element_marker": [
+    {
+     "region": {
+      "x": 98,
+      "y": 260,
+      "width": 8,
+      "height": 8
+     }
+    }
+   ]
+  }
+ },
+ "session_time_indicator": {
+  "display": false,
+  "hint": ""
+ },
+ "hero_notification": {
+  "texts": []
+ },
+ "shipui": {
+  "hitpoints_percent": {
+   "armor": 100,
+   "shield": 100,
+   "structure": 100
+  },
+  "indication": {
+   "maneuver_type": null
+  },
+  "speed": 120.0
+ },
+ "message_boxes": [],
+ "context_menus": [
+  {
+   "entries": [
+    {
+     "text": "Jump Through Stargate",
+     "enabled": true,
+     "region": {
+      "x": 120,
+      "y": 272,
+      "width": 260,
+      "height": 22
+     }
+    },
+    {
+     "text": "Show Info",
+     "enabled": true,
+     "region": {
+      "x": 120,
+      "y": 307,
+      "width": 260,
+      "height": 22
+     }
+    },
+    {
+     "text": "Set Destination",
+     "enabled": true,
+     "region": {
+      "x": 120,
+      "y": 342,
+      "width": 260,
+      "height": 22
+     }
+    }
+   ]
+  }
+ ],
+ "standalone_bookmark_window": null,
+ "locations_window": null,
+ "stacking": {
+  "client_area": {
+   "x": 0,
+   "y": 0,
+   "width": 1920,
+   "height": 1080
+  },
+  "modal_active": false,
+  "window_stack": []
+ }
+}
