@@ -23,9 +23,16 @@ end
 -- Clicks a target, bringing the game window to the front first.
 --
 -- The cursor is real: the press goes wherever the system is looking, so the
--- window is raised first. Returns true, or false and the reason.
+-- window is raised first. The raise is a condition, not a courtesy: while the
+-- operator holds the foreground in another window, Windows silently refuses
+-- to hand it over, and a click would spend itself activating the game —
+-- stealing the operator's focus and pressing nothing. Refused raise means
+-- nothing is pressed; the tree retries next tick.
+-- Returns true, or false and the reason.
 function M.click(target, button)
-    cygnixy.bring_to_front()
+    if not cygnixy.bring_to_front() then
+        return false, "the client window did not come to the foreground — the operator is working elsewhere"
+    end
     return M.click_now(target, button)
 end
 
