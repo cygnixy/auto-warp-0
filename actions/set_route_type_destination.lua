@@ -49,8 +49,16 @@ function M.main(args)
     -- typing on the strength of an empty read is what put the destination into
     -- the field twice on 2026-08-05, until the client refused the search as
     -- too long and blocked itself with the refusal.
+    local text = search.text
     local cross = search.clear
-    if cross and cross.x ~= nil then
+    local holds_text = type(text) == "string" and text ~= ""
+    local has_cross = cross and cross.x ~= nil
+    if holds_text or has_cross then
+        if not has_cross then
+            log.error("route", "the search field holds \"" .. tostring(text) ..
+                "\" and offers no cross to clear it")
+            return "Failure"
+        end
         local cleared, clear_error = pointer.click(cross)
         press.made("type_destination")
         if not cleared then

@@ -22,10 +22,24 @@ function M.main(args)
     -- an empty read meant "nothing to clear" here and "safe to type" next
     -- door. That pair typed the destination onto itself on 2026-08-05 until
     -- the client refused the search as too long.
+    -- Two signs, and either is enough. The text is what the field holds; the
+    -- cross appears with the first character and goes with the last. Neither
+    -- is always readable -- on 2026-08-05 the text read as nothing while the
+    -- field held the destination five times over -- so an empty field is one
+    -- where both say empty.
+    local text = search.text
     local cross = search.clear
-    if not (cross and cross.x ~= nil) then
+    local holds_text = type(text) == "string" and text ~= ""
+    local has_cross = cross and cross.x ~= nil
+    if not (holds_text or has_cross) then
         press.done("clear_field")
         return "Success"
+    end
+
+    if not has_cross then
+        log.error("route", "the search field holds \"" .. tostring(text) ..
+            "\" and offers no cross to clear it: a new name would be typed onto the old one")
+        return "Failure"
     end
 
     -- One press, then the client's answer: the cross clears the field; pressing it again while the client redraws hits whatever replaces it.

@@ -5,10 +5,10 @@
     "repository": {
         "url": "https://github.com/cygnixy/auto-warp-0.git"
     },
-    "version": "0.9.3",
+    "version": "0.9.4",
     "edition": "2024",
     "requires": {
-        "cygnixy": "0.3.21",
+        "cygnixy": "0.3.22",
         "capabilities": [
             "bb_get",
             "bb_set",
