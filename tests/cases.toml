@@ -686,7 +686,7 @@ times = 1
 # --- the session change, on trial ---------------------------------------------
 
 [[case]]
-name = "the session change is probed once, not once per tick"
+name = "the session change is probed at intervals, not once per tick"
 fixtures = [
     "tests/fixtures/session_changing.json",
     "tests/fixtures/session_changing.json",

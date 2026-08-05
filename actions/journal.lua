@@ -86,10 +86,9 @@ function M.main(args)
         log.forget("chose")
         log.forget("route_menu")
 
-        -- A new phase earns one fresh attempt at ordering. It matters for the
-        -- session change, where the tree is allowed a single probe rather
-        -- than one per tick: see open_route_menu_and_warp.
-        cygnixy.bb_set("phase_try", 0)
+        -- A new phase earns a fresh attempt at ordering straight away, rather
+        -- than waiting out the spacing left over from the phase before.
+        cygnixy.bb_set("press_session_probe", 0)
 
         -- An order ends where the client says it ended, and only some phases
         -- say that. "Jump through stargate" covers the warp and the jump both:
@@ -97,10 +96,14 @@ function M.main(args)
         -- mark there cost an extra order at every gate — two per leg, eight for
         -- the four legs of 19:39, each one a menu gesture given to a client
         -- already doing what was asked.
+        -- Docking is not in this list, and that is the same lesson as the
+        -- gate: it is the client carrying the order out, not finishing it.
+        -- A Dock order ends when the ship is docked. On 2026-08-05 at 21:03
+        -- the phase flickered docking -> adrift -> docking and the bot ordered
+        -- Dock a second time into a ship already on its way in.
         if
             phase == state.SESSION
             or phase == state.DOCKED
-            or phase == state.DOCKING
             or phase == state.UNDOCKING
             or phase == state.UNKNOWN
         then

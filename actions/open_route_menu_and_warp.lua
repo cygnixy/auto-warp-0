@@ -1,4 +1,5 @@
 local log = require("log")
+local press = require("press")
 local state = require("state")
 local pointer = require("pointer")
 local warp_choice = require("warp_choice")
@@ -85,10 +86,20 @@ function M.main(args)
             return "Running"
         end
 
-        if (cygnixy.bb_get("phase_try") or 0) == 1 then
+        -- More than one probe per session change, spaced out.
+        --
+        -- The flight of 20:59 probed once per change and won nine seconds on
+        -- the jump where the panel was ready, and lost three quarters of a
+        -- second on the two where it was not: the waypoint had been redrawn
+        -- but the markers under it still belonged to the leg just flown. One
+        -- probe cannot find the moment those catch up, it can only miss it.
+        -- Three ticks apart is cheap enough to keep asking -- a probe that
+        -- finds the wrong menu costs about as long as it takes to open -- and
+        -- the session lasts nine seconds, room for three or four tries.
+        if press.pending("session_probe") then
             return "Running"
         end
-        cygnixy.bb_set("phase_try", 1)
+        press.made("session_probe")
         cygnixy.bb_set("panel_fresh", 0)
         log.debug("flight", "the route panel has caught up and held; trying it mid-session")
     end
