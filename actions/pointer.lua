@@ -31,7 +31,7 @@ end
 -- Returns true, or false and the reason.
 function M.click(target, button)
     if not cygnixy.bring_to_front() then
-        return false, "the client window did not come to the foreground — the operator is working elsewhere"
+        return false, "the client window did not come to the foreground: click the game window once, or restore it if it is minimised"
     end
     return M.click_now(target, button)
 end

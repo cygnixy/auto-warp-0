@@ -610,3 +610,28 @@ expect = "Running"
 [[case.log_counts]]
 needle = "click_path(\"station_window.buttons.Undock\""
 times = 1
+
+[[case]]
+name = "a wait that lasts is reported less and less often, not thirty times over"
+fixtures = [
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+]
+action = "set_route_type_destination"
+args = ["Jita"]
+foreground = false
+expect = "Running"
+log_contains = [
+    "warn: route: waiting for the foreground before focusing the search field — 3 times now",
+    "warn: route: waiting for the foreground before focusing the search field — 9 times now",
+]
+[[case.log_counts]]
+needle = "warn: route: waiting for the foreground before focusing the search field"
+times = 2

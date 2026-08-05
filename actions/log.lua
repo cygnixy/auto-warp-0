@@ -76,7 +76,16 @@ end
 -- Use it where repetition means the bot is stuck. Where repetition is normal —
 -- the cloak pressed once a minute for the whole flight — use M.debug: a
 -- warning for expected behaviour teaches the reader to ignore warnings.
-local NOISE = 3
+-- Repeats are reported at 3, 9, 27, 81 and so on rather than every third one.
+--
+-- A wait that lasts reports itself thirty times at one line per three ticks,
+-- and thirty identical lines are not a signal but a wall: the flight of 19:50
+-- spent a minute waiting for the foreground and left ninety warnings saying
+-- so, none of which said anything the first had not. Spacing them out keeps
+-- both halves of what the reader needs -- that it is still happening, and how
+-- long for -- without burying the rest of the mission.
+local FIRST = 3
+local GROWTH = 3
 
 function M.repeated(key, level, subject, message)
     local slot = "log_" .. key
@@ -91,7 +100,12 @@ function M.repeated(key, level, subject, message)
 
     local count = (cygnixy.bb_get(counter) or 1) + 1
     cygnixy.bb_set(counter, count)
-    if count % NOISE == 0 then
+
+    local mark = FIRST
+    while mark < count do
+        mark = mark * GROWTH
+    end
+    if mark == count then
         emit("warn", subject, message .. " — " .. count .. " times now, still trying")
     end
 end
