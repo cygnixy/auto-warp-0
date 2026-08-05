@@ -521,3 +521,31 @@ fixtures = [
 action = "journal"
 expect = "Success"
 log_contains = ["debug: phase: docked -> unknown"]
+
+[[case]]
+name = "a ship already under way is not free to be given the order again"
+fixture = "tests/fixtures/phase_aligning.json"
+action = "phase_is"
+args = ["aligning"]
+expect = "Success"
+
+[[case]]
+name = "and it is not adrift, so no order is given over the one it is obeying"
+fixture = "tests/fixtures/phase_aligning.json"
+action = "phase_is"
+args = ["adrift"]
+expect = "Failure"
+
+[[case]]
+name = "a ship standing still is adrift and waiting to be told something"
+fixture = "tests/fixtures/journal_space_jita.json"
+action = "phase_is"
+args = ["adrift"]
+expect = "Success"
+
+[[case]]
+name = "an unreadable gauge is not a stopped ship, but it is not a reason to wait"
+fixture = "tests/fixtures/phase_speed_unreadable.json"
+action = "phase_is"
+args = ["adrift"]
+expect = "Success"

@@ -2,7 +2,7 @@
  "station_window": null,
  "info_panel_container": {
   "info_panel_location_info": {
-   "current_solar_system_name": "Perimeter",
+   "current_solar_system_name": "Jita",
    "current_solar_system_id": 30000142
   },
   "info_panel_route": {
@@ -35,7 +35,7 @@
   "indication": {
    "maneuver_type": null
   },
-  "speed": 0.0
+  "speed": null
  },
  "message_boxes": [],
  "context_menus": [],

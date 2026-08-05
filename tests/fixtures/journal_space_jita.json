@@ -34,7 +34,8 @@
   },
   "indication": {
    "maneuver_type": null
-  }
+  },
+  "speed": 0.0
  },
  "message_boxes": [],
  "context_menus": [],
