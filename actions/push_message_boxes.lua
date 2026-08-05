@@ -1,3 +1,4 @@
+local log = require("log")
 local pointer = require("pointer")
 
 local M = {}
@@ -17,9 +18,13 @@ function M.main(args)
         if label == "Yes" and node and node.region then
             local pressed, err = pointer.click(node.region)
             if not pressed then
-                cygnixy.info("MESSAGE BOX: " .. tostring(err))
+                log.warn("client", "a message box was not answered: " .. tostring(err))
                 return "Failure"
             end
+            -- Worth a line: the client asked the operator something and the
+            -- bot answered for them. Until now this happened silently, and a
+            -- mission that agreed to something unexpected left no trace of it.
+            log.info("client", "answered \"Yes\" to a message box")
             return "Success"
         end
     end

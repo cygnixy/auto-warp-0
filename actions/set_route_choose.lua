@@ -1,3 +1,4 @@
+local log = require("log")
 local pointer = require("pointer")
 local search = require("search")
 
@@ -25,17 +26,18 @@ function M.main(args)
 
     local row, why = search.find_entry(results.entries, destination)
     if row == nil then
-        cygnixy.info("SET ROUTE: " .. tostring(why))
+        log.error("route", tostring(why))
         return "Failure"
     end
 
     local entry, menu_error = pointer.open_menu_and_choose(row.region, CHOICES)
     if entry == nil then
-        cygnixy.info("SET ROUTE: the menu of " .. row.text .. ": " .. tostring(menu_error))
+        log.repeated("choose_menu", "debug", "route",
+            "the row \"" .. row.text .. "\" gave no menu: " .. tostring(menu_error))
         return "Running"
     end
 
-    cygnixy.info("SET ROUTE: destination set to " .. row.text)
+    log.info("route", "destination set to \"" .. row.text .. "\"")
     return "Success"
 end
 

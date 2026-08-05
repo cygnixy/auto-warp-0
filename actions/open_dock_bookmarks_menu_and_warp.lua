@@ -1,4 +1,5 @@
 local bookmarks = require("bookmarks")
+local log = require("log")
 local pointer = require("pointer")
 local warp_choice = require("warp_choice")
 
@@ -7,13 +8,13 @@ local M = {}
 function M.main(args)
     local bookmark, why = bookmarks.find("dock")
     if bookmark == nil then
-        cygnixy.info("DOCK BOOKMARK: " .. tostring(why))
+        log.error("flight", "the dock bookmark cannot be used: " .. tostring(why))
         return "Failure"
     end
 
     local entry, err = pointer.open_menu_and_choose(bookmark.region, warp_choice.choices)
     if entry == nil then
-        cygnixy.info("DOCK BOOKMARK MENU: " .. tostring(err))
+        log.error("flight", "the dock bookmark gave no menu: " .. tostring(err))
         return "Failure"
     end
 

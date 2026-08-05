@@ -1,0 +1,53 @@
+{
+ "station_window": {
+  "buttons": {
+   "Undock": {
+    "x": 1372,
+    "y": 242,
+    "width": 514,
+    "height": 40
+   },
+   "Board my Corvette": {
+    "x": 1555,
+    "y": 298,
+    "width": 148,
+    "height": 32
+   }
+  }
+ },
+ "info_panel_container": {
+  "info_panel_location_info": {
+   "current_solar_system_name": "Perimeter",
+   "current_solar_system_id": 30000142,
+   "expanded_content": {
+    "current_station_name": "Perimeter II - Moon 1 - Caldari Navy Assembly Plant"
+   }
+  },
+  "info_panel_route": {
+   "next_system": null,
+   "route_element_marker": []
+  }
+ },
+ "session_time_indicator": {
+  "display": false,
+  "hint": ""
+ },
+ "hero_notification": {
+  "texts": []
+ },
+ "shipui": null,
+ "message_boxes": [],
+ "context_menus": [],
+ "standalone_bookmark_window": null,
+ "locations_window": null,
+ "stacking": {
+  "client_area": {
+   "x": 0,
+   "y": 0,
+   "width": 1920,
+   "height": 1080
+  },
+  "modal_active": false,
+  "window_stack": []
+ }
+}

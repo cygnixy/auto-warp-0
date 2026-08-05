@@ -1,3 +1,4 @@
+local log = require("log")
 local pointer = require("pointer")
 
 local M = {}
@@ -41,10 +42,8 @@ local function waiting(what)
     end
     if now - since > WAIT_SECONDS then
         cygnixy.bb_set(SINCE, 0)
-        cygnixy.info(
-            "SET ROUTE: " .. what .. " would not close within " .. WAIT_SECONDS ..
-            "s — flying on with it on screen"
-        )
+        log.warn("route", what .. " would not close within " .. WAIT_SECONDS ..
+            "s — flying on with it on screen")
         return "Success"
     end
     return "Running"
@@ -59,7 +58,8 @@ function M.main(args)
     if close and close.x ~= nil then
         local clicked, err = pointer.click(close)
         if not clicked then
-            cygnixy.info("SET ROUTE: the results window was not closed: " .. tostring(err))
+            log.repeated("close_results", "debug", "route",
+                "the results window was not closed: " .. tostring(err))
         end
         return waiting("the results window")
     end
@@ -68,7 +68,7 @@ function M.main(args)
         -- Standing there with no way to dismiss it. The panel below is closed
         -- anyway: the route is set and the window blocks nothing the client
         -- itself will not redraw.
-        cygnixy.info("SET ROUTE: the results window offers no way to close it")
+        log.warn("route", "the results window offers no way to close it")
     end
 
     local search = cygnixy.eve.info_panel_search
@@ -85,7 +85,8 @@ function M.main(args)
 
     local clicked, err = pointer.click("info_panel_container.icons.search")
     if not clicked then
-        cygnixy.info("SET ROUTE: the search panel was not closed: " .. tostring(err))
+        log.repeated("close_panel", "debug", "route",
+            "the search panel was not closed: " .. tostring(err))
     end
     return waiting("the search panel")
 end

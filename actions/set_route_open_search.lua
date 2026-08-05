@@ -1,3 +1,4 @@
+local log = require("log")
 local pointer = require("pointer")
 
 local M = {}
@@ -17,13 +18,13 @@ function M.main(args)
 
     local icons = cygnixy.eve.info_panel_container and cygnixy.eve.info_panel_container.icons
     if not (icons and icons.search) then
-        cygnixy.info("SET ROUTE: the search icon is not on screen")
+        log.error("route", "the search cannot be opened: its icon is not on screen")
         return "Failure"
     end
 
     local clicked, err = pointer.click("info_panel_container.icons.search")
     if not clicked then
-        cygnixy.info("SET ROUTE: the search icon was not clicked: " .. tostring(err))
+        log.error("route", "the search icon was not clicked: " .. tostring(err))
         return "Failure"
     end
 

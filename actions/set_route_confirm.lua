@@ -1,3 +1,5 @@
+local log = require("log")
+
 local M = {}
 
 -- Waits for the client to lay the route that was just asked for.
@@ -35,10 +37,8 @@ function M.main(args)
 
     if now - since > WAIT_SECONDS then
         cygnixy.bb_set(SINCE, 0)
-        cygnixy.info(
-            "SET ROUTE: no route appeared within " .. WAIT_SECONDS ..
-            "s of choosing Set Destination — the press landed on nothing"
-        )
+        log.error("route", "no route appeared within " .. WAIT_SECONDS ..
+            "s of choosing Set Destination — the press landed on nothing")
         return "Failure"
     end
 

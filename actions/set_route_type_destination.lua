@@ -1,3 +1,4 @@
+local log = require("log")
 local pointer = require("pointer")
 
 local M = {}
@@ -28,18 +29,19 @@ function M.main(args)
 
     local focused, click_error = pointer.click(search.field)
     if not focused then
-        cygnixy.info("SET ROUTE: the search field was not focused: " .. tostring(click_error))
+        log.error("route", "the search field was not focused: " .. tostring(click_error) ..
+            " — text typed now would go to whatever holds the cursor")
         return "Failure"
     end
 
     local typed, type_error = cygnixy.type_text(destination)
     if not typed then
-        cygnixy.info("SET ROUTE: " .. destination .. " was not typed: " .. tostring(type_error))
+        log.error("route", "\"" .. destination .. "\" was not typed: " .. tostring(type_error))
         return "Failure"
     end
 
     cygnixy.press_key(0x0D)
-    cygnixy.info("SET ROUTE: searching for " .. destination)
+    log.info("route", "searching for \"" .. destination .. "\"")
     return "Running"
 end
 

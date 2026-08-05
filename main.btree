@@ -26,7 +26,16 @@ push_button_yes = false
 include('set_route.btree')
 include('fly_route.btree')
 
-->* main {
-    set_route
-    fly_route
+/* journal writes the mission's account of itself and presses nothing. It sits
+ * in a plain sequence ahead of the commands so that it runs on every tick of
+ * both: inside the memory sequence below it would run once, be remembered as
+ * done, and the flight — the part worth reading back — would go unrecorded.
+ * It always succeeds, so the commands are reached whatever it sees. */
+-> main {
+    journal(destination, destination_kind)
+
+    ->* {
+        set_route
+        fly_route
+    }
 }

@@ -1,3 +1,4 @@
+local log = require("log")
 local pointer = require("pointer")
 local search = require("search")
 
@@ -12,7 +13,8 @@ function M.main(args)
     local kind = args and args[1]
     local wanted = search.category_of(kind)
     if wanted == nil then
-        cygnixy.info("SET ROUTE: unknown destination kind " .. tostring(kind))
+        log.error("route", "unknown destination kind \"" .. tostring(kind) ..
+            "\": it must be \"system\" or \"station\"")
         return "Failure"
     end
 
@@ -28,15 +30,14 @@ function M.main(args)
 
     local header = search.find_group(results.groups, wanted)
     if header == nil then
-        cygnixy.info(
-            "SET ROUTE: no " .. wanted .. " among the categories: " .. search.list_groups(results.groups)
-        )
+        log.error("route", "the search found no " .. wanted .. "; it offered " ..
+            search.list_groups(results.groups))
         return "Failure"
     end
 
     local clicked, err = pointer.click(header.region)
     if not clicked then
-        cygnixy.info("SET ROUTE: " .. wanted .. " was not expanded: " .. tostring(err))
+        log.error("route", wanted .. " was not expanded: " .. tostring(err))
         return "Failure"
     end
     return "Running"

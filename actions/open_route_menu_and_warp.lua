@@ -1,3 +1,4 @@
+local log = require("log")
 local pointer = require("pointer")
 local warp_choice = require("warp_choice")
 
@@ -32,7 +33,12 @@ function M.main(args)
     local paths = marker_paths(#route.route_element_marker)
     local entry, err = pointer.open_menu_and_choose(paths, warp_choice.choices)
     if entry == nil then
-        cygnixy.info("ROUTE MENU: " .. tostring(err))
+        -- Debug, because failing here is ordinary: the panel carries up to
+        -- two markers and the leading one is the system just reached, whose
+        -- menu offers nothing worth choosing. Only persistence is a warning,
+        -- and log.repeated raises it on the third identical try.
+        log.repeated("route_menu", "debug", "flight",
+            "no order could be given from the route marker: " .. tostring(err))
         return "Running"
     end
 

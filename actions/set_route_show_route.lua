@@ -1,3 +1,4 @@
+local log = require("log")
 local pointer = require("pointer")
 
 local M = {}
@@ -21,13 +22,13 @@ function M.main(args)
 
     local icons = panel and panel.icons
     if not (icons and icons.route) then
-        cygnixy.info("ROUTE PANEL: the route icon is not on screen")
+        log.error("route", "the route block cannot be opened: its icon is not on screen")
         return "Failure"
     end
 
     local clicked, err = pointer.click("info_panel_container.icons.route")
     if not clicked then
-        cygnixy.info("ROUTE PANEL: the route icon was not clicked: " .. tostring(err))
+        log.error("route", "the route block icon was not clicked: " .. tostring(err))
         return "Failure"
     end
     return "Running"

@@ -90,7 +90,7 @@ expect = "Success"
 log_contains = [
     "open_menu right_click \"info_panel_container.info_panel_route.route_element_marker[0].region\"",
     "open_menu chose \"Jump Through Stargate\"",
-    "CHOSE: Jump Through Stargate",
+    "info: flight: ordered Jump Through Stargate from the menu",
     "bb_set _state = String(\"warp\")",
 ]
 
@@ -163,7 +163,11 @@ fixture = "tests/fixtures/search_open_empty.json"
 action = "set_route_type_destination"
 args = ["Jita"]
 expect = "Running"
-log_contains = ["click(226, 85", "type_text(\"Jita\")", "searching for Jita"]
+log_contains = [
+    "click(226, 85",
+    "type_text(\"Jita\")",
+    "info: route: searching for \"Jita\"",
+]
 
 [[case]]
 name = "what is already typed is not typed again"
@@ -209,7 +213,7 @@ fixture = "tests/fixtures/search_groups_collapsed.json"
 action = "set_route_expand_category"
 args = ["planet"]
 expect = "Failure"
-log_contains = ["unknown destination kind"]
+log_contains = ["error: route: unknown destination kind"]
 
 [[case]]
 name = "the row named exactly right is right-clicked and Set Destination chosen"
@@ -220,7 +224,7 @@ expect = "Success"
 log_contains = [
     "open_menu right_click region",
     "open_menu chose \"Set Destination\"",
-    "destination set to Jita",
+    "info: route: destination set to \"Jita\"",
 ]
 
 [[case]]
@@ -245,7 +249,7 @@ fixture = "tests/fixtures/search_no_exact_match.json"
 action = "set_route_choose"
 args = ["Jita"]
 expect = "Failure"
-log_contains = ["no row is named exactly Jita"]
+log_contains = ["error: route: no row is named exactly Jita"]
 
 [[case]]
 name = "a route already set is a command already done"
@@ -301,3 +305,71 @@ name = "nothing left open is nothing to close"
 fixture = "tests/fixtures/search_closed.json"
 action = "set_route_close_search"
 expect = "Success"
+
+# --- the log: what the mission says about itself ------------------------------
+
+[[case]]
+name = "the mission says where it is bound and what the route shows"
+fixture = "tests/fixtures/journal_docked_jita.json"
+action = "journal"
+args = ["Jita IV - Moon 4 - Caldari Navy Assembly Plant", "station"]
+expect = "Success"
+log_contains = [
+    "info: mission: bound for Jita IV - Moon 4 - Caldari Navy Assembly Plant, looked up among the stations",
+    "info: route: the client is showing the route; next waypoint Perimeter",
+]
+
+[[case]]
+name = "with no destination the mission says it is flying the route it was given"
+fixture = "tests/fixtures/journal_docked_jita.json"
+action = "journal"
+expect = "Success"
+log_contains = ["info: mission: no destination given"]
+
+[[case]]
+name = "leaving the station is recorded, whoever pressed the button"
+fixtures = [
+    "tests/fixtures/journal_docked_jita.json",
+    "tests/fixtures/journal_space_jita.json",
+]
+action = "journal"
+expect = "Success"
+log_contains = ["info: flight: undocked into Jita"]
+
+[[case]]
+name = "a jump is counted when the system under the ship changes"
+fixtures = [
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_space_perimeter.json",
+]
+action = "journal"
+expect = "Success"
+log_contains = ["info: flight: jumped into Perimeter — 1 jump so far"]
+
+[[case]]
+name = "arrival names the station, the jumps it took and the end of the route"
+fixtures = [
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_space_perimeter.json",
+    "tests/fixtures/journal_docked_arrived.json",
+]
+action = "journal"
+expect = "Success"
+log_contains = [
+    "info: flight: docked at Perimeter II - Moon 1 - Caldari Navy Assembly Plant after 1 jump",
+    "info: mission: the route has been flown to its end",
+]
+
+[[case]]
+name = "an order given three times to no effect becomes a warning"
+fixtures = [
+    "tests/fixtures/route_menu_open.json",
+    "tests/fixtures/route_menu_open.json",
+    "tests/fixtures/route_menu_open.json",
+]
+action = "open_route_menu_and_warp"
+expect = "Success"
+log_contains = [
+    "info: flight: ordered Jump Through Stargate from the menu",
+    "warn: flight: ordered Jump Through Stargate from the menu — 3 times over, and nothing has changed",
+]

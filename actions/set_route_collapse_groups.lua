@@ -1,3 +1,4 @@
+local log = require("log")
 local pointer = require("pointer")
 
 local M = {}
@@ -23,13 +24,14 @@ function M.main(args)
     end
 
     if results.collapse_all == nil or results.collapse_all.x == nil then
-        cygnixy.info("SET ROUTE: the results window offers no way to collapse its groups")
+        log.error("route", "the results window offers no way to collapse its groups: " ..
+            "the wanted category is buried under hundreds of rows")
         return "Failure"
     end
 
     local clicked, err = pointer.click(results.collapse_all)
     if not clicked then
-        cygnixy.info("SET ROUTE: the groups were not collapsed: " .. tostring(err))
+        log.error("route", "the groups were not collapsed: " .. tostring(err))
         return "Failure"
     end
     return "Running"

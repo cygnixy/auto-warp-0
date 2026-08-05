@@ -1,3 +1,4 @@
+local log = require("log")
 local pointer = require("pointer")
 
 local M = {}
@@ -15,10 +16,12 @@ function M.main(args)
 
     local pressed, err = pointer.click(UNDOCK)
     if not pressed then
-        cygnixy.info("UNDOCK: " .. tostring(err))
+        log.repeated("undock", "warn", "flight",
+            "the undock button was not pressed: " .. tostring(err))
         return "Running"
     end
 
+    log.forget("undock")
     cygnixy.bb_set("undock_timestamp", os.time())
     cygnixy.bb_set("_state", "undock")
     return "Success"

@@ -1,3 +1,4 @@
+local log = require("log")
 local pointer = require("pointer")
 
 local M = {}
@@ -20,13 +21,14 @@ function M.main(args)
     end
 
     if search.clear == nil or search.clear.x == nil then
-        cygnixy.info("SET ROUTE: the field holds " .. text .. " and offers no way to clear it")
+        log.error("route", "the search field holds \"" .. text ..
+            "\" and offers no way to clear it: a new name would be typed onto the old one")
         return "Failure"
     end
 
     local cleared, err = pointer.click(search.clear)
     if not cleared then
-        cygnixy.info("SET ROUTE: the field was not cleared: " .. tostring(err))
+        log.error("route", "the search field was not cleared: " .. tostring(err))
         return "Failure"
     end
     return "Running"
