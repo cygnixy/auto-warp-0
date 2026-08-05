@@ -36,6 +36,29 @@ function M.find_group(groups, wanted)
     return nil
 end
 
+-- The name inside a result row.
+--
+-- A row is not the bare name. The client writes it with the security status
+-- coloured in front and the distance in brackets behind:
+--
+--   <color=0xFF3A9AEB>0.9</color> Jita IV - Moon 4 - Caldari Navy Assembly Plant (3 Jumps)
+--
+-- so comparing the row to a destination as it stands never matches anything.
+--
+-- The security status is taken together with the markup that holds it, not as
+-- "a number at the front": a character may be called "1 Jita", and stripping
+-- leading digits blindly would turn that row into the system Jita — exactly
+-- the confusion the exact match exists to prevent.
+function M.row_name(text)
+    if type(text) ~= "string" then
+        return nil
+    end
+    local name = string.gsub(text, "^%s*<color=[^>]*>%s*%-?[%d%.]+%s*</color>%s*", "")
+    name = string.gsub(name, "<[^>]*>", "")
+    name = string.gsub(name, "%s*%(%d+%s+[Jj]umps?%)%s*$", "")
+    return (string.gsub(name, "^%s*(.-)%s*$", "%1"))
+end
+
 -- The row whose name is exactly the destination, ignoring case.
 --
 -- Exact, not partial: a search for "Jita" brings back Jita and every character
@@ -45,7 +68,8 @@ function M.find_entry(entries, wanted)
     local needle = string.lower(wanted)
     local found = nil
     for _, pair in ipairs(entries) do
-        local text, region = pair[1], pair[2]
+        local raw, region = pair[1], pair[2]
+        local text = M.row_name(raw)
         if type(text) == "string" and region ~= nil and string.lower(text) == needle then
             if found ~= nil then
                 return nil, "several rows are named " .. wanted

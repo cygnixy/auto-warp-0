@@ -232,6 +232,14 @@ expect = "Running"
 log_contains = ["no context menu opened"]
 
 [[case]]
+name = "a real station row is matched through its markup and jump count"
+fixture = "tests/fixtures/search_station_row_live.json"
+action = "set_route_choose"
+args = ["Jita IV - Moon 4 - Caldari Navy Assembly Plant"]
+expect = "Running"
+log_contains = ["open_menu right_click region", "no context menu opened"]
+
+[[case]]
 name = "four hundred characters named Jita are not the system Jita"
 fixture = "tests/fixtures/search_no_exact_match.json"
 action = "set_route_choose"
