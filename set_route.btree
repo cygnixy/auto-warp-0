@@ -20,7 +20,15 @@
             set_route_has_destination?(destination)
             @! is_session_change?()
 
-            ? {
+            /* A memory sequence, and it has to be one. A fallback would end
+               at the first step that succeeds — opening the panel, and the
+               command would call itself done having typed nothing. A plain
+               sequence would re-run every step each tick, and two of these
+               steps undo each other: collapsing the groups is done when no
+               category is expanded, expanding one is done when a category
+               is, so the pair would fight forever. Memory keeps the finished
+               steps finished. */
+            ->* {
                 set_route_open_search()
                 set_route_clear_field()
                 set_route_type_destination(destination)
