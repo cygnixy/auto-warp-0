@@ -1,0 +1,33 @@
+/* Strategic command: set the route to a named station or solar system.
+ *
+ * Success means the route panel carries markers. That is also the first
+ * condition, which makes the command idempotent: a route already set is a
+ * command already done, and a mission restarted mid-flight does not throw
+ * away the route the ship is following.
+ *
+ * The steps below are the client's own order, learned the hard way: the
+ * magnifier is a toggle, the panel keeps its region in the tree even when
+ * closed, and the results window buries the wanted category under hundreds of
+ * character names until the groups are collapsed. */
+
+-> set_route {
+    ? {
+        /* Already there: nothing to do. */
+        is_route_set?()
+
+        -> {
+            /* Nothing to look for — the mission was given no destination. */
+            set_route_has_destination?()
+            @! is_session_change?()
+
+            ? {
+                set_route_open_search()
+                set_route_clear_field()
+                set_route_type_destination()
+                set_route_collapse_groups()
+                set_route_expand_category(destination_kind)
+                set_route_choose(destination)
+            }
+        }
+    }
+}

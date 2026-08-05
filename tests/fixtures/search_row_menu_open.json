@@ -1,0 +1,165 @@
+{
+    "station_window": {
+        "buttons": {
+            "Undock": {
+                "x": 1372,
+                "y": 242,
+                "width": 514,
+                "height": 40
+            }
+        }
+    },
+    "info_panel_container": {
+        "icons": {
+            "search": {
+                "x": 98,
+                "y": 50,
+                "width": 16,
+                "height": 16
+            }
+        },
+        "info_panel_route": {
+            "next_system": null,
+            "route_element_marker": []
+        }
+    },
+    "session_time_indicator": {
+        "display": false,
+        "hint": ""
+    },
+    "hero_notification": {
+        "texts": []
+    },
+    "shipui": null,
+    "message_boxes": [],
+    "context_menus": [
+        {
+            "entries": [
+                {
+                    "text": "Show Info",
+                    "enabled": true,
+                    "region": {
+                        "x": 860,
+                        "y": 500,
+                        "width": 200,
+                        "height": 22
+                    }
+                },
+                {
+                    "text": "Set Destination",
+                    "enabled": true,
+                    "region": {
+                        "x": 860,
+                        "y": 530,
+                        "width": 200,
+                        "height": 22
+                    }
+                },
+                {
+                    "text": "Add Waypoint",
+                    "enabled": true,
+                    "region": {
+                        "x": 860,
+                        "y": 560,
+                        "width": 200,
+                        "height": 22
+                    }
+                }
+            ]
+        }
+    ],
+    "standalone_bookmark_window": null,
+    "locations_window": null,
+    "info_panel_search": {
+        "display": true,
+        "field": {
+            "x": 98,
+            "y": 73,
+            "width": 256,
+            "height": 24
+        },
+        "text": "Jita",
+        "clear": {
+            "x": 333,
+            "y": 77,
+            "width": 16,
+            "height": 16
+        }
+    },
+    "search_results": {
+        "collapse_all": {
+            "x": 814,
+            "y": 397,
+            "width": 12,
+            "height": 12
+        },
+        "groups": [
+            [
+                "Agents (2)",
+                {
+                    "x": 812,
+                    "y": 420,
+                    "width": 280,
+                    "height": 24
+                }
+            ],
+            [
+                "Characters (459)",
+                {
+                    "x": 812,
+                    "y": 444,
+                    "width": 280,
+                    "height": 24
+                }
+            ],
+            [
+                "Solar Systems (1)",
+                {
+                    "x": 812,
+                    "y": 468,
+                    "width": 280,
+                    "height": 24
+                }
+            ],
+            [
+                "Stations (4)",
+                {
+                    "x": 812,
+                    "y": 492,
+                    "width": 280,
+                    "height": 24
+                }
+            ]
+        ],
+        "entries": [
+            [
+                "Jita",
+                {
+                    "x": 812,
+                    "y": 492,
+                    "width": 280,
+                    "height": 24
+                }
+            ],
+            [
+                "Jita IV - Moon 4",
+                {
+                    "x": 812,
+                    "y": 516,
+                    "width": 280,
+                    "height": 24
+                }
+            ]
+        ]
+    },
+    "stacking": {
+        "client_area": {
+            "x": 0,
+            "y": 0,
+            "width": 1920,
+            "height": 1080
+        },
+        "modal_active": false,
+        "window_stack": []
+    }
+}

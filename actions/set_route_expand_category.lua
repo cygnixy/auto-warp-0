@@ -1,0 +1,45 @@
+local pointer = require("pointer")
+local search = require("search")
+
+local M = {}
+
+-- Expands the category the destination is looked for in.
+--
+-- args[1] is the kind: "system" or "station". The headers read "Solar Systems
+-- (3)" and "Stations (12)" — name and count — so they are matched by prefix,
+-- not equality: the count changes with every search.
+function M.main(args)
+    local kind = args and args[1]
+    local wanted = search.category_of(kind)
+    if wanted == nil then
+        cygnixy.info("SET ROUTE: unknown destination kind " .. tostring(kind))
+        return "Failure"
+    end
+
+    local results = cygnixy.eve.search_results
+    if not (results and results.groups and #results.groups > 0) then
+        return "Running"
+    end
+
+    -- Something is expanded already: this action ran, or the operator did it.
+    if results.entries ~= nil and #results.entries > 0 then
+        return "Success"
+    end
+
+    local header = search.find_group(results.groups, wanted)
+    if header == nil then
+        cygnixy.info(
+            "SET ROUTE: no " .. wanted .. " among the categories: " .. search.list_groups(results.groups)
+        )
+        return "Failure"
+    end
+
+    local clicked, err = pointer.click(header.region)
+    if not clicked then
+        cygnixy.info("SET ROUTE: " .. wanted .. " was not expanded: " .. tostring(err))
+        return "Failure"
+    end
+    return "Running"
+end
+
+return M

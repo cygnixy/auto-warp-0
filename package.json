@@ -1,11 +1,11 @@
 {
     "name": "auto-warp-0",
     "publisher": "Cygnixy Team",
-    "description": "Bot for auto-warping",
+    "description": "Bot for setting a route and flying it",
     "repository": {
         "url": "https://github.com/cygnixy/auto-warp-0.git"
     },
-    "version": "0.1.19",
+    "version": "0.2.0",
     "edition": "2024",
     "requires": {
         "cygnixy": "0.3.9",
@@ -19,6 +19,7 @@
             "open_menu",
             "press_key",
             "sleep",
+            "type_text",
             "update_eve"
         ]
     }
