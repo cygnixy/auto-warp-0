@@ -49,13 +49,15 @@ function M.main(args)
     -- typing on the strength of an empty read is what put the destination into
     -- the field twice on 2026-08-05, until the client refused the search as
     -- too long and blocked itself with the refusal.
+    -- Anything in the field is in the way: typing adds to it rather than
+    -- replacing it. The text is what says so -- the cross is always there on
+    -- this client, empty field or not, and judging by it left the bot
+    -- clearing nothing for ever.
     local text = search.text
-    local cross = search.clear
-    local holds_text = type(text) == "string" and text ~= ""
-    local has_cross = cross and cross.x ~= nil
-    if holds_text or has_cross then
-        if not has_cross then
-            log.error("route", "the search field holds \"" .. tostring(text) ..
+    if type(text) == "string" and text ~= "" then
+        local cross = search.clear
+        if not (cross and cross.x ~= nil) then
+            log.error("route", "the search field holds \"" .. text ..
                 "\" and offers no cross to clear it")
             return "Failure"
         end

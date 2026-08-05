@@ -1,0 +1,65 @@
+{
+ "station_window": {
+  "buttons": {
+   "Undock": {
+    "x": 1372,
+    "y": 242,
+    "width": 514,
+    "height": 40
+   }
+  }
+ },
+ "info_panel_container": {
+  "icons": {
+   "search": {
+    "x": 98,
+    "y": 50,
+    "width": 16,
+    "height": 16
+   }
+  },
+  "info_panel_route": {
+   "next_system": null,
+   "route_element_marker": []
+  }
+ },
+ "session_time_indicator": {
+  "display": false,
+  "hint": ""
+ },
+ "hero_notification": {
+  "texts": []
+ },
+ "shipui": null,
+ "message_boxes": [],
+ "context_menus": [],
+ "standalone_bookmark_window": null,
+ "locations_window": null,
+ "info_panel_search": {
+  "display": true,
+  "field": {
+   "x": 98,
+   "y": 73,
+   "width": 256,
+   "height": 24
+  },
+  "text": "",
+  "clear": {
+   "x": 333,
+   "y": 77,
+   "width": 16,
+   "height": 16
+  }
+ },
+ "search_results": null,
+ "stacking": {
+  "client_area": {
+   "x": 0,
+   "y": 0,
+   "width": 1920,
+   "height": 1080
+  },
+  "modal_active": false,
+  "window_stack": []
+ }
+}

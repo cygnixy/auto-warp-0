@@ -810,18 +810,34 @@ action = "dismiss_message_box"
 expect = "Success"
 
 [[case]]
-name = "a field whose text cannot be read is still cleared: the cross says it holds something"
-fixture = "tests/fixtures/search_text_unreadable.json"
+name = "a field with text in it is cleared before anything else happens"
+fixture = "tests/fixtures/search_open_stale_text.json"
 action = "set_route_clear_field"
 expect = "Running"
 log_contains = ["click(341, 85"]
 
 [[case]]
-name = "and nothing is typed into it while the cross is there"
+name = "a field whose text will not read is treated as empty, not as a reason to stall"
 fixture = "tests/fixtures/search_text_unreadable.json"
+action = "set_route_clear_field"
+expect = "Success"
+[[case.log_counts]]
+needle = "click("
+times = 0
+
+[[case]]
+name = "an empty field with a cross in it is empty: this client always draws the cross"
+fixture = "tests/fixtures/search_empty_with_cross.json"
+action = "set_route_clear_field"
+expect = "Success"
+[[case.log_counts]]
+needle = "click("
+times = 0
+
+[[case]]
+name = "and it is typed into, rather than cleared for ever"
+fixture = "tests/fixtures/search_empty_with_cross.json"
 action = "set_route_type_destination"
 args = ["Jita"]
 expect = "Running"
-[[case.log_counts]]
-needle = "type_text"
-times = 0
+log_contains = ["type_text(\"Jita\")"]

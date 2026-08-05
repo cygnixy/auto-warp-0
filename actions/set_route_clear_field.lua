@@ -16,28 +16,20 @@ function M.main(args)
         return "Failure"
     end
 
-    -- The cross is the sign, not the text. It appears with the first character
-    -- typed and goes with the last, while the text itself is not always
-    -- readable -- with a modal over the panel it reads as nothing at all, and
-    -- an empty read meant "nothing to clear" here and "safe to type" next
-    -- door. That pair typed the destination onto itself on 2026-08-05 until
-    -- the client refused the search as too long.
-    -- Two signs, and either is enough. The text is what the field holds; the
-    -- cross appears with the first character and goes with the last. Neither
-    -- is always readable -- on 2026-08-05 the text read as nothing while the
-    -- field held the destination five times over -- so an empty field is one
-    -- where both say empty.
+    -- The text is the truth, now that it is read from the field itself and
+    -- not from a label the client may not draw. The cross is not a sign of
+    -- anything: this client keeps that icon inside the edit box whether or
+    -- not there is text to clear, and reading it as "something is in there"
+    -- had the bot clearing an empty field for ever on 2026-08-05 at 21:08.
     local text = search.text
-    local cross = search.clear
-    local holds_text = type(text) == "string" and text ~= ""
-    local has_cross = cross and cross.x ~= nil
-    if not (holds_text or has_cross) then
+    if type(text) ~= "string" or text == "" then
         press.done("clear_field")
         return "Success"
     end
 
-    if not has_cross then
-        log.error("route", "the search field holds \"" .. tostring(text) ..
+    local cross = search.clear
+    if not (cross and cross.x ~= nil) then
+        log.error("route", "the search field holds \"" .. text ..
             "\" and offers no cross to clear it: a new name would be typed onto the old one")
         return "Failure"
     end
