@@ -58,10 +58,20 @@ end
 --
 -- The first occurrence reads at `level`. Identical repeats are not written
 -- again — the reader has seen them — until the third, and every third after
--- that, which comes back as a warning carrying the count. Three identical
--- lines mean the bot has done the same thing three times to no effect: worth
--- attention even when one occurrence was not. A different message under the
--- same key starts the count over, because the situation has changed.
+-- that, which comes back as a warning carrying the count.
+--
+-- The warning counts; it does not cap. Nothing here or anywhere else in this
+-- bot gives up on an order because it has been given often: the flight loop
+-- goes on ordering Dock until the ship is docked, however many attempts that
+-- takes, and the count exists so that the operator can see the bot working
+-- hard — a stargate behind a warp that keeps being interrupted looks exactly
+-- like a bot pressing the wrong pixel, and only the count tells them apart.
+-- The wording says so: an earlier "and nothing has changed" read as a bot
+-- about to stop, which it never was.
+--
+-- A different message under the same key starts the count over, because the
+-- situation has changed. So does M.forget, which journal calls whenever the
+-- ship actually gets somewhere.
 --
 -- Use it where repetition means the bot is stuck. Where repetition is normal —
 -- the cloak pressed once a minute for the whole flight — use M.debug: a
@@ -82,7 +92,7 @@ function M.repeated(key, level, subject, message)
     local count = (cygnixy.bb_get(counter) or 1) + 1
     cygnixy.bb_set(counter, count)
     if count % NOISE == 0 then
-        emit("warn", subject, message .. " — " .. count .. " times over, and nothing has changed")
+        emit("warn", subject, message .. " — " .. count .. " times now, still trying")
     end
 end
 

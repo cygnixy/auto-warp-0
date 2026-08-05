@@ -372,7 +372,7 @@ action = "open_route_menu_and_warp"
 expect = "Success"
 log_contains = [
     "info: flight: ordered Jump Through Stargate from the menu",
-    "warn: flight: ordered Jump Through Stargate from the menu — 3 times over, and nothing has changed",
+    "warn: flight: ordered Jump Through Stargate from the menu — 3 times now, still trying",
 ]
 
 # --- the foreground: the operator's window is not a broken client -------------
@@ -404,7 +404,7 @@ action = "set_route_type_destination"
 args = ["Jita"]
 foreground = false
 expect = "Running"
-log_contains = ["warn: route: waiting for the foreground before focusing the search field — 3 times over"]
+log_contains = ["warn: route: waiting for the foreground before focusing the search field — 3 times now"]
 
 [[case]]
 name = "a jump clears the count of orders given, so the next leg starts fresh"
