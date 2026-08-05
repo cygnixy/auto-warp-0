@@ -1,5 +1,6 @@
 local log = require("log")
 local pointer = require("pointer")
+local press = require("press")
 
 local M = {}
 
@@ -17,6 +18,7 @@ local M = {}
 function M.main(args)
     local panel = cygnixy.eve.info_panel_container
     if panel and panel.info_panel_route and panel.info_panel_route.route_element_marker then
+        press.done("show_route")
         return "Success"
     end
 
@@ -26,7 +28,12 @@ function M.main(args)
         return "Failure"
     end
 
+    -- One press, then the client's answer: the route block icon is a toggle: pressing it again hides what it just showed.
+    if press.pending("show_route") then
+        return "Running"
+    end
     local clicked, err = pointer.click("info_panel_container.icons.route")
+    press.made("show_route")
     if not clicked then
         if pointer.transient(err) then
             log.repeated("show_route", "debug", "route",

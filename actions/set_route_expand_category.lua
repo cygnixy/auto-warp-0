@@ -1,5 +1,6 @@
 local log = require("log")
 local pointer = require("pointer")
+local press = require("press")
 local search = require("search")
 
 local M = {}
@@ -25,6 +26,7 @@ function M.main(args)
 
     -- Something is expanded already: this action ran, or the operator did it.
     if results.entries ~= nil and #results.entries > 0 then
+        press.done("expand")
         return "Success"
     end
 
@@ -35,7 +37,12 @@ function M.main(args)
         return "Failure"
     end
 
+    -- One press, then the client's answer: a category header is a toggle: pressing it again collapses what it just opened.
+    if press.pending("expand") then
+        return "Running"
+    end
     local clicked, err = pointer.click(header.region)
+    press.made("expand")
     if not clicked then
         if pointer.transient(err) then
             log.repeated("expand", "debug", "route",

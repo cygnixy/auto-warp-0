@@ -1,5 +1,6 @@
 local log = require("log")
 local pointer = require("pointer")
+local press = require("press")
 
 local M = {}
 
@@ -17,6 +18,7 @@ function M.main(args)
 
     local text = search.text
     if type(text) ~= "string" or text == "" then
+        press.done("clear_field")
         return "Success"
     end
 
@@ -26,7 +28,12 @@ function M.main(args)
         return "Failure"
     end
 
+    -- One press, then the client's answer: the cross clears the field; pressing it again while the client redraws hits whatever replaces it.
+    if press.pending("clear_field") then
+        return "Running"
+    end
     local cleared, err = pointer.click(search.clear)
+    press.made("clear_field")
     if not cleared then
         if pointer.transient(err) then
             log.repeated("clear_field", "debug", "route",

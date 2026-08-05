@@ -1,5 +1,6 @@
 local log = require("log")
 local pointer = require("pointer")
+local press = require("press")
 
 local M = {}
 
@@ -20,6 +21,7 @@ function M.main(args)
 
     local entries = results.entries
     if entries == nil or #entries == 0 then
+        press.done("collapse")
         return "Success"
     end
 
@@ -29,7 +31,12 @@ function M.main(args)
         return "Failure"
     end
 
+    -- One press, then the client's answer: collapsing again mid-redraw lands on a list that has moved under the cursor.
+    if press.pending("collapse") then
+        return "Running"
+    end
     local clicked, err = pointer.click(results.collapse_all)
+    press.made("collapse")
     if not clicked then
         if pointer.transient(err) then
             log.repeated("collapse", "debug", "route",

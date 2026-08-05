@@ -732,3 +732,55 @@ log_contains = ["the route panel has caught up and held"]
 [[case.log_counts]]
 needle = "open_menu right_click"
 times = 1
+
+[[case]]
+name = "the destination is typed once, not once per tick: typing appends"
+fixtures = [
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+]
+action = "set_route_type_destination"
+args = ["Jita"]
+expect = "Running"
+[[case.log_counts]]
+needle = "type_text(\"Jita\")"
+times = 1
+
+[[case]]
+name = "a field holding someone else's text is cleared before anything is typed"
+fixture = "tests/fixtures/search_open_stale_text.json"
+action = "set_route_type_destination"
+args = ["Jita"]
+expect = "Running"
+log_contains = ["click(341, 85"]
+[[case.log_counts]]
+needle = "type_text"
+times = 0
+
+[[case]]
+name = "the route block icon is pressed once: it is a toggle like the rest"
+fixtures = [
+    "tests/fixtures/route_block_hidden.json",
+    "tests/fixtures/route_block_hidden.json",
+    "tests/fixtures/route_block_hidden.json",
+]
+action = "set_route_show_route"
+expect = "Running"
+[[case.log_counts]]
+needle = "click_path(\"info_panel_container.icons.route\""
+times = 1
+
+[[case]]
+name = "a category header is pressed once: pressing it again would collapse it"
+fixtures = [
+    "tests/fixtures/search_groups_collapsed.json",
+    "tests/fixtures/search_groups_collapsed.json",
+    "tests/fixtures/search_groups_collapsed.json",
+]
+action = "set_route_expand_category"
+args = ["station"]
+expect = "Running"
+[[case.log_counts]]
+needle = "click(952, 504"
+times = 1
