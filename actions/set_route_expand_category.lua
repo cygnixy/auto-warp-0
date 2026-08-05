@@ -37,7 +37,12 @@ function M.main(args)
 
     local clicked, err = pointer.click(header.region)
     if not clicked then
-        log.error("route", wanted .. " was not expanded: " .. tostring(err))
+        if pointer.transient(err) then
+            log.repeated("expand", "debug", "route",
+                "waiting for the foreground before expanding the category")
+            return "Running"
+        end
+        log.error("route", "expanding the category failed: " .. tostring(err))
         return "Failure"
     end
     return "Running"

@@ -24,7 +24,12 @@ function M.main(args)
 
     local clicked, err = pointer.click("info_panel_container.icons.search")
     if not clicked then
-        log.error("route", "the search icon was not clicked: " .. tostring(err))
+        if pointer.transient(err) then
+            log.repeated("open_search", "debug", "route",
+                "waiting for the foreground before opening the search")
+            return "Running"
+        end
+        log.error("route", "opening the search failed: " .. tostring(err))
         return "Failure"
     end
 

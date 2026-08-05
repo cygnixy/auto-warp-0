@@ -29,14 +29,24 @@ function M.main(args)
 
     local focused, click_error = pointer.click(search.field)
     if not focused then
-        log.error("route", "the search field was not focused: " .. tostring(click_error) ..
+        if pointer.transient(click_error) then
+            log.repeated("focus_field", "debug", "route",
+                "waiting for the foreground before focusing the search field")
+            return "Running"
+        end
+        log.error("route", "focusing the search field failed: " .. tostring(click_error) ..
             " — text typed now would go to whatever holds the cursor")
         return "Failure"
     end
 
     local typed, type_error = cygnixy.type_text(destination)
     if not typed then
-        log.error("route", "\"" .. destination .. "\" was not typed: " .. tostring(type_error))
+        if pointer.transient(type_error) then
+            log.repeated("type_destination", "debug", "route",
+                "waiting for the foreground before typing the destination")
+            return "Running"
+        end
+        log.error("route", "typing the destination failed: " .. tostring(type_error))
         return "Failure"
     end
 

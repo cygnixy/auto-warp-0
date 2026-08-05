@@ -28,7 +28,12 @@ function M.main(args)
 
     local clicked, err = pointer.click("info_panel_container.icons.route")
     if not clicked then
-        log.error("route", "the route block icon was not clicked: " .. tostring(err))
+        if pointer.transient(err) then
+            log.repeated("show_route", "debug", "route",
+                "waiting for the foreground before opening the route block")
+            return "Running"
+        end
+        log.error("route", "opening the route block failed: " .. tostring(err))
         return "Failure"
     end
     return "Running"

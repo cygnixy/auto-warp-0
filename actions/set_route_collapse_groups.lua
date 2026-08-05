@@ -31,7 +31,12 @@ function M.main(args)
 
     local clicked, err = pointer.click(results.collapse_all)
     if not clicked then
-        log.error("route", "the groups were not collapsed: " .. tostring(err))
+        if pointer.transient(err) then
+            log.repeated("collapse", "debug", "route",
+                "waiting for the foreground before collapsing the groups")
+            return "Running"
+        end
+        log.error("route", "collapsing the groups failed: " .. tostring(err))
         return "Failure"
     end
     return "Running"

@@ -373,3 +373,34 @@ log_contains = [
     "info: flight: ordered Jump Through Stargate from the menu",
     "warn: flight: ordered Jump Through Stargate from the menu — 3 times over, and nothing has changed",
 ]
+
+# --- the foreground: the operator's window is not a broken client -------------
+
+[[case]]
+name = "a refused foreground waits for another tick instead of ending the mission"
+fixture = "tests/fixtures/search_open_empty.json"
+action = "set_route_type_destination"
+args = ["Jita"]
+foreground = false
+expect = "Running"
+log_contains = ["debug: route: waiting for the foreground before focusing the search field"]
+
+[[case]]
+name = "the search is not opened while the operator holds the foreground"
+fixture = "tests/fixtures/search_closed.json"
+action = "set_route_open_search"
+foreground = false
+expect = "Running"
+
+[[case]]
+name = "a foreground held for three ticks running is worth a warning"
+fixtures = [
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+]
+action = "set_route_type_destination"
+args = ["Jita"]
+foreground = false
+expect = "Running"
+log_contains = ["warn: route: waiting for the foreground before focusing the search field — 3 times over"]

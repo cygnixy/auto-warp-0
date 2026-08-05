@@ -28,7 +28,12 @@ function M.main(args)
 
     local cleared, err = pointer.click(search.clear)
     if not cleared then
-        log.error("route", "the search field was not cleared: " .. tostring(err))
+        if pointer.transient(err) then
+            log.repeated("clear_field", "debug", "route",
+                "waiting for the foreground before clearing the search field")
+            return "Running"
+        end
+        log.error("route", "clearing the search field failed: " .. tostring(err))
         return "Failure"
     end
     return "Running"

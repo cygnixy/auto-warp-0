@@ -70,4 +70,20 @@ function M.open_menu_and_choose(target, choices)
     return cygnixy.open_menu(target, choices)
 end
 
+-- Whether a refusal is worth another tick rather than the end of the mission.
+--
+-- The operator working in another window is not a fault: Windows refuses to
+-- hand the foreground over, the host presses nothing and says so, and a tick
+-- later the operator may well have clicked back into the game. On 2026-08-05
+-- at 17:46 a mission died one second after it started because the first click
+-- of set_route met that refusal and every set_route step read a refusal as a
+-- broken client.
+--
+-- It is told by the text because the text is all there is: the host answers
+-- both refusals — its own raise, and its foreground gate before a press —
+-- with a message naming the foreground, and neither carries a code.
+function M.transient(reason)
+    return string.find(tostring(reason), "foreground", 1, true) ~= nil
+end
+
 return M
