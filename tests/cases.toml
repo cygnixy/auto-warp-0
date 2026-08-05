@@ -559,3 +559,31 @@ fixture = "tests/fixtures/drifting_after_undock.json"
 action = "open_route_menu_and_warp"
 expect = "Success"
 log_contains = ["open_menu chose \"Jump Through Stargate\""]
+
+# --- a press is not an order --------------------------------------------------
+
+[[case]]
+name = "the magnifier is pressed once, then left alone while the client answers"
+fixtures = [
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+    "tests/fixtures/search_open_empty.json",
+]
+action = "set_route_close_search"
+expect = "Running"
+[[case.log_counts]]
+needle = "click_path(\"info_panel_container.icons.search\""
+times = 1
+
+[[case]]
+name = "the undock button is pressed once, not once per tick"
+fixtures = [
+    "tests/fixtures/docked_with_route.json",
+    "tests/fixtures/docked_with_route.json",
+    "tests/fixtures/docked_with_route.json",
+]
+action = "push_undock_button"
+expect = "Running"
+[[case.log_counts]]
+needle = "click_path(\"station_window.buttons.Undock\""
+times = 1

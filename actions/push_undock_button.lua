@@ -1,4 +1,5 @@
 local log = require("log")
+local press = require("press")
 local pointer = require("pointer")
 
 local M = {}
@@ -14,7 +15,14 @@ function M.main(args)
         return "Running"
     end
 
+    -- Pressed once, then given its chance: the station window lingers for a
+    -- second after the press, and a second press in that second lands on a
+    -- window already on its way out. It was pressed twice on 2026-08-05.
+    if press.pending("undock") then
+        return "Running"
+    end
     local pressed, err = pointer.click(UNDOCK)
+    press.made("undock")
     if not pressed then
         log.repeated("undock", "warn", "flight",
             "the undock button was not pressed: " .. tostring(err))

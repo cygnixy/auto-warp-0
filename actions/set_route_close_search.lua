@@ -1,4 +1,5 @@
 local log = require("log")
+local press = require("press")
 local pointer = require("pointer")
 
 local M = {}
@@ -29,6 +30,8 @@ local M = {}
 local function done()
     log.forget("close_results")
     log.forget("close_panel")
+    press.done("close_results")
+    press.done("close_panel")
     return "Success"
 end
 
@@ -39,7 +42,14 @@ function M.main(args)
     local results = cygnixy.eve.search_results
     local close = results and results.close
     if close and close.x ~= nil then
+        -- The window is still there, but the last press may not have been
+        -- answered yet, and a second one would land on whatever the client
+        -- puts in its place.
+        if press.pending("close_results") then
+            return "Running"
+        end
         local clicked, err = pointer.click(close)
+        press.made("close_results")
         if not clicked then
             log.repeated("close_results", "debug", "route",
                 "the results window was not closed: " .. tostring(err))
@@ -68,7 +78,14 @@ function M.main(args)
         return done()
     end
 
+    -- The magnifier is a toggle: a press while the last one is still being
+    -- answered opens again what it just closed. This is the pair of presses
+    -- that fought each other forty-three times on 2026-08-05.
+    if press.pending("close_panel") then
+        return "Running"
+    end
     local clicked, err = pointer.click("info_panel_container.icons.search")
+    press.made("close_panel")
     if not clicked then
         log.repeated("close_panel", "debug", "route",
             "the search panel was not closed: " .. tostring(err))
