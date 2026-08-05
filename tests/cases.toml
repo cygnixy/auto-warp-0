@@ -784,3 +784,44 @@ expect = "Running"
 [[case.log_counts]]
 needle = "click(952, 504"
 times = 1
+
+# --- modals: acknowledge, never consent ---------------------------------------
+
+[[case]]
+name = "an information box is acknowledged with OK, unasked"
+fixture = "tests/fixtures/message_box_ok.json"
+action = "dismiss_message_box"
+expect = "Running"
+log_contains = ["click(960, 636", "info: client: dismissed a message box with \"OK\""]
+
+[[case]]
+name = "a box that only offers consent is left to the operator's own flag"
+fixture = "tests/fixtures/message_box_consent.json"
+action = "dismiss_message_box"
+expect = "Success"
+[[case.log_counts]]
+needle = "click("
+times = 0
+
+[[case]]
+name = "no box, nothing to do"
+fixture = "tests/fixtures/search_open_empty.json"
+action = "dismiss_message_box"
+expect = "Success"
+
+[[case]]
+name = "a field whose text cannot be read is still cleared: the cross says it holds something"
+fixture = "tests/fixtures/search_text_unreadable.json"
+action = "set_route_clear_field"
+expect = "Running"
+log_contains = ["click(341, 85"]
+
+[[case]]
+name = "and nothing is typed into it while the cross is there"
+fixture = "tests/fixtures/search_text_unreadable.json"
+action = "set_route_type_destination"
+args = ["Jita"]
+expect = "Running"
+[[case.log_counts]]
+needle = "type_text"
+times = 0

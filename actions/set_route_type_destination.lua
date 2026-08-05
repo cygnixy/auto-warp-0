@@ -43,17 +43,15 @@ function M.main(args)
         return "Running"
     end
 
-    -- Anything else in the field is in the way, and has to go before more
-    -- text arrives. Half a name from an interrupted attempt, a name typed
-    -- twice, or something the operator left there -- all the same problem.
-    local text = search.text
-    if type(text) == "string" and text ~= "" then
-        if not (search.clear and search.clear.x ~= nil) then
-            log.error("route", "the search field holds \"" .. text ..
-                "\" and offers no way to clear it")
-            return "Failure"
-        end
-        local cleared, clear_error = pointer.click(search.clear)
+    -- Anything at all in the field is in the way, and the cross is how that is
+    -- known: it appears with the first character and goes with the last. The
+    -- text is not always readable -- under a modal it reads as nothing -- and
+    -- typing on the strength of an empty read is what put the destination into
+    -- the field twice on 2026-08-05, until the client refused the search as
+    -- too long and blocked itself with the refusal.
+    local cross = search.clear
+    if cross and cross.x ~= nil then
+        local cleared, clear_error = pointer.click(cross)
         press.made("type_destination")
         if not cleared then
             if pointer.transient(clear_error) then

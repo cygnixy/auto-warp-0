@@ -16,23 +16,23 @@ function M.main(args)
         return "Failure"
     end
 
-    local text = search.text
-    if type(text) ~= "string" or text == "" then
+    -- The cross is the sign, not the text. It appears with the first character
+    -- typed and goes with the last, while the text itself is not always
+    -- readable -- with a modal over the panel it reads as nothing at all, and
+    -- an empty read meant "nothing to clear" here and "safe to type" next
+    -- door. That pair typed the destination onto itself on 2026-08-05 until
+    -- the client refused the search as too long.
+    local cross = search.clear
+    if not (cross and cross.x ~= nil) then
         press.done("clear_field")
         return "Success"
-    end
-
-    if search.clear == nil or search.clear.x == nil then
-        log.error("route", "the search field holds \"" .. text ..
-            "\" and offers no way to clear it: a new name would be typed onto the old one")
-        return "Failure"
     end
 
     -- One press, then the client's answer: the cross clears the field; pressing it again while the client redraws hits whatever replaces it.
     if press.pending("clear_field") then
         return "Running"
     end
-    local cleared, err = pointer.click(search.clear)
+    local cleared, err = pointer.click(cross)
     press.made("clear_field")
     if not cleared then
         if pointer.transient(err) then

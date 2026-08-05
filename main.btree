@@ -34,6 +34,11 @@ include('fly_route.btree')
 -> main {
     journal(destination, destination_kind)
 
+    /* A modal blocks the whole client, so it goes first and the rest of the
+       tick waits behind it. Only the acknowledging kind is pressed here -- OK
+       and Close, never Yes. */
+    dismiss_message_box()
+
     ->* {
         set_route
         fly_route
