@@ -23,9 +23,9 @@ function M.main(args)
     end
 
     -- Nothing shown, and the client is mid-change: it is not saying there is
-    -- no route, it is not saying anything.
-    local phase = state.phase()
-    if phase == state.SESSION or phase == state.UNKNOWN then
+    -- no route, it is not saying anything. Undocking counts — the panel blanks
+    -- there too, which is where the route was announced twice on 2026-08-05.
+    if not state.settled(state.phase()) then
         return "Running"
     end
 

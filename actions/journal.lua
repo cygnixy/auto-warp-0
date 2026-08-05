@@ -159,7 +159,7 @@ function M.main(args)
     -- Silence is not an empty route. The panel blanks for a moment while the
     -- client changes session, and on 2026-08-05 that made the journal announce
     -- the route a second time, mid-flight, as though it had just been set.
-    if markers == 0 and (phase == state.SESSION or phase == state.UNKNOWN) then
+    if markers == 0 and not state.settled(phase) then
         markers = before
     end
     if markers > 0 and before == 0 then

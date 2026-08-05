@@ -663,3 +663,22 @@ expect = "Success"
 [[case.log_counts]]
 needle = "info: route: the client is showing the route"
 times = 1
+
+[[case]]
+name = "the route panel blanks while undocking too, and that is still no answer"
+fixture = "tests/fixtures/undocking_route_blank.json"
+action = "is_route_set"
+expect = "Running"
+
+[[case]]
+name = "the route is not announced again because undocking blanked the panel"
+fixtures = [
+    "tests/fixtures/journal_docked_jita.json",
+    "tests/fixtures/undocking_route_blank.json",
+    "tests/fixtures/journal_docked_jita.json",
+]
+action = "journal"
+expect = "Success"
+[[case.log_counts]]
+needle = "info: route: the client is showing the route"
+times = 1

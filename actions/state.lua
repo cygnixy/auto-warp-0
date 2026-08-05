@@ -106,6 +106,27 @@ function M.phase()
     return M.UNKNOWN
 end
 
+-- Whether the client's panels can be believed about anything at all.
+--
+-- Only four phases are settled: a hangar, and the three ways of being in
+-- space with the ship panel drawn. The rest are transitions, and during a
+-- transition the client blanks panels it is about to redraw -- the route
+-- panel does it while undocking, while the session changes, and while the
+-- screen is between systems. Read then, an empty panel says "no route" when
+-- it means "not yet".
+--
+-- The cost of believing it: the journal announced the route a second time
+-- mid-flight on 2026-08-05, and is_route_set -- which is the flight's exit
+-- test -- answered Failure five times over on a route that was there all
+-- along. A docked ship reading that at the wrong moment would call the
+-- mission finished in the wrong system.
+function M.settled(phase)
+    return phase == M.DOCKED
+        or phase == M.ADRIFT
+        or phase == M.WARPING
+        or phase == M.APPROACHING
+end
+
 -- Where the ship is, when the client is sure of it. nil is an answer: during a
 -- session change and in the unknown the client says nothing about place, and
 -- whoever is asking should keep what they had rather than take silence for
