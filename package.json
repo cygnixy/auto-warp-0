@@ -5,6 +5,20 @@
     "repository": {
         "url": "https://github.com/cygnixy/auto-warp-0.git"
     },
-    "version": "0.1.16",
-    "edition": "2024"
+    "version": "0.1.17",
+    "edition": "2024",
+    "requires": {
+        "cygnixy": "0.3.7",
+        "capabilities": [
+            "bb_get",
+            "bb_set",
+            "bring_to_front",
+            "click",
+            "click_path",
+            "info",
+            "press_key",
+            "sleep",
+            "update_eve"
+        ]
+    }
 }
