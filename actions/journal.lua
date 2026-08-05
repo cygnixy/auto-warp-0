@@ -77,10 +77,22 @@ function M.main(args)
         log.forget("chose")
         log.forget("route_menu")
 
-        -- And the order is no longer outstanding: the client has moved on to
-        -- something, which is the answer that was being waited for.
-        cygnixy.bb_set("order_pending", 0)
-        cygnixy.bb_set("order_ticks", 0)
+        -- An order ends where the client says it ended, and only some phases
+        -- say that. "Jump through stargate" covers the warp and the jump both:
+        -- arriving at the gate is the middle of it, not the end. Clearing the
+        -- mark there cost an extra order at every gate — two per leg, eight for
+        -- the four legs of 19:39, each one a menu gesture given to a client
+        -- already doing what was asked.
+        if
+            phase == state.SESSION
+            or phase == state.DOCKED
+            or phase == state.DOCKING
+            or phase == state.UNDOCKING
+            or phase == state.UNKNOWN
+        then
+            cygnixy.bb_set("order_pending", 0)
+            cygnixy.bb_set("order_ticks", 0)
+        end
     end
 
     -- Silence is not space. During a session change and in the unknown the

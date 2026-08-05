@@ -357,18 +357,18 @@ log_contains = [
 args = ["Hykkota V - Moon 17", "station"]
 
 [[case]]
-name = "an order given three times to no effect becomes a warning"
+name = "an order that stands is not given again three ticks running"
 fixtures = [
     "tests/fixtures/route_menu_open.json",
     "tests/fixtures/route_menu_open.json",
     "tests/fixtures/route_menu_open.json",
 ]
 action = "open_route_menu_and_warp"
-expect = "Success"
-log_contains = [
-    "info: flight: ordered Jump Through Stargate from the menu",
-    "warn: flight: ordered Jump Through Stargate from the menu — 3 times now, still trying",
-]
+expect = "Running"
+log_contains = ["info: flight: ordered Jump Through Stargate from the menu"]
+[[case.log_counts]]
+needle = "open_menu chose \"Jump Through Stargate\""
+times = 1
 
 # --- the foreground: the operator's window is not a broken client -------------
 
@@ -539,7 +539,7 @@ action = "open_route_menu_and_warp"
 expect = "Running"
 
 [[case]]
-name = "a ship that moves on and on without a manoeuvre is ordered again"
+name = "a ship that gets nowhere under its order is ordered again in the end"
 fixtures = [
     "tests/fixtures/route_menu_open.json",
     "tests/fixtures/ship_drifting.json",
@@ -551,7 +551,30 @@ fixtures = [
 ]
 action = "open_route_menu_and_warp"
 expect = "Running"
-log_contains = ["warn: flight: the ship has been moving for 6 ticks"]
+
+[[case]]
+name = "arriving at the gate does not end the order that is taking the ship through it"
+fixtures = [
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/journal_space_jita.json",
+]
+action = "journal"
+expect = "Success"
+[[case.log_counts]]
+needle = "bb_set order_pending = Integer(0)"
+times = 0
+
+[[case]]
+name = "the jump itself ends it: the client has done what was asked"
+fixtures = [
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/session_changing.json",
+]
+action = "journal"
+expect = "Success"
+[[case.log_counts]]
+needle = "bb_set order_pending = Integer(0)"
+times = 1
 
 [[case]]
 name = "a ship drifting out of a station is ordered, not waited on"

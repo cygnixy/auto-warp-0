@@ -31,7 +31,7 @@ end
 -- only stops the bot waiting forever on a ship that moves without ever
 -- reaching a manoeuvre, which is how 19:25 ended: drifting out of a station,
 -- never standing still, never ordered anything again.
-local PATIENCE = 5
+local PATIENCE = 10
 
 function M.main(args)
     -- An order of ours is outstanding, and the ship is moving: it is being
@@ -41,16 +41,23 @@ function M.main(args)
     if (cygnixy.bb_get("order_pending") or 0) == 1 then
         local shipui = cygnixy.eve.shipui
         local speed = shipui and shipui.speed
+        -- A ship under way is plainly obeying, and the wait costs nothing to
+        -- extend; only standing still counts against the patience. That is
+        -- what the wait at a gate looks like: arrived, motionless, the jump
+        -- four seconds away and no part of the client saying so.
+        if type(speed) == "number" and speed > 1.0 then
+            return "Running"
+        end
+
         local ticks = (cygnixy.bb_get("order_ticks") or 0) + 1
         cygnixy.bb_set("order_ticks", ticks)
-
-        if type(speed) == "number" and speed > 1.0 and ticks <= PATIENCE then
+        if ticks <= PATIENCE then
             return "Running"
         end
         if ticks > PATIENCE then
             log.repeated("order_stuck", "warn", "flight",
-                "the ship has been moving for " .. ticks ..
-                " ticks without the client showing a manoeuvre — ordering again")
+                "nothing has come of the last order in " .. ticks ..
+                " ticks — ordering again")
         end
         cygnixy.bb_set("order_pending", 0)
         cygnixy.bb_set("order_ticks", 0)
