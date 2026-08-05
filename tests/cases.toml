@@ -357,8 +357,9 @@ action = "journal"
 expect = "Success"
 log_contains = [
     "info: flight: docked at Perimeter II - Moon 1 - Caldari Navy Assembly Plant after 1 jump",
-    "info: mission: the route has been flown to its end",
+    "info: mission: the route to Hykkota V - Moon 17 has been flown to its end",
 ]
+args = ["Hykkota V - Moon 17", "station"]
 
 [[case]]
 name = "an order given three times to no effect becomes a warning"
@@ -404,3 +405,17 @@ args = ["Jita"]
 foreground = false
 expect = "Running"
 log_contains = ["warn: route: waiting for the foreground before focusing the search field — 3 times over"]
+
+[[case]]
+name = "a jump clears the count of orders given, so the next leg starts fresh"
+fixtures = [
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_space_perimeter.json",
+]
+action = "journal"
+expect = "Success"
+log_contains = [
+    "info: flight: jumped into Perimeter",
+    "bb_set log_chose = String(\"\")",
+    "bb_set log_route_menu = String(\"\")",
+]

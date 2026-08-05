@@ -63,6 +63,15 @@ function M.main(args)
     local location = panel and panel.info_panel_location_info
     local now_system = location and text(location.current_solar_system_name)
 
+    -- Whether the ship got anywhere this tick. The counters that turn a
+    -- repeated line into a warning mean "the same thing to no effect", and
+    -- only this action can tell effect from repetition: the tactics see one
+    -- gate at a time and give every one of them the same order. On 2026-08-05
+    -- at 17:53 the third "Jump Through Stargate" was warned about ten seconds
+    -- after the jump it had caused, because nobody had told the counter that
+    -- the ship had moved.
+    local moved = false
+
     -- A jump is seen, not performed: the name in the location panel changes
     -- when the client finishes the session change, whoever ordered it and
     -- however many attempts it took.
@@ -74,6 +83,7 @@ function M.main(args)
             "flight",
             "jumped into " .. now_system .. " — " .. tostring(log.jumps(jumps)) .. " so far"
         )
+        moved = true
     end
     if now_system then
         cygnixy.bb_set(SYSTEM, now_system)
@@ -81,6 +91,7 @@ function M.main(args)
 
     local was_place = cygnixy.bb_get(PLACE)
     if text(was_place) and now_place ~= was_place then
+        moved = true
         if now_place == "space" then
             log.info("flight", "undocked into " .. (now_system or "space"))
         else
@@ -97,6 +108,13 @@ function M.main(args)
     end
     cygnixy.bb_set(PLACE, now_place)
 
+    if moved then
+        -- The orders that got the ship here worked; the next complaint about
+        -- them starts from one, not from where the last leg left off.
+        log.forget("chose")
+        log.forget("route_menu")
+    end
+
     local route = panel and panel.info_panel_route
     local markers = (route and route.route_element_marker) and #route.route_element_marker or 0
     local before = cygnixy.bb_get(ROUTE) or 0
@@ -110,7 +128,16 @@ function M.main(args)
     elseif markers == 0 and before > 0 and now_place == "station" then
         -- Docked with the route gone is what the end of a mission looks like
         -- from the outside; the tree reads the same two facts to stop.
-        log.info("mission", "the route has been flown to its end")
+        --
+        -- The destination is named again here so that the last line stands on
+        -- its own. The line above can only say the system: the station's name
+        -- lives in the location panel's expanded content, and a docked client
+        -- with that panel collapsed does not carry it.
+        if text(destination) then
+            log.info("mission", "the route to " .. destination .. " has been flown to its end")
+        else
+            log.info("mission", "the route has been flown to its end")
+        end
     end
     cygnixy.bb_set(ROUTE, markers)
 
