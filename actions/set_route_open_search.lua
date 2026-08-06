@@ -18,6 +18,7 @@ function M.main(args)
         -- did, or the operator did. The icon is a toggle: pressing it now
         -- would close the very panel that is wanted.
         press.done("open_search")
+        cygnixy.bb_set("search_field_x", -1)
         return "Success"
     end
 
@@ -25,6 +26,22 @@ function M.main(args)
     if not (icons and icons.search) then
         log.error("route", "the search cannot be opened: its icon is not on screen")
         return "Failure"
+    end
+
+    -- A panel on its way open is a panel answering. It slides in, and its
+    -- field slides with it: on 2026-08-06 the field stood at x=98 for one
+    -- press and x=103 for the next, two seconds later, with display false
+    -- throughout -- the flag turns true only once the panel has arrived. The
+    -- first press had worked, and the second landed on something moving. The
+    -- same lesson as the ship's speed: motion is the client obeying.
+    local field_x = search and search.field and search.field.x
+    local seen = cygnixy.bb_get("search_field_x")
+    if type(field_x) == "number" then
+        cygnixy.bb_set("search_field_x", field_x)
+        if type(seen) == "number" and seen ~= field_x then
+            log.debug("route", "the search panel is sliding open; waiting rather than pressing")
+            return "Running"
+        end
     end
 
     -- The panel is not open and the icon is a toggle: press it once and let

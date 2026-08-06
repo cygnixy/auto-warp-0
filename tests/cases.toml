@@ -925,3 +925,17 @@ action = "set_route_collapse_groups"
 args = ["Jita IV - Moon 4 - Caldari Navy Assembly Plant"]
 expect = "Running"
 log_contains = ["click(820, 403"]
+
+[[case]]
+name = "a panel sliding open is not pressed again: its field is on the move"
+fixtures = [
+    "tests/fixtures/search_closed.json",
+    "tests/fixtures/search_sliding_open.json",
+    "tests/fixtures/search_closed.json",
+]
+action = "set_route_open_search"
+expect = "Running"
+log_contains = ["the search panel is sliding open"]
+[[case.log_counts]]
+needle = "click_path(\"info_panel_container.icons.search\""
+times = 1
