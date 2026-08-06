@@ -17,6 +17,18 @@ function M.main(args)
         return "Running"
     end
 
+    -- The header counts the jumps, and it says so in every shape of the panel.
+    -- The markers are drawn only by the expanded one: on 2026-08-05 the bot
+    -- laid a route, met a collapsed panel with no markers in it, and read that
+    -- as "no route" while the header said three jumps.
+    local jumps = route.jumps
+    if type(jumps) == "number" then
+        if jumps > 0 then
+            return "Success"
+        end
+        return "Failure"
+    end
+
     local markers = route.route_element_marker
     if markers ~= nil and #markers > 0 then
         return "Success"

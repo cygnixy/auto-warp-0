@@ -38,8 +38,9 @@ function M.main(args)
     -- did it and however long it took.
     local panel = cygnixy.eve.info_panel_container
     local route = panel and panel.info_panel_route
+    local jumps = route and route.jumps
     local markers = route and route.route_element_marker
-    if markers ~= nil and #markers > 0 then
+    if (type(jumps) == "number" and jumps > 0) or (markers ~= nil and #markers > 0) then
         log.forget("choose_menu")
         log.forget("chosen")
         return "Success"

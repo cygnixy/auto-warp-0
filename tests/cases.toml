@@ -841,3 +841,34 @@ action = "set_route_type_destination"
 args = ["Jita"]
 expect = "Running"
 log_contains = ["type_text(\"Jita\")"]
+
+# --- a collapsed route panel draws no markers, but its header still counts ----
+
+[[case]]
+name = "a route is set even when the panel that would show it is shut"
+fixture = "tests/fixtures/route_collapsed.json"
+action = "is_route_set"
+expect = "Success"
+
+[[case]]
+name = "and the choice is done: the client has laid the route asked for"
+fixture = "tests/fixtures/route_collapsed.json"
+action = "set_route_choose"
+args = ["Jita"]
+expect = "Success"
+
+[[case]]
+name = "a shut panel is opened, because the flight steers by the markers in it"
+fixture = "tests/fixtures/route_collapsed.json"
+action = "set_route_show_route"
+expect = "Running"
+log_contains = ["click(56, 200"]
+
+[[case]]
+name = "an open panel with markers is left alone"
+fixture = "tests/fixtures/route_expanded.json"
+action = "set_route_show_route"
+expect = "Success"
+[[case.log_counts]]
+needle = "click("
+times = 0
