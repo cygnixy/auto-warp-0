@@ -526,6 +526,37 @@ action = "journal"
 expect = "Success"
 log_contains = ["debug: phase: docked -> unknown"]
 
+# On 2026-08-06 at 14:32 the client kept its HudReadout and drew nothing
+# inside it: no structure, no armor, no shield anywhere in the tree, while the
+# capacitor stood at 100% and the stop button was drawn. Every warp of that
+# flight ended in "unknown" instead of adrift, and in unknown this bot does
+# nothing — it sat at the gate of its destination for eighty-two seconds
+# without a word.
+[[case]]
+name = "a ship whose health readout went blank is still a ship in space"
+fixture = "tests/fixtures/ship_hud_readout_blank.json"
+action = "phase_is"
+args = ["adrift"]
+expect = "Success"
+
+[[case]]
+name = "and it is ordered like any free ship, not waited on"
+fixture = "tests/fixtures/ship_hud_readout_blank.json"
+action = "open_route_menu_and_warp"
+expect = "Success"
+log_contains = ["open_menu chose \"Jump Through Stargate\""]
+
+[[case]]
+name = "a client saying nothing at all is said aloud, not sat through in silence"
+fixtures = [
+    "tests/fixtures/phase_unknown.json",
+    "tests/fixtures/phase_unknown.json",
+    "tests/fixtures/phase_unknown.json",
+]
+action = "journal"
+expect = "Success"
+log_contains = ["the client is saying nothing about where the ship is"]
+
 [[case]]
 name = "a ship drifting out of a station is free: nobody ordered that motion"
 fixture = "tests/fixtures/ship_drifting.json"
@@ -781,7 +812,7 @@ fixtures = [
 ]
 action = "open_route_menu_and_warp"
 expect = "Running"
-log_contains = ["too young for the client to offer a way to travel"]
+log_contains = ["waiting out the young session change"]
 [[case.log_counts]]
 needle = "open_menu right_click"
 times = 0

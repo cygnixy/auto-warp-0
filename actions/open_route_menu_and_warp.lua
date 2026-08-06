@@ -57,14 +57,34 @@ function M.main(args)
     -- re-read between them would let them disagree.
     local phase = state.phase()
 
+    -- An order is outstanding: wait up to 8s with the client showing no sign
+    -- of carrying it out before giving it again.
+    --
+    -- Asked before anything about the session, and that order matters. A jump
+    -- order starts a session change of its own, so with the question the other
+    -- way round the bot spent the seconds after every successful order
+    -- announcing that the session change was too young to order in -- three
+    -- times, then nine, escalating into warnings about a client that was doing
+    -- exactly what it had been told.
+    if order.pending(PATIENCE_MS) then
+        return "Running"
+    end
+
     if phase == state.SESSION then
         -- The client's own countdown, when it reads. nil means it did not, and
         -- then the probe goes ahead as it did before this was known: a wait on
         -- a signal that never arrives is worse than a wasted gesture.
+        --
+        -- Said once per session change, at debug. This wait is normal and the
+        -- client's own clock bounds it; a line per tick, or a count that grows
+        -- into a warning, teaches the reader to ignore warnings.
         local left = guard.session_seconds_left()
         if left ~= nil and left > SESSION_READY_S then
-            log.repeated("session_early", "debug", "flight",
-                "the session change is too young for the client to offer a way to travel")
+            if (cygnixy.bb_get("said_session_early") or 0) ~= 1 then
+                cygnixy.bb_set("said_session_early", 1)
+                log.debug("flight",
+                    "waiting out the young session change: the client offers no way to travel yet")
+            end
             return "Running"
         end
 
@@ -74,12 +94,6 @@ function M.main(args)
         end
     end
 
-    -- An order is outstanding: wait up to 8s with the client showing no sign
-    -- of carrying it out before giving it again.
-    if order.pending(PATIENCE_MS) then
-        return "Running"
-    end
-
     -- Take permission for mid-session probing if in session change.
     if phase == state.SESSION then
         if press.pending("session_probe", PROBE_EVERY_MS) then
@@ -87,7 +101,6 @@ function M.main(args)
         end
         press.made("session_probe")
         cygnixy.bb_set("panel_fresh", -1)
-        log.forget("session_early")
         log.debug("flight", "the route panel has caught up and held; trying it mid-session")
     end
 

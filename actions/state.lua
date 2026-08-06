@@ -87,13 +87,26 @@ function M.phase()
         return M.APPROACHING
     end
 
-    -- Shield, armour and structure are drawn for a ship that is flying and
-    -- are empty for one in a hangar: on every reference dump the in-space ones
-    -- carry all three and the docked ones carry none. This is what tells "in
-    -- space with nothing happening" from "the client is between things", and
-    -- without it the two were the same answer.
+    -- In space with nothing happening, told from "the client is between
+    -- things" -- and told by more than one widget on purpose.
+    --
+    -- Shield, armour and structure used to answer this alone: a flying ship
+    -- carries all three, a hangared one carries none. Then on 2026-08-06 at
+    -- 14:32 the client kept its HudReadout node but drew nothing inside it --
+    -- no structure, no armor, no shield anywhere in the tree, while the
+    -- capacitor stood at 100%, the modules were drawn and the stop button was
+    -- there. Every warp of that flight ended in "unknown" instead of adrift,
+    -- and in unknown this bot does nothing at all: it sat at the gate of its
+    -- destination system for eighty-two seconds, silent, until the operator
+    -- stopped it.
+    --
+    -- One widget failing to draw must not cost the bot its whole idea of where
+    -- it is. Each of these is empty in a hangar and drawn in space, and any
+    -- one of them is enough to say so.
     local hitpoints = shipui and shipui.hitpoints_percent
-    if present(hitpoints) then
+    local capacitor = shipui and shipui.capacitor
+    local stop_button = shipui and shipui.stop_button
+    if present(hitpoints) or present(capacitor) or present(stop_button) then
         -- Speed lives here no longer. It says the ship is moving, which is not
         -- the same as "the order I gave is being obeyed": a ship pushed out of
         -- a station is moving with nobody having ordered anything, and on

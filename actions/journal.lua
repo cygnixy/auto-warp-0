@@ -97,6 +97,9 @@ function M.main(args)
         -- than waiting out the spacing left over from the phase before.
         cygnixy.bb_set("press_session_probe", 0)
 
+        -- And a new session change is worth one line about waiting it out.
+        cygnixy.bb_set("said_session_early", 0)
+
         -- An order ends where the client says it ended, and only some phases
         -- say that. Which ones, and why docking and arriving at a gate are not
         -- among them, is written down in order.lua beside the rest of the
@@ -104,6 +107,20 @@ function M.main(args)
         -- docking -> adrift -> docking and the bot ordered Dock a second time
         -- into a ship already on its way in.
         order.ends_with_phase(phase)
+    end
+
+    -- The unknown is the one phase in which this bot does nothing at all: no
+    -- branch of the flight tree runs in it. Passing through it is ordinary —
+    -- the client blanks its panels between systems — but staying in it is the
+    -- shape a hang takes, and on 2026-08-06 at 14:32 it took exactly that
+    -- shape for eighty-two seconds without a word. Counted rather than timed:
+    -- three ticks of it is a passage, eighty is a fault, and the count says
+    -- which without anyone having to choose a number of seconds.
+    if phase == state.UNKNOWN then
+        log.repeated("phase_unknown", "debug", "flight",
+            "the client is saying nothing about where the ship is")
+    else
+        log.forget("phase_unknown")
     end
 
     -- Silence is not space. During a session change and in the unknown the
