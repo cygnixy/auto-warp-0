@@ -64,8 +64,13 @@ end
 --
 -- target may be a path, a region, or a list of either, tried in turn.
 -- choices is a list of {text=, partial_match=} in order of preference;
--- matching ignores case and skips disabled entries. Returns the chosen entry
--- ({text=, region=, ...}), or nil and the reason.
+-- matching ignores case and skips disabled entries. partial_match matches the
+-- START of an entry, not any part of it: it exists for "Warp to Within 0 m",
+-- whose tail is a distance and whose head is fixed. A short needle hunting
+-- anywhere in the line eventually finds itself inside an entry that must not
+-- be pressed -- a client that has not finished loading a system answers the
+-- route marker with the solar system's own menu, "Clear All Waypoints" and
+-- all. Returns the chosen entry ({text=, region=, ...}), or nil and the reason.
 function M.open_menu_and_choose(target, choices)
     return cygnixy.open_menu(target, choices)
 end
