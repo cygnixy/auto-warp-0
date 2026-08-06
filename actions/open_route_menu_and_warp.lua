@@ -31,13 +31,44 @@ local PATIENCE_MS = 8000
 local PROBE_EVERY_MS = 2000
 local PANEL_HELD_MS = 700
 
+-- The client serves no travel command early in a session change, and says so
+-- itself: its countdown reads high. Measured over the flight of 14:05, where
+-- every attempt fell into one of two groups and nothing else about the client
+-- differed between them:
+--
+--   7 seconds left -> the route marker's menu carries Show Info, Save
+--                     Location, Remove Waypoint, and no way to travel   (3 of 3)
+--   4 or fewer     -> the same menu carries Jump Through Stargate       (3 of 3)
+--
+-- Everything else was identical on both sides, and that is the point: the
+-- route panel had already recomputed for the new system, the overview already
+-- held its ten rows in the tree -- drawn empty, but there -- and the location
+-- panel already named the new system. The one thing that told the two apart
+-- was the number the client publishes about itself.
+--
+-- Four is where the evidence stops, not where the client's rule is: the probe
+-- runs every two seconds, so five and six were never asked. Asking too late
+-- costs nothing, since the order lands on the next probe either way; the whole
+-- gain here is not spending a menu gesture on a client that will refuse it.
+local SESSION_READY_S = 4
+
 function M.main(args)
     -- Read once: three questions below are about the same tick, and a phase
     -- re-read between them would let them disagree.
     local phase = state.phase()
 
-    -- Mid-session probing: wait until the route panel is fresh before trying.
     if phase == state.SESSION then
+        -- The client's own countdown, when it reads. nil means it did not, and
+        -- then the probe goes ahead as it did before this was known: a wait on
+        -- a signal that never arrives is worse than a wasted gesture.
+        local left = guard.session_seconds_left()
+        if left ~= nil and left > SESSION_READY_S then
+            log.repeated("session_early", "debug", "flight",
+                "the session change is too young for the client to offer a way to travel")
+            return "Running"
+        end
+
+        -- Mid-session probing: wait until the route panel is fresh before trying.
         if not guard.panel_fresh(PANEL_HELD_MS) then
             return "Running"
         end
@@ -56,6 +87,7 @@ function M.main(args)
         end
         press.made("session_probe")
         cygnixy.bb_set("panel_fresh", -1)
+        log.forget("session_early")
         log.debug("flight", "the route panel has caught up and held; trying it mid-session")
     end
 
