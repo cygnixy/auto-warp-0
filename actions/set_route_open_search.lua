@@ -34,6 +34,15 @@ function M.main(args)
     if press.pending("open_search") then
         return "Running"
     end
+    -- What the panel says about itself at the moment of the press, because on
+    -- 2026-08-06 the search opened on the fourth press and seven seconds after
+    -- the mission began, and nothing in the log said why the first three did
+    -- nothing. Guessing has cost enough today; the next flight will say.
+    local icon = icons.search
+    log.debug("route", "pressing the magnifier: display=" .. tostring(search and search.display) ..
+        ", icon=" .. tostring(icon and icon.x) .. "," .. tostring(icon and icon.y) ..
+        ", field=" .. tostring(search and search.field and search.field.x))
+
     local clicked, err = pointer.click("info_panel_container.icons.search")
     press.made("open_search")
     if not clicked then
