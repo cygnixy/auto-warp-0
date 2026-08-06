@@ -1,6 +1,8 @@
 local log = require("log")
 local press = require("press")
 local state = require("state")
+local order = require("order")
+local guard = require("guard")
 local pointer = require("pointer")
 local warp_choice = require("warp_choice")
 
@@ -25,124 +27,24 @@ local function marker_paths(count)
     return paths
 end
 
--- How many ticks a ship may be seen moving under an order before the order is
--- given again anyway.
---
--- Not a deadline on the client: the phase changing clears the wait at once,
--- and that is what normally ends it — three seconds, two or three ticks. This
--- only stops the bot waiting forever on a ship that moves without ever
--- reaching a manoeuvre, which is how 19:25 ended: drifting out of a station,
--- never standing still, never ordered anything again.
--- All three are times, not counts of ticks. A tick lasts 1.11 seconds while
--- dumps are saved and 0.59 without, so counting ticks made every wait in this
--- bot twice as long when the operator turned on a debugging aid.
---
--- Eight seconds for an order to come to something: the client shows a
--- manoeuvre within three, and a wasted leg costs ten. Two seconds between
--- probes of a session change: the change lasts nine or ten, which leaves room
--- for four or five tries at about a second each. Seven hundred milliseconds
--- for a redrawn route panel to settle before its markers are believed.
 local PATIENCE_MS = 8000
 local PROBE_EVERY_MS = 2000
 local PANEL_HELD_MS = 700
 
 function M.main(args)
-    -- The session change is being tested, and tested cheaply.
-    --
-    -- The tree waited it out because the client "opens no context menu while
-    -- the session is changing" — written down long ago and never measured.
-    -- The wait costs nine and a half seconds after every jump: twenty-eight
-    -- seconds of the four-and-a-half-minute flight of 20:14, a tenth of it.
-    --
-    -- So one probe per session change, not one per tick. If the menu opens,
-    -- the ship is on its way to the next gate eight seconds early and the log
-    -- says "ordered". If it does not, the log says "no context menu opened",
-    -- the gesture cost a second, and the bot waits as before. Either way the
-    -- next run answers the question with evidence.
+    -- Mid-session probing: wait until the route panel is fresh before trying.
     if state.phase() == state.SESSION then
-        -- The panel must have caught up with the jump first.
-        --
-        -- The trial of 20:27 answered the old question and found a different
-        -- one. Menus do open during a session change: the order given while
-        -- undocking was taken, and the ship left for the gate six seconds
-        -- early. But after a jump the route panel still describes the leg just
-        -- flown, and its markers open menus for a station left behind — "Show
-        -- Info, Save Location..., Remove Waypoint", nothing to fly by.
-        --
-        -- The panel says so itself. Until it catches up, the waypoint it names
-        -- as next is the system the ship is already in; when it names the one
-        -- beyond, it has been redrawn and its markers point where the ship is
-        -- going. On the last leg the two are equal for real, and no probe is
-        -- made -- the dock order is given a moment later, from adrift, as it
-        -- always was.
-        local panel = cygnixy.eve.info_panel_container
-        local route = panel and panel.info_panel_route
-        local location = panel and panel.info_panel_location_info
-        local next_stop = route and route.next_system
-        local here = location and location.current_solar_system_name
-        if type(next_stop) ~= "string" or next_stop == "" or next_stop == here then
-            cygnixy.bb_set("panel_fresh", -1)
+        if not guard.panel_fresh(PANEL_HELD_MS) then
             return "Running"
         end
-
-        -- And it must hold. A panel redrawn this very tick is a panel still
-        -- being redrawn: the waypoint arrives before the markers under it are
-        -- in their places, and a menu opened between the two belongs to
-        -- whatever was there before. So the new state is watched for a tick
-        -- before it is trusted -- patience counted in looks at the client
-        -- rather than in seconds.
-        local fresh_since = cygnixy.bb_get("panel_fresh") or -1
-        if fresh_since < 0 then
-            cygnixy.bb_set("panel_fresh", cygnixy.now_ms())
-            return "Running"
-        end
-        if cygnixy.now_ms() - fresh_since < PANEL_HELD_MS then
-            return "Running"
-        end
-
     end
 
-    -- An order of ours is outstanding, and the ship is moving: it is being
-    -- obeyed, and a second order would only interrupt the first. Speed alone
-    -- would not do — a ship pushed out of a station moves with nothing
-    -- ordered — so it is read together with the flag that says we ordered.
-    if (cygnixy.bb_get("order_pending") or 0) == 1 then
-        local shipui = cygnixy.eve.shipui
-        local speed = shipui and shipui.speed
-        -- A ship under way is plainly obeying, and the wait costs nothing to
-        -- extend; only standing still counts against the patience. That is
-        -- what the wait at a gate looks like: arrived, motionless, the jump
-        -- four seconds away and no part of the client saying so.
-        if type(speed) == "number" and speed > 1.0 then
-            -- And the count starts over when it stops. The patience measures
-            -- unbroken stillness, not time since the order: a forty-second warp
-            -- is the order being carried out, and on 2026-08-06 at 06:28 the
-            -- clock ran through one and cried "nothing has come of it" the
-            -- instant the ship arrived at the gate.
-            cygnixy.bb_set("order_since", -1)
-            return "Running"
-        end
-
-        local since = cygnixy.bb_get("order_since") or -1
-        if since < 0 then
-            cygnixy.bb_set("order_since", cygnixy.now_ms())
-            return "Running"
-        end
-        local waited = cygnixy.now_ms() - since
-        if waited < PATIENCE_MS then
-            return "Running"
-        end
-        log.repeated("order_stuck", "warn", "flight",
-            "nothing has come of the last order in " .. math.floor(waited / 1000) ..
-            "s, ordering again")
-        cygnixy.bb_set("order_pending", 0)
-        cygnixy.bb_set("order_since", -1)
+    -- An order is outstanding: wait up to 8s without movement before ordering again.
+    if order.pending(PATIENCE_MS, 1.0) then
+        return "Running"
     end
 
-    -- The probe's permission is taken here, below the order that may already
-    -- stand: taken above it, the log announced "trying it mid-session" on
-    -- ticks where nothing was tried at all, because the order still in force
-    -- returned first.
+    -- Take permission for mid-session probing if in session change.
     if state.phase() == state.SESSION then
         if press.pending("session_probe", PROBE_EVERY_MS) then
             return "Running"
@@ -161,16 +63,13 @@ function M.main(args)
     local paths = marker_paths(#route.route_element_marker)
     local entry, err = pointer.open_menu_and_choose(paths, warp_choice.choices)
     if entry == nil then
-        -- Debug, because failing here is ordinary: the panel carries up to
-        -- two markers and the leading one is the system just reached, whose
-        -- menu offers nothing worth choosing. Only persistence is a warning,
-        -- and log.repeated raises it on the third identical try.
         log.repeated("route_menu", "debug", "flight",
             "no order could be given from the route marker: " .. tostring(err))
         return "Running"
     end
 
     warp_choice.after_chosen(entry)
+    order.issue()
     return "Success"
 end
 

@@ -1,5 +1,6 @@
 local log = require("log")
 local press = require("press")
+local guard = require("guard")
 local pointer = require("pointer")
 
 local M = {}
@@ -10,6 +11,10 @@ local M = {}
 local UNDOCK = "station_window.buttons.Undock"
 
 function M.main(args)
+    if not guard.settled() then
+        return "Running"
+    end
+
     local station = cygnixy.eve.station_window
     if not (station and station.buttons and station.buttons["Undock"]) then
         return "Running"

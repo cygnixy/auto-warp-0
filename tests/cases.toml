@@ -939,3 +939,25 @@ log_contains = ["the search panel is sliding open"]
 [[case.log_counts]]
 needle = "click_path(\"info_panel_container.icons.search\""
 times = 1
+
+# --- order module & guard framework verification ----------------------------
+
+[[case]]
+name = "order patience expires when ship remains stationary for over 8 seconds"
+fixtures = [
+    "tests/fixtures/route_menu_open.json",
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_space_jita.json",
+]
+action = "open_route_menu_and_warp"
+expect = "Running"
+tick_ms = 1000
+log_contains = ["nothing has come of the last order"]
+
