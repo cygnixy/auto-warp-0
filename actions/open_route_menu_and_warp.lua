@@ -100,12 +100,6 @@ function M.main(args)
             return "Running"
         end
 
-        if press.pending("session_probe", PROBE_EVERY_MS) then
-            return "Running"
-        end
-        press.made("session_probe")
-        cygnixy.bb_set("panel_fresh", -1)
-        log.debug("flight", "the route panel has caught up and held; trying it mid-session")
     end
 
     -- An order of ours is outstanding, and the ship is moving: it is being
@@ -120,6 +114,12 @@ function M.main(args)
         -- what the wait at a gate looks like: arrived, motionless, the jump
         -- four seconds away and no part of the client saying so.
         if type(speed) == "number" and speed > 1.0 then
+            -- And the count starts over when it stops. The patience measures
+            -- unbroken stillness, not time since the order: a forty-second warp
+            -- is the order being carried out, and on 2026-08-06 at 06:28 the
+            -- clock ran through one and cried "nothing has come of it" the
+            -- instant the ship arrived at the gate.
+            cygnixy.bb_set("order_since", -1)
             return "Running"
         end
 
@@ -137,6 +137,19 @@ function M.main(args)
             "s, ordering again")
         cygnixy.bb_set("order_pending", 0)
         cygnixy.bb_set("order_since", -1)
+    end
+
+    -- The probe's permission is taken here, below the order that may already
+    -- stand: taken above it, the log announced "trying it mid-session" on
+    -- ticks where nothing was tried at all, because the order still in force
+    -- returned first.
+    if state.phase() == state.SESSION then
+        if press.pending("session_probe", PROBE_EVERY_MS) then
+            return "Running"
+        end
+        press.made("session_probe")
+        cygnixy.bb_set("panel_fresh", -1)
+        log.debug("flight", "the route panel has caught up and held; trying it mid-session")
     end
 
     local panel = cygnixy.eve.info_panel_container

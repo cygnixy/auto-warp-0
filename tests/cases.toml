@@ -884,3 +884,26 @@ expect = "Success"
 [[case.log_counts]]
 needle = "click("
 times = 0
+
+[[case]]
+name = "a long warp under an order is the order working, not the order failing"
+fixtures = [
+    "tests/fixtures/route_menu_open.json",
+    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/ship_drifting.json",
+]
+action = "open_route_menu_and_warp"
+expect = "Running"
+tick_ms = 4000
+[[case.log_counts]]
+needle = "warn: flight: nothing has come of the last order"
+times = 0
