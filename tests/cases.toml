@@ -907,3 +907,21 @@ tick_ms = 4000
 [[case.log_counts]]
 needle = "warn: flight: nothing has come of the last order"
 times = 0
+
+[[case]]
+name = "a search that already shows the wanted row is left alone, not collapsed"
+fixture = "tests/fixtures/search_station_row_live.json"
+action = "set_route_collapse_groups"
+args = ["Jita IV - Moon 4 - Caldari Navy Assembly Plant"]
+expect = "Success"
+[[case.log_counts]]
+needle = "click("
+times = 0
+
+[[case]]
+name = "hundreds of rows that are not the one wanted are still collapsed"
+fixture = "tests/fixtures/search_category_expanded.json"
+action = "set_route_collapse_groups"
+args = ["Jita IV - Moon 4 - Caldari Navy Assembly Plant"]
+expect = "Running"
+log_contains = ["click(820, 403"]

@@ -1,5 +1,6 @@
 local log = require("log")
 local pointer = require("pointer")
+local search = require("search")
 local press = require("press")
 
 local M = {}
@@ -11,8 +12,17 @@ local M = {}
 -- category headers and the right one is a click away — no scrolling, no
 -- guessing where the characters end.
 --
--- Done when no group is expanded, which shows as the entries list being empty.
+-- Done when no group is expanded, which shows as the entries list being empty
+-- -- or when the row being looked for is already in front of us, which is the
+-- ordinary case for a name specific enough to match one thing.
+--
+-- args[1] is the destination. Without it this action collapsed whatever the
+-- search had opened and the next step opened it again: a search for a full
+-- station name returns that station alone, expanded, and the bot spent two
+-- gestures putting it back the way it found it.
 function M.main(args)
+    local destination = args and args[1]
+
     local results = cygnixy.eve.search_results
     if not (results and results.groups and #results.groups > 0) then
         -- The window has not opened yet; the search is still running.
@@ -23,6 +33,16 @@ function M.main(args)
     if entries == nil or #entries == 0 then
         press.done("collapse")
         return "Success"
+    end
+
+    -- The row is here already. Collapsing now would hide the very thing the
+    -- search was for.
+    if type(destination) == "string" and destination ~= "" then
+        local row = search.find_entry(entries, destination)
+        if row ~= nil then
+            press.done("collapse")
+            return "Success"
+        end
     end
 
     if results.collapse_all == nil or results.collapse_all.x == nil then

@@ -42,7 +42,11 @@
                     set_route_open_search()
                     set_route_clear_field()
                     set_route_type_destination(destination)
-                    set_route_collapse_groups()
+                    /* The destination is passed so that a search which
+                       already shows the wanted row is left as it is: without
+                       it this collapsed what the search had opened and the
+                       next step opened it again. */
+                    set_route_collapse_groups(destination)
                     set_route_expand_category(destination_kind)
                     /* Succeeds on the route appearing, not on the press
                        landing: between the two the client says nothing, so a

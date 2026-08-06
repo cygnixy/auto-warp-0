@@ -24,7 +24,8 @@ function M.main(args)
         return "Running"
     end
 
-    -- Something is expanded already: this action ran, or the operator did it.
+    -- Something is expanded already: this action ran, the operator did it, or
+    -- the search itself opened the only category it matched.
     if results.entries ~= nil and #results.entries > 0 then
         press.done("expand")
         return "Success"
