@@ -534,7 +534,7 @@ args = ["adrift"]
 expect = "Success"
 
 [[case]]
-name = "an order given is not given again while the ship is seen obeying it"
+name = "an order just given is given a beat before it is given again"
 fixtures = [
     "tests/fixtures/route_menu_open.json",
     "tests/fixtures/ship_drifting.json",
@@ -542,19 +542,45 @@ fixtures = [
 action = "open_route_menu_and_warp"
 expect = "Running"
 
+# A ship coasting out of a station is the state this bot hung in for
+# sixty-two seconds on 2026-08-06: the order was lost in a session change, the
+# ship kept flying forward by itself, and speed was read as obedience. The
+# case that stood here ran seven ticks of a ship at 240 m/s, expected Running,
+# and so asserted the hang itself — under the old guard it could not have
+# failed. It now ends on the tick that gives the order again, which is what
+# its name always promised.
 [[case]]
 name = "a ship that gets nowhere under its order is ordered again in the end"
 fixtures = [
     "tests/fixtures/route_menu_open.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/drifting_after_undock.json",
+    "tests/fixtures/drifting_after_undock.json",
+    "tests/fixtures/drifting_after_undock.json",
+    "tests/fixtures/drifting_after_undock.json",
+    "tests/fixtures/drifting_after_undock.json",
+]
+tick_ms = 2000
+action = "open_route_menu_and_warp"
+expect = "Success"
+log_contains = ["nothing has come of the last order in 8s, ordering again"]
+[[case.log_counts]]
+needle = "open_menu chose \"Jump Through Stargate\""
+times = 2
+
+# The other half of this law — a warp under way holds the order however long
+# it lasts — is "a long warp under an order is the order working" further down.
+
+# Waiting is allowed; waiting without a word is not. Both silent exits of this
+# action cost a hang that read in the log exactly like a bot at work.
+[[case]]
+name = "a route panel with no marker to order from is said aloud, not waited on in silence"
+fixtures = [
+    "tests/fixtures/drifting_no_markers.json",
+    "tests/fixtures/drifting_no_markers.json",
 ]
 action = "open_route_menu_and_warp"
 expect = "Running"
+log_contains = ["the route panel shows no marker to order from"]
 
 [[case]]
 name = "arriving at the gate does not end the order that is taking the ship through it"
@@ -887,19 +913,25 @@ times = 0
 
 [[case]]
 name = "a long warp under an order is the order working, not the order failing"
+# Written with a drifting ship, because the guard it tested read speed and a
+# drifting ship has plenty of it. A warp is not speed: it is the manoeuvre the
+# client draws while it carries the order out, and ship_drifting draws none —
+# under the fixed guard those eleven ticks are eleven ticks of nothing
+# happening, which is exactly what they look like to a reader. The fixture is
+# now a ship that is actually warping.
 fixtures = [
     "tests/fixtures/route_menu_open.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
-    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
 ]
 action = "open_route_menu_and_warp"
 expect = "Running"
@@ -907,6 +939,9 @@ tick_ms = 4000
 [[case.log_counts]]
 needle = "warn: flight: nothing has come of the last order"
 times = 0
+[[case.log_counts]]
+needle = "open_menu chose \"Jump Through Stargate\""
+times = 1
 
 [[case]]
 name = "a search that already shows the wanted row is left alone, not collapsed"

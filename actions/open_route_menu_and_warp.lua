@@ -32,20 +32,25 @@ local PROBE_EVERY_MS = 2000
 local PANEL_HELD_MS = 700
 
 function M.main(args)
+    -- Read once: three questions below are about the same tick, and a phase
+    -- re-read between them would let them disagree.
+    local phase = state.phase()
+
     -- Mid-session probing: wait until the route panel is fresh before trying.
-    if state.phase() == state.SESSION then
+    if phase == state.SESSION then
         if not guard.panel_fresh(PANEL_HELD_MS) then
             return "Running"
         end
     end
 
-    -- An order is outstanding: wait up to 8s without movement before ordering again.
-    if order.pending(PATIENCE_MS, 1.0) then
+    -- An order is outstanding: wait up to 8s with the client showing no sign
+    -- of carrying it out before giving it again.
+    if order.pending(phase, PATIENCE_MS) then
         return "Running"
     end
 
     -- Take permission for mid-session probing if in session change.
-    if state.phase() == state.SESSION then
+    if phase == state.SESSION then
         if press.pending("session_probe", PROBE_EVERY_MS) then
             return "Running"
         end
@@ -57,8 +62,18 @@ function M.main(args)
     local panel = cygnixy.eve.info_panel_container
     local route = panel and panel.info_panel_route
     if not (route and route.route_element_marker and #route.route_element_marker > 0) then
+        -- Said aloud, because a wordless Running is indistinguishable in the
+        -- log from a bot doing its job: the hang of 12:44 left sixty-two
+        -- seconds of nothing at all. Only while the panels can be believed --
+        -- the route panel blanks itself during a session change, and an empty
+        -- panel then says "not yet" rather than "no route".
+        if state.settled(phase) then
+            log.repeated("no_markers", "debug", "flight",
+                "the route panel shows no marker to order from")
+        end
         return "Running"
     end
+    log.forget("no_markers")
 
     local paths = marker_paths(#route.route_element_marker)
     local entry, err = pointer.open_menu_and_choose(paths, warp_choice.choices)
@@ -69,7 +84,6 @@ function M.main(args)
     end
 
     warp_choice.after_chosen(entry)
-    order.issue()
     return "Success"
 end
 

@@ -6,6 +6,7 @@
 -- undock bookmark — offer the same three entries and must agree on which one
 -- wins.
 local log = require("log")
+local order = require("order")
 
 local M = {}
 
@@ -32,11 +33,13 @@ function M.after_chosen(entry, state)
     -- what the client shows, and the two must not be confused again.
     cygnixy.bb_set("_state", state or "warp")
 
-    -- An order is outstanding until the client shows it has been taken. The
-    -- flag is what lets the next tick tell "the ship is moving because of me"
-    -- from "the ship is moving"; journal clears it on any change of phase.
-    cygnixy.bb_set("order_pending", 1)
-    cygnixy.bb_set("order_ticks", 0)
+    -- An order is outstanding until the client shows it has been taken, and
+    -- order.lua owns that mark. All three ways of sending the ship somewhere
+    -- come through here, so this is the one place it is set: the route marker
+    -- used to set it twice over, once here and once at its own call site, with
+    -- order_ticks -- a leftover of the days when waits were counted in ticks
+    -- and read by nobody -- set alongside it.
+    order.issue()
 end
 
 return M
