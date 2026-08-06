@@ -11,14 +11,6 @@
             "width": 8,
             "height": 8
           }
-        },
-        {
-          "region": {
-            "x": 98,
-            "y": 283,
-            "width": 8,
-            "height": 8
-          }
         }
       ]
     },
@@ -29,7 +21,7 @@
   },
   "session_time_indicator": {
     "display": true,
-    "hint": "Session changing"
+    "hint": "Session changing - Time left: 4 seconds"
   },
   "hero_notification": {
     "texts": []

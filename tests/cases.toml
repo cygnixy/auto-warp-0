@@ -772,6 +772,26 @@ action = "open_route_menu_and_warp"
 expect = "Success"
 log_contains = ["open_menu chose \"Jump Through Stargate\""]
 
+# The same reading — "the next stop is the system I am standing in" — means
+# two opposite things, and the marker count tells them apart. Before the
+# destination system the panel carries a marker per jump; on arrival one is
+# left, the station itself. Read as staleness, it cost the flight of 14:50
+# eleven seconds in its last system where six would have done: the panel was
+# never "fresh" there, so it was never probed.
+[[case]]
+name = "the last system is not a stale panel: its next stop is where the ship stands"
+fixtures = [
+    "tests/fixtures/session_route_arrived.json",
+    "tests/fixtures/session_route_arrived.json",
+    "tests/fixtures/session_route_arrived.json",
+]
+action = "open_route_menu_and_warp"
+expect = "Running"
+log_contains = ["the route panel has caught up and held"]
+[[case.log_counts]]
+needle = "open_menu right_click"
+times = 1
+
 [[case]]
 name = "a panel still naming the system under the ship has not caught up: no probe"
 fixtures = [
