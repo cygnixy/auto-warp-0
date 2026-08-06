@@ -45,7 +45,7 @@ function M.main(args)
 
     -- An order is outstanding: wait up to 8s with the client showing no sign
     -- of carrying it out before giving it again.
-    if order.pending(phase, PATIENCE_MS) then
+    if order.pending(PATIENCE_MS) then
         return "Running"
     end
 

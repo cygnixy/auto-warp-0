@@ -1,5 +1,6 @@
 local log = require("log")
 local state = require("state")
+local order = require("order")
 
 local M = {}
 
@@ -68,6 +69,12 @@ function M.main(args)
     -- The phase, read from the same module the tree acts on, so the log and
     -- the behaviour can never disagree about what is going on.
     local phase = state.phase()
+
+    -- The journal is the only thing that runs on every tick in every phase, so
+    -- the order's clock is kept from here. It watches; the bookkeeping rules
+    -- themselves live in order.lua, next to the guard that reads them.
+    order.observe(phase)
+
     local was_phase = cygnixy.bb_get(PHASE)
     if phase ~= was_phase then
         -- Debug, not info: phases change several times a jump and the reader
@@ -91,25 +98,12 @@ function M.main(args)
         cygnixy.bb_set("press_session_probe", 0)
 
         -- An order ends where the client says it ended, and only some phases
-        -- say that. "Jump through stargate" covers the warp and the jump both:
-        -- arriving at the gate is the middle of it, not the end. Clearing the
-        -- mark there cost an extra order at every gate — two per leg, eight for
-        -- the four legs of 19:39, each one a menu gesture given to a client
-        -- already doing what was asked.
-        -- Docking is not in this list, and that is the same lesson as the
-        -- gate: it is the client carrying the order out, not finishing it.
-        -- A Dock order ends when the ship is docked. On 2026-08-05 at 21:03
-        -- the phase flickered docking -> adrift -> docking and the bot ordered
-        -- Dock a second time into a ship already on its way in.
-        if
-            phase == state.SESSION
-            or phase == state.DOCKED
-            or phase == state.UNDOCKING
-            or phase == state.UNKNOWN
-        then
-            cygnixy.bb_set("order_pending", 0)
-            cygnixy.bb_set("order_since", -1)
-        end
+        -- say that. Which ones, and why docking and arriving at a gate are not
+        -- among them, is written down in order.lua beside the rest of the
+        -- order's bookkeeping: on 2026-08-05 at 21:03 the phase flickered
+        -- docking -> adrift -> docking and the bot ordered Dock a second time
+        -- into a ship already on its way in.
+        order.ends_with_phase(phase)
     end
 
     -- Silence is not space. During a session change and in the unknown the

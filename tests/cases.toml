@@ -913,35 +913,40 @@ times = 0
 
 [[case]]
 name = "a long warp under an order is the order working, not the order failing"
-# Written with a drifting ship, because the guard it tested read speed and a
-# drifting ship has plenty of it. A warp is not speed: it is the manoeuvre the
-# client draws while it carries the order out, and ship_drifting draws none —
-# under the fixed guard those eleven ticks are eleven ticks of nothing
-# happening, which is exactly what they look like to a reader. The fixture is
-# now a ship that is actually warping.
+# Twice wrong before this. First it drew its warp with a drifting ship, because
+# the guard it tested read speed and a drifting ship has plenty of it. Then it
+# drew a real warp but drove open_route_menu_and_warp through it — a position
+# the tree never produces: that node is reached in adrift and session only,
+# so nothing asks it anything while the ship warps. That is exactly why the
+# flight of 13:25 came out of every forty-eight-second warp to be told that
+# nothing had come of the order in forty-eight seconds: the clock is held at
+# zero by the journal, which runs every tick in every phase, and the test has
+# to ask the journal.
 fixtures = [
-    "tests/fixtures/route_menu_open.json",
-    "tests/fixtures/in_space_warping.json",
-    "tests/fixtures/in_space_warping.json",
-    "tests/fixtures/in_space_warping.json",
-    "tests/fixtures/in_space_warping.json",
-    "tests/fixtures/in_space_warping.json",
-    "tests/fixtures/in_space_warping.json",
-    "tests/fixtures/in_space_warping.json",
-    "tests/fixtures/in_space_warping.json",
     "tests/fixtures/in_space_warping.json",
     "tests/fixtures/in_space_warping.json",
     "tests/fixtures/in_space_warping.json",
 ]
-action = "open_route_menu_and_warp"
-expect = "Running"
+action = "journal"
+expect = "Success"
 tick_ms = 4000
+# Раз на такт: терпение не течёт, пока клиент работает, а не обнуляется однажды.
 [[case.log_counts]]
-needle = "warn: flight: nothing has come of the last order"
+needle = "bb_set order_since = Integer(-1)"
+times = 3
+
+[[case]]
+name = "a ship adrift under an order lets the clock run: nothing is being carried out"
+fixtures = [
+    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/ship_drifting.json",
+    "tests/fixtures/ship_drifting.json",
+]
+action = "journal"
+expect = "Success"
+[[case.log_counts]]
+needle = "bb_set order_since = Integer(-1)"
 times = 0
-[[case.log_counts]]
-needle = "open_menu chose \"Jump Through Stargate\""
-times = 1
 
 [[case]]
 name = "a search that already shows the wanted row is left alone, not collapsed"

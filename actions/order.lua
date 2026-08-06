@@ -24,23 +24,20 @@ local M = {}
 -- docking itself. The adrift phase *is* "nobody is carrying anything out": the
 -- patience clock is reset by evidence of work, never by a sign of movement.
 --
--- phase — this tick's phase, read once by the caller.
+-- Where the clock is reset: see M.observe. It cannot be reset from here,
+-- and putting it here was the first fix's mistake — the only caller of this
+-- function is the `move` node, which the tree reaches solely in adrift and
+-- session. While the ship warps nobody asks, so the branch that was meant to
+-- hold the clock at zero never ran, and the flight of 13:25 came out of every
+-- forty-eight-second warp to be told that nothing had come of the order in
+-- forty-eight seconds. Four false warnings and eight orders for four legs,
+-- where one order per leg is the whole point.
+--
 -- patience_ms — how long without any evidence of work is allowed before the
 -- order is taken for lost.
-function M.pending(phase, patience_ms)
+function M.pending(patience_ms)
     if (cygnixy.bb_get("order_pending") or 0) ~= 1 then
         return false
-    end
-
-    -- The client is showing the order being carried out: the clock restarts.
-    if
-        phase == state.WARPING
-        or phase == state.JUMPING
-        or phase == state.APPROACHING
-        or phase == state.DOCKING
-    then
-        cygnixy.bb_set("order_since", -1)
-        return true
     end
 
     -- Nothing is happening. Start counting, if counting has not started.
@@ -70,6 +67,51 @@ end
 function M.issue()
     cygnixy.bb_set("order_pending", 1)
     cygnixy.bb_set("order_since", -1)
+end
+
+-- What becomes of the order this tick, whatever the client is showing.
+--
+-- Called by the journal, which is the one thing that runs on every tick in
+-- every phase. The guard that consults the clock does not: it is reached in
+-- two phases out of nine, and a rule about "while the client works" cannot
+-- live somewhere that is blind while the client works.
+--
+-- Patience measures a continuous absence of evidence, so a manoeuvre holds
+-- the clock at zero rather than merely restarting it once. Whether an order
+-- is outstanding does not matter here: with none pending the clock means
+-- nothing anyway, and the guard reads it only after M.issue.
+function M.observe(phase)
+    if
+        phase == state.WARPING
+        or phase == state.JUMPING
+        or phase == state.APPROACHING
+        or phase == state.DOCKING
+    then
+        cygnixy.bb_set("order_since", -1)
+    end
+end
+
+-- The client has said the order is over: it changes session, it is in a
+-- hangar, it is leaving one, or it has gone quiet altogether.
+--
+-- Called on a change of phase, not every tick. That is deliberate: an order
+-- given during a session change -- the mid-session probe -- would otherwise be
+-- wiped by the very next tick and given again on the one after.
+--
+-- Docking is not in this list, and neither is arriving at a gate. "Jump
+-- through stargate" covers the warp and the jump both, and a Dock order ends
+-- when the ship is docked: clearing the mark in the middle costs an extra
+-- order at every leg.
+function M.ends_with_phase(phase)
+    if
+        phase == state.SESSION
+        or phase == state.DOCKED
+        or phase == state.UNDOCKING
+        or phase == state.UNKNOWN
+    then
+        cygnixy.bb_set("order_pending", 0)
+        cygnixy.bb_set("order_since", -1)
+    end
 end
 
 return M
