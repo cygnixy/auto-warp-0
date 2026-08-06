@@ -62,13 +62,15 @@
         open_route_menu_and_warp()
     }
 }
-/* The one timer left in this bot, and it guards a toggle rather than an
-   order. Giving an order twice repeats it; pressing F1 twice reverses it —
-   the second press uncloaks the ship it just cloaked. The cloak takes a
-   moment to appear in the panel, so without the wait the bot would undo its
-   own work. Every other timer is gone: repeating an order is free. */
+/* The wait that stood here as a condition has moved into the action, where
+   every other press in this bot is spaced. The wait itself stays — it guards
+   a toggle rather than an order, and F1 pressed twice uncloaks the ship it
+   just cloaked — but the tree is no place for it: the tree asks what is true,
+   and how long a press is given to land is the action's business. With it
+   goes the last timer told in whole seconds off the wall clock.
+
+   What is left is what a tree is for: not cloaked already, and in warp. */
 -> stealth {
-    is_timer_elapsed?("stealth_timestamp", 3)
     @! is_stealth?()
     phase_is?("warping")
     stealth()

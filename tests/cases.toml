@@ -63,13 +63,6 @@ fixture = "tests/fixtures/docked_with_route.json"
 action = "is_message_boxes"
 expect = "Failure"
 
-[[case]]
-name = "an absent timer counts as elapsed"
-fixture = "tests/fixtures/docked_with_route.json"
-action = "is_timer_elapsed"
-args = ["warp_timestamp", 3]
-expect = "Success"
-
 # --- actions ---------------------------------------------------------------
 
 [[case]]
@@ -109,11 +102,55 @@ expect = "Failure"
 log_contains = ["not addressable"]
 
 [[case]]
-name = "stealth presses F1 and records the time"
+name = "stealth presses F1 and records the press"
 fixture = "tests/fixtures/in_space_warping.json"
 action = "stealth"
 expect = "Success"
-log_contains = ["press_key(112.0,)", "bb_set stealth_timestamp"]
+log_contains = ["press_key(112.0,)", "bb_set press_stealth"]
+
+# F1 is a toggle: the second press undoes the first. The cloak needs a moment
+# to appear in the panel, and until it does the bot must not press again — the
+# whole reason this is the one wait left in the bot.
+[[case]]
+name = "the cloak is toggled once and given time to appear, not pressed every tick"
+fixtures = [
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+]
+action = "stealth"
+expect = "Running"
+[[case.log_counts]]
+needle = "press_key(112.0,)"
+times = 1
+
+[[case]]
+name = "and pressed again once the wait is over and the cloak still is not up"
+fixtures = [
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+]
+tick_ms = 2000
+action = "stealth"
+expect = "Success"
+[[case.log_counts]]
+needle = "press_key(112.0,)"
+times = 2
+
+# Until now nothing ran is_stealth at all: the cloak branch is off by default,
+# so the action had no cases and no evidence that it answers either way.
+[[case]]
+name = "a ship with no cloak buff answers no, rather than raising"
+fixture = "tests/fixtures/ship_uncloaked.json"
+action = "is_stealth"
+expect = "Failure"
+
+[[case]]
+name = "and a cloaked one answers yes"
+fixture = "tests/fixtures/ship_cloaked.json"
+action = "is_stealth"
+expect = "Success"
 
 # --- set_route: the search --------------------------------------------------
 
