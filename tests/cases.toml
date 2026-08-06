@@ -369,6 +369,7 @@ fixtures = [
 action = "open_route_menu_and_warp"
 expect = "Running"
 log_contains = ["info: flight: ordered Jump Through Stargate from the menu"]
+tick_ms = 400
 [[case.log_counts]]
 needle = "open_menu chose \"Jump Through Stargate\""
 times = 1
@@ -597,6 +598,10 @@ fixtures = [
 ]
 action = "set_route_open_search"
 expect = "Running"
+# Такт покороче настоящего: три такта укладываются в полторы секунды
+# выдержки, и проверяется именно «нажал и ждёт», а не «дождался и нажал
+# снова».
+tick_ms = 400
 [[case.log_counts]]
 needle = "click_path(\"info_panel_container.icons.search\""
 times = 1
@@ -610,6 +615,10 @@ fixtures = [
 ]
 action = "push_undock_button"
 expect = "Running"
+# Такт покороче настоящего: три такта укладываются в полторы секунды
+# выдержки, и проверяется именно «нажал и ждёт», а не «дождался и нажал
+# снова».
+tick_ms = 400
 [[case.log_counts]]
 needle = "click_path(\"station_window.buttons.Undock\""
 times = 1
@@ -686,7 +695,7 @@ times = 1
 # --- the session change, on trial ---------------------------------------------
 
 [[case]]
-name = "the session change is probed at intervals, not once per tick"
+name = "the session change is probed every two seconds, not every tick"
 fixtures = [
     "tests/fixtures/session_changing.json",
     "tests/fixtures/session_changing.json",
@@ -697,7 +706,7 @@ action = "open_route_menu_and_warp"
 expect = "Running"
 [[case.log_counts]]
 needle = "open_menu right_click"
-times = 1
+times = 2
 
 [[case]]
 name = "a settled ship is not rationed: it may be ordered whenever it is free"
@@ -743,6 +752,7 @@ fixtures = [
 action = "set_route_type_destination"
 args = ["Jita"]
 expect = "Running"
+tick_ms = 400
 [[case.log_counts]]
 needle = "type_text(\"Jita\")"
 times = 1
@@ -767,6 +777,7 @@ fixtures = [
 ]
 action = "set_route_show_route"
 expect = "Running"
+tick_ms = 400
 [[case.log_counts]]
 needle = "click_path(\"info_panel_container.icons.route\""
 times = 1
@@ -781,6 +792,7 @@ fixtures = [
 action = "set_route_expand_category"
 args = ["station"]
 expect = "Running"
+tick_ms = 400
 [[case.log_counts]]
 needle = "click(952, 504"
 times = 1

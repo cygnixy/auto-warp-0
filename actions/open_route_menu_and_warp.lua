@@ -33,7 +33,18 @@ end
 -- only stops the bot waiting forever on a ship that moves without ever
 -- reaching a manoeuvre, which is how 19:25 ended: drifting out of a station,
 -- never standing still, never ordered anything again.
-local PATIENCE = 10
+-- All three are times, not counts of ticks. A tick lasts 1.11 seconds while
+-- dumps are saved and 0.59 without, so counting ticks made every wait in this
+-- bot twice as long when the operator turned on a debugging aid.
+--
+-- Eight seconds for an order to come to something: the client shows a
+-- manoeuvre within three, and a wasted leg costs ten. Two seconds between
+-- probes of a session change: the change lasts nine or ten, which leaves room
+-- for four or five tries at about a second each. Seven hundred milliseconds
+-- for a redrawn route panel to settle before its markers are believed.
+local PATIENCE_MS = 8000
+local PROBE_EVERY_MS = 2000
+local PANEL_HELD_MS = 700
 
 function M.main(args)
     -- The session change is being tested, and tested cheaply.
@@ -70,7 +81,7 @@ function M.main(args)
         local next_stop = route and route.next_system
         local here = location and location.current_solar_system_name
         if type(next_stop) ~= "string" or next_stop == "" or next_stop == here then
-            cygnixy.bb_set("panel_fresh", 0)
+            cygnixy.bb_set("panel_fresh", -1)
             return "Running"
         end
 
@@ -80,27 +91,20 @@ function M.main(args)
         -- whatever was there before. So the new state is watched for a tick
         -- before it is trusted -- patience counted in looks at the client
         -- rather than in seconds.
-        local fresh = (cygnixy.bb_get("panel_fresh") or 0) + 1
-        cygnixy.bb_set("panel_fresh", fresh)
-        if fresh < 2 then
+        local fresh_since = cygnixy.bb_get("panel_fresh") or -1
+        if fresh_since < 0 then
+            cygnixy.bb_set("panel_fresh", cygnixy.now_ms())
+            return "Running"
+        end
+        if cygnixy.now_ms() - fresh_since < PANEL_HELD_MS then
             return "Running"
         end
 
-        -- More than one probe per session change, spaced out.
-        --
-        -- The flight of 20:59 probed once per change and won nine seconds on
-        -- the jump where the panel was ready, and lost three quarters of a
-        -- second on the two where it was not: the waypoint had been redrawn
-        -- but the markers under it still belonged to the leg just flown. One
-        -- probe cannot find the moment those catch up, it can only miss it.
-        -- Three ticks apart is cheap enough to keep asking -- a probe that
-        -- finds the wrong menu costs about as long as it takes to open -- and
-        -- the session lasts nine seconds, room for three or four tries.
-        if press.pending("session_probe") then
+        if press.pending("session_probe", PROBE_EVERY_MS) then
             return "Running"
         end
         press.made("session_probe")
-        cygnixy.bb_set("panel_fresh", 0)
+        cygnixy.bb_set("panel_fresh", -1)
         log.debug("flight", "the route panel has caught up and held; trying it mid-session")
     end
 
@@ -119,18 +123,20 @@ function M.main(args)
             return "Running"
         end
 
-        local ticks = (cygnixy.bb_get("order_ticks") or 0) + 1
-        cygnixy.bb_set("order_ticks", ticks)
-        if ticks <= PATIENCE then
+        local since = cygnixy.bb_get("order_since") or -1
+        if since < 0 then
+            cygnixy.bb_set("order_since", cygnixy.now_ms())
             return "Running"
         end
-        if ticks > PATIENCE then
-            log.repeated("order_stuck", "warn", "flight",
-                "nothing has come of the last order in " .. ticks ..
-                " ticks — ordering again")
+        local waited = cygnixy.now_ms() - since
+        if waited < PATIENCE_MS then
+            return "Running"
         end
+        log.repeated("order_stuck", "warn", "flight",
+            "nothing has come of the last order in " .. math.floor(waited / 1000) ..
+            "s, ordering again")
         cygnixy.bb_set("order_pending", 0)
-        cygnixy.bb_set("order_ticks", 0)
+        cygnixy.bb_set("order_since", -1)
     end
 
     local panel = cygnixy.eve.info_panel_container

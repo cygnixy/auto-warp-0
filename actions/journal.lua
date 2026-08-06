@@ -108,7 +108,7 @@ function M.main(args)
             or phase == state.UNKNOWN
         then
             cygnixy.bb_set("order_pending", 0)
-            cygnixy.bb_set("order_ticks", 0)
+            cygnixy.bb_set("order_since", -1)
         end
     end
 
