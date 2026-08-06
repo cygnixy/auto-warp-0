@@ -961,3 +961,13 @@ expect = "Running"
 tick_ms = 1000
 log_contains = ["nothing has come of the last order"]
 
+[[case]]
+name = "mid-session probe attempts interaction when phase is session and panel is fresh"
+fixtures = [
+    "tests/fixtures/mid_session_probe.json",
+    "tests/fixtures/mid_session_probe.json",
+]
+action = "open_route_menu_and_warp"
+expect = "Running"
+tick_ms = 1000
+log_contains = ["trying it mid-session"]

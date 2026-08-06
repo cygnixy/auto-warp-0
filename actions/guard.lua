@@ -24,7 +24,7 @@ function M.panel_fresh(timeout_ms)
         cygnixy.bb_set("panel_fresh", cygnixy.now_ms())
         return false
     end
-    if cygnixy.now_ms() - fresh_since < (timeout_ms or 700) then
+    if cygnixy.now_ms() - fresh_since < timeout_ms then
         return false
     end
     return true
