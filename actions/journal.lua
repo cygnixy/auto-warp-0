@@ -44,6 +44,7 @@ end
 function M.main(args)
     local destination = args and args[1]
     local kind = args and args[2]
+    local return_destination = args and args[3]
 
     if (cygnixy.bb_get(STARTED) or 0) == 0 then
         cygnixy.bb_set(STARTED, 1)
@@ -74,6 +75,13 @@ function M.main(args)
                 "mission",
                 "bound for " .. destination .. ", looked up among the " .. tostring(kind) .. "s"
             )
+            -- Read by the flight parser too: the "and back to " prefix is
+            -- the anchor bot-harness `flight` looks for. Printed only when a
+            -- return leg was actually requested — a one-way mission stays
+            -- silent about it, and the parser reads that silence as None.
+            if text(return_destination) then
+                log.info("mission", "and back to " .. return_destination)
+            end
         else
             log.info("mission", "no destination given — flying the route already set")
         end
@@ -208,7 +216,7 @@ function M.main(args)
         -- depends on whether a return destination was given and which leg
         -- was flying — the same question legs_done asks, asked here again so
         -- the log narrates the turn instead of staying silent about it.
-        local return_destination = args and args[3]
+        -- (return_destination is the same local read at the top of main.)
         local going_home = leg.current() == "out"
             and type(return_destination) == "string" and return_destination ~= ""
         if going_home then
