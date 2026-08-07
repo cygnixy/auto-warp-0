@@ -75,10 +75,6 @@ function M.main(args)
             return "Failure"
         end
 
-        -- Every retry costs an attempt, whether or not the click behind it
-        -- landed: a cross hidden under another window is refused by
-        -- click_path, but nothing here inspects that refusal -- the field
-        -- staying wrong on the next tick is the only signal there is.
         local attempts = cygnixy.bb_get("type_destination_attempts") or 0
         if attempts >= MAX_ATTEMPTS then
             log.error("route", "the search field cannot be made to hold \"" .. destination ..
@@ -89,7 +85,25 @@ function M.main(args)
         log.repeated("retype", "warn", "route",
             "the search field holds \"" .. text .. "\" instead of \"" .. destination ..
                 "\"; clearing it to type again")
-        pointer.click("info_panel_search.clear")
+        local cleared, clear_error = pointer.click("info_panel_search.clear")
+
+        -- The operator holding the foreground is not the field's fault: a
+        -- tick later they may have handed it back, and spending an attempt
+        -- on a click that never happened would fail the mission over
+        -- something that was never wrong with the search.
+        if not cleared and pointer.transient(clear_error) then
+            log.repeated("clear_before_typing", "debug", "route",
+                "waiting for the foreground before clearing the search field")
+            return "Running"
+        end
+
+        -- Counted here and nowhere else: a cross hidden under another window
+        -- is refused by click_path without raising an error a human would
+        -- see, so this is the one branch every failure to clear -- seen or
+        -- silent -- passes through, and the one place the budget of retries
+        -- is spent. Typing afterwards does not spend it again, or a single
+        -- clear-then-retype cycle would cost two of the three attempts the
+        -- comment above promises instead of one.
         press.made("type_destination")
         cygnixy.bb_set("type_destination_attempts", attempts + 1)
         return "Running"
@@ -120,7 +134,6 @@ function M.main(args)
 
     press.made("type_destination")
     cygnixy.press_key(0x0D)
-    cygnixy.bb_set("type_destination_attempts", (cygnixy.bb_get("type_destination_attempts") or 0) + 1)
     log.repeated("searching", "info", "route", "searching for \"" .. destination .. "\"")
     return "Running"
 end
