@@ -36,6 +36,8 @@ stealth = false
 bookmark_jump = false
 push_button_yes = false
 
+downtime_guard_seconds = 300
+
 include('set_route.btree')
 include('fly_route.btree')
 
@@ -45,6 +47,13 @@ include('fly_route.btree')
  * done, and the flight — the part worth reading back — would go unrecorded.
  * It always succeeds, so the commands are reached whatever it sees. */
 -> main {
+    /* The server going away outranks everything: no order is worth giving
+       to a client that is about to lose it, and a "Connection Lost" modal
+       means none can be given at all. Failure here fails the whole tree,
+       which is how a mission stops with a reason instead of running
+       forever against a dead client. */
+    downtime_guard(downtime_guard_seconds)
+
     journal(destination, destination_kind, return_destination)
 
     /* A modal blocks the whole client, so it goes first and the rest of the

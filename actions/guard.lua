@@ -84,4 +84,26 @@ function M.panel_fresh(timeout_ms)
     return true
 end
 
+-- How many seconds the client says are left before the cluster shuts down,
+-- or nil if no shutdown is announced.
+--
+-- The announcement lives in quick_message: "Cluster Shutdown in 3 minutes
+-- and 40 seconds", "... in 2 minutes", "... in 40 seconds", "... in Less
+-- than one second". A wording this parser does not know still counts as an
+-- announcement: zero is returned rather than nil, because acting on a dying
+-- server is worse than stopping a minute early.
+function M.downtime_seconds_left()
+    local message = cygnixy.eve.quick_message
+    local text = message and message.text
+    if type(text) ~= "string" or not string.find(text, "Cluster Shutdown", 1, true) then
+        return nil
+    end
+    local minutes = tonumber(string.match(text, "(%d+)%s+minutes?")) or 0
+    local seconds = tonumber(string.match(text, "(%d+)%s+seconds?")) or 0
+    if minutes == 0 and seconds == 0 then
+        return 0
+    end
+    return minutes * 60 + seconds
+end
+
 return M
