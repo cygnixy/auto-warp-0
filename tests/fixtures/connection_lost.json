@@ -1,0 +1,2677 @@
+{
+  "agent_conversation_windows": [],
+  "bookmark_location_window": null,
+  "character_sheet_window": null,
+  "chat_window_stacks": [
+    {
+      "chats_window": [
+        {
+          "name": "chatchannel_local",
+          "userlist": {
+            "scroll_controls": null,
+            "visible_users": [
+              {
+                "name": "Pilot A",
+                "standing_icon_hint": "Pilot has No Standing."
+              },
+              {
+                "name": "Pilot B",
+                "standing_icon_hint": "Pilot has No Standing."
+              },
+              {
+                "name": "Pilot C",
+                "standing_icon_hint": "Pilot has No Standing."
+              },
+              {
+                "name": "Pilot D",
+                "standing_icon_hint": "Pilot has No Standing."
+              },
+              {
+                "name": "Pilot E",
+                "standing_icon_hint": "Pilot has No Standing."
+              },
+              {
+                "name": "Pilot F",
+                "standing_icon_hint": "Pilot has No Standing."
+              }
+            ]
+          }
+        },
+        {
+          "name": "chatchannel_corp",
+          "userlist": {
+            "scroll_controls": null,
+            "visible_users": [
+              {
+                "name": "Test Pilot",
+                "standing_icon_hint": null
+              }
+            ]
+          }
+        },
+        {
+          "name": "chatchannel_player_-6614024",
+          "userlist": {
+            "scroll_controls": {
+              "scroll_handle": {
+                "height": 198,
+                "width": 112,
+                "x": 638,
+                "y": 817
+              }
+            },
+            "visible_users": [
+              {
+                "name": "Test Pilot",
+                "standing_icon_hint": null
+              }
+            ]
+          }
+        }
+      ],
+      "visibility": {
+        "fraction": 1.0,
+        "largest_visible": {
+          "height": 305,
+          "width": 716,
+          "x": 44,
+          "y": 775
+        },
+        "occluded_by": [
+          {
+            "by": "ResourceLoadingIndicator",
+            "region": {
+              "height": 32,
+              "width": 2,
+              "x": 42,
+              "y": 1036
+            },
+            "tp_name": "ResourceLoadingIndicator",
+            "z": 0
+          }
+        ],
+        "region": {
+          "height": 305,
+          "width": 718,
+          "x": 42,
+          "y": 775
+        }
+      }
+    }
+  ],
+  "compression_window": null,
+  "context_menus": [],
+  "directional_scanner_window": {
+    "scan_results": [
+      {
+        "region": {
+          "height": 20,
+          "width": 631,
+          "x": 1271,
+          "y": 832
+        },
+        "texts": [
+          "Ansila",
+          "Stargate (Caldari System)",
+          "13 km"
+        ]
+      }
+    ],
+    "scroll_node": {
+      "height": 297,
+      "width": 667,
+      "x": 1253,
+      "y": 740
+    },
+    "visibility": {
+      "fraction": 0.999,
+      "largest_visible": {
+        "height": 292,
+        "width": 667,
+        "x": 1253,
+        "y": 740
+      },
+      "occluded_by": [
+        {
+          "by": "NotificationContainer",
+          "region": {
+            "height": 5,
+            "width": 32,
+            "x": 1872,
+            "y": 1032
+          },
+          "tp_name": "NotificationContainer",
+          "z": 5
+        }
+      ],
+      "region": {
+        "height": 297,
+        "width": 667,
+        "x": 1253,
+        "y": 740
+      }
+    }
+  },
+  "drones_window": null,
+  "fitting_window": null,
+  "fleet_window": null,
+  "heat_status_tooltip": null,
+  "hero_notification": {
+    "texts": [],
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 1080,
+        "width": 1876,
+        "x": 44,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "info_panel_container": {
+    "icons": {
+      "agent_missions": null,
+      "all": [
+        {
+          "name": null,
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 98,
+            "y": 50
+          },
+          "texture_path": "res:/UI/Texture/Classes/InfoPanels/search.png"
+        },
+        {
+          "name": null,
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 118,
+            "y": 50
+          },
+          "texture_path": "res:/UI/Texture/Classes/InfoPanels/LocationInfo.png"
+        },
+        {
+          "name": null,
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 138,
+            "y": 50
+          },
+          "texture_path": "res:/UI/Texture/Classes/InfoPanels/Route.png"
+        },
+        {
+          "name": "Opportunities board",
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 158,
+            "y": 50
+          },
+          "texture_path": null
+        }
+      ],
+      "daily_challenge": null,
+      "location_info": {
+        "height": 16,
+        "width": 16,
+        "x": 118,
+        "y": 50
+      },
+      "route": {
+        "height": 16,
+        "width": 16,
+        "x": 138,
+        "y": 50
+      },
+      "search": {
+        "height": 16,
+        "width": 16,
+        "x": 98,
+        "y": 50
+      }
+    },
+    "info_panel_agent_missions": null,
+    "info_panel_location_info": {
+      "current_solar_system_id": 30000135,
+      "current_solar_system_name": "Outuni",
+      "expanded_content": {
+        "current_station_name": null
+      },
+      "list_surroundings_button": {
+        "height": 28,
+        "width": 28,
+        "x": 70,
+        "y": 109
+      },
+      "security_status_percent": 0.7
+    },
+    "info_panel_route": {
+      "expand": {
+        "height": 28,
+        "width": 28,
+        "x": 42,
+        "y": 186
+      },
+      "jumps": 1,
+      "next_system": "Eskunen",
+      "route_element_marker": [
+        {
+          "address": 2423622791880,
+          "region": {
+            "height": 8,
+            "width": 8,
+            "x": 98,
+            "y": 260
+          },
+          "tp_name": "AutopilotDestinationIcon",
+          "value": {
+            "_bgColor": {
+              "tp_name": "NoneType"
+            },
+            "_bgTexturePath": {
+              "tp_name": "NoneType"
+            },
+            "_displayHeight": {
+              "value": 8
+            },
+            "_displayWidth": {
+              "value": 8
+            },
+            "_displayX": {
+              "value": 0
+            },
+            "_displayY": {
+              "value": 0
+            },
+            "_height": {
+              "value": 8
+            },
+            "_hint": {
+              "tp_name": "NoneType"
+            },
+            "_left": {
+              "value": 0
+            },
+            "_sr": {
+              "address": 2423838441128,
+              "tp_name": "Bunch"
+            },
+            "_top": {
+              "value": 0
+            },
+            "_width": {
+              "value": 8
+            },
+            "children": {
+              "address": 2423622789288,
+              "region": {
+                "height": 8,
+                "width": 8,
+                "x": 98,
+                "y": 260
+              },
+              "tp_name": "PyChildrenList",
+              "value": {
+                "_childrenObjects": {
+                  "address": 2422414213704,
+                  "tp_name": "list",
+                  "value": [
+                    {
+                      "address": 2423622837384,
+                      "region": {
+                        "height": 10,
+                        "width": 10,
+                        "x": 98,
+                        "y": 260
+                      },
+                      "tp_name": "Sprite",
+                      "value": {
+                        "_color": {
+                          "address": 2423233734136,
+                          "tp_name": "PyColor"
+                        },
+                        "_displayHeight": {
+                          "value": 10
+                        },
+                        "_displayWidth": {
+                          "value": 10
+                        },
+                        "_displayX": {
+                          "value": 0
+                        },
+                        "_displayY": {
+                          "value": 0
+                        },
+                        "_height": {
+                          "value": 10
+                        },
+                        "_hint": {
+                          "tp_name": "NoneType"
+                        },
+                        "_left": {
+                          "value": 0
+                        },
+                        "_texturePath": {
+                          "value": "res:/UI/Texture/classes/LocationInfo/stationMarker.png"
+                        },
+                        "_top": {
+                          "value": 0
+                        },
+                        "_width": {
+                          "value": 10
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visibility": {
+      "fraction": 0.719,
+      "largest_visible": {
+        "height": 258,
+        "width": 222,
+        "x": 42,
+        "y": 50
+      },
+      "occluded_by": [
+        {
+          "by": "locations",
+          "region": {
+            "height": 251,
+            "width": 90,
+            "x": 264,
+            "y": 57
+          },
+          "tp_name": "LocationsWindow",
+          "z": 10
+        }
+      ],
+      "region": {
+        "height": 258,
+        "width": 312,
+        "x": 42,
+        "y": 50
+      }
+    }
+  },
+  "info_panel_search": {
+    "clear": {
+      "height": 24,
+      "width": 256,
+      "x": 98,
+      "y": 73
+    },
+    "display": true,
+    "field": {
+      "height": 24,
+      "width": 256,
+      "x": 98,
+      "y": 73
+    },
+    "text": "",
+    "visibility": {
+      "fraction": 0.712,
+      "largest_visible": {
+        "height": 38,
+        "width": 222,
+        "x": 42,
+        "y": 71
+      },
+      "occluded_by": [
+        {
+          "by": "locations",
+          "region": {
+            "height": 38,
+            "width": 90,
+            "x": 264,
+            "y": 71
+          },
+          "tp_name": "LocationsWindow",
+          "z": 10
+        }
+      ],
+      "region": {
+        "height": 38,
+        "width": 312,
+        "x": 42,
+        "y": 71
+      }
+    }
+  },
+  "inventory_windows": null,
+  "key_activation_window": null,
+  "layer_abovemain": {
+    "visibility": {
+      "fraction": 0.942,
+      "largest_visible": {
+        "height": 1080,
+        "width": 734,
+        "x": 1186,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        },
+        {
+          "by": "modal",
+          "region": {
+            "height": 260,
+            "width": 420,
+            "x": 766,
+            "y": 426
+          },
+          "tp_name": "MessageBox",
+          "z": 1
+        },
+        {
+          "by": "modal",
+          "region": {
+            "height": 260,
+            "width": 420,
+            "x": 750,
+            "y": 410
+          },
+          "tp_name": "MessageBox",
+          "z": 2
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "locations_window": {
+    "buttons": {
+      "Add Location": {
+        "height": 24,
+        "width": 112,
+        "x": 413,
+        "y": 463
+      },
+      "Create Folder": {
+        "height": 24,
+        "width": 117,
+        "x": 533,
+        "y": 463
+      },
+      "Create Subfolder": {
+        "height": 24,
+        "width": 138,
+        "x": 658,
+        "y": 463
+      }
+    },
+    "entries": [],
+    "visibility": {
+      "fraction": 0.975,
+      "largest_visible": {
+        "height": 448,
+        "width": 486,
+        "x": 264,
+        "y": 57
+      },
+      "occluded_by": [
+        {
+          "by": "modal",
+          "region": {
+            "height": 79,
+            "width": 48,
+            "x": 766,
+            "y": 426
+          },
+          "tp_name": "MessageBox",
+          "z": 1
+        },
+        {
+          "by": "modal",
+          "region": {
+            "height": 95,
+            "width": 64,
+            "x": 750,
+            "y": 410
+          },
+          "tp_name": "MessageBox",
+          "z": 2
+        },
+        {
+          "by": "QuickMessage",
+          "region": {
+            "height": 34,
+            "width": 4,
+            "x": 810,
+            "y": 182
+          },
+          "tp_name": "QuickMessage",
+          "z": 3
+        }
+      ],
+      "region": {
+        "height": 448,
+        "width": 550,
+        "x": 264,
+        "y": 57
+      }
+    }
+  },
+  "market_orders_window": null,
+  "message_boxes": [
+    {
+      "button_group": {
+        "height": 32,
+        "width": 384,
+        "x": 784,
+        "y": 636
+      },
+      "buttons": [
+        [
+          {
+            "address": 2422835757256,
+            "region": {
+              "height": 32,
+              "width": 384,
+              "x": 784,
+              "y": 636
+            },
+            "tp_name": "Button",
+            "value": {
+              "_bgColor": {
+                "tp_name": "NoneType"
+              },
+              "_bgTexturePath": {
+                "tp_name": "NoneType"
+              },
+              "_density": {
+                "address": 2421446849816,
+                "region": {
+                  "height": 32,
+                  "width": 384,
+                  "x": 784,
+                  "y": 636
+                },
+                "tp_name": "Density",
+                "value": {
+                  "_value_": {
+                    "value": 1
+                  }
+                }
+              },
+              "_displayHeight": {
+                "value": 32
+              },
+              "_displayWidth": {
+                "value": 384
+              },
+              "_displayX": {
+                "value": 0
+              },
+              "_displayY": {
+                "value": 0
+              },
+              "_height": {
+                "value": 32
+              },
+              "_hint": {
+                "tp_name": "NoneType"
+              },
+              "_label_text": {
+                "value": "Quit"
+              },
+              "_left": {
+                "value": 0
+              },
+              "_name": {
+                "value": "ok_dialog_button"
+              },
+              "_sr": {
+                "address": 2423308023224,
+                "tp_name": "Bunch"
+              },
+              "_texturePath": {
+                "tp_name": "NoneType"
+              },
+              "_top": {
+                "value": 0
+              },
+              "_width": {
+                "value": 384
+              },
+              "children": {
+                "address": 2422412657768,
+                "region": {
+                  "height": 32,
+                  "width": 384,
+                  "x": 784,
+                  "y": 636
+                },
+                "tp_name": "PyChildrenList",
+                "value": {
+                  "_childrenObjects": {
+                    "address": 2422890436680,
+                    "tp_name": "list",
+                    "value": [
+                      {
+                        "address": 2422458840440,
+                        "region": {
+                          "height": 18,
+                          "width": 23,
+                          "x": 965,
+                          "y": 643
+                        },
+                        "tp_name": "EveLabelMedium",
+                        "value": {
+                          "_color": {
+                            "address": 2423929726456,
+                            "tp_name": "PyColor"
+                          },
+                          "_displayHeight": {
+                            "value": 18
+                          },
+                          "_displayWidth": {
+                            "value": 23
+                          },
+                          "_displayX": {
+                            "value": 181
+                          },
+                          "_displayY": {
+                            "value": 7
+                          },
+                          "_height": {
+                            "value": 18
+                          },
+                          "_hint": {
+                            "tp_name": "NoneType"
+                          },
+                          "_inlineObjects": {
+                            "tp_name": "NoneType"
+                          },
+                          "_name": {
+                            "value": "label"
+                          },
+                          "_setText": {
+                            "value": "Quit"
+                          },
+                          "_width": {
+                            "value": 23
+                          }
+                        }
+                      },
+                      {
+                        "address": 2422458842456,
+                        "region": {
+                          "height": 32,
+                          "width": 384,
+                          "x": 784,
+                          "y": 636
+                        },
+                        "tp_name": "ButtonUnderlay",
+                        "value": {
+                          "_bgColor": {
+                            "tp_name": "NoneType"
+                          },
+                          "_bgTexturePath": {
+                            "tp_name": "NoneType"
+                          },
+                          "_displayHeight": {
+                            "value": 32
+                          },
+                          "_displayWidth": {
+                            "value": 384
+                          },
+                          "_displayX": {
+                            "value": 0
+                          },
+                          "_displayY": {
+                            "value": 0
+                          },
+                          "_hint": {
+                            "tp_name": "NoneType"
+                          },
+                          "_name": {
+                            "value": "underlay"
+                          },
+                          "children": {
+                            "address": 2423732231480,
+                            "region": {
+                              "height": 32,
+                              "width": 384,
+                              "x": 784,
+                              "y": 636
+                            },
+                            "tp_name": "PyChildrenList",
+                            "value": {
+                              "_childrenObjects": {
+                                "address": 2423296909256,
+                                "tp_name": "list",
+                                "value": [
+                                  {
+                                    "address": 2422412680232,
+                                    "region": {
+                                      "height": 32,
+                                      "width": 384,
+                                      "x": 784,
+                                      "y": 636
+                                    },
+                                    "tp_name": "Frame",
+                                    "value": {
+                                      "_color": {
+                                        "address": 2423929726848,
+                                        "tp_name": "PyColor"
+                                      },
+                                      "_displayHeight": {
+                                        "value": 32
+                                      },
+                                      "_displayWidth": {
+                                        "value": 384
+                                      },
+                                      "_displayX": {
+                                        "value": 0
+                                      },
+                                      "_displayY": {
+                                        "value": 0
+                                      },
+                                      "_hint": {
+                                        "tp_name": "NoneType"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "address": 2422412680808,
+                                    "region": {
+                                      "height": 0,
+                                      "width": 0,
+                                      "x": 976,
+                                      "y": 636
+                                    },
+                                    "tp_name": "Sprite",
+                                    "value": {
+                                      "_color": {
+                                        "address": 2423929726904,
+                                        "tp_name": "PyColor"
+                                      },
+                                      "_displayHeight": {
+                                        "value": 0
+                                      },
+                                      "_displayWidth": {
+                                        "value": 0
+                                      },
+                                      "_displayX": {
+                                        "value": 192
+                                      },
+                                      "_displayY": {
+                                        "value": 0
+                                      },
+                                      "_hint": {
+                                        "tp_name": "NoneType"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "address": 2422412687720,
+                                    "region": {
+                                      "height": 1,
+                                      "width": 384,
+                                      "x": 784,
+                                      "y": 636
+                                    },
+                                    "tp_name": "GradientSprite",
+                                    "value": {
+                                      "_displayHeight": {
+                                        "value": 1
+                                      },
+                                      "_displayWidth": {
+                                        "value": 384
+                                      },
+                                      "_displayX": {
+                                        "value": 0
+                                      },
+                                      "_displayY": {
+                                        "value": 0
+                                      },
+                                      "_height": {
+                                        "value": 1
+                                      },
+                                      "_hint": {
+                                        "tp_name": "NoneType"
+                                      },
+                                      "_left": {
+                                        "value": 0
+                                      },
+                                      "_texturePath": {
+                                        "value": "dynamic:/gradient/{'rgbPoints': [(1.0, 1.0, 1.0), (1.0, 1.0, 1.0)], 'rgbInterp': 'linear', 'textureSize': 128, 'alphaInterp': 'linear', 'toCorners': False, 'alphaPoints': [0.0, 0.0], 'rgbDivs': [0.0, 1.0], 'alphaDivs': [0.0, 1.0]}"
+                                      },
+                                      "_top": {
+                                        "value": 0
+                                      },
+                                      "_width": {
+                                        "value": 0
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "address": 2422412690312,
+                                    "region": {
+                                      "height": 32,
+                                      "width": 384,
+                                      "x": 784,
+                                      "y": 636
+                                    },
+                                    "tp_name": "Frame",
+                                    "value": {
+                                      "_color": {
+                                        "address": 2423929793112,
+                                        "tp_name": "PyColor"
+                                      },
+                                      "_displayHeight": {
+                                        "value": 32
+                                      },
+                                      "_displayWidth": {
+                                        "value": 384
+                                      },
+                                      "_displayX": {
+                                        "value": 0
+                                      },
+                                      "_displayY": {
+                                        "value": 0
+                                      },
+                                      "_hint": {
+                                        "tp_name": "NoneType"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "address": 2422412690600,
+                                    "region": {
+                                      "height": 32,
+                                      "width": 384,
+                                      "x": 784,
+                                      "y": 636
+                                    },
+                                    "tp_name": "Frame",
+                                    "value": {
+                                      "_color": {
+                                        "address": 2423929793336,
+                                        "tp_name": "PyColor"
+                                      },
+                                      "_displayHeight": {
+                                        "value": 32
+                                      },
+                                      "_displayWidth": {
+                                        "value": 384
+                                      },
+                                      "_displayX": {
+                                        "value": 0
+                                      },
+                                      "_displayY": {
+                                        "value": 0
+                                      },
+                                      "_hint": {
+                                        "tp_name": "NoneType"
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "Quit"
+        ]
+      ],
+      "visibility": {
+        "fraction": 1.0,
+        "largest_visible": {
+          "height": 260,
+          "width": 420,
+          "x": 766,
+          "y": 426
+        },
+        "occluded_by": [],
+        "region": {
+          "height": 260,
+          "width": 420,
+          "x": 766,
+          "y": 426
+        }
+      }
+    },
+    {
+      "button_group": {
+        "height": 32,
+        "width": 384,
+        "x": 768,
+        "y": 620
+      },
+      "buttons": [
+        [
+          {
+            "address": 2423742090104,
+            "region": {
+              "height": 32,
+              "width": 384,
+              "x": 768,
+              "y": 620
+            },
+            "tp_name": "Button",
+            "value": {
+              "_bgColor": {
+                "tp_name": "NoneType"
+              },
+              "_bgTexturePath": {
+                "tp_name": "NoneType"
+              },
+              "_density": {
+                "Ref": [
+                  2421446849816,
+                  "Density"
+                ]
+              },
+              "_displayHeight": {
+                "value": 32
+              },
+              "_displayWidth": {
+                "value": 384
+              },
+              "_displayX": {
+                "value": 0
+              },
+              "_displayY": {
+                "value": 0
+              },
+              "_height": {
+                "value": 32
+              },
+              "_hint": {
+                "tp_name": "NoneType"
+              },
+              "_label_text": {
+                "value": "OK"
+              },
+              "_left": {
+                "value": 0
+              },
+              "_name": {
+                "value": "ok_dialog_button"
+              },
+              "_sr": {
+                "address": 2423308019576,
+                "tp_name": "Bunch"
+              },
+              "_texturePath": {
+                "tp_name": "NoneType"
+              },
+              "_top": {
+                "value": 0
+              },
+              "_width": {
+                "value": 384
+              },
+              "children": {
+                "address": 2420340604024,
+                "region": {
+                  "height": 32,
+                  "width": 384,
+                  "x": 768,
+                  "y": 620
+                },
+                "tp_name": "PyChildrenList",
+                "value": {
+                  "_childrenObjects": {
+                    "address": 2423761473864,
+                    "tp_name": "list",
+                    "value": [
+                      {
+                        "address": 2423742104504,
+                        "region": {
+                          "height": 18,
+                          "width": 14,
+                          "x": 953,
+                          "y": 627
+                        },
+                        "tp_name": "EveLabelMedium",
+                        "value": {
+                          "_color": {
+                            "address": 2423850161096,
+                            "tp_name": "PyColor"
+                          },
+                          "_displayHeight": {
+                            "value": 18
+                          },
+                          "_displayWidth": {
+                            "value": 14
+                          },
+                          "_displayX": {
+                            "value": 185
+                          },
+                          "_displayY": {
+                            "value": 7
+                          },
+                          "_height": {
+                            "value": 18
+                          },
+                          "_hint": {
+                            "tp_name": "NoneType"
+                          },
+                          "_inlineObjects": {
+                            "tp_name": "NoneType"
+                          },
+                          "_name": {
+                            "value": "label"
+                          },
+                          "_setText": {
+                            "value": "OK"
+                          },
+                          "_width": {
+                            "value": 14
+                          }
+                        }
+                      },
+                      {
+                        "address": 2423742091256,
+                        "region": {
+                          "height": 32,
+                          "width": 384,
+                          "x": 768,
+                          "y": 620
+                        },
+                        "tp_name": "ButtonUnderlay",
+                        "value": {
+                          "_bgColor": {
+                            "tp_name": "NoneType"
+                          },
+                          "_bgTexturePath": {
+                            "tp_name": "NoneType"
+                          },
+                          "_displayHeight": {
+                            "value": 32
+                          },
+                          "_displayWidth": {
+                            "value": 384
+                          },
+                          "_displayX": {
+                            "value": 0
+                          },
+                          "_displayY": {
+                            "value": 0
+                          },
+                          "_hint": {
+                            "tp_name": "NoneType"
+                          },
+                          "_name": {
+                            "value": "underlay"
+                          },
+                          "children": {
+                            "address": 2423742094712,
+                            "region": {
+                              "height": 32,
+                              "width": 384,
+                              "x": 768,
+                              "y": 620
+                            },
+                            "tp_name": "PyChildrenList",
+                            "value": {
+                              "_childrenObjects": {
+                                "address": 2423761476296,
+                                "tp_name": "list",
+                                "value": [
+                                  {
+                                    "address": 2420340621592,
+                                    "region": {
+                                      "height": 32,
+                                      "width": 384,
+                                      "x": 768,
+                                      "y": 620
+                                    },
+                                    "tp_name": "Frame",
+                                    "value": {
+                                      "_color": {
+                                        "address": 2423850161376,
+                                        "tp_name": "PyColor"
+                                      },
+                                      "_displayHeight": {
+                                        "value": 32
+                                      },
+                                      "_displayWidth": {
+                                        "value": 384
+                                      },
+                                      "_displayX": {
+                                        "value": 0
+                                      },
+                                      "_displayY": {
+                                        "value": 0
+                                      },
+                                      "_hint": {
+                                        "tp_name": "NoneType"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "address": 2420340622456,
+                                    "region": {
+                                      "height": 0,
+                                      "width": 0,
+                                      "x": 960,
+                                      "y": 620
+                                    },
+                                    "tp_name": "Sprite",
+                                    "value": {
+                                      "_color": {
+                                        "address": 2423850160872,
+                                        "tp_name": "PyColor"
+                                      },
+                                      "_displayHeight": {
+                                        "value": 0
+                                      },
+                                      "_displayWidth": {
+                                        "value": 0
+                                      },
+                                      "_displayX": {
+                                        "value": 192
+                                      },
+                                      "_displayY": {
+                                        "value": 0
+                                      },
+                                      "_hint": {
+                                        "tp_name": "NoneType"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "address": 2420340623896,
+                                    "region": {
+                                      "height": 1,
+                                      "width": 384,
+                                      "x": 768,
+                                      "y": 620
+                                    },
+                                    "tp_name": "GradientSprite",
+                                    "value": {
+                                      "_displayHeight": {
+                                        "value": 1
+                                      },
+                                      "_displayWidth": {
+                                        "value": 384
+                                      },
+                                      "_displayX": {
+                                        "value": 0
+                                      },
+                                      "_displayY": {
+                                        "value": 0
+                                      },
+                                      "_height": {
+                                        "value": 1
+                                      },
+                                      "_hint": {
+                                        "tp_name": "NoneType"
+                                      },
+                                      "_left": {
+                                        "value": 0
+                                      },
+                                      "_texturePath": {
+                                        "value": "dynamic:/gradient/{'rgbPoints': [(1.0, 1.0, 1.0), (1.0, 1.0, 1.0)], 'rgbInterp': 'linear', 'textureSize': 128, 'alphaInterp': 'linear', 'toCorners': False, 'alphaPoints': [0.0, 0.0], 'rgbDivs': [0.0, 1.0], 'alphaDivs': [0.0, 1.0]}"
+                                      },
+                                      "_top": {
+                                        "value": 0
+                                      },
+                                      "_width": {
+                                        "value": 0
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "address": 2420340632824,
+                                    "region": {
+                                      "height": 32,
+                                      "width": 384,
+                                      "x": 768,
+                                      "y": 620
+                                    },
+                                    "tp_name": "Frame",
+                                    "value": {
+                                      "_color": {
+                                        "address": 2423737525976,
+                                        "tp_name": "PyColor"
+                                      },
+                                      "_displayHeight": {
+                                        "value": 32
+                                      },
+                                      "_displayWidth": {
+                                        "value": 384
+                                      },
+                                      "_displayX": {
+                                        "value": 0
+                                      },
+                                      "_displayY": {
+                                        "value": 0
+                                      },
+                                      "_hint": {
+                                        "tp_name": "NoneType"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "address": 2420340631096,
+                                    "region": {
+                                      "height": 32,
+                                      "width": 384,
+                                      "x": 768,
+                                      "y": 620
+                                    },
+                                    "tp_name": "Frame",
+                                    "value": {
+                                      "_color": {
+                                        "address": 2423737526200,
+                                        "tp_name": "PyColor"
+                                      },
+                                      "_displayHeight": {
+                                        "value": 32
+                                      },
+                                      "_displayWidth": {
+                                        "value": 384
+                                      },
+                                      "_displayX": {
+                                        "value": 0
+                                      },
+                                      "_displayY": {
+                                        "value": 0
+                                      },
+                                      "_hint": {
+                                        "tp_name": "NoneType"
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "OK"
+        ]
+      ],
+      "visibility": {
+        "fraction": 0.097,
+        "largest_visible": {
+          "height": 16,
+          "width": 420,
+          "x": 750,
+          "y": 410
+        },
+        "occluded_by": [
+          {
+            "by": "modal",
+            "region": {
+              "height": 244,
+              "width": 404,
+              "x": 766,
+              "y": 426
+            },
+            "tp_name": "MessageBox",
+            "z": 1
+          }
+        ],
+        "region": {
+          "height": 260,
+          "width": 420,
+          "x": 750,
+          "y": 410
+        }
+      }
+    }
+  ],
+  "module_button_tooltip": null,
+  "neocom": {
+    "buttons": {
+      "AurumStoreBtnDataNode": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 986
+      },
+      "agency": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 168
+      },
+      "airCareerProgram": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 126
+      },
+      "assets": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 336
+      },
+      "charSheetBtn": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 42
+      },
+      "chat": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 630
+      },
+      "clockCont": {
+        "height": 20,
+        "width": 42,
+        "x": 0,
+        "y": 1060
+      },
+      "contracts": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 504
+      },
+      "eveMenuBtn": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 0
+      },
+      "fitting": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 546
+      },
+      "inventory": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 294
+      },
+      "job_board": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 210
+      },
+      "mail": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 252
+      },
+      "map_beta": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 588
+      },
+      "market": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 420
+      },
+      "marketOrders": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 462
+      },
+      "newRedeemableItemsNotification": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 944
+      },
+      "omega_upsell_fixed": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 902
+      },
+      "shipTree": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 672
+      },
+      "skillsBtn": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 84
+      },
+      "uicontrols.Window": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 798
+      },
+      "wallet": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 378
+      }
+    },
+    "clock": {
+      "parsed_text": "11:1",
+      "text": "<b>11:01</b>"
+    },
+    "icon_inventory": {
+      "height": 34,
+      "width": 34,
+      "x": 4,
+      "y": 298
+    },
+    "visibility": {
+      "fraction": 0.979,
+      "largest_visible": {
+        "height": 1036,
+        "width": 42,
+        "x": 0,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 30,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 42,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "overview_windows": {
+    "entries": [
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Distance": "13 km",
+          "Name": "Hykkota",
+          "Type": "Stargate (Caldari System)"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "13 km",
+        "object_distance_in_meters": 13000,
+        "object_name": "Hykkota",
+        "object_type": "Stargate (Caldari System)",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "texts_left_to_right": [
+          "Stargate (Caldari System)",
+          "Hykkota",
+          "13 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Distance": "16,8 AU",
+          "Name": "Outuni - Capital Construction Research",
+          "Type": "Raitaru"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite",
+          "flagIcon"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "16,8 AU",
+        "object_distance_in_meters": 2513244227484,
+        "object_name": "Outuni - Capital Construction Research",
+        "object_type": "Raitaru",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "texts_left_to_right": [
+          "Raitaru",
+          "Outuni - Capital Construction Research",
+          "16,8 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Distance": "16,8 AU",
+          "Name": "Outuni - ICE Refinery & Free clone",
+          "Type": "Athanor"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "flagIcon",
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "16,8 AU",
+        "object_distance_in_meters": 2513244227484,
+        "object_name": "Outuni - ICE Refinery & Free clone",
+        "object_type": "Athanor",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "texts_left_to_right": [
+          "Athanor",
+          "Outuni - ICE Refinery & Free clone",
+          "16,8 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Distance": "16,9 AU",
+          "Name": "Outuni X - Moon 14 - Imperial Armaments Factory",
+          "Type": "Amarr Industrial Station"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "16,9 AU",
+        "object_distance_in_meters": 2528204014553,
+        "object_name": "Outuni X - Moon 14 - Imperial Armaments Factory",
+        "object_type": "Amarr Industrial Station",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "texts_left_to_right": [
+          "Amarr Industrial Station",
+          "Outuni X - Moon 14 - Imperial Armaments Factory",
+          "16,9 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Distance": "21,3 AU",
+          "Name": "Ohmahailen",
+          "Type": "Stargate (Caldari System)"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "21,3 AU",
+        "object_distance_in_meters": 3186434645561,
+        "object_name": "Ohmahailen",
+        "object_type": "Stargate (Caldari System)",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "texts_left_to_right": [
+          "Stargate (Caldari System)",
+          "Ohmahailen",
+          "21,3 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Distance": "23,7 AU",
+          "Name": "Outuni IX - Moon 3 - Imperial Armaments Factory",
+          "Type": "Amarr Industrial Station"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "23,7 AU",
+        "object_distance_in_meters": 3545469535201,
+        "object_name": "Outuni IX - Moon 3 - Imperial Armaments Factory",
+        "object_type": "Amarr Industrial Station",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "texts_left_to_right": [
+          "Amarr Industrial Station",
+          "Outuni IX - Moon 3 - Imperial Armaments Factory",
+          "23,7 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Distance": "26,0 AU",
+          "Name": "Outuni - Star",
+          "Type": "Sun A0 (Blue Small)"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26,0 AU",
+        "object_distance_in_meters": 3889544637774,
+        "object_name": "Outuni - Star",
+        "object_type": "Sun A0 (Blue Small)",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "texts_left_to_right": [
+          "Sun A0 (Blue Small)",
+          "Outuni - Star",
+          "26,0 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Distance": "26,0 AU",
+          "Name": "Jove Observatory",
+          "Type": "Celestial Beacon"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26,0 AU",
+        "object_distance_in_meters": 3889544637774,
+        "object_name": "Jove Observatory",
+        "object_type": "Celestial Beacon",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "texts_left_to_right": [
+          "Celestial Beacon",
+          "Jove Observatory",
+          "26,0 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Distance": "26,9 AU",
+          "Name": "Pilfered Guristas Outpost",
+          "Type": "Celestial Beacon"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26,9 AU",
+        "object_distance_in_meters": 4024182721389,
+        "object_name": "Pilfered Guristas Outpost",
+        "object_type": "Celestial Beacon",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "texts_left_to_right": [
+          "Celestial Beacon",
+          "Pilfered Guristas Outpost",
+          "26,9 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Distance": "28,1 AU",
+          "Name": "Eskunen",
+          "Type": "Stargate (Caldari System)"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "28,1 AU",
+        "object_distance_in_meters": 4203700166209,
+        "object_name": "Eskunen",
+        "object_type": "Stargate (Caldari System)",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "texts_left_to_right": [
+          "Stargate (Caldari System)",
+          "Eskunen",
+          "28,1 AU"
+        ]
+      }
+    ],
+    "entries_headers": [
+      [
+        "Icon",
+        {
+          "height": 24,
+          "width": 22,
+          "x": 1271,
+          "y": 243
+        }
+      ],
+      [
+        "Distance",
+        {
+          "height": 16,
+          "width": 68,
+          "x": 1301,
+          "y": 247
+        }
+      ],
+      [
+        "Name",
+        {
+          "height": 16,
+          "width": 226,
+          "x": 1381,
+          "y": 247
+        }
+      ],
+      [
+        "Type",
+        {
+          "height": 16,
+          "width": 100,
+          "x": 1619,
+          "y": 247
+        }
+      ]
+    ],
+    "scroll_controls": null,
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 566,
+        "width": 667,
+        "x": 1253,
+        "y": 174
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 566,
+        "width": 667,
+        "x": 1253,
+        "y": 174
+      }
+    }
+  },
+  "probe_scanner": null,
+  "quick_message": {
+    "region": {
+      "height": 34,
+      "width": 300,
+      "x": 810,
+      "y": 182
+    },
+    "text": "<center>Cluster Shutdown in Less than one second",
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 34,
+        "width": 300,
+        "x": 810,
+        "y": 182
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 34,
+        "width": 300,
+        "x": 810,
+        "y": 182
+      }
+    }
+  },
+  "repair_shop": null,
+  "search_results": null,
+  "selected_item_window": {
+    "buttons": {
+      "selectedItemApproach": {
+        "height": 32,
+        "width": 32,
+        "x": 1271,
+        "y": 124
+      },
+      "selectedItemJump": {
+        "height": 32,
+        "width": 32,
+        "x": 1343,
+        "y": 124
+      },
+      "selectedItemKeepAtRange": {
+        "height": 32,
+        "width": 32,
+        "x": 1415,
+        "y": 124
+      },
+      "selectedItemLockTarget": {
+        "height": 32,
+        "width": 32,
+        "x": 1451,
+        "y": 124
+      },
+      "selectedItemLookAt": {
+        "height": 32,
+        "width": 32,
+        "x": 1487,
+        "y": 124
+      },
+      "selectedItemOrbit": {
+        "height": 32,
+        "width": 32,
+        "x": 1379,
+        "y": 124
+      },
+      "selectedItemSetInterest": {
+        "height": 32,
+        "width": 32,
+        "x": 1523,
+        "y": 124
+      },
+      "selectedItemShowInfo": {
+        "height": 32,
+        "width": 32,
+        "x": 1559,
+        "y": 124
+      },
+      "selectedItemWarpTo": {
+        "height": 32,
+        "width": 32,
+        "x": 1307,
+        "y": 124
+      }
+    },
+    "texts": [
+      "No Object Selected",
+      "Selected Item",
+      "28,1 AU",
+      "Eskunen (<color=#ff72e755>0.6</color>)"
+    ],
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 174,
+        "width": 667,
+        "x": 1253,
+        "y": 0
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 174,
+        "width": 667,
+        "x": 1253,
+        "y": 0
+      }
+    }
+  },
+  "session_time_indicator": {
+    "display": false,
+    "hint": "Session changing - Time left: Less than one second",
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 24,
+        "width": 24,
+        "x": 58,
+        "y": 47
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 24,
+        "width": 24,
+        "x": 58,
+        "y": 47
+      }
+    }
+  },
+  "shipui": {
+    "capacitor": {
+      "level_from_pmarks_percent": 100,
+      "pmarks": [
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        }
+      ],
+      "ui_node": {
+        "height": 60,
+        "width": 60,
+        "x": 931,
+        "y": 949
+      }
+    },
+    "heat_gauges": {
+      "gauges": [
+        {
+          "heat_percent": null,
+          "rotation_percent": null
+        },
+        {
+          "heat_percent": null,
+          "rotation_percent": null
+        },
+        {
+          "heat_percent": null,
+          "rotation_percent": null
+        }
+      ]
+    },
+    "hitpoints_percent": {
+      "armor": 100,
+      "shield": 100,
+      "structure": 100
+    },
+    "indication": {
+      "maneuver_type": null
+    },
+    "max_speed_button": {
+      "height": 12,
+      "width": 12,
+      "x": 1000,
+      "y": 1007
+    },
+    "module_buttons": [
+      {
+        "is_active": null,
+        "is_busy": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1116,
+          "y": 903
+        },
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1124,
+          "y": 911
+        }
+      },
+      {
+        "is_active": null,
+        "is_busy": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1090,
+          "y": 947
+        },
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1098,
+          "y": 955
+        }
+      },
+      {
+        "is_active": null,
+        "is_busy": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1141,
+          "y": 947
+        },
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1149,
+          "y": 955
+        }
+      }
+    ],
+    "module_buttons_rows": {
+      "bottom": [],
+      "middle": [
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1090,
+            "y": 947
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1098,
+            "y": 955
+          }
+        },
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1141,
+            "y": 947
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1149,
+            "y": 955
+          }
+        }
+      ],
+      "top": [
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1116,
+            "y": 903
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1124,
+            "y": 911
+          }
+        }
+      ]
+    },
+    "offensive_buff_button_names": [],
+    "speed": 0.0,
+    "squadrons_ui": {
+      "squadrons": []
+    },
+    "stop_button": {
+      "height": 12,
+      "width": 12,
+      "x": 907,
+      "y": 1007
+    },
+    "visibility": {
+      "fraction": 0.342,
+      "largest_visible": {
+        "height": 394,
+        "width": 493,
+        "x": 760,
+        "y": 686
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        },
+        {
+          "by": "modal",
+          "region": {
+            "height": 260,
+            "width": 420,
+            "x": 766,
+            "y": 426
+          },
+          "tp_name": "MessageBox",
+          "z": 1
+        },
+        {
+          "by": "modal",
+          "region": {
+            "height": 260,
+            "width": 420,
+            "x": 750,
+            "y": 410
+          },
+          "tp_name": "MessageBox",
+          "z": 2
+        },
+        {
+          "by": "QuickMessage",
+          "region": {
+            "height": 34,
+            "width": 300,
+            "x": 810,
+            "y": 182
+          },
+          "tp_name": "QuickMessage",
+          "z": 3
+        },
+        {
+          "by": "BadgeMasterContainer",
+          "region": {
+            "height": 20,
+            "width": 40,
+            "x": 1880,
+            "y": 1038
+          },
+          "tp_name": "BadgeMasterContainer",
+          "z": 4
+        },
+        {
+          "by": "NotificationContainer",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 1872,
+            "y": 1032
+          },
+          "tp_name": "NotificationContainer",
+          "z": 5
+        },
+        {
+          "by": "overview",
+          "region": {
+            "height": 566,
+            "width": 667,
+            "x": 1253,
+            "y": 174
+          },
+          "tp_name": "OverviewWindow",
+          "z": 6
+        },
+        {
+          "by": "selecteditemview",
+          "region": {
+            "height": 174,
+            "width": 667,
+            "x": 1253,
+            "y": 0
+          },
+          "tp_name": "SelectedItemWnd",
+          "z": 7
+        },
+        {
+          "by": "directionalScannerWindow",
+          "region": {
+            "height": 297,
+            "width": 667,
+            "x": 1253,
+            "y": 740
+          },
+          "tp_name": "DirectionalScanner",
+          "z": 8
+        },
+        {
+          "by": "standaloneBookmarkWnd",
+          "region": {
+            "height": 169,
+            "width": 483,
+            "x": 42,
+            "y": 606
+          },
+          "tp_name": "StandaloneBookmarkWnd",
+          "z": 9
+        },
+        {
+          "by": "locations",
+          "region": {
+            "height": 448,
+            "width": 550,
+            "x": 264,
+            "y": 57
+          },
+          "tp_name": "LocationsWindow",
+          "z": 10
+        },
+        {
+          "by": "ChatWindowStack",
+          "region": {
+            "height": 305,
+            "width": 718,
+            "x": 42,
+            "y": 775
+          },
+          "tp_name": "ChatWindowStack",
+          "z": 11
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "stacking": {
+    "client_area": {
+      "height": 1080,
+      "width": 1920,
+      "x": 0,
+      "y": 0
+    },
+    "modal_active": true,
+    "window_stack": [
+      {
+        "name": null,
+        "region": {
+          "height": 32,
+          "width": 32,
+          "x": 12,
+          "y": 1036
+        },
+        "tp_name": "ResourceLoadingIndicator",
+        "window": null,
+        "z": 0
+      },
+      {
+        "name": "modal",
+        "region": {
+          "height": 260,
+          "width": 420,
+          "x": 766,
+          "y": 426
+        },
+        "tp_name": "MessageBox",
+        "window": "message_boxes[0]",
+        "z": 1
+      },
+      {
+        "name": "modal",
+        "region": {
+          "height": 260,
+          "width": 420,
+          "x": 750,
+          "y": 410
+        },
+        "tp_name": "MessageBox",
+        "window": "message_boxes[1]",
+        "z": 2
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 34,
+          "width": 300,
+          "x": 810,
+          "y": 182
+        },
+        "tp_name": "QuickMessage",
+        "window": "quick_message",
+        "z": 3
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 20,
+          "width": 100,
+          "x": 1880,
+          "y": 1038
+        },
+        "tp_name": "BadgeMasterContainer",
+        "window": null,
+        "z": 4
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 32,
+          "width": 32,
+          "x": 1872,
+          "y": 1032
+        },
+        "tp_name": "NotificationContainer",
+        "window": null,
+        "z": 5
+      },
+      {
+        "name": "overview",
+        "region": {
+          "height": 566,
+          "width": 667,
+          "x": 1253,
+          "y": 174
+        },
+        "tp_name": "OverviewWindow",
+        "window": "overview_windows",
+        "z": 6
+      },
+      {
+        "name": "selecteditemview",
+        "region": {
+          "height": 174,
+          "width": 667,
+          "x": 1253,
+          "y": 0
+        },
+        "tp_name": "SelectedItemWnd",
+        "window": "selected_item_window",
+        "z": 7
+      },
+      {
+        "name": "directionalScannerWindow",
+        "region": {
+          "height": 297,
+          "width": 667,
+          "x": 1253,
+          "y": 740
+        },
+        "tp_name": "DirectionalScanner",
+        "window": "directional_scanner_window",
+        "z": 8
+      },
+      {
+        "name": "standaloneBookmarkWnd",
+        "region": {
+          "height": 169,
+          "width": 483,
+          "x": 42,
+          "y": 606
+        },
+        "tp_name": "StandaloneBookmarkWnd",
+        "window": "standalone_bookmark_window",
+        "z": 9
+      },
+      {
+        "name": "locations",
+        "region": {
+          "height": 448,
+          "width": 550,
+          "x": 264,
+          "y": 57
+        },
+        "tp_name": "LocationsWindow",
+        "window": "locations_window",
+        "z": 10
+      },
+      {
+        "name": "ChatWindowStack",
+        "region": {
+          "height": 305,
+          "width": 718,
+          "x": 42,
+          "y": 775
+        },
+        "tp_name": "ChatWindowStack",
+        "window": "chat_window_stacks[0]",
+        "z": 11
+      },
+      {
+        "name": "hudContainer",
+        "region": {
+          "height": 200,
+          "width": 1200,
+          "x": 360,
+          "y": 880
+        },
+        "tp_name": "HudContainer",
+        "window": null,
+        "z": 12
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 1080,
+          "width": 42,
+          "x": 0,
+          "y": 0
+        },
+        "tp_name": "NeocomContainer",
+        "window": "neocom",
+        "z": 13
+      },
+      {
+        "name": "sidePanel",
+        "region": {
+          "height": 1068,
+          "width": 312,
+          "x": 42,
+          "y": 12
+        },
+        "tp_name": "Container",
+        "window": null,
+        "z": 14
+      }
+    ]
+  },
+  "standalone_bookmark_window": {
+    "entries": [],
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 169,
+        "width": 483,
+        "x": 42,
+        "y": 606
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 169,
+        "width": 483,
+        "x": 42,
+        "y": 606
+      }
+    }
+  },
+  "station_window": null,
+  "survey_scan_window": null,
+  "targets": [],
+  "watchlist_panel": null
+}

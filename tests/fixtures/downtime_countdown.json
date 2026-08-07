@@ -1,0 +1,1290 @@
+{
+  "agent_conversation_windows": [],
+  "bookmark_location_window": null,
+  "character_sheet_window": null,
+  "chat_window_stacks": [
+    {
+      "chats_window": [
+        {
+          "name": "chatchannel_local",
+          "userlist": {
+            "scroll_controls": null,
+            "visible_users": [
+              {
+                "name": "Pilot A",
+                "standing_icon_hint": "Pilot has No Standing."
+              },
+              {
+                "name": "Test Pilot",
+                "standing_icon_hint": null
+              },
+              {
+                "name": "Pilot B",
+                "standing_icon_hint": "Pilot has No Standing."
+              },
+              {
+                "name": "Pilot C",
+                "standing_icon_hint": "Pilot has No Standing."
+              },
+              {
+                "name": "Pilot D",
+                "standing_icon_hint": "Pilot has No Standing."
+              },
+              {
+                "name": "Pilot E",
+                "standing_icon_hint": "Pilot has No Standing."
+              }
+            ]
+          }
+        },
+        {
+          "name": "chatchannel_corp",
+          "userlist": {
+            "scroll_controls": null,
+            "visible_users": [
+              {
+                "name": "Test Pilot",
+                "standing_icon_hint": null
+              }
+            ]
+          }
+        },
+        {
+          "name": "chatchannel_player_-6614024",
+          "userlist": {
+            "scroll_controls": {
+              "scroll_handle": {
+                "height": 198,
+                "width": 112,
+                "x": 638,
+                "y": 817
+              }
+            },
+            "visible_users": [
+              {
+                "name": "Test Pilot",
+                "standing_icon_hint": null
+              }
+            ]
+          }
+        }
+      ],
+      "visibility": {
+        "fraction": 1.0,
+        "largest_visible": {
+          "height": 305,
+          "width": 716,
+          "x": 44,
+          "y": 775
+        },
+        "occluded_by": [
+          {
+            "by": "ResourceLoadingIndicator",
+            "region": {
+              "height": 32,
+              "width": 2,
+              "x": 42,
+              "y": 1036
+            },
+            "tp_name": "ResourceLoadingIndicator",
+            "z": 0
+          }
+        ],
+        "region": {
+          "height": 305,
+          "width": 718,
+          "x": 42,
+          "y": 775
+        }
+      }
+    }
+  ],
+  "compression_window": null,
+  "context_menus": [],
+  "directional_scanner_window": null,
+  "drones_window": null,
+  "fitting_window": null,
+  "fleet_window": null,
+  "heat_status_tooltip": null,
+  "hero_notification": {
+    "texts": [
+      "Docking"
+    ],
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 1080,
+        "width": 1876,
+        "x": 44,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "info_panel_container": {
+    "icons": {
+      "agent_missions": null,
+      "all": [
+        {
+          "name": null,
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 98,
+            "y": 50
+          },
+          "texture_path": "res:/UI/Texture/Classes/InfoPanels/search.png"
+        },
+        {
+          "name": null,
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 118,
+            "y": 50
+          },
+          "texture_path": "res:/UI/Texture/Classes/InfoPanels/LocationInfo.png"
+        },
+        {
+          "name": null,
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 138,
+            "y": 50
+          },
+          "texture_path": "res:/UI/Texture/Classes/InfoPanels/Route.png"
+        },
+        {
+          "name": "Opportunities board",
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 158,
+            "y": 50
+          },
+          "texture_path": null
+        }
+      ],
+      "daily_challenge": null,
+      "location_info": {
+        "height": 16,
+        "width": 16,
+        "x": 118,
+        "y": 50
+      },
+      "route": {
+        "height": 16,
+        "width": 16,
+        "x": 138,
+        "y": 50
+      },
+      "search": {
+        "height": 16,
+        "width": 16,
+        "x": 98,
+        "y": 50
+      }
+    },
+    "info_panel_agent_missions": null,
+    "info_panel_location_info": {
+      "current_solar_system_id": 30000132,
+      "current_solar_system_name": "Ansila",
+      "expanded_content": {
+        "current_station_name": null
+      },
+      "list_surroundings_button": {
+        "height": 28,
+        "width": 28,
+        "x": 70,
+        "y": 109
+      },
+      "security_status_percent": 0.9
+    },
+    "info_panel_route": {
+      "expand": {
+        "height": 28,
+        "width": 28,
+        "x": 42,
+        "y": 186
+      },
+      "jumps": 0,
+      "next_system": null,
+      "route_element_marker": null
+    },
+    "visibility": {
+      "fraction": 0.721,
+      "largest_visible": {
+        "height": 220,
+        "width": 222,
+        "x": 42,
+        "y": 50
+      },
+      "occluded_by": [
+        {
+          "by": "locations",
+          "region": {
+            "height": 213,
+            "width": 90,
+            "x": 264,
+            "y": 57
+          },
+          "tp_name": "LocationsWindow",
+          "z": 6
+        }
+      ],
+      "region": {
+        "height": 220,
+        "width": 312,
+        "x": 42,
+        "y": 50
+      }
+    }
+  },
+  "info_panel_search": {
+    "clear": {
+      "height": 24,
+      "width": 256,
+      "x": 98,
+      "y": 73
+    },
+    "display": true,
+    "field": {
+      "height": 24,
+      "width": 256,
+      "x": 98,
+      "y": 73
+    },
+    "text": "",
+    "visibility": {
+      "fraction": 0.712,
+      "largest_visible": {
+        "height": 38,
+        "width": 222,
+        "x": 42,
+        "y": 71
+      },
+      "occluded_by": [
+        {
+          "by": "locations",
+          "region": {
+            "height": 38,
+            "width": 90,
+            "x": 264,
+            "y": 71
+          },
+          "tp_name": "LocationsWindow",
+          "z": 6
+        }
+      ],
+      "region": {
+        "height": 38,
+        "width": 312,
+        "x": 42,
+        "y": 71
+      }
+    }
+  },
+  "inventory_windows": null,
+  "key_activation_window": null,
+  "layer_abovemain": {
+    "visibility": {
+      "fraction": 0.908,
+      "largest_visible": {
+        "height": 557,
+        "width": 1876,
+        "x": 44,
+        "y": 523
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        },
+        {
+          "by": "GoldenPositionContainerAutoSize",
+          "region": {
+            "height": 220,
+            "width": 860,
+            "x": 530,
+            "y": 303
+          },
+          "tp_name": "GoldenPositionContainerAutoSize",
+          "z": 1
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "locations_window": {
+    "buttons": {
+      "Add Location": {
+        "height": 24,
+        "width": 112,
+        "x": 413,
+        "y": 463
+      },
+      "Create Folder": {
+        "height": 24,
+        "width": 117,
+        "x": 533,
+        "y": 463
+      },
+      "Create Subfolder": {
+        "height": 24,
+        "width": 138,
+        "x": 658,
+        "y": 463
+      }
+    },
+    "entries": [],
+    "visibility": {
+      "fraction": 0.766,
+      "largest_visible": {
+        "height": 246,
+        "width": 546,
+        "x": 264,
+        "y": 57
+      },
+      "occluded_by": [
+        {
+          "by": "GoldenPositionContainerAutoSize",
+          "region": {
+            "height": 202,
+            "width": 284,
+            "x": 530,
+            "y": 303
+          },
+          "tp_name": "GoldenPositionContainerAutoSize",
+          "z": 1
+        },
+        {
+          "by": "QuickMessage",
+          "region": {
+            "height": 52,
+            "width": 4,
+            "x": 810,
+            "y": 164
+          },
+          "tp_name": "QuickMessage",
+          "z": 2
+        }
+      ],
+      "region": {
+        "height": 448,
+        "width": 550,
+        "x": 264,
+        "y": 57
+      }
+    }
+  },
+  "market_orders_window": null,
+  "message_boxes": [],
+  "module_button_tooltip": null,
+  "neocom": {
+    "buttons": {
+      "AurumStoreBtnDataNode": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 986
+      },
+      "agency": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 168
+      },
+      "airCareerProgram": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 126
+      },
+      "assets": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 336
+      },
+      "charSheetBtn": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 42
+      },
+      "chat": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 630
+      },
+      "clockCont": {
+        "height": 20,
+        "width": 42,
+        "x": 0,
+        "y": 1060
+      },
+      "contracts": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 504
+      },
+      "eveMenuBtn": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 0
+      },
+      "fitting": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 546
+      },
+      "inventory": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 294
+      },
+      "job_board": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 210
+      },
+      "mail": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 252
+      },
+      "map_beta": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 588
+      },
+      "market": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 420
+      },
+      "marketOrders": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 462
+      },
+      "newRedeemableItemsNotification": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 944
+      },
+      "omega_upsell_fixed": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 902
+      },
+      "shipTree": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 672
+      },
+      "skillsBtn": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 84
+      },
+      "uicontrols.Window": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 714
+      },
+      "wallet": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 378
+      }
+    },
+    "clock": {
+      "parsed_text": "10:56",
+      "text": "<b>10:56</b>"
+    },
+    "icon_inventory": {
+      "height": 34,
+      "width": 34,
+      "x": 4,
+      "y": 298
+    },
+    "visibility": {
+      "fraction": 0.979,
+      "largest_visible": {
+        "height": 1036,
+        "width": 42,
+        "x": 0,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 30,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 42,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "overview_windows": null,
+  "probe_scanner": null,
+  "quick_message": {
+    "region": {
+      "height": 52,
+      "width": 300,
+      "x": 810,
+      "y": 164
+    },
+    "text": "<center>Cluster Shutdown in 3 minutes and 40 seconds",
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 52,
+        "width": 300,
+        "x": 810,
+        "y": 164
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 52,
+        "width": 300,
+        "x": 810,
+        "y": 164
+      }
+    }
+  },
+  "repair_shop": null,
+  "search_results": null,
+  "selected_item_window": null,
+  "session_time_indicator": {
+    "display": true,
+    "hint": "Session changing - Time left: 9 seconds",
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 24,
+        "width": 24,
+        "x": 58,
+        "y": 47
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 24,
+        "width": 24,
+        "x": 58,
+        "y": 47
+      }
+    }
+  },
+  "shipui": {
+    "capacitor": {
+      "level_from_pmarks_percent": 100,
+      "pmarks": [
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        }
+      ],
+      "ui_node": {
+        "height": 60,
+        "width": 60,
+        "x": 931,
+        "y": 949
+      }
+    },
+    "heat_gauges": {
+      "gauges": [
+        {
+          "heat_percent": null,
+          "rotation_percent": null
+        },
+        {
+          "heat_percent": null,
+          "rotation_percent": null
+        },
+        {
+          "heat_percent": null,
+          "rotation_percent": null
+        }
+      ]
+    },
+    "hitpoints_percent": {
+      "armor": 100,
+      "shield": 100,
+      "structure": 100
+    },
+    "indication": {
+      "maneuver_type": null
+    },
+    "max_speed_button": {
+      "height": 12,
+      "width": 12,
+      "x": 1000,
+      "y": 1007
+    },
+    "module_buttons": [
+      {
+        "is_active": null,
+        "is_busy": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1116,
+          "y": 903
+        },
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1124,
+          "y": 911
+        }
+      },
+      {
+        "is_active": null,
+        "is_busy": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1090,
+          "y": 947
+        },
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1098,
+          "y": 955
+        }
+      },
+      {
+        "is_active": null,
+        "is_busy": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1141,
+          "y": 947
+        },
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1149,
+          "y": 955
+        }
+      }
+    ],
+    "module_buttons_rows": {
+      "bottom": [],
+      "middle": [
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1090,
+            "y": 947
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1098,
+            "y": 955
+          }
+        },
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1141,
+            "y": 947
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1149,
+            "y": 955
+          }
+        }
+      ],
+      "top": [
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1116,
+            "y": 903
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1124,
+            "y": 911
+          }
+        }
+      ]
+    },
+    "offensive_buff_button_names": [],
+    "speed": null,
+    "squadrons_ui": {
+      "squadrons": []
+    },
+    "stop_button": {
+      "height": 12,
+      "width": 12,
+      "x": 907,
+      "y": 1007
+    },
+    "visibility": {
+      "fraction": 0.463,
+      "largest_visible": {
+        "height": 252,
+        "width": 1354,
+        "x": 0,
+        "y": 523
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        },
+        {
+          "by": "GoldenPositionContainerAutoSize",
+          "region": {
+            "height": 220,
+            "width": 860,
+            "x": 530,
+            "y": 303
+          },
+          "tp_name": "GoldenPositionContainerAutoSize",
+          "z": 1
+        },
+        {
+          "by": "QuickMessage",
+          "region": {
+            "height": 52,
+            "width": 300,
+            "x": 810,
+            "y": 164
+          },
+          "tp_name": "QuickMessage",
+          "z": 2
+        },
+        {
+          "by": "BadgeMasterContainer",
+          "region": {
+            "height": 20,
+            "width": 40,
+            "x": 1880,
+            "y": 1038
+          },
+          "tp_name": "BadgeMasterContainer",
+          "z": 3
+        },
+        {
+          "by": "NotificationContainer",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 1872,
+            "y": 1032
+          },
+          "tp_name": "NotificationContainer",
+          "z": 4
+        },
+        {
+          "by": "lobbyWnd",
+          "region": {
+            "height": 920,
+            "width": 550,
+            "x": 1354,
+            "y": 0
+          },
+          "tp_name": "LobbyWnd",
+          "z": 5
+        },
+        {
+          "by": "locations",
+          "region": {
+            "height": 448,
+            "width": 550,
+            "x": 264,
+            "y": 57
+          },
+          "tp_name": "LocationsWindow",
+          "z": 6
+        },
+        {
+          "by": "ChatWindowStack",
+          "region": {
+            "height": 305,
+            "width": 718,
+            "x": 42,
+            "y": 775
+          },
+          "tp_name": "ChatWindowStack",
+          "z": 7
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "stacking": {
+    "client_area": {
+      "height": 1080,
+      "width": 1920,
+      "x": 0,
+      "y": 0
+    },
+    "modal_active": false,
+    "window_stack": [
+      {
+        "name": null,
+        "region": {
+          "height": 32,
+          "width": 32,
+          "x": 12,
+          "y": 1036
+        },
+        "tp_name": "ResourceLoadingIndicator",
+        "window": null,
+        "z": 0
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 220,
+          "width": 860,
+          "x": 530,
+          "y": 303
+        },
+        "tp_name": "GoldenPositionContainerAutoSize",
+        "window": null,
+        "z": 1
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 52,
+          "width": 300,
+          "x": 810,
+          "y": 164
+        },
+        "tp_name": "QuickMessage",
+        "window": "quick_message",
+        "z": 2
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 20,
+          "width": 100,
+          "x": 1880,
+          "y": 1038
+        },
+        "tp_name": "BadgeMasterContainer",
+        "window": null,
+        "z": 3
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 32,
+          "width": 32,
+          "x": 1872,
+          "y": 1032
+        },
+        "tp_name": "NotificationContainer",
+        "window": null,
+        "z": 4
+      },
+      {
+        "name": "lobbyWnd",
+        "region": {
+          "height": 920,
+          "width": 550,
+          "x": 1354,
+          "y": 0
+        },
+        "tp_name": "LobbyWnd",
+        "window": "station_window",
+        "z": 5
+      },
+      {
+        "name": "locations",
+        "region": {
+          "height": 448,
+          "width": 550,
+          "x": 264,
+          "y": 57
+        },
+        "tp_name": "LocationsWindow",
+        "window": "locations_window",
+        "z": 6
+      },
+      {
+        "name": "ChatWindowStack",
+        "region": {
+          "height": 305,
+          "width": 718,
+          "x": 42,
+          "y": 775
+        },
+        "tp_name": "ChatWindowStack",
+        "window": "chat_window_stacks[0]",
+        "z": 7
+      },
+      {
+        "name": "hudContainer",
+        "region": {
+          "height": 200,
+          "width": 1200,
+          "x": 360,
+          "y": 880
+        },
+        "tp_name": "HudContainer",
+        "window": null,
+        "z": 8
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 1080,
+          "width": 42,
+          "x": 0,
+          "y": 0
+        },
+        "tp_name": "NeocomContainer",
+        "window": "neocom",
+        "z": 9
+      },
+      {
+        "name": "sidePanel",
+        "region": {
+          "height": 1068,
+          "width": 312,
+          "x": 42,
+          "y": 12
+        },
+        "tp_name": "Container",
+        "window": null,
+        "z": 10
+      }
+    ]
+  },
+  "standalone_bookmark_window": null,
+  "station_window": {
+    "buttons": {
+      "Board my Corvette": {
+        "height": 32,
+        "width": 148,
+        "x": 1555,
+        "y": 298
+      },
+      "Undock": {
+        "height": 40,
+        "width": 514,
+        "x": 1372,
+        "y": 242
+      }
+    },
+    "services": {
+      "charcustomization": {
+        "height": 32,
+        "width": 32,
+        "x": 1739,
+        "y": 194
+      },
+      "fitting": {
+        "height": 32,
+        "width": 32,
+        "x": 1595,
+        "y": 194
+      },
+      "insurance": {
+        "height": 32,
+        "width": 32,
+        "x": 1523,
+        "y": 194
+      },
+      "lpstore": {
+        "height": 32,
+        "width": 32,
+        "x": 1487,
+        "y": 194
+      },
+      "market": {
+        "height": 32,
+        "width": 32,
+        "x": 1631,
+        "y": 194
+      },
+      "navyoffices": {
+        "height": 32,
+        "width": 32,
+        "x": 1559,
+        "y": 194
+      },
+      "repairshop": {
+        "height": 32,
+        "width": 32,
+        "x": 1703,
+        "y": 194
+      },
+      "reprocessingPlant": {
+        "height": 32,
+        "width": 32,
+        "x": 1667,
+        "y": 194
+      }
+    },
+    "ships": [],
+    "tabs": {
+      "Agents": {
+        "height": 32,
+        "width": 41,
+        "x": 1462,
+        "y": 346
+      },
+      "Guests [1]": {
+        "height": 32,
+        "width": 66,
+        "x": 1372,
+        "y": 346
+      },
+      "Hangars": {
+        "height": 32,
+        "width": 47,
+        "x": 1593,
+        "y": 346
+      },
+      "Items": {
+        "height": 32,
+        "width": 34,
+        "x": 1427,
+        "y": 378
+      },
+      "Offices": {
+        "height": 32,
+        "width": 42,
+        "x": 1527,
+        "y": 346
+      },
+      "Ships": {
+        "height": 32,
+        "width": 31,
+        "x": 1372,
+        "y": 378
+      }
+    },
+    "visibility": {
+      "fraction": 0.984,
+      "largest_visible": {
+        "height": 920,
+        "width": 514,
+        "x": 1390,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "GoldenPositionContainerAutoSize",
+          "region": {
+            "height": 220,
+            "width": 36,
+            "x": 1354,
+            "y": 303
+          },
+          "tp_name": "GoldenPositionContainerAutoSize",
+          "z": 1
+        }
+      ],
+      "region": {
+        "height": 920,
+        "width": 550,
+        "x": 1354,
+        "y": 0
+      }
+    }
+  },
+  "survey_scan_window": null,
+  "targets": [],
+  "watchlist_panel": null
+}

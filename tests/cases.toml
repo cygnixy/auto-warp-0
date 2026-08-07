@@ -1210,3 +1210,33 @@ fixture = "tests/fixtures/journal_docked_arrived.json"
 action = "legs_done"
 args = ["   "]
 expect = "Success"
+
+[[case]]
+name     = "shutdown countdown under the threshold stops the mission"
+fixture  = "tests/fixtures/downtime_countdown.json"
+action   = "downtime_guard"
+args     = [300]
+expect   = "Failure"
+log_contains = ["cluster shutdown in 220"]
+
+[[case]]
+name     = "shutdown countdown over the threshold lets the flight continue"
+fixture  = "tests/fixtures/downtime_countdown.json"
+action   = "downtime_guard"
+args     = [60]
+expect   = "Success"
+
+[[case]]
+name     = "connection lost fails regardless of the threshold"
+fixture  = "tests/fixtures/connection_lost.json"
+action   = "downtime_guard"
+args     = [0]
+expect   = "Failure"
+log_contains = ["connection lost"]
+
+[[case]]
+name     = "an ordinary flight tick passes the downtime guard"
+fixture  = "tests/fixtures/docked_with_route.json"
+action   = "downtime_guard"
+args     = [300]
+expect   = "Success"
