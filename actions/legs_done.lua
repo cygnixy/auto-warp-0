@@ -13,7 +13,7 @@ local M = {}
 --
 -- The journal narrates the turn; this action stays silent like the rest.
 function M.main(args)
-    local return_destination = args and args[1]
+    local return_destination = leg.trimmed(args and args[1])
     if leg.current() == "out"
         and type(return_destination) == "string"
         and return_destination ~= ""

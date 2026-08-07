@@ -1181,3 +1181,32 @@ args = ["Eskunen VI - Caldari Constructions Warehouse", "station", "Ansila V - C
 setup_bb = { _leg = "home" }
 expect = "Success"
 log_contains = ["the route to Ansila V - Caldari Funds Unlimited Depository has been flown to its end"]
+
+# Mission parameters come from a text box, and a text box carries invisible
+# spaces. On 2026-08-07 at 05:58 a return destination with a leading space
+# flew the whole way out, turned home, typed its space into the search and
+# stalled forever on "no row is named exactly". Every destination value is
+# trimmed at the leg gate; these three would each catch the trim going away.
+
+[[case]]
+name = "a destination typed with a stray space is searched without it"
+fixture = "tests/fixtures/search_open_empty.json"
+action = "set_route_type_destination"
+args = [" Jita", ""]
+expect = "Running"
+log_contains = ["type_text(\"Jita\")"]
+
+[[case]]
+name = "the journal names the return leg without the operator's stray spaces"
+fixture = "tests/fixtures/journal_docked_jita.json"
+action = "journal"
+args = ["Eskunen VI - Caldari Constructions Warehouse", "station", " Ansila V - Caldari Funds Unlimited Depository "]
+expect = "Success"
+log_contains = ["and back to Ansila V - Caldari Funds Unlimited Depository"]
+
+[[case]]
+name = "a return destination of only spaces is no return leg at all"
+fixture = "tests/fixtures/journal_docked_arrived.json"
+action = "legs_done"
+args = ["   "]
+expect = "Success"

@@ -11,13 +11,27 @@ function M.current()
     return "out"
 end
 
+-- Mission parameters come from a text box the operator types into, and an
+-- invisible leading space is exactly the kind of thing a text box carries.
+-- On 2026-08-07 at 05:58 a return destination of " Ansila V - ..." flew the
+-- whole way out, turned home, typed its leading space into the search — and
+-- stalled forever on "no row is named exactly", because row selection is
+-- deliberately exact. The trim lives here, at the one gate every destination
+-- value passes through.
+function M.trimmed(value)
+    if type(value) ~= "string" then
+        return value
+    end
+    return (string.gsub(value, "^%s*(.-)%s*$", "%1"))
+end
+
 -- The value for the current leg: the outward one until the turn, the
 -- return one after it.
 function M.pick(out_value, home_value)
     if M.current() == "home" then
-        return home_value
+        return M.trimmed(home_value)
     end
-    return out_value
+    return M.trimmed(out_value)
 end
 
 return M

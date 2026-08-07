@@ -42,9 +42,9 @@ local function text(value)
 end
 
 function M.main(args)
-    local destination = args and args[1]
+    local destination = leg.trimmed(args and args[1])
     local kind = args and args[2]
-    local return_destination = args and args[3]
+    local return_destination = leg.trimmed(args and args[3])
 
     if (cygnixy.bb_get(STARTED) or 0) == 0 then
         cygnixy.bb_set(STARTED, 1)
