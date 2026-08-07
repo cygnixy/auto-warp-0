@@ -1,14 +1,21 @@
 # Client words the scanner cannot trace: they reach the comparison through
 # a function call. Each entry names the word, how it is compared, the path
 # it is read from, and why the scanner cannot see it.
+#
+# The path is groups, not entries — checked against an engine parse of a
+# real dump on 2026-08-07: groups carries the category headers the bot
+# expands ("Stations (12)", text at [0]), entries carries the result rows
+# (station and character names). The first benchmark flight counted these
+# words 0/4 against entries, which was this file aiming at the wrong field,
+# not the client going quiet.
 [[word]]
 text = "Solar Systems"
 predicate = "starts_with"      # equals | starts_with | contains | lua_pattern
-path = "search_results.entries[*][0]"
+path = "search_results.groups[*][0]"
 why = "category_of returns it through a module function"
 
 [[word]]
 text = "Stations"
 predicate = "starts_with"
-path = "search_results.entries[*][0]"
+path = "search_results.groups[*][0]"
 why = "category_of returns it through a module function"
