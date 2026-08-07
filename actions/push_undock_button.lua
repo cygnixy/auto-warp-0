@@ -1,7 +1,7 @@
-local log = require("log")
-local press = require("press")
+local log = require("std.log")
+local press = require("std.press")
 local guard = require("guard")
-local pointer = require("pointer")
+local pointer = require("std.pointer")
 
 local M = {}
 

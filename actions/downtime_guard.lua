@@ -1,5 +1,5 @@
-local log = require("log")
-local guard = require("guard")
+local log = require("std.log")
+local downtime = require("std.downtime")
 
 local M = {}
 
@@ -26,7 +26,7 @@ function M.main(args)
         end
     end
 
-    local left = guard.downtime_seconds_left()
+    local left = downtime.seconds_left()
     local threshold = tonumber(args and args[1]) or 300
     if left ~= nil and left <= threshold then
         log.warn("downtime",

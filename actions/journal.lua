@@ -1,5 +1,5 @@
 local leg = require("leg")
-local log = require("log")
+local log = require("std.log")
 local state = require("state")
 local order = require("order")
 

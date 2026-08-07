@@ -1,6 +1,6 @@
 local bookmarks = require("bookmarks")
-local log = require("log")
-local pointer = require("pointer")
+local log = require("std.log")
+local pointer = require("std.pointer")
 local warp_choice = require("warp_choice")
 
 local M = {}

@@ -1,5 +1,5 @@
-local log = require("log")
-local pointer = require("pointer")
+local log = require("std.log")
+local pointer = require("std.pointer")
 
 local M = {}
 

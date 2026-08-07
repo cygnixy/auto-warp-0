@@ -1,5 +1,5 @@
-local log = require("log")
-local press = require("press")
+local log = require("std.log")
+local press = require("std.press")
 
 local M = {}
 

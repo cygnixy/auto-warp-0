@@ -1,8 +1,8 @@
 local leg = require("leg")
-local log = require("log")
-local pointer = require("pointer")
+local log = require("std.log")
+local pointer = require("std.pointer")
 local search = require("search")
-local press = require("press")
+local press = require("std.press")
 
 local M = {}
 

@@ -5,7 +5,7 @@
 -- sending the ship somewhere — the route marker, the dock bookmark and the
 -- undock bookmark — offer the same three entries and must agree on which one
 -- wins.
-local log = require("log")
+local log = require("std.log")
 local order = require("order")
 
 local M = {}

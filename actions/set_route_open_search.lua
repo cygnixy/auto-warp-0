@@ -1,6 +1,6 @@
-local log = require("log")
-local press = require("press")
-local pointer = require("pointer")
+local log = require("std.log")
+local press = require("std.press")
+local pointer = require("std.pointer")
 
 local M = {}
 

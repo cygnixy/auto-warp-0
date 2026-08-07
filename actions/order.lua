@@ -1,4 +1,4 @@
-local log = require("log")
+local log = require("std.log")
 local state = require("state")
 
 local M = {}
