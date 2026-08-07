@@ -1,0 +1,14 @@
+# Client words the scanner cannot trace: they reach the comparison through
+# a function call. Each entry names the word, how it is compared, the path
+# it is read from, and why the scanner cannot see it.
+[[word]]
+text = "Solar Systems"
+predicate = "starts_with"      # equals | starts_with | contains | lua_pattern
+path = "search_results.entries[*][0]"
+why = "category_of returns it through a module function"
+
+[[word]]
+text = "Stations"
+predicate = "starts_with"
+path = "search_results.entries[*][0]"
+why = "category_of returns it through a module function"

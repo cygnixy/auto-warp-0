@@ -1130,3 +1130,54 @@ action = "open_route_menu_and_warp"
 expect = "Running"
 tick_ms = 1000
 log_contains = ["trying it mid-session"]
+
+# --- the closed mission: legs ------------------------------------------------
+
+[[case]]
+name = "on the return leg, having somewhere to go is asked of the return destination, not the outward one"
+fixture = "tests/fixtures/search_closed.json"
+action = "set_route_has_destination"
+args = ["Jita", ""]
+setup_bb = { _leg = "home" }
+expect = "Failure"
+
+[[case]]
+name = "a mission with no return leg is done at its destination"
+fixture = "tests/fixtures/journal_docked_arrived.json"
+action = "legs_done"
+args = [""]
+expect = "Success"
+
+[[case]]
+name = "a mission with a return leg turns around instead of finishing"
+fixture = "tests/fixtures/journal_docked_arrived.json"
+action = "legs_done"
+args = ["Ansila V - Caldari Funds Unlimited Depository"]
+expect = "Failure"
+log_contains = ["bb_set _leg = String(\"home\")"]
+
+[[case]]
+name = "the journal calls the first dock a turn, not the end of the mission"
+fixtures = [
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_docked_arrived.json",
+]
+action = "journal"
+args = ["Eskunen VI - Caldari Constructions Warehouse", "station", "Ansila V - Caldari Funds Unlimited Depository"]
+expect = "Success"
+log_contains = ["the way out has been flown; turning home"]
+[[case.log_counts]]
+needle = "has been flown to its end"
+times = 0
+
+[[case]]
+name = "and the second dock, with the leg turned, ends it"
+fixtures = [
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_docked_arrived.json",
+]
+action = "journal"
+args = ["Eskunen VI - Caldari Constructions Warehouse", "station", "Ansila V - Caldari Funds Unlimited Depository"]
+setup_bb = { _leg = "home" }
+expect = "Success"
+log_contains = ["the route to Ansila V - Caldari Funds Unlimited Depository has been flown to its end"]

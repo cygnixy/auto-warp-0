@@ -1,3 +1,4 @@
+local leg = require("leg")
 local log = require("log")
 local state = require("state")
 local order = require("order")
@@ -47,6 +48,18 @@ function M.main(args)
     if (cygnixy.bb_get(STARTED) or 0) == 0 then
         cygnixy.bb_set(STARTED, 1)
         cygnixy.bb_set(JUMPS, 0)
+        -- Every mission starts on the outward leg. Only if the blackboard
+        -- has not already said otherwise, though: a mission that begins
+        -- already turned -- which happens in these very tests, seeding _leg
+        -- ahead of the first tick to check the second dock without replaying
+        -- the first -- is not a mission this journal gets to correct.
+        if cygnixy.bb_get("_leg") == nil then
+            cygnixy.bb_set("_leg", "out")
+        end
+        -- The version line below is the flight delimiter: bot-harness
+        -- `flight` cuts lua.log by "mission: ... on cygnixy ...". Reword it
+        -- and the parser goes blind.
+        --
         -- The versions first, and in the mission's own log rather than the
         -- application's: a log read an hour later is read to answer "what was
         -- flying, and on what", and until 2026-08-05 it could not.
@@ -189,15 +202,29 @@ function M.main(args)
             log.info("route", "the client is showing the route")
         end
     elseif markers == 0 and before > 0 and now_place == "station" then
-        -- Docked with the route gone is what the end of a mission looks like
-        -- from the outside; the tree reads the same two facts to stop.
-        --
-        -- The destination is named again here so that the last line stands on
-        -- its own. The line above can only say the system: the station's name
-        -- lives in the location panel's expanded content, and a docked client
-        -- with that panel collapsed does not carry it.
-        if text(destination) then
-            log.info("mission", "the route to " .. destination .. " has been flown to its end")
+        -- Docked with the route gone is what the end of a leg looks like from
+        -- the outside; the tree reads the same two facts to stop. Whether it
+        -- is the end of the mission or only the end of the outward leg
+        -- depends on whether a return destination was given and which leg
+        -- was flying — the same question legs_done asks, asked here again so
+        -- the log narrates the turn instead of staying silent about it.
+        local return_destination = args and args[3]
+        local going_home = leg.current() == "out"
+            and type(return_destination) == "string" and return_destination ~= ""
+        if going_home then
+            -- Leg's end, not the mission's: legs_done turns the ship around
+            -- on this same tick, and the route panel will fill again.
+            log.info("route", "the way out has been flown; turning home")
+        elseif text(destination) then
+            -- The destination is named again here so that the last line
+            -- stands on its own. The line above can only say the system: the
+            -- station's name lives in the location panel's expanded content,
+            -- and a docked client with that panel collapsed does not carry
+            -- it. leg.pick names whichever leg just ended: the outward
+            -- destination on a one-way mission, the return one on a closed
+            -- mission's second dock.
+            local flown = leg.pick(destination, return_destination)
+            log.info("mission", "the route to " .. flown .. " has been flown to its end")
         else
             log.info("mission", "the route has been flown to its end")
         end

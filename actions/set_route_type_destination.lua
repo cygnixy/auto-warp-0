@@ -1,3 +1,4 @@
+local leg = require("leg")
 local log = require("log")
 local pointer = require("pointer")
 local press = require("press")
@@ -21,7 +22,9 @@ local M = {}
 -- match the one being looked for. On 2026-08-05 at 20:34 it did that
 -- twenty-three times running and the mission never left the hangar.
 function M.main(args)
-    local destination = args and args[1]
+    -- args[1] is the outward destination, args[2] the return one; leg.pick
+    -- chooses between them by what leg.lua reads off the blackboard.
+    local destination = leg.pick(args and args[1], args and args[2])
     if type(destination) ~= "string" or destination == "" then
         return "Failure"
     end

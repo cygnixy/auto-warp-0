@@ -1,3 +1,4 @@
+local leg = require("leg")
 local log = require("log")
 local pointer = require("pointer")
 local press = require("press")
@@ -7,11 +8,12 @@ local M = {}
 
 -- Expands the category the destination is looked for in.
 --
--- args[1] is the kind: "system" or "station". The headers read "Solar Systems
--- (3)" and "Stations (12)" — name and count — so they are matched by prefix,
--- not equality: the count changes with every search.
+-- args[1] is the outward kind, args[2] the return one; leg.pick chooses
+-- between them. Each is "system" or "station". The headers read "Solar
+-- Systems (3)" and "Stations (12)" — name and count — so they are matched by
+-- prefix, not equality: the count changes with every search.
 function M.main(args)
-    local kind = args and args[1]
+    local kind = leg.pick(args and args[1], args and args[2])
     local wanted = search.category_of(kind)
     if wanted == nil then
         log.error("route", "unknown destination kind \"" .. tostring(kind) ..

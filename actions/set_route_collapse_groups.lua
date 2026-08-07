@@ -1,3 +1,4 @@
+local leg = require("leg")
 local log = require("log")
 local pointer = require("pointer")
 local search = require("search")
@@ -16,12 +17,13 @@ local M = {}
 -- -- or when the row being looked for is already in front of us, which is the
 -- ordinary case for a name specific enough to match one thing.
 --
--- args[1] is the destination. Without it this action collapsed whatever the
+-- args[1] is the outward destination, args[2] the return one; leg.pick
+-- chooses between them. Without it this action collapsed whatever the
 -- search had opened and the next step opened it again: a search for a full
 -- station name returns that station alone, expanded, and the bot spent two
 -- gestures putting it back the way it found it.
 function M.main(args)
-    local destination = args and args[1]
+    local destination = leg.pick(args and args[1], args and args[2])
 
     local results = cygnixy.eve.search_results
     if not (results and results.groups and #results.groups > 0) then

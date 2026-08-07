@@ -15,7 +15,13 @@
  * The steps are the client's own order, learned the hard way: the magnifier is
  * a toggle, the panel keeps its region in the tree even when closed, and the
  * results window buries the wanted category under hundreds of character names
- * until the groups are collapsed. */
+ * until the groups are collapsed.
+ *
+ * Each action below takes two names, the outward one and the return one, and
+ * picks between them itself: leg.pick(destination, return_destination) reads
+ * which leg the mission is on off the blackboard, the same way for all five,
+ * so this tree does not need to know which leg is flying — only main.btree's
+ * loop and legs_done decide that. */
 
 -> set_route {
     ->* {
@@ -27,7 +33,7 @@
 
             -> {
                 /* Nothing to look for — the mission was given no destination. */
-                set_route_has_destination?(destination)
+                set_route_has_destination?(destination, return_destination)
                 @! is_session_change?()
 
                 /* A memory sequence, and it has to be one. A fallback would end
@@ -41,19 +47,19 @@
                 ->* {
                     set_route_open_search()
                     set_route_clear_field()
-                    set_route_type_destination(destination)
+                    set_route_type_destination(destination, return_destination)
                     /* The destination is passed so that a search which
                        already shows the wanted row is left as it is: without
                        it this collapsed what the search had opened and the
                        next step opened it again. */
-                    set_route_collapse_groups(destination)
-                    set_route_expand_category(destination_kind)
+                    set_route_collapse_groups(destination, return_destination)
+                    set_route_expand_category(destination_kind, return_kind)
                     /* Succeeds on the route appearing, not on the press
                        landing: between the two the client says nothing, so a
                        step that trusted the press would hand the flight a
                        route that was never set. It orders again while the
                        route is missing and the row is still there. */
-                    set_route_choose(destination)
+                    set_route_choose(destination, return_destination)
                 }
             }
         }

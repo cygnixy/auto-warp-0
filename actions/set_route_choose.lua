@@ -1,3 +1,4 @@
+local leg = require("leg")
 local log = require("log")
 local pointer = require("pointer")
 local search = require("search")
@@ -7,8 +8,9 @@ local M = {}
 -- Right-clicks the row named by the destination, chooses Set Destination, and
 -- is done when the client shows the route — not when the click was sent.
 --
--- args[1] is the destination name. The row must match it exactly: a search for
--- "Jita" also returns four hundred characters with Jita in their names, and a
+-- args[1] is the outward destination name, args[2] the return one; leg.pick
+-- chooses between them. The row must match it exactly: a search for "Jita"
+-- also returns four hundred characters with Jita in their names, and a
 -- route to the wrong one is a long way home.
 --
 -- The route is the only proof the order was taken. There is no other: between
@@ -29,7 +31,7 @@ local CHOICES = {
 }
 
 function M.main(args)
-    local destination = args and args[1]
+    local destination = leg.pick(args and args[1], args and args[2])
     if type(destination) ~= "string" or destination == "" then
         return "Failure"
     end
