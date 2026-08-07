@@ -1240,3 +1240,36 @@ fixture  = "tests/fixtures/docked_with_route.json"
 action   = "downtime_guard"
 args     = [300]
 expect   = "Success"
+
+[[case]]
+name    = "typing that came out wrong is retyped, not accepted"
+fixture = "tests/fixtures/search_typed_wrong.json"
+action  = "set_route_type_destination"
+args    = ["Ansila V - Caldari Funds Unlimited Depository", ""]
+expect  = "Running"
+log_contains = ["the search field holds"]
+
+[[case]]
+name     = "a field that cannot be cleared stops the command instead of looping"
+fixtures = ["tests/fixtures/search_typed_wrong.json",
+            "tests/fixtures/search_typed_wrong.json",
+            "tests/fixtures/search_typed_wrong.json",
+            "tests/fixtures/search_typed_wrong.json",
+            "tests/fixtures/search_typed_wrong.json",
+            "tests/fixtures/search_typed_wrong.json",
+            "tests/fixtures/search_typed_wrong.json"]
+action   = "set_route_type_destination"
+args     = ["Ansila V - Caldari Funds Unlimited Depository", ""]
+expect   = "Failure"
+log_contains = ["the search field cannot be made to hold"]
+
+[[case]]
+name    = "an empty results window is not waited on for ever"
+fixtures = ["tests/fixtures/search_no_results.json",
+            "tests/fixtures/search_no_results.json",
+            "tests/fixtures/search_no_results.json",
+            "tests/fixtures/search_no_results.json"]
+action  = "set_route_collapse_groups"
+args    = ["Ansila V - Caldari Funds Unlimited Depository", ""]
+expect  = "Failure"
+log_contains = ["no results"]

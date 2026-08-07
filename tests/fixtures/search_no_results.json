@@ -1,0 +1,982 @@
+{
+  "agent_conversation_windows": [],
+  "bookmark_location_window": null,
+  "character_sheet_window": null,
+  "chat_window_stacks": [
+    {
+      "chats_window": [
+        {
+          "name": "chatchannel_local",
+          "userlist": {
+            "scroll_controls": null,
+            "visible_users": [
+              {
+                "name": "Test Pilot",
+                "standing_icon_hint": null
+              }
+            ]
+          }
+        },
+        {
+          "name": "chatchannel_corp",
+          "userlist": {
+            "scroll_controls": null,
+            "visible_users": [
+              {
+                "name": "Test Pilot",
+                "standing_icon_hint": null
+              }
+            ]
+          }
+        },
+        {
+          "name": "chatchannel_player_-6614024",
+          "userlist": {
+            "scroll_controls": {
+              "scroll_handle": {
+                "height": 198,
+                "width": 112,
+                "x": 638,
+                "y": 817
+              }
+            },
+            "visible_users": [
+              {
+                "name": "Test Pilot",
+                "standing_icon_hint": null
+              }
+            ]
+          }
+        }
+      ],
+      "visibility": {
+        "fraction": 1.0,
+        "largest_visible": {
+          "height": 305,
+          "width": 716,
+          "x": 44,
+          "y": 775
+        },
+        "occluded_by": [
+          {
+            "by": "ResourceLoadingIndicator",
+            "region": {
+              "height": 32,
+              "width": 2,
+              "x": 42,
+              "y": 1036
+            },
+            "tp_name": "ResourceLoadingIndicator",
+            "z": 0
+          }
+        ],
+        "region": {
+          "height": 305,
+          "width": 718,
+          "x": 42,
+          "y": 775
+        }
+      }
+    }
+  ],
+  "compression_window": null,
+  "context_menus": [],
+  "directional_scanner_window": null,
+  "drones_window": null,
+  "fitting_window": null,
+  "fleet_window": null,
+  "heat_status_tooltip": null,
+  "hero_notification": {
+    "texts": [],
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 1080,
+        "width": 1876,
+        "x": 44,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "info_panel_container": {
+    "icons": {
+      "agent_missions": null,
+      "all": [
+        {
+          "name": null,
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 98,
+            "y": 50
+          },
+          "texture_path": "res:/UI/Texture/Classes/InfoPanels/search.png"
+        },
+        {
+          "name": null,
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 118,
+            "y": 50
+          },
+          "texture_path": "res:/UI/Texture/Classes/InfoPanels/LocationInfo.png"
+        },
+        {
+          "name": null,
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 138,
+            "y": 50
+          },
+          "texture_path": "res:/UI/Texture/Classes/InfoPanels/Route.png"
+        },
+        {
+          "name": "Opportunities board",
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 158,
+            "y": 50
+          },
+          "texture_path": null
+        }
+      ],
+      "daily_challenge": null,
+      "location_info": {
+        "height": 16,
+        "width": 16,
+        "x": 118,
+        "y": 50
+      },
+      "route": {
+        "height": 16,
+        "width": 16,
+        "x": 138,
+        "y": 50
+      },
+      "search": {
+        "height": 16,
+        "width": 16,
+        "x": 98,
+        "y": 50
+      }
+    },
+    "info_panel_agent_missions": null,
+    "info_panel_location_info": {
+      "current_solar_system_id": 30000137,
+      "current_solar_system_name": "Eskunen",
+      "expanded_content": {
+        "current_station_name": null
+      },
+      "list_surroundings_button": {
+        "height": 28,
+        "width": 28,
+        "x": 70,
+        "y": 109
+      },
+      "security_status_percent": 0.6
+    },
+    "info_panel_route": {
+      "expand": {
+        "height": 28,
+        "width": 28,
+        "x": 42,
+        "y": 209
+      },
+      "jumps": 0,
+      "next_system": null,
+      "route_element_marker": null
+    },
+    "visibility": {
+      "fraction": 0.721,
+      "largest_visible": {
+        "height": 215,
+        "width": 222,
+        "x": 42,
+        "y": 50
+      },
+      "occluded_by": [
+        {
+          "by": "locations",
+          "region": {
+            "height": 208,
+            "width": 90,
+            "x": 264,
+            "y": 57
+          },
+          "tp_name": "LocationsWindow",
+          "z": 3
+        }
+      ],
+      "region": {
+        "height": 215,
+        "width": 312,
+        "x": 42,
+        "y": 50
+      }
+    }
+  },
+  "info_panel_search": {
+    "clear": {
+      "height": 16,
+      "width": 16,
+      "x": 333,
+      "y": 77
+    },
+    "display": true,
+    "field": {
+      "height": 24,
+      "width": 256,
+      "x": 98,
+      "y": 73
+    },
+    "text": "Ansila V - Caldari Funds Unlimited Depository",
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 38,
+        "width": 222,
+        "x": 42,
+        "y": 71
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 38,
+        "width": 312,
+        "x": 42,
+        "y": 71
+      }
+    }
+  },
+  "inventory_windows": null,
+  "key_activation_window": null,
+  "layer_abovemain": {
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 1080,
+        "width": 1876,
+        "x": 44,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "locations_window": {
+    "buttons": {
+      "Add Location": {
+        "height": 24,
+        "width": 112,
+        "x": 413,
+        "y": 463
+      },
+      "Create Folder": {
+        "height": 24,
+        "width": 117,
+        "x": 533,
+        "y": 463
+      },
+      "Create Subfolder": {
+        "height": 24,
+        "width": 138,
+        "x": 658,
+        "y": 463
+      }
+    },
+    "entries": [],
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 448,
+        "width": 550,
+        "x": 264,
+        "y": 57
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 448,
+        "width": 550,
+        "x": 264,
+        "y": 57
+      }
+    }
+  },
+  "market_orders_window": null,
+  "message_boxes": [],
+  "module_button_tooltip": null,
+  "neocom": {
+    "buttons": {
+      "AurumStoreBtnDataNode": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 986
+      },
+      "agency": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 168
+      },
+      "airCareerProgram": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 126
+      },
+      "assets": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 336
+      },
+      "charSheetBtn": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 42
+      },
+      "chat": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 630
+      },
+      "clockCont": {
+        "height": 20,
+        "width": 42,
+        "x": 0,
+        "y": 1060
+      },
+      "contracts": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 504
+      },
+      "eveMenuBtn": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 0
+      },
+      "fitting": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 546
+      },
+      "form.ListWindow": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 756
+      },
+      "inventory": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 294
+      },
+      "job_board": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 210
+      },
+      "mail": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 252
+      },
+      "map_beta": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 588
+      },
+      "market": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 420
+      },
+      "marketOrders": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 462
+      },
+      "newRedeemableItemsNotification": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 944
+      },
+      "omega_upsell_fixed": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 902
+      },
+      "shipTree": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 672
+      },
+      "skillsBtn": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 84
+      },
+      "uicontrols.Window": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 714
+      },
+      "wallet": {
+        "height": 42,
+        "width": 42,
+        "x": 0,
+        "y": 378
+      }
+    },
+    "clock": {
+      "parsed_text": "15:54",
+      "text": "<b>15:54</b>"
+    },
+    "icon_inventory": {
+      "height": 34,
+      "width": 34,
+      "x": 4,
+      "y": 298
+    },
+    "visibility": {
+      "fraction": 0.979,
+      "largest_visible": {
+        "height": 1036,
+        "width": 42,
+        "x": 0,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 30,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 42,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "overview_windows": null,
+  "probe_scanner": null,
+  "quick_message": null,
+  "repair_shop": null,
+  "search_results": {
+    "close": {
+      "height": 32,
+      "width": 304,
+      "x": 808,
+      "y": 690
+    },
+    "collapse_all": {
+      "height": 12,
+      "width": 12,
+      "x": 814,
+      "y": 406
+    },
+    "entries": [],
+    "groups": [],
+    "visibility": {
+      "fraction": 0.971,
+      "largest_visible": {
+        "height": 400,
+        "width": 316,
+        "x": 814,
+        "y": 340
+      },
+      "occluded_by": [
+        {
+          "by": "locations",
+          "region": {
+            "height": 165,
+            "width": 24,
+            "x": 790,
+            "y": 340
+          },
+          "tp_name": "LocationsWindow",
+          "z": 3
+        }
+      ],
+      "region": {
+        "height": 400,
+        "width": 340,
+        "x": 790,
+        "y": 340
+      }
+    }
+  },
+  "selected_item_window": null,
+  "session_time_indicator": {
+    "display": false,
+    "hint": "Session changing - Time left: Less than one second",
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 24,
+        "width": 24,
+        "x": 58,
+        "y": 47
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 24,
+        "width": 24,
+        "x": 58,
+        "y": 47
+      }
+    }
+  },
+  "shipui": {
+    "capacitor": null,
+    "heat_gauges": null,
+    "hitpoints_percent": null,
+    "indication": null,
+    "max_speed_button": null,
+    "module_buttons": [],
+    "module_buttons_rows": null,
+    "offensive_buff_button_names": [],
+    "speed": null,
+    "squadrons_ui": null,
+    "stop_button": null,
+    "visibility": {
+      "fraction": 0.467,
+      "largest_visible": {
+        "height": 1080,
+        "width": 224,
+        "x": 1130,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        },
+        {
+          "by": "BadgeMasterContainer",
+          "region": {
+            "height": 20,
+            "width": 40,
+            "x": 1880,
+            "y": 1038
+          },
+          "tp_name": "BadgeMasterContainer",
+          "z": 1
+        },
+        {
+          "by": "NotificationContainer",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 1872,
+            "y": 1032
+          },
+          "tp_name": "NotificationContainer",
+          "z": 2
+        },
+        {
+          "by": "locations",
+          "region": {
+            "height": 448,
+            "width": 550,
+            "x": 264,
+            "y": 57
+          },
+          "tp_name": "LocationsWindow",
+          "z": 3
+        },
+        {
+          "by": "mySearch",
+          "region": {
+            "height": 400,
+            "width": 340,
+            "x": 790,
+            "y": 340
+          },
+          "tp_name": "ListWindow",
+          "z": 4
+        },
+        {
+          "by": "lobbyWnd",
+          "region": {
+            "height": 920,
+            "width": 550,
+            "x": 1354,
+            "y": 0
+          },
+          "tp_name": "LobbyWnd",
+          "z": 5
+        },
+        {
+          "by": "ChatWindowStack",
+          "region": {
+            "height": 305,
+            "width": 718,
+            "x": 42,
+            "y": 775
+          },
+          "tp_name": "ChatWindowStack",
+          "z": 6
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "stacking": {
+    "client_area": {
+      "height": 1080,
+      "width": 1920,
+      "x": 0,
+      "y": 0
+    },
+    "modal_active": false,
+    "window_stack": [
+      {
+        "name": null,
+        "region": {
+          "height": 32,
+          "width": 32,
+          "x": 12,
+          "y": 1036
+        },
+        "tp_name": "ResourceLoadingIndicator",
+        "window": null,
+        "z": 0
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 20,
+          "width": 100,
+          "x": 1880,
+          "y": 1038
+        },
+        "tp_name": "BadgeMasterContainer",
+        "window": null,
+        "z": 1
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 32,
+          "width": 32,
+          "x": 1872,
+          "y": 1032
+        },
+        "tp_name": "NotificationContainer",
+        "window": null,
+        "z": 2
+      },
+      {
+        "name": "locations",
+        "region": {
+          "height": 448,
+          "width": 550,
+          "x": 264,
+          "y": 57
+        },
+        "tp_name": "LocationsWindow",
+        "window": "locations_window",
+        "z": 3
+      },
+      {
+        "name": "mySearch",
+        "region": {
+          "height": 400,
+          "width": 340,
+          "x": 790,
+          "y": 340
+        },
+        "tp_name": "ListWindow",
+        "window": "search_results",
+        "z": 4
+      },
+      {
+        "name": "lobbyWnd",
+        "region": {
+          "height": 920,
+          "width": 550,
+          "x": 1354,
+          "y": 0
+        },
+        "tp_name": "LobbyWnd",
+        "window": "station_window",
+        "z": 5
+      },
+      {
+        "name": "ChatWindowStack",
+        "region": {
+          "height": 305,
+          "width": 718,
+          "x": 42,
+          "y": 775
+        },
+        "tp_name": "ChatWindowStack",
+        "window": "chat_window_stacks[0]",
+        "z": 6
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 1080,
+          "width": 42,
+          "x": 0,
+          "y": 0
+        },
+        "tp_name": "NeocomContainer",
+        "window": "neocom",
+        "z": 7
+      },
+      {
+        "name": "sidePanel",
+        "region": {
+          "height": 1068,
+          "width": 312,
+          "x": 42,
+          "y": 12
+        },
+        "tp_name": "Container",
+        "window": null,
+        "z": 8
+      }
+    ]
+  },
+  "standalone_bookmark_window": null,
+  "station_window": {
+    "buttons": {
+      "Board my Corvette": {
+        "height": 32,
+        "width": 148,
+        "x": 1555,
+        "y": 298
+      },
+      "Undock": {
+        "height": 40,
+        "width": 514,
+        "x": 1372,
+        "y": 242
+      }
+    },
+    "services": {
+      "charcustomization": {
+        "height": 32,
+        "width": 32,
+        "x": 1757,
+        "y": 194
+      },
+      "fitting": {
+        "height": 32,
+        "width": 32,
+        "x": 1613,
+        "y": 194
+      },
+      "industry": {
+        "height": 32,
+        "width": 32,
+        "x": 1577,
+        "y": 194
+      },
+      "insurance": {
+        "height": 32,
+        "width": 32,
+        "x": 1505,
+        "y": 194
+      },
+      "lpstore": {
+        "height": 32,
+        "width": 32,
+        "x": 1469,
+        "y": 194
+      },
+      "market": {
+        "height": 32,
+        "width": 32,
+        "x": 1649,
+        "y": 194
+      },
+      "navyoffices": {
+        "height": 32,
+        "width": 32,
+        "x": 1541,
+        "y": 194
+      },
+      "repairshop": {
+        "height": 32,
+        "width": 32,
+        "x": 1721,
+        "y": 194
+      },
+      "reprocessingPlant": {
+        "height": 32,
+        "width": 32,
+        "x": 1685,
+        "y": 194
+      }
+    },
+    "ships": [
+      {
+        "name": "Impairor - Test Pilot",
+        "region": {
+          "height": 106,
+          "width": 254,
+          "x": 1372,
+          "y": 450
+        },
+        "texts": [
+          "Active",
+          "Corvette",
+          "Impairor - Test Pilot",
+          "Impairor",
+          "Packaged"
+        ]
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 106,
+          "width": 254,
+          "x": 1632,
+          "y": 450
+        },
+        "texts": [
+          "Active",
+          "Packaged"
+        ]
+      }
+    ],
+    "tabs": {
+      "Agents": {
+        "height": 32,
+        "width": 41,
+        "x": 1462,
+        "y": 346
+      },
+      "Guests [1]": {
+        "height": 32,
+        "width": 66,
+        "x": 1372,
+        "y": 346
+      },
+      "Hangars": {
+        "height": 32,
+        "width": 47,
+        "x": 1593,
+        "y": 346
+      },
+      "Items": {
+        "height": 32,
+        "width": 34,
+        "x": 1427,
+        "y": 378
+      },
+      "Offices": {
+        "height": 32,
+        "width": 42,
+        "x": 1527,
+        "y": 346
+      },
+      "Ships": {
+        "height": 32,
+        "width": 31,
+        "x": 1372,
+        "y": 378
+      }
+    },
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 920,
+        "width": 550,
+        "x": 1354,
+        "y": 0
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 920,
+        "width": 550,
+        "x": 1354,
+        "y": 0
+      }
+    }
+  },
+  "survey_scan_window": null,
+  "targets": [],
+  "watchlist_panel": null
+}
