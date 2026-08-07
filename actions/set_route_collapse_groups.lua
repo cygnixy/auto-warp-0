@@ -6,6 +6,13 @@ local press = require("std.press")
 
 local M = {}
 
+-- The client answers an unknown name with an empty results window, and it
+-- looks exactly like a window that has not filled in yet. Two seconds tell
+-- them apart: after that an empty window is an answer, not a delay, and the
+-- mission stops with the name it could not find instead of waiting for a row
+-- that will never come.
+local EMPTY_PATIENCE_MS = 2000
+
 -- Collapses every category in the results window.
 --
 -- "Jita" returns 498 results, 459 of them characters, and the wanted category
@@ -26,6 +33,30 @@ function M.main(args)
     local destination = leg.pick(args and args[1], args and args[2])
 
     local results = cygnixy.eve.search_results
+
+    -- The window is open and says nothing matched: waiting on it forever is
+    -- the same mistake as waiting on a window that has not opened, and
+    -- nothing tells the two apart except the clock.
+    local result_groups = results and results.groups
+    local result_entries = results and results.entries
+    local empty_window = results ~= nil
+        and (result_groups == nil or #result_groups == 0)
+        and (result_entries == nil or #result_entries == 0)
+
+    if empty_window then
+        local since = cygnixy.bb_get("search_results_empty_since") or 0
+        if since == 0 then
+            cygnixy.bb_set("search_results_empty_since", cygnixy.now_ms())
+            return "Running"
+        end
+        if cygnixy.now_ms() - since < EMPTY_PATIENCE_MS then
+            return "Running"
+        end
+        log.error("route", "no results for \"" .. destination .. "\": check the name and destination_kind")
+        return "Failure"
+    end
+    cygnixy.bb_set("search_results_empty_since", 0)
+
     if not (results and results.groups and #results.groups > 0) then
         -- The window has not opened yet; the search is still running.
         return "Running"

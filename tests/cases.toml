@@ -192,7 +192,7 @@ name = "a field holding an old query is cleared first"
 fixture = "tests/fixtures/search_open_stale_text.json"
 action = "set_route_clear_field"
 expect = "Running"
-log_contains = ["click(341, 85"]
+log_contains = ["click_path(\"info_panel_search.clear\""]
 
 [[case]]
 name = "the destination is typed into the focused field"
@@ -908,7 +908,7 @@ fixture = "tests/fixtures/search_open_stale_text.json"
 action = "set_route_type_destination"
 args = ["Jita"]
 expect = "Running"
-log_contains = ["click(341, 85"]
+log_contains = ["click_path(\"info_panel_search.clear\""]
 [[case.log_counts]]
 needle = "type_text"
 times = 0
@@ -971,7 +971,7 @@ name = "a field with text in it is cleared before anything else happens"
 fixture = "tests/fixtures/search_open_stale_text.json"
 action = "set_route_clear_field"
 expect = "Running"
-log_contains = ["click(341, 85"]
+log_contains = ["click_path(\"info_panel_search.clear\""]
 
 [[case]]
 name = "a field whose text will not read is treated as empty, not as a reason to stall"

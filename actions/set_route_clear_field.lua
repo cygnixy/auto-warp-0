@@ -38,7 +38,7 @@ function M.main(args)
     if press.pending("clear_field") then
         return "Running"
     end
-    local cleared, err = pointer.click(cross)
+    local cleared, err = pointer.click("info_panel_search.clear")
     press.made("clear_field")
     if not cleared then
         if pointer.transient(err) then

@@ -5,6 +5,15 @@ local press = require("std.press")
 
 local M = {}
 
+-- Three attempts: typing leaves for another application as input events, and
+-- the client occasionally applies part of the characters later than the
+-- rest -- on 2026-08-07 the "Fun" from the middle of a station name ended up
+-- at the end, the search found nothing, and the bot spent three hours
+-- retyping the field without noticing that the clearing cross was covered by
+-- another window. A retry fixes the occasional race; the ceiling stops it
+-- from spinning silently when the cause is something else.
+local MAX_ATTEMPTS = 3
+
 -- Clicks into the search field and types the destination.
 --
 -- The click is what focuses the field: without it the characters reach the
@@ -37,6 +46,7 @@ function M.main(args)
     -- Already typed: the results are on their way, or already here.
     if search.text == destination then
         press.done("type_destination")
+        cygnixy.bb_set("type_destination_attempts", 0)
         return "Success"
     end
 
@@ -64,17 +74,24 @@ function M.main(args)
                 "\" and offers no cross to clear it")
             return "Failure"
         end
-        local cleared, clear_error = pointer.click(cross)
-        press.made("type_destination")
-        if not cleared then
-            if pointer.transient(clear_error) then
-                log.repeated("clear_before_typing", "debug", "route",
-                    "waiting for the foreground before clearing the search field")
-                return "Running"
-            end
-            log.error("route", "clearing the search field failed: " .. tostring(clear_error))
+
+        -- Every retry costs an attempt, whether or not the click behind it
+        -- landed: a cross hidden under another window is refused by
+        -- click_path, but nothing here inspects that refusal -- the field
+        -- staying wrong on the next tick is the only signal there is.
+        local attempts = cygnixy.bb_get("type_destination_attempts") or 0
+        if attempts >= MAX_ATTEMPTS then
+            log.error("route", "the search field cannot be made to hold \"" .. destination ..
+                "\": it holds \"" .. text .. "\"")
             return "Failure"
         end
+
+        log.repeated("retype", "warn", "route",
+            "the search field holds \"" .. text .. "\" instead of \"" .. destination ..
+                "\"; clearing it to type again")
+        pointer.click("info_panel_search.clear")
+        press.made("type_destination")
+        cygnixy.bb_set("type_destination_attempts", attempts + 1)
         return "Running"
     end
 
@@ -103,6 +120,7 @@ function M.main(args)
 
     press.made("type_destination")
     cygnixy.press_key(0x0D)
+    cygnixy.bb_set("type_destination_attempts", (cygnixy.bb_get("type_destination_attempts") or 0) + 1)
     log.repeated("searching", "info", "route", "searching for \"" .. destination .. "\"")
     return "Running"
 end
