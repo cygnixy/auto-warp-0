@@ -5,13 +5,13 @@
     "repository": {
         "url": "https://github.com/cygnixy/auto-warp-0.git"
     },
-    "version": "0.16.1",
+    "version": "0.17.0",
     "edition": "2024",
     "requires": {
         "cygnixy": "0.3.32",
         "bots": {
             "cygnixy/std": {
-                "version": "0.1.0",
+                "version": "0.2.0",
                 "url": "https://github.com/cygnixy/std.git"
             }
         },
