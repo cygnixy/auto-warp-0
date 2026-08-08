@@ -1,6 +1,6 @@
 local log = require("std.log")
 local press = require("std.press")
-local guard = require("guard")
+local state = require("std.state")
 local pointer = require("std.pointer")
 
 local M = {}
@@ -11,7 +11,7 @@ local M = {}
 local UNDOCK = "station_window.buttons.Undock"
 
 function M.main(args)
-    if not guard.settled() then
+    if not state.settled() then
         return "Running"
     end
 

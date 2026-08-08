@@ -6,7 +6,7 @@
 -- undock bookmark — offer the same three entries and must agree on which one
 -- wins.
 local log = require("std.log")
-local order = require("order")
+local order = require("std.order")
 
 local M = {}
 

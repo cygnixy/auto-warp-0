@@ -1,7 +1,7 @@
 local log = require("std.log")
 local press = require("std.press")
-local state = require("state")
-local order = require("order")
+local state = require("std.state")
+local order = require("std.order")
 local guard = require("guard")
 local pointer = require("std.pointer")
 local warp_choice = require("warp_choice")
@@ -78,7 +78,7 @@ function M.main(args)
         -- Said once per session change, at debug. This wait is normal and the
         -- client's own clock bounds it; a line per tick, or a count that grows
         -- into a warning, teaches the reader to ignore warnings.
-        local left = guard.session_seconds_left()
+        local left = state.session_seconds_left()
         if left ~= nil and left > SESSION_READY_S then
             if (cygnixy.bb_get("said_session_early") or 0) ~= 1 then
                 cygnixy.bb_set("said_session_early", 1)
