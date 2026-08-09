@@ -650,6 +650,20 @@ action = "open_route_menu_and_warp"
 expect = "Running"
 log_contains = ["the route panel shows no marker to order from"]
 
+# Live run, 2026-08-09: a system-kind mission arrived in Urlen with the route
+# actually spent -- next_system already null, not merely a marker slow to
+# redraw -- and this action answered Running forever regardless, 243 lines
+# and an escalating warning nobody could stop by hand. next_system is what
+# tells this fixture apart from drifting_no_markers.json just above, which
+# keeps a real place named and must keep waiting. This case is load-bearing
+# for fly_route's own exit condition: without the Failure here, that
+# condition is never even reached, whatever it says.
+[[case]]
+name = "a route with nowhere further named is not waited on: there is nothing left to order"
+fixture = "tests/fixtures/drifting_route_flown.json"
+action = "open_route_menu_and_warp"
+expect = "Failure"
+
 [[case]]
 name = "arriving at the gate does not end the order that is taking the ship through it"
 fixtures = [
@@ -1273,3 +1287,37 @@ action  = "set_route_collapse_groups"
 args    = ["Ansila V - Caldari Funds Unlimited Depository", ""]
 expect  = "Failure"
 log_contains = ["no results"]
+
+# is_kind_station: fly_route's exit condition asks this before requiring a
+# dock. It touches nothing in cygnixy.eve, only leg.pick against the
+# blackboard's _leg mark, so any fixture will do -- the same convention
+# already used for legs_done and set_route_has_destination.
+
+[[case]]
+name = "a system-kind leg does not need a dock"
+fixture = "tests/fixtures/search_closed.json"
+action = "is_kind_station"
+args = ["system", "station"]
+expect = "Failure"
+
+[[case]]
+name = "a station-kind leg does need a dock"
+fixture = "tests/fixtures/search_closed.json"
+action = "is_kind_station"
+args = ["station", "system"]
+expect = "Success"
+
+[[case]]
+name = "on the return leg, the return kind is asked, not the outward one"
+fixture = "tests/fixtures/search_closed.json"
+action = "is_kind_station"
+args = ["system", "station"]
+setup_bb = { _leg = "home" }
+expect = "Success"
+
+[[case]]
+name = "a kind is trimmed the same way every other leg value is"
+fixture = "tests/fixtures/search_closed.json"
+action = "is_kind_station"
+args = ["  station  ", "system"]
+expect = "Success"

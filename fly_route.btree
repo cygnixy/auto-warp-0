@@ -1,8 +1,17 @@
 /* Strategic command: fly the route that is already set.
  *
- * Succeeds when the ship is docked and no route remains — that is what "the
- * route has been flown" looks like from the outside. Everything else is
- * Running: the tree keeps ticking and the ship keeps moving.
+ * Succeeds when no route remains and, for a station-kind leg only, the ship
+ * is docked — that is what "the route has been flown" looks like from the
+ * outside, and the two kinds of destination do not look alike at the end. A
+ * route to a station ends inside it: the last marker offers Dock, and an
+ * empty route with the ship still adrift is a leg not yet finished. A route
+ * to a system ends in open space with nothing further to press: the route
+ * empties itself on arrival and there is no station to wait for. Requiring
+ * a dock regardless of kind — the ship's is_kind_station read below decides
+ * which applies — left a system-kind leg, the default this bot ships with,
+ * circling an empty route forever after a live mission on 2026-08-09 flew
+ * exactly that route and arrived. Everything else is Running: the tree
+ * keeps ticking and the ship keeps moving.
  *
  * Idempotent by construction: with no route set the exit condition holds on
  * the first tick and the command is done without touching anything. */
@@ -20,7 +29,10 @@
         }
         /* exit condition */
         -> {
-            in_station?()
+            ? {
+                @! is_kind_station?(destination_kind, return_kind)
+                in_station?()
+            }
             @! is_route_set?()
         }
     }

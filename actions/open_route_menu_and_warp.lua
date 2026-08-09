@@ -115,6 +115,31 @@ function M.main(args)
         if state.settled(phase) then
             log.repeated("no_markers", "debug", "flight",
                 "the route panel shows no marker to order from")
+
+            -- No marker and settled panels are not by themselves "the route
+            -- is over": drifting_no_markers.json is exactly this shape with
+            -- a real place still named in next_system, and staying Running
+            -- for it is the whole point of that fixture. next_system is what
+            -- tells the two apart -- it names nowhere once the route is
+            -- actually spent, not merely slow to redraw a marker.
+            --
+            -- Live run, 2026-08-09: a system-kind mission arrived with
+            -- next_system already null and circled here forever -- 243 lines
+            -- and a warning nobody could silence by hand, because this
+            -- branch answered Running whatever the route said. Failure hands
+            -- the tick to whatever fly_route's own exit condition decides an
+            -- empty, settled route this bare actually means: done, for a
+            -- system-kind leg with nowhere further to go, or merely nothing
+            -- to order this tick, for a station-kind leg still short of a
+            -- dock -- in which case the debug line above keeps escalating
+            -- exactly as it always did.
+            --
+            -- Checked by type, not by nil: the host turns a JSON null into an
+            -- empty table on the way into Lua, not into nil, and
+            -- route.next_system == nil would never once be true for it.
+            if type(route.next_system) ~= "string" then
+                return "Failure"
+            end
         end
         return "Running"
     end
