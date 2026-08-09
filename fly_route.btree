@@ -1,20 +1,50 @@
 /* Strategic command: fly the route that is already set.
  *
- * Succeeds when no route remains and, for a station-kind leg only, the ship
- * is docked — that is what "the route has been flown" looks like from the
- * outside, and the two kinds of destination do not look alike at the end. A
- * route to a station ends inside it: the last marker offers Dock, and an
- * empty route with the ship still adrift is a leg not yet finished. A route
- * to a system ends in open space with nothing further to press: the route
- * empties itself on arrival and there is no station to wait for. Requiring
- * a dock regardless of kind — the ship's is_kind_station read below decides
- * which applies — left a system-kind leg, the default this bot ships with,
- * circling an empty route forever after a live mission on 2026-08-09 flew
- * exactly that route and arrived. Everything else is Running: the tree
- * keeps ticking and the ship keeps moving.
+ * Succeeds when no route remains and, for a leg that ordered a dock, the
+ * ship is actually docked — that is what "the route has been flown" looks
+ * like from the outside, and a route to a station does not end the same
+ * way a route to a system does. A route to a station ends inside it: the
+ * last marker offers Dock, and an empty route with the ship still adrift
+ * is a leg not yet finished. A route to a system ends in open space with
+ * nothing further to press: the route empties itself on arrival and there
+ * is no station to wait for.
+ *
+ * Which of the two applies is read off _state — what was actually ordered,
+ * written by warp_choice.after_chosen the moment open_route_menu_and_warp
+ * chooses Dock from the route marker's own menu — not off destination_kind
+ * or return_kind. Those are the operator's own text fields, and the first
+ * live mission this fix was built for set no route itself at all: another
+ * bot (agent-missions) laid the route, this one only flew it, and
+ * destination_kind sat at its default ("system") whether or not the route
+ * it never wrote actually ended at a station. Gating on that default would
+ * have declared the mission over the instant the route ran out, in open
+ * space, Dock never even ordered — the same silent wrong answer the exit
+ * condition used to give the other way round, just for the opposite kind
+ * of leg. _state answers the only question that matters and cannot be
+ * stale about it: was a dock actually asked for on the way here.
+ *
+ * Requiring a dock regardless of what was actually ordered left a
+ * system-kind leg — the default this bot ships with — circling an empty
+ * route forever after a live mission on 2026-08-09 flew exactly that route
+ * and arrived. Everything else is Running: the tree keeps ticking and the
+ * ship keeps moving.
  *
  * Idempotent by construction: with no route set the exit condition holds on
- * the first tick and the command is done without touching anything. */
+ * the first tick and the command is done without touching anything.
+ *
+ * The exit condition below is not reached every tick the way its comment
+ * might suggest. It sits as the second child of a plain (memoryless)
+ * Sequence, and neurofolia's Sequence stops at the first child that is not
+ * Success (sequence.rs) — so on any tick where the body above answers
+ * Running (open_route_menu_and_warp does, for as long as there is
+ * something to try ordering), this condition is never ticked at all,
+ * whatever it would have said. It is reached only on the tick the body's
+ * own Fallback fails outright — nothing left anywhere for it to attempt —
+ * and @fail_is_success turns that Failure into the Success that lets this
+ * Sequence continue (fallback.rs). Confirmed against those two files and
+ * against tree.rs, which ticks the root exactly once per iteration: this
+ * is not a guess about the DSL's intent, it is what the engine actually
+ * does. */
 
 -> fly_route {
     @repeat_until_success -> {
@@ -30,7 +60,7 @@
         /* exit condition */
         -> {
             ? {
-                @! is_kind_station?(destination_kind, return_kind)
+                @! is_state?("dock")
                 in_station?()
             }
             @! is_route_set?()

@@ -123,16 +123,18 @@ function M.main(args)
             -- tells the two apart -- it names nowhere once the route is
             -- actually spent, not merely slow to redraw a marker.
             --
-            -- Live run, 2026-08-09: a system-kind mission arrived with
-            -- next_system already null and circled here forever -- 243 lines
-            -- and a warning nobody could silence by hand, because this
-            -- branch answered Running whatever the route said. Failure hands
-            -- the tick to whatever fly_route's own exit condition decides an
-            -- empty, settled route this bare actually means: done, for a
-            -- system-kind leg with nowhere further to go, or merely nothing
-            -- to order this tick, for a station-kind leg still short of a
-            -- dock -- in which case the debug line above keeps escalating
-            -- exactly as it always did.
+            -- Live run, 2026-08-09: a mission arrived in Urlen with
+            -- next_system already null, and this branch answered Running
+            -- whatever the route said -- not warping anywhere, not pressing
+            -- anything, just repeating "the route panel shows no marker to
+            -- order from" once per tick until it read 243 times and the
+            -- escalating warning was the only sign anything was wrong.
+            -- Failure hands the tick to whatever fly_route's own exit
+            -- condition decides an empty, settled route bare like this
+            -- actually means: done, if no dock was ever ordered on the way
+            -- here, or merely nothing to order this tick, if one was and the
+            -- ship has not landed it yet -- in which case the debug line
+            -- above keeps escalating exactly as it always did.
             --
             -- Checked by type, not by nil: the host turns a JSON null into an
             -- empty table on the way into Lua, not into nil, and
@@ -153,7 +155,14 @@ function M.main(args)
         return "Running"
     end
 
-    warp_choice.after_chosen(entry)
+    -- Dock recorded by name, not assumed: fly_route's own exit condition
+    -- reads _state to know whether this leg ever asked to dock at all, and
+    -- it can only know that if the one order that means it is named here,
+    -- the same way open_dock_bookmarks_menu_and_warp already names it for
+    -- the bookmark path. Anything else offered by this menu -- a jump, a
+    -- plain warp -- is not a claim about docking, and after_chosen's own
+    -- default ("warp") already covers it without help from here.
+    warp_choice.after_chosen(entry, entry.text == "Dock" and "dock" or nil)
     return "Success"
 end
 

@@ -664,6 +664,27 @@ fixture = "tests/fixtures/drifting_route_flown.json"
 action = "open_route_menu_and_warp"
 expect = "Failure"
 
+# The missing case a Critical review finding pointed at: arrived in a
+# station's system (0 more jumps, next_system already null) with the
+# station's own marker still standing and not yet docked. jumps and
+# next_system going quiet do not mean the route is spent when a dock is
+# still owed -- the marker is what says so, and this fixture keeps one.
+# Dock is recorded by name so fly_route's own exit condition (_state ==
+# "dock") knows a dock was actually asked for here, not assumed from a
+# destination_kind the operator may never have set: the mission this task
+# started from set no route of its own at all, another bot laid it, and a
+# kind read off a text field nobody filled in is not a fact about where
+# this route actually leads.
+[[case]]
+name = "a station's own marker still standing after the last jump is dock, and dock is recorded as what it is"
+fixture = "tests/fixtures/route_menu_open_dock.json"
+action = "open_route_menu_and_warp"
+expect = "Success"
+log_contains = [
+    "info: flight: ordered Dock from the menu",
+    "bb_set _state = String(\"dock\")",
+]
+
 [[case]]
 name = "arriving at the gate does not end the order that is taking the ship through it"
 fixtures = [
@@ -1288,36 +1309,3 @@ args    = ["Ansila V - Caldari Funds Unlimited Depository", ""]
 expect  = "Failure"
 log_contains = ["no results"]
 
-# is_kind_station: fly_route's exit condition asks this before requiring a
-# dock. It touches nothing in cygnixy.eve, only leg.pick against the
-# blackboard's _leg mark, so any fixture will do -- the same convention
-# already used for legs_done and set_route_has_destination.
-
-[[case]]
-name = "a system-kind leg does not need a dock"
-fixture = "tests/fixtures/search_closed.json"
-action = "is_kind_station"
-args = ["system", "station"]
-expect = "Failure"
-
-[[case]]
-name = "a station-kind leg does need a dock"
-fixture = "tests/fixtures/search_closed.json"
-action = "is_kind_station"
-args = ["station", "system"]
-expect = "Success"
-
-[[case]]
-name = "on the return leg, the return kind is asked, not the outward one"
-fixture = "tests/fixtures/search_closed.json"
-action = "is_kind_station"
-args = ["system", "station"]
-setup_bb = { _leg = "home" }
-expect = "Success"
-
-[[case]]
-name = "a kind is trimmed the same way every other leg value is"
-fixture = "tests/fixtures/search_closed.json"
-action = "is_kind_station"
-args = ["  station  ", "system"]
-expect = "Success"

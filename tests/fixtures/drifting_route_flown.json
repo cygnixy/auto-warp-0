@@ -9,7 +9,7 @@
  },
  "session_time_indicator": {
   "display": false,
-  "hint": ""
+  "hint": "Session changing - Time left: Less than one second"
  },
  "hero_notification": {
   "texts": []
