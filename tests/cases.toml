@@ -1670,3 +1670,39 @@ log_contains = [
     "warn: flight: the ship's health does not read",
 ]
 log_absent = ["still trying"]
+
+# --- a flight that is going well leaves no warnings ---------------------------
+#
+# The same rule as mission-combat's own section, and the same measurement behind
+# it: std.log.repeated escalates to WARN on the third, ninth and twenty-seventh
+# repeat whatever level it is handed, so a state that repeats because it is
+# supposed to becomes a warning about nothing. Which function a line uses is
+# decided by whether the bot has an UNPASSED FRONTIER — a gesture of its own that
+# has not been answered, or a budget whose running out changes what it does — and
+# never by how often the line repeats.
+#
+# What is NOT quieted here, and deliberately: every "waiting for the foreground"
+# line. The operator working in another window is a real impediment that only the
+# operator can clear, the bot really is retrying a gesture into it, and the count
+# is how the operator sees how long they have been away.
+
+# The survey waits for warp, and a flight spends whole minutes not in warp. There
+# is nothing to try harder at: the ship is going to warp or it is not.
+[[case]]
+name     = "a ship not yet in warp is not a bot that is stuck"
+action   = "survey_ship"
+fixtures = [
+    "tests/fixtures/drifting_after_undock.json",
+    "tests/fixtures/drifting_after_undock.json",
+    "tests/fixtures/drifting_after_undock.json",
+    "tests/fixtures/drifting_after_undock.json",
+    "tests/fixtures/drifting_after_undock.json",
+    "tests/fixtures/drifting_after_undock.json",
+]
+args     = [true]
+expect   = "Success"
+log_contains = ["info: ship: the ship is not in warp (adrift): the survey waits until it is"]
+log_absent = ["still trying"]
+[[case.log_counts]]
+needle = "info: ship: the ship is not in warp (adrift): the survey waits until it is"
+times  = 1

@@ -138,7 +138,7 @@ function M.main(args)
     -- three ticks of it is a passage, eighty is a fault, and the count says
     -- which without anyone having to choose a number of seconds.
     if phase == state.UNKNOWN then
-        log.repeated("phase_unknown", "debug", "flight",
+        log.steady("phase_unknown", "debug", "flight",
             "the client is saying nothing about where the ship is")
     else
         log.forget("phase_unknown")

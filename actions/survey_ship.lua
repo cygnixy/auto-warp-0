@@ -41,7 +41,7 @@ function M.main(args)
 
     local phase = state.phase()
     if phase ~= state.WARPING then
-        log.repeated("survey_not_in_warp", "info", "ship",
+        log.steady("survey_not_in_warp", "info", "ship",
             "the ship is not in warp (" .. phase .. "): the survey waits until it is")
         return "Success"
     end
