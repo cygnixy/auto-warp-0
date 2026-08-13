@@ -1777,3 +1777,51 @@ args    = ["", "Jita IV - Moon 4"]
 setup_bb = { _leg = "home" }
 expect  = "Success"
 log_absent = ["error:", "warn:", "no destination and no route yet"]
+
+# --- and one flight with nothing to fly that is perfectly healthy -----------
+#
+# The run of 14:14 on 13 August: an agent gave a mission in the system he
+# himself lives in. No route was laid because there is nowhere to go, and the
+# watchdog above would have ended a good mission a minute into it. The client
+# says which of the two states this is, on the mission entry's own button —
+# "Warp to Location", the very word cygnixy/mission-combat presses in the step
+# after this one.
+
+[[case]]
+name    = "a mission in this system wants a warp, not a route, and that is not a fault"
+action  = "somewhere_to_fly"
+fixture = "tests/fixtures/mission_in_this_system.json"
+args    = ["", ""]
+expect  = "Success"
+log_contains = ["info: flight: no route, and none wanted: the mission is in this system"]
+log_absent = ["error:", "warn:", "no destination and no route yet"]
+
+# The one that matters: the minute passes and nothing barks. A watchdog that
+# cannot tell a healthy state from a broken one is worse than none.
+[[case]]
+name     = "the minute passes over a mission in this system and nothing is called a fault"
+action   = "somewhere_to_fly"
+fixtures = [
+    "tests/fixtures/mission_in_this_system.json",
+    "tests/fixtures/mission_in_this_system.json",
+]
+tick_ms  = 70000
+args     = ["", ""]
+expect   = "Success"
+log_absent = ["error:", "warn:"]
+
+# The same frame with the button offering a route instead of a warp: nothing
+# explains the emptiness, so the watchdog is back and it ends the run with a
+# reason. This is what keeps the branch above from swallowing every empty
+# flight there is.
+[[case]]
+name     = "a mission entry that is not offering a warp explains nothing, and the bound holds"
+action   = "somewhere_to_fly"
+fixtures = [
+    "tests/fixtures/mission_elsewhere_no_route.json",
+    "tests/fixtures/mission_elsewhere_no_route.json",
+]
+tick_ms  = 70000
+args     = ["", ""]
+expect   = "Failure"
+log_contains = ["error: flight: this flight was given no destination and there is no route to follow"]

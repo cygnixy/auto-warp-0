@@ -45,6 +45,38 @@ local WAIT = "somewhere_to_fly"
 -- collapsed route panel draws no markers while its header still counts the
 -- jumps, and an expanded one has been seen carrying markers with no jump count
 -- at all. Either one is a route.
+--
+-- AND ONE STATE WITH NOTHING TO FLY IS PERFECTLY HEALTHY, which is what the run
+-- of 14:14 on 13 August taught: an agent gives a mission in the system he
+-- himself lives in, and there is no route because there is nowhere to go. A
+-- watchdog barking at that would end a good mission a minute in. It is told
+-- apart by the client's own word — the mission entry's button reads "Warp to
+-- Location", which is the client saying the ship is in the mission's system and
+-- a warp is what is wanted next. The same word, on the same button, that
+-- cygnixy/mission-combat presses in the step after this one.
+--
+-- Read off the mission entry rather than off the two systems, which is what the
+-- step that lays the route compares: this bot does not know the mission's system
+-- and has no business learning it. It knows what the panel says, and the panel
+-- says it outright.
+local WARP_OFFERED = "Warp to Location"
+
+-- The label on the mission entry's button, or nil if there is no mission, no
+-- button, or no label drawn. Spelled out in one function so the path lint can
+-- follow the chain.
+local function mission_button_label()
+    local panel = cygnixy.eve.info_panel_container
+    local missions = panel and panel.info_panel_agent_missions
+    local entries = missions and missions.entries
+    local entry = entries and entries[1]
+    local button = entry and entry.action_button
+    local label = button and button.label
+    if type(label) ~= "string" then
+        return nil
+    end
+    return label
+end
+
 function M.main(args)
     local destination = leg.pick(args and args[1], args and args[2])
     if type(destination) == "string" and destination ~= "" then
@@ -59,6 +91,17 @@ function M.main(args)
     if (type(jumps) == "number" and jumps > 0)
         or (type(markers) == "table" and #markers > 0) then
         patience.forget(WAIT)
+        return "Success"
+    end
+
+    -- Nothing to fly, and the client says why: the mission is in this system.
+    -- Done, at once and without a clock — there is nothing here for a budget to
+    -- run out of.
+    if mission_button_label() == WARP_OFFERED then
+        patience.forget(WAIT)
+        log.steady("somewhere_to_fly", "info", "flight",
+            "no route, and none wanted: the mission is in this system and its entry " ..
+            "offers a warp to the place")
         return "Success"
     end
 
