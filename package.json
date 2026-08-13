@@ -30,6 +30,8 @@
             "open_menu",
             "press_key",
             "sleep",
+            "store_get",
+            "store_set",
             "type_text",
             "update_eve",
             "version",

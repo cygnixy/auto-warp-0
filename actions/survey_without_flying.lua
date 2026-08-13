@@ -45,12 +45,16 @@ local M = {}
 -- yield, its own budget for a ship that keeps changing shape — and the longest
 -- of them is minutes, not a quarter of an hour. The walk cannot outlast the
 -- watch.
+-- args[2] is remember_module_names, the same variable survey_ship.lua reads and
+-- with the same meaning, handed straight through. A survey taken standing still
+-- is the one this ship will fight on, so it is worth remembering exactly as much
+-- as the one taken in warp.
 function M.main(args)
     if args[1] ~= true then
         return "Success"
     end
 
-    local outcome = survey.take()
+    local outcome = survey.take(args[2])
     if outcome == "Failure" then
         log.repeated("survey_standing", "warn", "ship",
             "the ship could not be surveyed standing still — the fight step will " ..

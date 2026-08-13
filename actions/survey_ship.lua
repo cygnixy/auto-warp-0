@@ -33,11 +33,18 @@ local M = {}
 -- Stepping aside is Success, never Failure. This action sits at the end of the
 -- flight's fallback, after the moves and the cloak, and the flight is worth
 -- more than the survey: whatever the survey cannot do, the ship keeps flying.
+-- args[2] is remember_module_names, declared in main.btree beside survey_ship
+-- and handed straight through: nothing about it is decided here. It is a second
+-- variable rather than a second meaning of the first because the two answer
+-- different questions -- whether this flight owes a survey at all, and whether
+-- what a survey learns outlives the run -- and a mission may want either
+-- without the other. See std/modules.lua for what it turns on.
 function M.main(args)
     local wanted = args and args[1]
     if wanted ~= true then
         return "Success"
     end
+    local remember = args and args[2]
 
     local phase = state.phase()
     if phase ~= state.WARPING then
@@ -46,7 +53,7 @@ function M.main(args)
         return "Success"
     end
 
-    return survey.take()
+    return survey.take(remember)
 end
 
 return M

@@ -2076,3 +2076,75 @@ fixture = "tests/fixtures/docked_with_route.json"
 args    = ["", ""]
 expect  = "Failure"
 log_absent = ["the ship is in a station"]
+
+# --- remember_module_names ---------------------------------------------------
+#
+# The second variable of the survey, added 2026-08-13: whether what a walk
+# learns outlives the run. The dictionary and every rule about it are
+# cygnixy/std's std.modules, measured there. What these cases hold is this bot's
+# only share of it -- that the variable reaches the walk from the tree, and that
+# off means off -- because a variable declared in main.btree and dropped on the
+# way to the action is a switch that does nothing, silently, and no case in the
+# library could tell.
+
+# On: the file already knows this fit, and the flight that would have cost ten
+# hovers costs none. This is the whole purpose of the variable, seen from the
+# bot that carries it.
+[[case]]
+name    = "with remembering on, a fit the file knows costs the flight no hovers"
+action  = "survey_ship"
+fixture = "tests/fixtures/ship_slots_warping.json"
+args    = [true, true]
+setup_store = { module_names = { "1877" = { name = "Rapid Light Missile Launcher II", activatable = true }, "6005" = { name = "10MN Monopropellant Enduring Afterburner", activatable = true }, "3841" = { name = "Large Shield Extender II", activatable = false }, "2281" = { name = "Multispectrum Shield Hardener II", activatable = true }, "22291" = { name = "Ballistic Control System II", activatable = false }, "35771" = { name = "Missile Guidance Enhancer II", activatable = false } } }
+expect  = "Running"
+log_contains = ["info: ship: 10 of 10 slots were taken from the module-name store: they are not hovered"]
+log_absent = ["hover("]
+
+# Off with the very same file in place: the walk hovers, and the file is not
+# even read. A mission that surveys and does not want the operator's machine
+# written to gets exactly that.
+[[case]]
+name    = "with remembering off the same file is not read and the walk hovers"
+action  = "survey_ship"
+fixture = "tests/fixtures/ship_slots_warping.json"
+args    = [true, false]
+setup_store = { module_names = { "1877" = { name = "Rapid Light Missile Launcher II", activatable = true }, "6005" = { name = "10MN Monopropellant Enduring Afterburner", activatable = true }, "3841" = { name = "Large Shield Extender II", activatable = false }, "2281" = { name = "Multispectrum Shield Hardener II", activatable = true }, "22291" = { name = "Ballistic Control System II", activatable = false }, "35771" = { name = "Missile Guidance Enhancer II", activatable = false } } }
+expect  = "Running"
+log_contains = ["hover(1065, 935)"]
+log_absent = ["taken from the module-name store", "store_set module_names"]
+
+# And a tree that hands nothing down is a tree written before the variable
+# existed: the old flight, unchanged.
+[[case]]
+name    = "a flight told nothing about remembering flies as it always did"
+action  = "survey_ship"
+fixture = "tests/fixtures/ship_slots_warping.json"
+args    = [true]
+setup_store = { module_names = { "1877" = { name = "Rapid Light Missile Launcher II", activatable = true } } }
+expect  = "Running"
+log_contains = ["hover(1065, 935)"]
+log_absent = ["taken from the module-name store", "store_set module_names"]
+
+# The survey taken standing still is the one this ship will fight on, so it is
+# worth remembering exactly as much as the one taken in warp -- and the variable
+# reaches this action too. The panel here is the same ship with the afterburner
+# in Alt-F3 instead of F3, so all ten types are the six the file knows.
+[[case]]
+name    = "the standing survey remembers too, and costs no hovers when the file knows"
+action  = "survey_without_flying"
+fixture = "tests/fixtures/mission_in_this_system.json"
+args    = [true, true]
+setup_store = { module_names = { "1877" = { name = "Rapid Light Missile Launcher II", activatable = true }, "6005" = { name = "10MN Monopropellant Enduring Afterburner", activatable = true }, "3841" = { name = "Large Shield Extender II", activatable = false }, "2281" = { name = "Multispectrum Shield Hardener II", activatable = true }, "22291" = { name = "Ballistic Control System II", activatable = false }, "35771" = { name = "Missile Guidance Enhancer II", activatable = false } } }
+expect  = "Running"
+log_contains = ["info: ship: 10 of 10 slots were taken from the module-name store: they are not hovered"]
+log_absent = ["hover("]
+
+[[case]]
+name    = "the standing survey told nothing about remembering hovers as before"
+action  = "survey_without_flying"
+fixture = "tests/fixtures/mission_in_this_system.json"
+args    = [true]
+setup_store = { module_names = { "1877" = { name = "Rapid Light Missile Launcher II", activatable = true } } }
+expect  = "Running"
+log_contains = ["hover("]
+log_absent = ["taken from the module-name store", "store_set module_names"]

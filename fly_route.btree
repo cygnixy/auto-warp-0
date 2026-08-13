@@ -98,7 +98,7 @@
     ? {
         move
         @if(stealth) stealth
-        survey_ship(survey_ship)
+        survey_ship(survey_ship, remember_module_names)
     }
 }
 /* One phase says all of it: in space, nothing announced, no manoeuvre under
