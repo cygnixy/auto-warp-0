@@ -116,6 +116,23 @@ include('fly_route.btree')
        tick nothing at all. */
     report_ship_health()
 
+    /* Whether there is anything to fly at all, and the only thing in this
+       sequence that can end the run over the mission's own input rather than
+       over the client's.
+
+       A flight given no destination flies whatever route it finds already laid.
+       Given no route either, the loop below tries to set one, cannot, fails,
+       and is run again by the repeat around it — for as long as anybody leaves
+       it, in silence. That is not a wait, it is a mission standing still with
+       nothing to say, and this bot has no other guard against it: every budget
+       it keeps is about the client answering a press, and here nothing was ever
+       pressed.
+
+       Like report_ship_health above, it never answers Running, so the warp of
+       this tick is ordered on this tick; unlike it, it does answer Failure, once
+       its minute is spent. See somewhere_to_fly.lua. */
+    somewhere_to_fly(destination, return_destination)
+
     /* The outer ->* is memory: once the whole mission — both legs, if there
        are two — is done, it stays done, and a mission restarted mid-flight
        does not repeat legs it already flew.

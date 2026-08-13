@@ -1706,3 +1706,74 @@ log_absent = ["still trying"]
 [[case.log_counts]]
 needle = "info: ship: the ship is not in warp (adrift): the survey waits until it is"
 times  = 1
+
+# --- something to fly ------------------------------------------------------
+#
+# The silent hole: no destination, no route, set_route fails, and
+# @repeat_until_success runs the whole thing again for as long as anybody
+# leaves it. It reaches a mission most easily through a route with no jumps in
+# it — cygnixy/agent-missions lays the route home with the mission's own
+# button, and a mission taken in the agent's own system has no jumps to lay.
+
+[[case]]
+name    = "a flight with a destination has somewhere to go, route or no route"
+action  = "somewhere_to_fly"
+fixture = "tests/fixtures/drifting_route_flown.json"
+args    = ["Jita", ""]
+expect  = "Success"
+log_absent = ["error:", "warn:", "no destination and no route yet"]
+
+[[case]]
+name    = "a flight with no destination follows the route it was left"
+action  = "somewhere_to_fly"
+fixture = "tests/fixtures/route_collapsed.json"
+args    = ["", ""]
+expect  = "Success"
+log_absent = ["error:", "warn:", "no destination and no route yet"]
+
+# A collapsed panel counts jumps and draws no markers; an expanded one has been
+# seen carrying markers with no count. Either one is a route, and this is the
+# second of the two shapes.
+[[case]]
+name    = "markers with no jump count are a route too"
+action  = "somewhere_to_fly"
+fixture = "tests/fixtures/route_already_set.json"
+args    = ["", ""]
+expect  = "Success"
+log_absent = ["error:", "warn:", "no destination and no route yet"]
+
+# Nothing to fly, and the tick is not spent on saying so: the flight below is
+# tried exactly as it would have been. The line is said once, not counted up.
+[[case]]
+name    = "nothing to fly is said once and costs the tick nothing"
+action  = "somewhere_to_fly"
+fixture = "tests/fixtures/drifting_route_flown.json"
+args    = ["", ""]
+expect  = "Success"
+log_contains = ["info: flight: no destination and no route yet"]
+log_absent = ["error:"]
+
+# The point of the whole action: the silence gets a bound and a sentence.
+[[case]]
+name     = "a flight that never acquires anything to fly ends with a reason"
+action   = "somewhere_to_fly"
+fixtures = [
+    "tests/fixtures/drifting_route_flown.json",
+    "tests/fixtures/drifting_route_flown.json",
+]
+tick_ms  = 70000
+args     = ["", ""]
+expect   = "Failure"
+log_contains = ["error: flight: this flight was given no destination and there is no route to follow, 60000ms on"]
+
+# The return leg has its own destination, and it is the one that counts once the
+# mission has turned around: leg.pick, the same gate every set_route action
+# passes its two names through.
+[[case]]
+name    = "on the way home it is the return destination that counts"
+action  = "somewhere_to_fly"
+fixture = "tests/fixtures/drifting_route_flown.json"
+args    = ["", "Jita IV - Moon 4"]
+setup_bb = { _leg = "home" }
+expect  = "Success"
+log_absent = ["error:", "warn:", "no destination and no route yet"]
