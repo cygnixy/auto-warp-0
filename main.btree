@@ -82,6 +82,24 @@ include('fly_route.btree')
 
     journal(destination, destination_kind, return_destination)
 
+    /* Whether the ship is getting anywhere at all, and the only guard in this
+       bot that is about the flight as a whole rather than about one gesture.
+
+       AS EARLY AS IT CAN BE, and that placement is the whole of its reach.
+       Twelve actions in this bot can answer Running with no clock of their own —
+       every step of the search that sets a route, the undock, the modal — and
+       any one of them holds this plain sequence for as long as the client
+       refuses to answer. A guard standing behind them would be starved by
+       exactly the branches it exists to catch. Standing here, ahead of
+       everything that can hold a tick, it sees every one of them.
+
+       Never Running, so it costs the tick nothing, and it presses nothing: a
+       message box blocking the client does not blank the panels it reads.
+       Failure, loudly and once, when nothing on the client has changed for a
+       quarter of an hour. See flight_progress.lua for what "nothing" means and
+       why it is that long. */
+    flight_progress()
+
     /* A modal blocks the whole client, so it goes first and the rest of the
        tick waits behind it. Only the acknowledging kind is pressed here -- OK
        and Close, never Yes. */
@@ -116,51 +134,60 @@ include('fly_route.btree')
        tick nothing at all. */
     report_ship_health()
 
-    /* Whether there is anything to fly at all, and the only thing in this
-       sequence that can end the run over the mission's own input rather than
-       over the client's.
+    /* EITHER THERE IS SOMETHING TO FLY, AND THE BLOCK BELOW FLIES IT, OR THERE
+       IS NOT, AND THE STEP IS DONE.
 
-       A flight given no destination flies whatever route it finds already laid.
-       Given no route either, the loop below tries to set one, cannot, fails,
-       and is run again by the repeat around it — for as long as anybody leaves
-       it, in silence. That is not a wait, it is a mission standing still with
-       nothing to say, and this bot has no other guard against it: every budget
-       it keeps is about the client answering a press, and here nothing was ever
-       pressed.
+       The condition comes first because the block below cannot answer it: a
+       flight with no destination and no route to follow makes set_route fail,
+       and @repeat_until_success runs it again, and again, for as long as anybody
+       leaves it — in complete silence. The run of 16:51 stood exactly there,
+       with everything upstream of it correct: the mission was known to be in
+       hand, the route was correctly not laid, and the reason was correctly named
+       in the log. Then nothing, for as long as the operator watched it.
 
-       Like report_ship_health above, it never answers Running, so the warp of
-       this tick is ordered on this tick; unlike it, it does answer Failure, once
-       its minute is spent. See somewhere_to_fly.lua. */
-    somewhere_to_fly(destination, return_destination)
+       A step that can neither move nor finish is not allowed to exist. So the
+       question is asked here, where a Success ends the run, rather than inside
+       the loop where an answer has nowhere to go.
 
-    /* The outer ->* is memory: once the whole mission — both legs, if there
-       are two — is done, it stays done, and a mission restarted mid-flight
-       does not repeat legs it already flew.
-       The inner repeat_until_success is the loop the turn lives in: each
-       pass sets the route for the current leg and flies it in a fresh
-       memory sequence, then asks legs_done whether another leg remains.
-       legs_done succeeding ends the mission (Success bubbles out of the
-       repeat and the outer ->* forgets nothing further needs doing). legs_done
-       failing — the turn — fails the sequence it sits in, which is exactly
-       what @repeat_until_success is watching for: it runs the sequence again,
-       and because ->* forgets its own progress on completion (not on
-       failure of what follows it), the inner ->* starts the route from
-       scratch. By then leg.lua's _leg already says "home", so set_route and
-       fly_route are asked for the return place.
+       A PLAIN fallback and not a memory one: the question has to be asked again
+       on every tick, because the minute it allows for a route to appear is spent
+       tick by tick. What keeps it from cutting a flight short on arrival —
+       where the route has emptied itself and the mission entry has begun
+       offering a warp — is the condition's own third branch: once anything has
+       been ordered, it answers "there is something to fly" and the block below
+       owns its ending. See somewhere_to_fly.lua. */
+    ? {
+        somewhere_to_fly?(destination, return_destination)
 
-       Timeline of the turn: on the tick the outward leg's ->* completes with
-       Success, legs_done runs in the same tick, flips _leg to "home", and
-       returns Failure — the sequence around it fails, the repeat stays
-       Running. On the next tick the inner ->* re-enters from its first step,
-       and by then _leg already reads "home", so every set_route action asks
-       for the return destination instead of the outward one. */
-    ->* {
-        @repeat_until_success -> {
-            ->* {
-                set_route
-                fly_route
+        /* The outer ->* is memory: once the whole mission — both legs, if there
+           are two — is done, it stays done, and a mission restarted mid-flight
+           does not repeat legs it already flew.
+           The inner repeat_until_success is the loop the turn lives in: each
+           pass sets the route for the current leg and flies it in a fresh
+           memory sequence, then asks legs_done whether another leg remains.
+           legs_done succeeding ends the mission (Success bubbles out of the
+           repeat and the outer ->* forgets nothing further needs doing). legs_done
+           failing — the turn — fails the sequence it sits in, which is exactly
+           what @repeat_until_success is watching for: it runs the sequence again,
+           and because ->* forgets its own progress on completion (not on
+           failure of what follows it), the inner ->* starts the route from
+           scratch. By then leg.lua's _leg already says "home", so set_route and
+           fly_route are asked for the return place.
+
+           Timeline of the turn: on the tick the outward leg's ->* completes with
+           Success, legs_done runs in the same tick, flips _leg to "home", and
+           returns Failure — the sequence around it fails, the repeat stays
+           Running. On the next tick the inner ->* re-enters from its first step,
+           and by then _leg already reads "home", so every set_route action asks
+           for the return destination instead of the outward one. */
+        ->* {
+            @repeat_until_success -> {
+                ->* {
+                    set_route
+                    fly_route
+                }
+                legs_done?(return_destination)
             }
-            legs_done?(return_destination)
         }
     }
 }
