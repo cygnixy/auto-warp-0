@@ -1,4 +1,5 @@
 local leg = require("leg")
+local state = require("std.state")
 
 local M = {}
 
@@ -42,6 +43,18 @@ M.ORDERED = "ordered"
 -- rather than a route, which is the client saying there is nowhere to route to.
 -- The same word cygnixy/mission-combat presses in the step after this one.
 M.WARP = "warp"
+-- The ship is in a station, with no route to fly out on and no place named to
+-- fly to. A bot whose whole job is to lay a route and fly it has nothing to do
+-- with a ship in a hangar and nothing to fly it along: that is not an emptiness
+-- needing an explanation, it is a ship that has arrived.
+--
+-- It is the state the return leg of a mission in the agent's own system leaves
+-- behind: cygnixy/agent-missions presses the Dock the mission itself offers, the
+-- ship goes inside, and the flight step after it has nothing left to do. Without
+-- this reading that step would spend a minute deciding the emptiness was
+-- nobody's fault and then fail the run over it.
+M.DOCKED = "docked"
+
 -- Nothing to fly, and nothing on the screen explains it.
 M.NOTHING = "nothing"
 
@@ -74,6 +87,13 @@ function M.reading(out_destination, home_destination)
     local label = button and button.label
     if label == WARP_OFFERED then
         return M.WARP
+    end
+
+    -- Asked last of all, and after the mission entry: a ship in a station with a
+    -- route still to fly is a ship about to undock, and the route above has
+    -- already answered for it.
+    if state.phase() == state.DOCKED then
+        return M.DOCKED
     end
 
     return M.NOTHING

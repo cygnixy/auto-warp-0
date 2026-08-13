@@ -2032,3 +2032,47 @@ foreground = false
 args      = [true]
 expect    = "Success"
 log_contains = ["warn: ship: the ship could not be surveyed standing still"]
+
+# --- a ship that has arrived -----------------------------------------------
+#
+# The other end of the same run. In the agent's own system the return step
+# presses the Dock the mission itself offers, and the ship goes inside — so the
+# flight step after it opens on a ship in a station with no route to fly out on
+# and nowhere named to go. That is not an emptiness anybody has to explain: it
+# is a ship that has arrived, and the step is done.
+#
+# Without this reading the step would spend its minute deciding the emptiness
+# was nobody's fault and then fail the run over it.
+
+[[case]]
+name    = "a ship in a station with nothing to fly has arrived, and the step is done"
+action  = "flight_is_over"
+fixture = "tests/fixtures/docked_nothing_to_fly.json"
+args    = ["", ""]
+expect  = "Success"
+log_contains = ["info: flight: the ship is in a station with nothing to fly to and no route to fly"]
+
+# And it is never called a fault, however long it stands: the minute belongs to
+# the emptiness nobody explains, and this one is explained.
+[[case]]
+name     = "a ship that has arrived is not failed for having no route"
+action   = "somewhere_to_fly"
+fixtures = [
+    "tests/fixtures/docked_nothing_to_fly.json",
+    "tests/fixtures/docked_nothing_to_fly.json",
+    "tests/fixtures/docked_nothing_to_fly.json",
+]
+tick_ms  = 70000
+args     = ["", ""]
+expect   = "Success"
+log_absent = ["error:", "warn:", "no destination and no route yet"]
+
+# A ship in a station with a route still to fly is a ship about to undock, and
+# the route answers for it before this reading is ever reached.
+[[case]]
+name    = "a docked ship with a route to fly has not arrived anywhere"
+action  = "flight_is_over"
+fixture = "tests/fixtures/docked_with_route.json"
+args    = ["", ""]
+expect  = "Failure"
+log_absent = ["the ship is in a station"]
