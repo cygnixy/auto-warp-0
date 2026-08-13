@@ -1707,105 +1707,45 @@ log_absent = ["still trying"]
 needle = "info: ship: the ship is not in warp (adrift): the survey waits until it is"
 times  = 1
 
-# --- something to fly, or the end of the step ------------------------------
+# --- something to fly, and the two ways there is not ------------------------
 #
-# THE CONDITION THE TREE ENDS ON. Failure means "there is something to fly" and
-# the flight block below runs; Success means this flight is over and the step is
-# done. It was a watchdog once — Success while it waited, Failure when it gave
-# up — and the run of 16:51 spent itself proving why that shape cannot work
-# here: it said "nothing to fly", let the tick through, and the block below then
-# failed to set a route it could not set and was run again by the repeat around
-# it, in silence, for as long as the operator watched. Everything upstream was
-# right. The step simply never ended.
-
-[[case]]
-name    = "a flight with a destination has somewhere to go, route or no route"
-action  = "somewhere_to_fly"
-fixture = "tests/fixtures/drifting_route_flown.json"
-args    = ["Jita", ""]
-expect  = "Failure"
-log_absent = ["error:", "warn:", "no destination and no route yet"]
-
-[[case]]
-name    = "a flight with no destination follows the route it was left"
-action  = "somewhere_to_fly"
-fixture = "tests/fixtures/route_collapsed.json"
-args    = ["", ""]
-expect  = "Failure"
-log_absent = ["error:", "warn:", "no destination and no route yet"]
-
-# A collapsed panel counts jumps and draws no markers; an expanded one has been
-# seen carrying markers with no count. Either one is a route, and this is the
-# second of the two shapes.
-[[case]]
-name    = "markers with no jump count are a route too"
-action  = "somewhere_to_fly"
-fixture = "tests/fixtures/route_already_set.json"
-args    = ["", ""]
-expect  = "Failure"
-log_absent = ["error:", "warn:", "no destination and no route yet"]
-
-# Nothing to fly and nothing to explain it: the flight below is tried exactly as
-# it would have been, and the line is said once rather than counted up.
-[[case]]
-name    = "an unexplained empty flight is still tried, and said once"
-action  = "somewhere_to_fly"
-fixture = "tests/fixtures/drifting_route_flown.json"
-args    = ["", ""]
-expect  = "Failure"
-log_contains = ["info: flight: no destination and no route yet"]
-log_absent = ["error:"]
-
-# And the minute has an end: the step finishes with the reason in the log rather
-# than standing there. Success and not Failure because the cause is upstream —
-# whoever was to lay the route did not — and the steps after this one report on
-# their own; what may not happen is this one going on for ever without a word.
-[[case]]
-name     = "a flight that never acquires anything to fly ends with a reason"
-action   = "somewhere_to_fly"
-fixtures = [
-    "tests/fixtures/drifting_route_flown.json",
-    "tests/fixtures/drifting_route_flown.json",
-]
-tick_ms  = 70000
-args     = ["", ""]
-expect   = "Success"
-log_contains = ["error: flight: this flight was given no destination and there is no route to follow, 60000ms on"]
-
-# The return leg has its own destination, and it is the one that counts once the
-# mission has turned around: leg.pick, the same gate every set_route action
-# passes its two names through.
-[[case]]
-name    = "on the way home it is the return destination that counts"
-action  = "somewhere_to_fly"
-fixture = "tests/fixtures/drifting_route_flown.json"
-args    = ["", "Jita IV - Moon 4"]
-setup_bb = { _leg = "home" }
-expect  = "Failure"
-log_absent = ["error:", "warn:", "no destination and no route yet"]
-
-# --- and one flight with nothing to fly that is perfectly healthy -----------
+# TWO OUTCOMES THAT MUST NOT SHARE A NODE, and the day of 13 August was spent
+# learning both halves of it.
 #
-# The run of 14:14: an agent gave a mission in the system he himself lives in.
-# No route was laid because there is nowhere to go, and the client says so on
-# the mission entry's own button — "Warp to Location", the very word
-# cygnixy/mission-combat presses in the step after this one. THE STEP IS DONE
-# HERE: this is where the run of 16:51 should have ended and did not.
+# The run of 16:51 taught the first: an answer with nowhere to go is not an
+# answer. "Nothing to fly" was said as a line in the log, the tick went on to
+# the flight below, set_route could not set a route that cannot exist, and
+# @repeat_until_success ran it again — in silence, for as long as the operator
+# watched. Everything upstream had been right.
+#
+# The second is the rule the whole day defended: an emptiness the client
+# explains is an answer, an emptiness nothing explains is a fault.
+#
+#   flight_is_over?    Success only when the mission entry offers a warp — the
+#                      mission's place is in this system, the ship is where it
+#                      was to be taken, and the tree ends on it
+#   somewhere_to_fly   Failure when a minute of unexplained emptiness is spent —
+#                      the run ends loudly, because Success would claim the ship
+#                      had been delivered and send the fight step warping at a
+#                      place that may not exist
+#
+# Both read flight.lua, which does the looking; neither guesses.
+
+# --- flight_is_over: the one picture that ends the step ---------------------
 
 [[case]]
 name    = "a mission in this system ends the flight before it began"
-action  = "somewhere_to_fly"
+action  = "flight_is_over"
 fixture = "tests/fixtures/mission_in_this_system.json"
 args    = ["", ""]
 expect  = "Success"
 log_contains = ["info: flight: no route, and none wanted: the mission is in this system"]
-log_absent = ["error:", "warn:", "no destination and no route yet"]
 
-# On the first tick, with no clock spent at all: a minute of standing before
-# ending would be a minute of the mission gone for nothing.
+# On the first tick, with no clock anywhere: a minute of standing before ending
+# would be a minute of the mission gone for nothing.
 [[case]]
 name     = "the mission in this system ends the step at once, not a minute later"
-action   = "somewhere_to_fly"
+action   = "flight_is_over"
 fixtures = [
     "tests/fixtures/mission_in_this_system.json",
     "tests/fixtures/mission_in_this_system.json",
@@ -1823,15 +1763,127 @@ log_absent = ["error:", "warn:"]
 # the flight below owns its own ending.
 [[case]]
 name    = "a flight that has already ordered something is not ended by this condition"
-action  = "somewhere_to_fly"
+action  = "flight_is_over"
 fixture = "tests/fixtures/mission_in_this_system.json"
 args    = ["", ""]
 setup_bb = { _state = "dock" }
 expect  = "Failure"
-log_absent = ["error:", "warn:", "this flight is over"]
+log_absent = ["this flight is over"]
+
+[[case]]
+name    = "a flight with a destination is not over"
+action  = "flight_is_over"
+fixture = "tests/fixtures/mission_in_this_system.json"
+args    = ["Jita", ""]
+expect  = "Failure"
+
+[[case]]
+name    = "a flight with a route to follow is not over"
+action  = "flight_is_over"
+fixture = "tests/fixtures/route_collapsed.json"
+args    = ["", ""]
+expect  = "Failure"
+
+# THE OTHER EMPTINESS, and this action must not touch it: nothing explains it,
+# so nothing here may call the flight finished. It is somewhere_to_fly that ends
+# the run over this, and with a Failure.
+[[case]]
+name    = "an emptiness nothing explains is not a flight that is over"
+action  = "flight_is_over"
+fixture = "tests/fixtures/drifting_route_flown.json"
+args    = ["", ""]
+expect  = "Failure"
+log_absent = ["this flight is over"]
+
+# --- somewhere_to_fly: the emptiness nobody can account for -----------------
+
+[[case]]
+name    = "a flight with a destination has somewhere to go, route or no route"
+action  = "somewhere_to_fly"
+fixture = "tests/fixtures/drifting_route_flown.json"
+args    = ["Jita", ""]
+expect  = "Success"
+log_absent = ["error:", "warn:", "no destination and no route yet"]
+
+[[case]]
+name    = "a flight with no destination follows the route it was left"
+action  = "somewhere_to_fly"
+fixture = "tests/fixtures/route_collapsed.json"
+args    = ["", ""]
+expect  = "Success"
+log_absent = ["error:", "warn:", "no destination and no route yet"]
+
+# A collapsed panel counts jumps and draws no markers; an expanded one has been
+# seen carrying markers with no count. Either one is a route, and this is the
+# second of the two shapes.
+[[case]]
+name    = "markers with no jump count are a route too"
+action  = "somewhere_to_fly"
+fixture = "tests/fixtures/route_already_set.json"
+args    = ["", ""]
+expect  = "Success"
+log_absent = ["error:", "warn:", "no destination and no route yet"]
+
+# The return leg has its own destination, and it is the one that counts once the
+# mission has turned around: leg.pick, the same gate every set_route action
+# passes its two names through.
+[[case]]
+name    = "on the way home it is the return destination that counts"
+action  = "somewhere_to_fly"
+fixture = "tests/fixtures/drifting_route_flown.json"
+args    = ["", "Jita IV - Moon 4"]
+setup_bb = { _leg = "home" }
+expect  = "Success"
+log_absent = ["error:", "warn:", "no destination and no route yet"]
+
+# THE EXPLAINED EMPTINESS PASSES THROUGH HERE UNTOUCHED, minute or no minute:
+# the client has accounted for it, flight_is_over is about to end the step on
+# it, and this action must not fail the run out from under that. The mutation
+# that makes this action fail an explained emptiness too — the one that would
+# fix the unexplained case and break this one — reddens exactly here.
+[[case]]
+name     = "the mission in this system is never called a fault, however long it stands"
+action   = "somewhere_to_fly"
+fixtures = [
+    "tests/fixtures/mission_in_this_system.json",
+    "tests/fixtures/mission_in_this_system.json",
+    "tests/fixtures/mission_in_this_system.json",
+]
+tick_ms  = 70000
+args     = ["", ""]
+expect   = "Success"
+log_absent = ["error:", "warn:", "no destination and no route yet"]
+
+# Nothing to fly and nothing to explain it: while the minute runs, the flight
+# below is tried exactly as it would have been, and the line is said once rather
+# than counted up.
+[[case]]
+name    = "an unexplained empty flight is still tried, and said once"
+action  = "somewhere_to_fly"
+fixture = "tests/fixtures/drifting_route_flown.json"
+args    = ["", ""]
+expect  = "Success"
+log_contains = ["info: flight: no destination and no route yet"]
+log_absent = ["error:"]
+
+# AND THE MINUTE HAS AN END, and it is a Failure: Success would say the ship had
+# been taken where it was to be taken, and the fight step would warp at a place
+# that may not exist and report the trouble one step late for somebody else's
+# mistake.
+[[case]]
+name     = "an emptiness nobody explains fails the run when its minute is spent"
+action   = "somewhere_to_fly"
+fixtures = [
+    "tests/fixtures/drifting_route_flown.json",
+    "tests/fixtures/drifting_route_flown.json",
+]
+tick_ms  = 70000
+args     = ["", ""]
+expect   = "Failure"
+log_contains = ["error: flight: this flight was given no destination and there is no route to follow, 60000ms on"]
 
 # The same frame with the button offering a route instead of a warp: nothing
-# explains the emptiness, so the minute runs and the step ends on the loud line.
+# explains the emptiness there either, and the same bound holds.
 [[case]]
 name     = "a mission entry that is not offering a warp explains nothing, and the bound holds"
 action   = "somewhere_to_fly"
@@ -1841,8 +1893,23 @@ fixtures = [
 ]
 tick_ms  = 70000
 args     = ["", ""]
-expect   = "Success"
+expect   = "Failure"
 log_contains = ["error: flight: this flight was given no destination and there is no route to follow"]
+
+# Something already ordered is something to fly, and the flight below owns its
+# ending: no clock of this action's runs over it at all.
+[[case]]
+name     = "a flight that has ordered something is not failed for having no route"
+action   = "somewhere_to_fly"
+fixtures = [
+    "tests/fixtures/drifting_route_flown.json",
+    "tests/fixtures/drifting_route_flown.json",
+]
+tick_ms  = 70000
+args     = ["", ""]
+setup_bb = { _state = "dock" }
+expect   = "Success"
+log_absent = ["error:", "warn:", "no destination and no route yet"]
 
 # --- and the last line against a step that stands ---------------------------
 #

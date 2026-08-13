@@ -100,6 +100,24 @@ include('fly_route.btree')
        why it is that long. */
     flight_progress()
 
+    /* And whether anybody knows why there is nothing to fly, when there is
+       nothing to fly.
+
+       HERE, IN THE PLAIN SEQUENCE, BECAUSE ONLY HERE CAN IT END THE RUN. Its
+       Failure fails main; the same Failure inside the fallback below would only
+       send the tick on to the flight, which is the loop that cannot end. And
+       beside flight_progress for the same reason as flight_progress: a dozen
+       actions in this bot answer Running with no clock, and a budget standing
+       behind them would never be spent.
+
+       It fails ONLY the emptiness nothing explains. The emptiness the client
+       accounts for — the mission's place being in this very system — is
+       flight_is_over's business, one node down, and it is a Success there:
+       the ship is where it was to be taken. Success from here on an emptiness
+       nobody understands would say the same thing untruthfully, and the fight
+       step would warp at a place that may not exist. */
+    somewhere_to_fly(destination, return_destination)
+
     /* A modal blocks the whole client, so it goes first and the rest of the
        tick waits behind it. Only the acknowledging kind is pressed here -- OK
        and Close, never Yes. */
@@ -150,14 +168,14 @@ include('fly_route.btree')
        the loop where an answer has nowhere to go.
 
        A PLAIN fallback and not a memory one: the question has to be asked again
-       on every tick, because the minute it allows for a route to appear is spent
-       tick by tick. What keeps it from cutting a flight short on arrival —
+       on every tick, because the client's answer to it changes. What keeps it
+       from cutting a flight short on arrival —
        where the route has emptied itself and the mission entry has begun
        offering a warp — is the condition's own third branch: once anything has
        been ordered, it answers "there is something to fly" and the block below
        owns its ending. See somewhere_to_fly.lua. */
     ? {
-        somewhere_to_fly?(destination, return_destination)
+        flight_is_over?(destination, return_destination)
 
         /* The outer ->* is memory: once the whole mission — both legs, if there
            are two — is done, it stays done, and a mission restarted mid-flight
