@@ -1309,3 +1309,77 @@ args    = ["Ansila V - Caldari Funds Unlimited Depository", ""]
 expect  = "Failure"
 log_contains = ["no results"]
 
+
+# survey_ship: the ship's module panel is written down while the ship is in
+# warp, where the twenty seconds it costs are being spent on flying anyway.
+#
+# The walk itself is cygnixy/std's std.survey, and agent-missions calls the same
+# one from an action of the same name. What is decided here is when: this bot is
+# shared -- other missions fly with it, and a fight's business is none of theirs
+# -- so the survey is off unless the mission asks for it, and it does not begin
+# before the ship is actually flying.
+
+# Off is the default, and off means nothing happens: no hover, and not a word
+# in the log. Any neighbouring mission that upgrades this bot and changes
+# nothing must not be able to tell the difference.
+[[case]]
+name    = "with the survey off, a flight in warp hovers nothing and says nothing"
+action  = "survey_ship"
+fixture = "tests/fixtures/ship_slots_warping.json"
+args    = [false]
+expect  = "Success"
+log_absent = ["hover", "ship:"]
+
+# A variable that never arrives reads as off, and that is the opposite of
+# agent-missions' answer to the same nil: there the survey is the bot's own job
+# and nil means "nobody said, take it"; here it is a favour to a mission that
+# asked, and a mission that did not ask gets a flight, not ten hovers.
+[[case]]
+name    = "no variable at all leaves the flight exactly as it was"
+action  = "survey_ship"
+fixture = "tests/fixtures/ship_slots_warping.json"
+args    = []
+expect  = "Success"
+log_absent = ["hover", "ship:"]
+
+# Asked for, and the ship is in warp: the walk begins on the first slot. The
+# coordinate is the same F1 the walk's own cases in cygnixy/std hover, because
+# the fixture is that same live panel with one field changed.
+[[case]]
+name    = "with the survey on and the ship in warp, the walk begins"
+action  = "survey_ship"
+fixture = "tests/fixtures/ship_slots_warping.json"
+args    = [true]
+expect  = "Running"
+log_contains = ["hover(1065, 935)"]
+
+# Asked for, and the ship is not flying yet: NOT begun. This is the whole point
+# of the move -- a survey taken standing still is the twenty seconds the
+# operator asked to stop paying, and the module panel is drawn and readable long
+# before the warp starts, so "there are slots on screen" is not the question.
+# The phase is, and it is the same phase this bot's tree steers by.
+[[case]]
+name    = "with the survey on and the ship still adrift, nothing is hovered yet"
+action  = "survey_ship"
+fixture = "tests/fixtures/ship_slots_adrift.json"
+args    = [true]
+expect  = "Success"
+log_contains = [
+    "info: ship: the ship is not in warp (adrift): the survey waits until it is",
+]
+log_absent = ["hover"]
+
+# The same for a phase that is not a phase of flight at all: undocking. Two
+# cases rather than one because the line names the phase it read, and a check
+# that only ever sees "adrift" would pass just as well against a check written
+# as "not adrift".
+[[case]]
+name    = "a ship still leaving the station is not a ship in warp"
+action  = "survey_ship"
+fixture = "tests/fixtures/phase_undocking.json"
+args    = [true]
+expect  = "Success"
+log_contains = [
+    "info: ship: the ship is not in warp (undocking): the survey waits until it is",
+]
+log_absent = ["hover"]

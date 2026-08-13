@@ -36,6 +36,17 @@ stealth = false
 bookmark_jump = false
 push_button_yes = false
 
+/* survey_ship — write the ship's module panel down while flying.
+ *
+ * Off, and off is the honest default for a bot this shared: a mission with no
+ * fight ahead of it has no use for the survey, and the walk costs ten hovers.
+ * The mission that wants one asks for it (agent-mission-loop does, for its
+ * flight step), and the survey is then taken in warp, where the twenty seconds
+ * are being spent on flying anyway rather than added to the mission. It is
+ * written down under a keep_ key, so it outlives this step and reaches the
+ * fight ready-made. See survey in fly_route.btree. */
+survey_ship = false
+
 downtime_guard_seconds = 300
 
 include('set_route.btree')

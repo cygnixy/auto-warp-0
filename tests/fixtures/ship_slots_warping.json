@@ -1,0 +1,2116 @@
+{
+ "agent_conversation_windows": [],
+ "agents_panel": null,
+ "bookmark_location_window": null,
+ "character_sheet_window": null,
+ "chat_window_stacks": [
+  {
+   "chats_window": [
+    {
+     "name": "chatchannel_local",
+     "userlist": {
+      "scroll_controls": null,
+      "visible_users": [
+       {
+        "name": "Pilot A",
+        "standing_icon_hint": "Pilot has No Standing."
+       },
+       {
+        "name": "Pilot B",
+        "standing_icon_hint": "Pilot has No Standing."
+       },
+       {
+        "name": "Pilot C",
+        "standing_icon_hint": "Pilot has No Standing."
+       },
+       {
+        "name": "Pilot D",
+        "standing_icon_hint": "Pilot has No Standing."
+       },
+       {
+        "name": "Pilot E",
+        "standing_icon_hint": "Pilot has No Standing."
+       }
+      ]
+     }
+    },
+    {
+     "name": "chatchannel_corp",
+     "userlist": {
+      "scroll_controls": null,
+      "visible_users": [
+       {
+        "name": "Test Pilot",
+        "standing_icon_hint": null
+       }
+      ]
+     }
+    },
+    {
+     "name": "chatchannel_player_-85455299",
+     "userlist": {
+      "scroll_controls": null,
+      "visible_users": [
+       {
+        "name": "Pilot A",
+        "standing_icon_hint": "Pilot has No Standing."
+       },
+       {
+        "name": "Pilot B",
+        "standing_icon_hint": "Pilot has No Standing."
+       },
+       {
+        "name": "Pilot C",
+        "standing_icon_hint": "Pilot has No Standing."
+       },
+       {
+        "name": "Pilot D",
+        "standing_icon_hint": "Pilot has No Standing."
+       },
+       {
+        "name": "Pilot E",
+        "standing_icon_hint": "Pilot has No Standing."
+       }
+      ]
+     }
+    },
+    {
+     "name": "chatchannel_player_-6614024",
+     "userlist": {
+      "scroll_controls": {
+       "scroll_handle": {
+        "height": 200,
+        "width": 112,
+        "x": 387,
+        "y": 815
+       }
+      },
+      "visible_users": [
+       {
+        "name": "Test Pilot",
+        "standing_icon_hint": null
+       }
+      ]
+     }
+    }
+   ],
+   "visibility": {
+    "fraction": 1.0,
+    "largest_visible": {
+     "height": 307,
+     "width": 461,
+     "x": 48,
+     "y": 773
+    },
+    "occluded_by": [],
+    "region": {
+     "height": 307,
+     "width": 461,
+     "x": 48,
+     "y": 773
+    }
+   }
+  }
+ ],
+ "compression_window": null,
+ "context_menus": [],
+ "directional_scanner_window": {
+  "scan_results": [
+   {
+    "region": {
+     "height": 20,
+     "width": 518,
+     "x": 1352,
+     "y": 835
+    },
+    "texts": [
+     "Perimeter I - Moon 1 - POS 0",
+     "Amarr Control Tower Small",
+     "5 286 km"
+    ]
+   },
+   {
+    "region": {
+     "height": 20,
+     "width": 518,
+     "x": 1352,
+     "y": 855
+    },
+    "texts": [
+     "P6 M2 Blocker",
+     "Gallente Control Tower Small",
+     "-"
+    ]
+   },
+   {
+    "region": {
+     "height": 20,
+     "width": 518,
+     "x": 1352,
+     "y": 875
+    },
+    "texts": [
+     "P6 M1 Blocker",
+     "Gallente Control Tower Small",
+     "-"
+    ]
+   },
+   {
+    "region": {
+     "height": 20,
+     "width": 518,
+     "x": 1352,
+     "y": 895
+    },
+    "texts": [
+     "P7 M2 Blocker",
+     "Gallente Control Tower Small",
+     "-"
+    ]
+   },
+   {
+    "region": {
+     "height": 20,
+     "width": 518,
+     "x": 1352,
+     "y": 915
+    },
+    "texts": [
+     "P5 M1 Blocker",
+     "Gallente Control Tower Small",
+     "-"
+    ]
+   },
+   {
+    "region": {
+     "height": 20,
+     "width": 518,
+     "x": 1352,
+     "y": 935
+    },
+    "texts": [
+     "P8 M1 Blocker",
+     "Gallente Control Tower Small",
+     "-"
+    ]
+   },
+   {
+    "region": {
+     "height": 20,
+     "width": 518,
+     "x": 1352,
+     "y": 955
+    },
+    "texts": [
+     "P7 M1 Blocker",
+     "Gallente Control Tower Small",
+     "-"
+    ]
+   },
+   {
+    "region": {
+     "height": 20,
+     "width": 518,
+     "x": 1352,
+     "y": 975
+    },
+    "texts": [
+     "P1 M1 Blocker",
+     "Gallente Control Tower Small",
+     "-"
+    ]
+   },
+   {
+    "region": {
+     "height": 20,
+     "width": 518,
+     "x": 1352,
+     "y": 995
+    },
+    "texts": [
+     "Gallente Control Tower",
+     "Gallente Control Tower",
+     "-"
+    ]
+   }
+  ],
+  "scroll_node": {
+   "height": 337,
+   "width": 570,
+   "x": 1334,
+   "y": 743
+  },
+  "visibility": {
+   "fraction": 0.995,
+   "largest_visible": {
+    "height": 337,
+    "width": 538,
+    "x": 1334,
+    "y": 743
+   },
+   "occluded_by": [
+    {
+     "by": "BadgeMasterContainer",
+     "region": {
+      "height": 20,
+      "width": 24,
+      "x": 1880,
+      "y": 1038
+     },
+     "tp_name": "BadgeMasterContainer",
+     "z": 1
+    },
+    {
+     "by": "NotificationContainer",
+     "region": {
+      "height": 32,
+      "width": 32,
+      "x": 1872,
+      "y": 1032
+     },
+     "tp_name": "NotificationContainer",
+     "z": 2
+    }
+   ],
+   "region": {
+    "height": 337,
+    "width": 570,
+    "x": 1334,
+    "y": 743
+   }
+  }
+ },
+ "drones_window": null,
+ "fitting_window": null,
+ "fleet_window": null,
+ "heat_status_tooltip": null,
+ "hero_notification": {
+  "texts": [],
+  "visibility": {
+   "fraction": 1.0,
+   "largest_visible": {
+    "height": 1080,
+    "width": 1876,
+    "x": 44,
+    "y": 0
+   },
+   "occluded_by": [
+    {
+     "by": "ResourceLoadingIndicator",
+     "region": {
+      "height": 32,
+      "width": 32,
+      "x": 12,
+      "y": 1036
+     },
+     "tp_name": "ResourceLoadingIndicator",
+     "z": 0
+    }
+   ],
+   "region": {
+    "height": 1080,
+    "width": 1920,
+    "x": 0,
+    "y": 0
+   }
+  }
+ },
+ "info_panel_container": {
+  "icons": {
+   "agent_missions": null,
+   "all": [
+    {
+     "name": null,
+     "region": {
+      "height": 16,
+      "width": 16,
+      "x": 104,
+      "y": 50
+     },
+     "texture_path": "res:/UI/Texture/Classes/InfoPanels/search.png"
+    },
+    {
+     "name": null,
+     "region": {
+      "height": 16,
+      "width": 16,
+      "x": 124,
+      "y": 50
+     },
+     "texture_path": "res:/UI/Texture/Classes/InfoPanels/LocationInfo.png"
+    },
+    {
+     "name": null,
+     "region": {
+      "height": 16,
+      "width": 16,
+      "x": 144,
+      "y": 50
+     },
+     "texture_path": "res:/UI/Texture/Classes/InfoPanels/Route.png"
+    },
+    {
+     "name": "Opportunities board",
+     "region": {
+      "height": 16,
+      "width": 16,
+      "x": 164,
+      "y": 50
+     },
+     "texture_path": null
+    }
+   ],
+   "daily_challenge": null,
+   "location_info": {
+    "height": 16,
+    "width": 16,
+    "x": 124,
+    "y": 50
+   },
+   "route": {
+    "height": 16,
+    "width": 16,
+    "x": 144,
+    "y": 50
+   },
+   "search": {
+    "height": 16,
+    "width": 16,
+    "x": 104,
+    "y": 50
+   }
+  },
+  "info_panel_agent_missions": {
+   "entries": [
+    {
+     "action_button": {
+      "label": "Set Destination",
+      "region": {
+       "height": 24,
+       "width": 240,
+       "x": 112,
+       "y": 373
+      }
+     },
+     "name": "The Guristas Spies",
+     "objective_title": "Encounter (Deadspace)",
+     "task_text": "You need to travel to <a href=\"showinfo:5//30000139\">Urlen</a> <color=#ff3a9aeb>0.9</color>"
+    }
+   ]
+  },
+  "info_panel_location_info": {
+   "current_solar_system_id": 30000144,
+   "current_solar_system_name": "Perimeter",
+   "expanded_content": {
+    "current_station_name": null
+   },
+   "list_surroundings_button": {
+    "height": 28,
+    "width": 28,
+    "x": 76,
+    "y": 71
+   },
+   "security_status_percent": 0.9
+  },
+  "info_panel_route": {
+   "expand": {
+    "height": 28,
+    "width": 28,
+    "x": 48,
+    "y": 189
+   },
+   "jumps": 0,
+   "next_system": null,
+   "route_element_marker": null
+  },
+  "visibility": {
+   "fraction": 1.0,
+   "largest_visible": {
+    "height": 369,
+    "width": 312,
+    "x": 48,
+    "y": 50
+   },
+   "occluded_by": [],
+   "region": {
+    "height": 369,
+    "width": 312,
+    "x": 48,
+    "y": 50
+   }
+  }
+ },
+ "info_panel_search": {
+  "clear": {
+   "height": -8,
+   "width": 256,
+   "x": 104,
+   "y": 73
+  },
+  "display": false,
+  "field": {
+   "height": -8,
+   "width": 256,
+   "x": 104,
+   "y": 73
+  },
+  "text": "",
+  "visibility": {
+   "fraction": 1.0,
+   "largest_visible": {
+    "height": 28,
+    "width": 312,
+    "x": 48,
+    "y": 71
+   },
+   "occluded_by": [],
+   "region": {
+    "height": 28,
+    "width": 312,
+    "x": 48,
+    "y": 71
+   }
+  }
+ },
+ "inventory_windows": null,
+ "key_activation_window": null,
+ "layer_abovemain": {
+  "visibility": {
+   "fraction": 1.0,
+   "largest_visible": {
+    "height": 1080,
+    "width": 1876,
+    "x": 44,
+    "y": 0
+   },
+   "occluded_by": [
+    {
+     "by": "ResourceLoadingIndicator",
+     "region": {
+      "height": 32,
+      "width": 32,
+      "x": 12,
+      "y": 1036
+     },
+     "tp_name": "ResourceLoadingIndicator",
+     "z": 0
+    }
+   ],
+   "region": {
+    "height": 1080,
+    "width": 1920,
+    "x": 0,
+    "y": 0
+   }
+  }
+ },
+ "locations_window": null,
+ "market_orders_window": null,
+ "message_boxes": [],
+ "module_button_tooltip": null,
+ "neocom": {
+  "buttons": {
+   "AurumStoreBtnDataNode": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 980
+   },
+   "ProjectDiscovery": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 624
+   },
+   "agency": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 192
+   },
+   "airCareerProgram": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 144
+   },
+   "assets": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 384
+   },
+   "charSheetBtn": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 48
+   },
+   "chat": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 720
+   },
+   "clockCont": {
+    "height": 20,
+    "width": 48,
+    "x": 0,
+    "y": 1060
+   },
+   "eveMenuBtn": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 0
+   },
+   "fitting": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 528
+   },
+   "help": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 672
+   },
+   "inventory": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 336
+   },
+   "job_board": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 240
+   },
+   "mail": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 288
+   },
+   "map_beta": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 576
+   },
+   "market": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 480
+   },
+   "newRedeemableItemsNotification": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 932
+   },
+   "shipTree": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 768
+   },
+   "skillsBtn": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 96
+   },
+   "uicontrols.Window": {
+    "height": 765,
+    "width": 48,
+    "x": 0,
+    "y": 144
+   },
+   "wallet": {
+    "height": 48,
+    "width": 48,
+    "x": 0,
+    "y": 432
+   }
+  },
+  "clock": {
+   "parsed_text": "5:39",
+   "text": "<b>05:39</b>"
+  },
+  "icon_inventory": {
+   "height": 40,
+   "width": 40,
+   "x": 4,
+   "y": 340
+  },
+  "visibility": {
+   "fraction": 0.98,
+   "largest_visible": {
+    "height": 1036,
+    "width": 48,
+    "x": 0,
+    "y": 0
+   },
+   "occluded_by": [
+    {
+     "by": "ResourceLoadingIndicator",
+     "region": {
+      "height": 32,
+      "width": 32,
+      "x": 12,
+      "y": 1036
+     },
+     "tp_name": "ResourceLoadingIndicator",
+     "z": 0
+    }
+   ],
+   "region": {
+    "height": 1080,
+    "width": 48,
+    "x": 0,
+    "y": 0
+   }
+  }
+ },
+ "overview_windows": {
+  "entries": [],
+  "entries_headers": [
+   [
+    "Icon",
+    {
+     "height": 24,
+     "width": 22,
+     "x": 1267,
+     "y": 259
+    }
+   ],
+   [
+    "Distance",
+    {
+     "height": 16,
+     "width": 68,
+     "x": 1297,
+     "y": 263
+    }
+   ],
+   [
+    "Name",
+    {
+     "height": 16,
+     "width": 100,
+     "x": 1377,
+     "y": 263
+    }
+   ],
+   [
+    "Type",
+    {
+     "height": 16,
+     "width": 100,
+     "x": 1489,
+     "y": 263
+    }
+   ],
+   [
+    "Corporation",
+    {
+     "height": 16,
+     "width": 79,
+     "x": 1601,
+     "y": 263
+    }
+   ],
+   [
+    "Alliance",
+    {
+     "height": 16,
+     "width": 68,
+     "x": 1692,
+     "y": 263
+    }
+   ],
+   [
+    "Velocity (m/s)",
+    {
+     "height": 16,
+     "width": 46,
+     "x": 1772,
+     "y": 263
+    }
+   ],
+   [
+    "Angular Velocity (deg/s)",
+    {
+     "height": 16,
+     "width": 46,
+     "x": 1830,
+     "y": 263
+    }
+   ]
+  ],
+  "scroll_controls": null,
+  "visibility": {
+   "fraction": 1.0,
+   "largest_visible": {
+    "height": 553,
+    "width": 655,
+    "x": 1249,
+    "y": 190
+   },
+   "occluded_by": [],
+   "region": {
+    "height": 553,
+    "width": 655,
+    "x": 1249,
+    "y": 190
+   }
+  }
+ },
+ "probe_scanner": null,
+ "quick_message": null,
+ "repair_shop": null,
+ "search_results": null,
+ "selected_item_window": {
+  "buttons": {},
+  "texts": [
+   "No Object Selected",
+   "Selected Item"
+  ],
+  "visibility": {
+   "fraction": 1.0,
+   "largest_visible": {
+    "height": 174,
+    "width": 655,
+    "x": 1249,
+    "y": 16
+   },
+   "occluded_by": [],
+   "region": {
+    "height": 174,
+    "width": 655,
+    "x": 1249,
+    "y": 16
+   }
+  }
+ },
+ "session_time_indicator": {
+  "display": false,
+  "hint": "Session changing - Time left: Less than one second",
+  "visibility": {
+   "fraction": 1.0,
+   "largest_visible": {
+    "height": 24,
+    "width": 24,
+    "x": 64,
+    "y": 47
+   },
+   "occluded_by": [],
+   "region": {
+    "height": 24,
+    "width": 24,
+    "x": 64,
+    "y": 47
+   }
+  }
+ },
+ "shipui": {
+  "capacitor": {
+   "level_from_pmarks_percent": null,
+   "pmarks": [
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": null
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    },
+    {
+     "color_percent": {
+      "a": 1.0,
+      "b": null,
+      "g": null,
+      "r": null
+     }
+    }
+   ],
+   "ui_node": {
+    "height": 60,
+    "width": 60,
+    "x": 931,
+    "y": 949
+   }
+  },
+  "heat_gauges": {
+   "gauges": [
+    {
+     "heat_percent": null,
+     "rotation_percent": null
+    },
+    {
+     "heat_percent": null,
+     "rotation_percent": null
+    },
+    {
+     "heat_percent": null,
+     "rotation_percent": null
+    }
+   ]
+  },
+  "hitpoints_percent": {
+   "armor": 100,
+   "shield": 100,
+   "structure": 100
+  },
+  "indication": {
+   "maneuver_type": "Warp"
+  },
+  "max_speed_button": {
+   "height": 12,
+   "width": 12,
+   "x": 1000,
+   "y": 1007
+  },
+  "module_buttons": [
+   {
+    "charges": 16,
+    "is_active": null,
+    "is_busy": false,
+    "is_hilite_visible": false,
+    "ramp_rotation_milli": null,
+    "shortcut": "F1",
+    "slot_ui_node": {
+     "height": 64,
+     "width": 64,
+     "x": 1033,
+     "y": 903
+    },
+    "type_id": 1877,
+    "ui_node": {
+     "height": 48,
+     "width": 48,
+     "x": 1041,
+     "y": 911
+    }
+   },
+   {
+    "charges": null,
+    "is_active": null,
+    "is_busy": false,
+    "is_hilite_visible": false,
+    "ramp_rotation_milli": null,
+    "shortcut": "F3",
+    "slot_ui_node": {
+     "height": 64,
+     "width": 64,
+     "x": 1135,
+     "y": 903
+    },
+    "type_id": 6005,
+    "ui_node": {
+     "height": 48,
+     "width": 48,
+     "x": 1143,
+     "y": 911
+    }
+   },
+   {
+    "charges": null,
+    "is_active": null,
+    "is_busy": false,
+    "is_hilite_visible": false,
+    "ramp_rotation_milli": null,
+    "shortcut": "Alt-F1",
+    "slot_ui_node": {
+     "height": 64,
+     "width": 64,
+     "x": 1058,
+     "y": 947
+    },
+    "type_id": 3841,
+    "ui_node": {
+     "height": 48,
+     "width": 48,
+     "x": 1066,
+     "y": 955
+    }
+   },
+   {
+    "charges": null,
+    "is_active": null,
+    "is_busy": false,
+    "is_hilite_visible": false,
+    "ramp_rotation_milli": null,
+    "shortcut": "Alt-F2",
+    "slot_ui_node": {
+     "height": 64,
+     "width": 64,
+     "x": 1109,
+     "y": 947
+    },
+    "type_id": 3841,
+    "ui_node": {
+     "height": 48,
+     "width": 48,
+     "x": 1117,
+     "y": 955
+    }
+   },
+   {
+    "charges": null,
+    "is_active": null,
+    "is_busy": false,
+    "is_hilite_visible": true,
+    "ramp_rotation_milli": null,
+    "shortcut": "Alt-F4",
+    "slot_ui_node": {
+     "height": 64,
+     "width": 64,
+     "x": 1211,
+     "y": 947
+    },
+    "type_id": 2281,
+    "ui_node": {
+     "height": 48,
+     "width": 48,
+     "x": 1219,
+     "y": 955
+    }
+   },
+   {
+    "charges": null,
+    "is_active": null,
+    "is_busy": false,
+    "is_hilite_visible": true,
+    "ramp_rotation_milli": null,
+    "shortcut": "Alt-F5",
+    "slot_ui_node": {
+     "height": 64,
+     "width": 64,
+     "x": 1262,
+     "y": 947
+    },
+    "type_id": 2281,
+    "ui_node": {
+     "height": 48,
+     "width": 48,
+     "x": 1270,
+     "y": 955
+    }
+   },
+   {
+    "charges": null,
+    "is_active": null,
+    "is_busy": false,
+    "is_hilite_visible": true,
+    "ramp_rotation_milli": null,
+    "shortcut": "Ctrl-F1",
+    "slot_ui_node": {
+     "height": 64,
+     "width": 64,
+     "x": 1033,
+     "y": 991
+    },
+    "type_id": 22291,
+    "ui_node": {
+     "height": 48,
+     "width": 48,
+     "x": 1041,
+     "y": 999
+    }
+   },
+   {
+    "charges": null,
+    "is_active": null,
+    "is_busy": false,
+    "is_hilite_visible": true,
+    "ramp_rotation_milli": null,
+    "shortcut": "Ctrl-F2",
+    "slot_ui_node": {
+     "height": 64,
+     "width": 64,
+     "x": 1084,
+     "y": 991
+    },
+    "type_id": 22291,
+    "ui_node": {
+     "height": 48,
+     "width": 48,
+     "x": 1092,
+     "y": 999
+    }
+   },
+   {
+    "charges": null,
+    "is_active": null,
+    "is_busy": false,
+    "is_hilite_visible": false,
+    "ramp_rotation_milli": null,
+    "shortcut": "Ctrl-F3",
+    "slot_ui_node": {
+     "height": 64,
+     "width": 64,
+     "x": 1135,
+     "y": 991
+    },
+    "type_id": 22291,
+    "ui_node": {
+     "height": 48,
+     "width": 48,
+     "x": 1143,
+     "y": 999
+    }
+   },
+   {
+    "charges": null,
+    "is_active": null,
+    "is_busy": false,
+    "is_hilite_visible": false,
+    "ramp_rotation_milli": null,
+    "shortcut": "Ctrl-F4",
+    "slot_ui_node": {
+     "height": 64,
+     "width": 64,
+     "x": 1186,
+     "y": 991
+    },
+    "type_id": 35771,
+    "ui_node": {
+     "height": 48,
+     "width": 48,
+     "x": 1194,
+     "y": 999
+    }
+   }
+  ],
+  "module_buttons_rows": {
+   "bottom": [
+    {
+     "is_active": null,
+     "is_busy": false,
+     "is_hilite_visible": true,
+     "ramp_rotation_milli": null,
+     "slot_ui_node": {
+      "height": 64,
+      "width": 64,
+      "x": 1033,
+      "y": 991
+     },
+     "ui_node": {
+      "height": 48,
+      "width": 48,
+      "x": 1041,
+      "y": 999
+     }
+    },
+    {
+     "is_active": null,
+     "is_busy": false,
+     "is_hilite_visible": true,
+     "ramp_rotation_milli": null,
+     "slot_ui_node": {
+      "height": 64,
+      "width": 64,
+      "x": 1084,
+      "y": 991
+     },
+     "ui_node": {
+      "height": 48,
+      "width": 48,
+      "x": 1092,
+      "y": 999
+     }
+    },
+    {
+     "is_active": null,
+     "is_busy": false,
+     "is_hilite_visible": false,
+     "ramp_rotation_milli": null,
+     "slot_ui_node": {
+      "height": 64,
+      "width": 64,
+      "x": 1135,
+      "y": 991
+     },
+     "ui_node": {
+      "height": 48,
+      "width": 48,
+      "x": 1143,
+      "y": 999
+     }
+    },
+    {
+     "is_active": null,
+     "is_busy": false,
+     "is_hilite_visible": false,
+     "ramp_rotation_milli": null,
+     "slot_ui_node": {
+      "height": 64,
+      "width": 64,
+      "x": 1186,
+      "y": 991
+     },
+     "ui_node": {
+      "height": 48,
+      "width": 48,
+      "x": 1194,
+      "y": 999
+     }
+    }
+   ],
+   "middle": [
+    {
+     "is_active": null,
+     "is_busy": false,
+     "is_hilite_visible": false,
+     "ramp_rotation_milli": null,
+     "slot_ui_node": {
+      "height": 64,
+      "width": 64,
+      "x": 1058,
+      "y": 947
+     },
+     "ui_node": {
+      "height": 48,
+      "width": 48,
+      "x": 1066,
+      "y": 955
+     }
+    },
+    {
+     "is_active": null,
+     "is_busy": false,
+     "is_hilite_visible": false,
+     "ramp_rotation_milli": null,
+     "slot_ui_node": {
+      "height": 64,
+      "width": 64,
+      "x": 1109,
+      "y": 947
+     },
+     "ui_node": {
+      "height": 48,
+      "width": 48,
+      "x": 1117,
+      "y": 955
+     }
+    },
+    {
+     "is_active": null,
+     "is_busy": false,
+     "is_hilite_visible": true,
+     "ramp_rotation_milli": null,
+     "slot_ui_node": {
+      "height": 64,
+      "width": 64,
+      "x": 1211,
+      "y": 947
+     },
+     "ui_node": {
+      "height": 48,
+      "width": 48,
+      "x": 1219,
+      "y": 955
+     }
+    },
+    {
+     "is_active": null,
+     "is_busy": false,
+     "is_hilite_visible": true,
+     "ramp_rotation_milli": null,
+     "slot_ui_node": {
+      "height": 64,
+      "width": 64,
+      "x": 1262,
+      "y": 947
+     },
+     "ui_node": {
+      "height": 48,
+      "width": 48,
+      "x": 1270,
+      "y": 955
+     }
+    }
+   ],
+   "top": [
+    {
+     "is_active": null,
+     "is_busy": false,
+     "is_hilite_visible": false,
+     "ramp_rotation_milli": null,
+     "slot_ui_node": {
+      "height": 64,
+      "width": 64,
+      "x": 1033,
+      "y": 903
+     },
+     "ui_node": {
+      "height": 48,
+      "width": 48,
+      "x": 1041,
+      "y": 911
+     }
+    },
+    {
+     "is_active": null,
+     "is_busy": false,
+     "is_hilite_visible": false,
+     "ramp_rotation_milli": null,
+     "slot_ui_node": {
+      "height": 64,
+      "width": 64,
+      "x": 1135,
+      "y": 903
+     },
+     "ui_node": {
+      "height": 48,
+      "width": 48,
+      "x": 1143,
+      "y": 911
+     }
+    }
+   ]
+  },
+  "offensive_buff_button_names": [],
+  "speed": 1.2,
+  "squadrons_ui": {
+   "squadrons": []
+  },
+  "stop_button": {
+   "height": 12,
+   "width": 12,
+   "x": 907,
+   "y": 1007
+  },
+  "visibility": {
+   "fraction": 0.587,
+   "largest_visible": {
+    "height": 1080,
+    "width": 740,
+    "x": 509,
+    "y": 0
+   },
+   "occluded_by": [
+    {
+     "by": "ResourceLoadingIndicator",
+     "region": {
+      "height": 32,
+      "width": 32,
+      "x": 12,
+      "y": 1036
+     },
+     "tp_name": "ResourceLoadingIndicator",
+     "z": 0
+    },
+    {
+     "by": "BadgeMasterContainer",
+     "region": {
+      "height": 20,
+      "width": 40,
+      "x": 1880,
+      "y": 1038
+     },
+     "tp_name": "BadgeMasterContainer",
+     "z": 1
+    },
+    {
+     "by": "NotificationContainer",
+     "region": {
+      "height": 32,
+      "width": 32,
+      "x": 1872,
+      "y": 1032
+     },
+     "tp_name": "NotificationContainer",
+     "z": 2
+    },
+    {
+     "by": "overview",
+     "region": {
+      "height": 553,
+      "width": 655,
+      "x": 1249,
+      "y": 190
+     },
+     "tp_name": "OverviewWindow",
+     "z": 3
+    },
+    {
+     "by": "selecteditemview",
+     "region": {
+      "height": 174,
+      "width": 655,
+      "x": 1249,
+      "y": 16
+     },
+     "tp_name": "SelectedItemWnd",
+     "z": 4
+    },
+    {
+     "by": "directionalScannerWindow",
+     "region": {
+      "height": 337,
+      "width": 570,
+      "x": 1334,
+      "y": 743
+     },
+     "tp_name": "DirectionalScanner",
+     "z": 5
+    },
+    {
+     "by": "standaloneBookmarkWnd",
+     "region": {
+      "height": 142,
+      "width": 312,
+      "x": 48,
+      "y": 519
+     },
+     "tp_name": "StandaloneBookmarkWnd",
+     "z": 6
+    },
+    {
+     "by": "ChatWindowStack",
+     "region": {
+      "height": 307,
+      "width": 461,
+      "x": 48,
+      "y": 773
+     },
+     "tp_name": "ChatWindowStack",
+     "z": 7
+    }
+   ],
+   "region": {
+    "height": 1080,
+    "width": 1920,
+    "x": 0,
+    "y": 0
+   }
+  }
+ },
+ "stacking": {
+  "client_area": {
+   "height": 1080,
+   "width": 1920,
+   "x": 0,
+   "y": 0
+  },
+  "modal_active": false,
+  "window_stack": [
+   {
+    "name": null,
+    "region": {
+     "height": 32,
+     "width": 32,
+     "x": 12,
+     "y": 1036
+    },
+    "tp_name": "ResourceLoadingIndicator",
+    "window": null,
+    "z": 0
+   },
+   {
+    "name": null,
+    "region": {
+     "height": 20,
+     "width": 100,
+     "x": 1880,
+     "y": 1038
+    },
+    "tp_name": "BadgeMasterContainer",
+    "window": null,
+    "z": 1
+   },
+   {
+    "name": null,
+    "region": {
+     "height": 32,
+     "width": 32,
+     "x": 1872,
+     "y": 1032
+    },
+    "tp_name": "NotificationContainer",
+    "window": null,
+    "z": 2
+   },
+   {
+    "name": "overview",
+    "region": {
+     "height": 553,
+     "width": 655,
+     "x": 1249,
+     "y": 190
+    },
+    "tp_name": "OverviewWindow",
+    "window": "overview_windows",
+    "z": 3
+   },
+   {
+    "name": "selecteditemview",
+    "region": {
+     "height": 174,
+     "width": 655,
+     "x": 1249,
+     "y": 16
+    },
+    "tp_name": "SelectedItemWnd",
+    "window": "selected_item_window",
+    "z": 4
+   },
+   {
+    "name": "directionalScannerWindow",
+    "region": {
+     "height": 337,
+     "width": 570,
+     "x": 1334,
+     "y": 743
+    },
+    "tp_name": "DirectionalScanner",
+    "window": "directional_scanner_window",
+    "z": 5
+   },
+   {
+    "name": "standaloneBookmarkWnd",
+    "region": {
+     "height": 142,
+     "width": 312,
+     "x": 48,
+     "y": 519
+    },
+    "tp_name": "StandaloneBookmarkWnd",
+    "window": "standalone_bookmark_window",
+    "z": 6
+   },
+   {
+    "name": "ChatWindowStack",
+    "region": {
+     "height": 307,
+     "width": 461,
+     "x": 48,
+     "y": 773
+    },
+    "tp_name": "ChatWindowStack",
+    "window": "chat_window_stacks[0]",
+    "z": 7
+   },
+   {
+    "name": "hudContainer",
+    "region": {
+     "height": 200,
+     "width": 1200,
+     "x": 360,
+     "y": 880
+    },
+    "tp_name": "HudContainer",
+    "window": null,
+    "z": 8
+   },
+   {
+    "name": null,
+    "region": {
+     "height": 1080,
+     "width": 48,
+     "x": 0,
+     "y": 0
+    },
+    "tp_name": "NeocomContainer",
+    "window": "neocom",
+    "z": 9
+   },
+   {
+    "name": "sidePanel",
+    "region": {
+     "height": 1068,
+     "width": 312,
+     "x": 48,
+     "y": 12
+    },
+    "tp_name": "Container",
+    "window": null,
+    "z": 10
+   }
+  ]
+ },
+ "standalone_bookmark_window": {
+  "entries": [],
+  "visibility": {
+   "fraction": 1.0,
+   "largest_visible": {
+    "height": 142,
+    "width": 312,
+    "x": 48,
+    "y": 519
+   },
+   "occluded_by": [],
+   "region": {
+    "height": 142,
+    "width": 312,
+    "x": 48,
+    "y": 519
+   }
+  }
+ },
+ "station_window": null,
+ "survey_scan_window": null,
+ "targets": [],
+ "watchlist_panel": null
+}

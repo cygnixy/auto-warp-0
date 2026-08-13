@@ -8,10 +8,10 @@
     "version": "0.17.0",
     "edition": "2024",
     "requires": {
-        "cygnixy": "0.3.32",
+        "cygnixy": "0.3.42",
         "bots": {
             "cygnixy/std": {
-                "version": "0.2.0",
+                "version": "0.8.0",
                 "url": "https://github.com/cygnixy/std.git"
             }
         },
@@ -24,6 +24,7 @@
             "click_path",
             "debug",
             "error",
+            "hover",
             "info",
             "now_ms",
             "open_menu",

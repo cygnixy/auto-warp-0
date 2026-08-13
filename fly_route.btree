@@ -81,11 +81,24 @@
     is_route_set?()
     push_undock_button()
 }
+/* The survey comes last of the three on purpose. move is the flight itself and
+   outranks everything here; the cloak is next, because a ship that should be
+   hidden should be hidden before it is inventoried; the survey takes what is
+   left, which in warp is every tick. It answers Running for the twenty-odd
+   ticks of a walk, and that is why it may not stand ahead of either: a fallback
+   stops at the first child that is not Failure.
+
+   Its own two guards — the mission asked for it, and the ship is actually in
+   warp — are inside the action rather than here, unlike the cloak's phase_is
+   just below. Not for taste: an action is what a case can tick, and "asked for
+   but not flying yet" is exactly the state that has to be pinned by one. See
+   survey_ship.lua. */
 -> on_space {
     @! phase_is?("docked")
     ? {
         move
         @if(stealth) stealth
+        survey_ship(survey_ship)
     }
 }
 /* One phase says all of it: in space, nothing announced, no manoeuvre under
