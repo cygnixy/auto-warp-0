@@ -1606,3 +1606,67 @@ fixture = "tests/fixtures/session_changing.json"
 expect  = "Success"
 log_contains = ["debug: flight: the ship's health has not been drawn yet"]
 log_absent = ["Display Readout as Percentage"]
+
+# AND A SESSION CHANGE IS NEVER WARNED ABOUT, HOWEVER LONG IT LASTS. Found in the
+# live flight of 2026-08-13 12:39, in this action's own first version: the third
+# answer went through log.repeated at debug, and log.repeated ESCALATES — at the
+# third, ninth and twenty-seventh repeat it emits at WARN whatever level it was
+# given, with "still trying" on the end. Three session changes of one flight left
+# four warnings saying that a hangar is not a setting anybody has to change.
+#
+# std.log's own comment says it: "where repetition is normal, use M.debug — a
+# warning for expected behaviour teaches the reader to ignore warnings". A session
+# change on every jump is as normal as repetition gets. Six ticks, one line, and no
+# "still trying" anywhere.
+[[case]]
+name     = "a session change is one debug line, never a warning that grows"
+action   = "report_ship_health"
+fixtures = [
+    "tests/fixtures/session_changing.json",
+    "tests/fixtures/session_changing.json",
+    "tests/fixtures/session_changing.json",
+    "tests/fixtures/session_changing.json",
+    "tests/fixtures/session_changing.json",
+    "tests/fixtures/session_changing.json",
+]
+expect   = "Success"
+log_absent = ["still trying", "warn: flight:"]
+[[case.log_counts]]
+needle = "debug: flight: the ship's health has not been drawn yet"
+times  = 1
+
+# And the stretch ends when the panel comes back, so the NEXT session change is a
+# line again — the same rule the setting's own line keeps. A jump, in four ticks:
+# in space, in session, in space, in session.
+[[case]]
+name     = "a panel that comes back and goes again is a line again"
+action   = "report_ship_health"
+fixtures = [
+    "tests/fixtures/drifting_after_undock.json",
+    "tests/fixtures/session_changing.json",
+    "tests/fixtures/drifting_after_undock.json",
+    "tests/fixtures/session_changing.json",
+]
+expect   = "Success"
+log_absent = ["still trying"]
+[[case.log_counts]]
+needle = "debug: flight: the ship's health has not been drawn yet"
+times  = 2
+
+# The two answers are held under ONE mark, and they must never mask each other: a
+# flight that lost the panel and then found it with the setting off has to hear
+# about the setting. Three ticks: in session, then in space with no health, and the
+# warning has to arrive.
+[[case]]
+name     = "a session change does not swallow the setting that follows it"
+action   = "report_ship_health"
+fixtures = [
+    "tests/fixtures/session_changing.json",
+    "tests/fixtures/in_space_warping.json",
+]
+expect   = "Success"
+log_contains = [
+    "debug: flight: the ship's health has not been drawn yet",
+    "warn: flight: the ship's health does not read",
+]
+log_absent = ["still trying"]

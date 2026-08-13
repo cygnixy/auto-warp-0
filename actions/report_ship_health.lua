@@ -29,7 +29,7 @@ local M = {}
 --
 -- ONCE, NOT ONCE A TICK. A setting nothing but the operator will change, said
 -- every tick of a four-jump flight, is a log nobody reads — which is what the run
--- of 11:35 produced. The mark holds the sentence rather than a flag, so a health
+-- of 11:35 produced. The mark holds the SENTENCE rather than a flag, so a health
 -- that goes missing again later in the flight is news again.
 --
 -- AND THE THIRD ANSWER IS NOT THE SECOND. Straight after an undock, and through
@@ -37,6 +37,21 @@ local M = {}
 -- from. Blaming the operator's settings for that would be this project's own
 -- besetting fault — an absence taken for a fact — committed inside the code
 -- written to cure it. It is said at debug, it accuses nobody, and it mends itself.
+--
+-- NEITHER OF THEM GOES THROUGH log.repeated, AND THE LIVE RUN OF 12:39 IS WHY.
+-- The first version of this action put the third answer through it at debug —
+-- and log.repeated escalates: at the third, ninth and twenty-seventh repeat it
+-- emits at WARN whatever level it was given, with "still trying" on the end. So
+-- three session changes of one flight left four WARNINGS saying that a hangar is
+-- not a setting anybody has to change, over a thing nobody was trying at. The
+-- module's own comment says as much — "where repetition is normal, use M.debug: a
+-- warning for expected behaviour teaches the reader to ignore warnings" — and a
+-- session change on every jump is as normal as repetition gets.
+--
+-- So both answers are held under the SAME mark, and only the sentence decides.
+-- One line per stretch, at the level the answer deserves, and a state that comes
+-- back is news again. Which of the two the mark is holding never has to be asked:
+-- two different sentences can never be equal.
 --
 -- Never Failure, and never Running: it waits for nothing, because there is
 -- nothing of its own that it has done.
@@ -47,26 +62,33 @@ function M.main()
     local readout = health.readout()
 
     if readout == health.READ then
-        -- The mark is spent, so the next time the health goes missing is news
-        -- again. An empty sentence is a sentence nothing will ever equal.
+        -- The mark is spent, so the next time the health is anything else it is
+        -- news. An empty sentence is a sentence nothing will ever equal.
         cygnixy.bb_set(SAID, "")
-        log.forget("flight_health_undrawn")
         return "Success"
     end
 
+    local message, level
     if readout == health.UNDRAWN then
-        log.repeated("flight_health_undrawn", "debug", "flight",
-            health.NOT_YET .. " — the flight carries on, and the health is looked at " ..
-            "again when the panel is there")
-        return "Success"
+        message = health.NOT_YET ..
+            " — the flight carries on, and the health is looked at again when the " ..
+            "panel is there"
+        level = "debug"
+    else
+        message = health.ADVICE ..
+            " — the flight carries on without it, but the fight at the end of this " ..
+            "route will not start without it: fix it while the ship is still on its way"
+        level = "warn"
     end
 
-    local message = health.ADVICE ..
-        " — the flight carries on without it, but the fight at the end of this " ..
-        "route will not start without it: fix it while the ship is still on its way"
-    if cygnixy.bb_get(SAID) ~= message then
-        cygnixy.bb_set(SAID, message)
+    if cygnixy.bb_get(SAID) == message then
+        return "Success"
+    end
+    cygnixy.bb_set(SAID, message)
+    if level == "warn" then
         log.warn("flight", message)
+    else
+        log.debug("flight", message)
     end
     return "Success"
 end
