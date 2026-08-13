@@ -1957,3 +1957,78 @@ fixture = "tests/fixtures/in_space_warping.json"
 args    = []
 expect  = "Success"
 log_absent = ["click_path(", "click("]
+
+# --- and what the flight owes before it ends --------------------------------
+#
+# The run of 17:11, and it is the cost of the fix above it. The survey moved
+# into warp on 13 August, where its twenty seconds are spent flying anyway —
+# and then the flight learnt to end on its first tick when there is nothing to
+# fly. A mission given in the agent's own system has no warp, so it had no
+# survey either, and the fight step said so three times over: no defence, no
+# weapons, no propulsion, with a target closing.
+#
+# So the early end is no longer instant: the survey first, then the end.
+
+# THE CASE THIS EXISTS FOR. The mission is in this system, the blackboard is
+# empty, and the walk BEGINS — the step does not finish on its first tick. The
+# mutation that leaves without surveying reddens exactly here.
+[[case]]
+name    = "with nothing to fly and no survey yet, the walk begins instead of the step ending"
+action  = "survey_without_flying"
+fixture = "tests/fixtures/mission_in_this_system.json"
+args    = [true]
+expect  = "Running"
+log_contains = ["hover("]
+
+# A mission that asked for no survey is not made to stand for one: this bot is
+# shared, and a flight with no fight ahead of it has no use for ten hovers.
+[[case]]
+name    = "a flight that was asked for no survey ends without one"
+action  = "survey_without_flying"
+fixture = "tests/fixtures/mission_in_this_system.json"
+args    = [false]
+expect  = "Success"
+log_absent = ["hover("]
+
+# nil is "nobody said", and the default is not to survey — the opposite way
+# round from agent-missions' own survey_after_undock, and stated rather than
+# inferred.
+[[case]]
+name    = "nobody having said is not a yes"
+action  = "survey_without_flying"
+fixture = "tests/fixtures/mission_in_this_system.json"
+args    = []
+expect  = "Success"
+log_absent = ["hover("]
+
+# A survey already complete on the board is not taken again: std.survey.take
+# answers Success on sight of it, and the step ends at once. The record is the
+# shape mission-combat reads — a fingerprint and the slots under it.
+[[case]]
+name    = "a survey already on the board ends the step without a second walk"
+action  = "survey_without_flying"
+fixture = "tests/fixtures/mission_in_this_system.json"
+args    = [true]
+# The fingerprint is the ship in this very frame — shortcut, type, and where
+# the slot sits — because a record of some other ship is not a survey of this
+# one, and std.survey would rightly start the walk over on it.
+setup_bb = { keep_ship_survey = { fingerprint = "F1:1877:1041:911|Alt-F1:3841:1066:955|Alt-F2:3841:1117:955|Alt-F3:6005:1168:955|Alt-F4:2281:1219:955|Alt-F5:2281:1270:955|Ctrl-F1:22291:1041:999|Ctrl-F2:22291:1092:999|Ctrl-F3:22291:1143:999|Ctrl-F4:35771:1194:999", complete = true, slots = [] } }
+expect  = "Success"
+log_absent = ["hover("]
+
+# The hover that cannot be made does not stop the step — the flight is worth
+# more than the survey, exactly as survey_ship says in the other branch — but it
+# is said where somebody looks, because the fight step will otherwise report the
+# same absence with no cause attached.
+[[case]]
+name     = "a survey that cannot be taken is said out loud and does not hold the step"
+action   = "survey_without_flying"
+fixtures = [
+    "tests/fixtures/mission_in_this_system.json",
+    "tests/fixtures/mission_in_this_system.json",
+]
+tick_ms   = 130000
+foreground = false
+args      = [true]
+expect    = "Success"
+log_contains = ["warn: ship: the ship could not be surveyed standing still"]

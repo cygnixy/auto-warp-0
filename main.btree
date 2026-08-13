@@ -175,7 +175,22 @@ include('fly_route.btree')
        been ordered, it answers "there is something to fly" and the block below
        owns its ending. See somewhere_to_fly.lua. */
     ? {
-        flight_is_over?(destination, return_destination)
+        /* Nothing to fly — but the flight still owes the survey, because there
+           will be no warp to take it in. The ship is standing in space with
+           nothing else to do, which is the only sensible place left for it: in
+           the pocket the same twenty seconds are spent under fire, and in the
+           hangar the slots say something else. The run of 17:11 fought without
+           it — no defence, no weapons, no propulsion, three lines saying so and
+           a target closing.
+
+           A sequence and not one action, because the two halves are two
+           questions: whether this flight is over, and what it owes before it
+           ends. The walk answers Running for a score of ticks and the step goes
+           on ticking through it; when it is done, the step ends. */
+        -> {
+            flight_is_over?(destination, return_destination)
+            survey_without_flying(survey_ship)
+        }
 
         /* The outer ->* is memory: once the whole mission — both legs, if there
            are two — is done, it stays done, and a mission restarted mid-flight
