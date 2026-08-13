@@ -1383,3 +1383,130 @@ log_contains = [
     "info: ship: the ship is not in warp (undocking): the survey waits until it is",
 ]
 log_absent = ["hover"]
+
+# --- select_travel_tab -------------------------------------------------------
+#
+# THE SCREEN THE SHIP TRAVELS UNDER, and the reason it is this bot's business is
+# the run of 2026-08-13 10:22. The fight step of the same mission put the overview
+# on the tab it FIGHTS by before warping to the mission's place; the ship was at a
+# gate in Niyabainen, that tab holds the empire's own customs officers and sentry
+# guns there, and the fight — which takes any row of its own tab for an enemy —
+# ordered a lock on a Caldari Customs Commissioner. The fight step waits for the
+# pocket now, and this bot holds the flying tab for the whole flight, because a
+# tab nobody holds is a tab anybody may have left anywhere.
+#
+# The whole mechanism is std.tabs, tested in the library's own cases against its
+# own budgets. What is this bot's own, and what these cases are about, is: WHEN it
+# runs (not in a hangar), and that it NEVER holds the tick — a flight delayed for
+# a filter would be paying for the wrong thing.
+#
+# The fixtures are hand-made, one state of a strip each, in the manner of the
+# library's: three tabs, a ship adrift in space. The shape of a real strip is held
+# by `bot-harness lint` against the reference dumps and by mission-combat's
+# fixtures, which are whole frames of that run.
+
+[[case]]
+name    = "an overview on another tab is put on the flight's own, with one press"
+action  = "select_travel_tab"
+fixture = "tests/fixtures/travel_tab_elsewhere.json"
+args    = [1]
+expect  = "Success"
+log_contains = [
+    "info: flight: the overview is on another tab — pressing tab 1, the flight's own",
+    "click_path(\"overview_windows.tabs[0].tab_region\", \"left\")",
+]
+[[case.log_counts]]
+needle = "click_path("
+times  = 1
+
+# THE FLIGHT IS NEVER HELD UP FOR A TAB. The case above already says it — Success
+# on the very tick the press goes out — and it is worth saying why in a case of
+# its own: in mission-combat this same press answers Running, because lock_target
+# stands behind it and presses an overview row by the region read in that tick.
+# Nothing here reads a row, so nothing here may cost the flight a tick.
+[[case]]
+name    = "a tab press does not cost the flight its tick"
+action  = "select_travel_tab"
+fixture = "tests/fixtures/travel_tab_elsewhere.json"
+args    = [1]
+expect  = "Success"
+log_absent = ["Running"]
+
+# The travel tab is already up: NO GESTURE OF ANY KIND. Not a press to be sure,
+# not a press because the last tick pressed.
+[[case]]
+name    = "an overview already on the flight's tab is not pressed at all"
+action  = "select_travel_tab"
+fixture = "tests/fixtures/travel_tab_up.json"
+args    = [1]
+expect  = "Success"
+[[case.log_counts]]
+needle = "click_path("
+times  = 0
+[[case.log_counts]]
+needle = "click("
+times  = 0
+
+# THE SWITCH IS CONFIRMED BY READING, NOT BY PRESSING. Two ticks: the first finds
+# another tab up and presses, the second reads the client's own pointer under the
+# flight's tab and says so. One press for the two.
+[[case]]
+name     = "the switch is said done when the pointer has moved, not when the press went out"
+action   = "select_travel_tab"
+fixtures = [
+    "tests/fixtures/travel_tab_elsewhere.json",
+    "tests/fixtures/travel_tab_up.json",
+]
+tick_ms  = 6000
+args     = [1]
+expect   = "Success"
+log_contains = ["info: flight: the overview is on tab 1, the flight's own"]
+[[case.log_counts]]
+needle = "click_path("
+times  = 1
+
+# NO NUMBER, NO SWITCH, AND ONE LINE ABOUT IT. There is no travel tab to invent,
+# and a mission that hands nothing down flies on whatever tab is up — knowingly,
+# because the line is loud and it is said exactly once rather than once a tick.
+[[case]]
+name     = "with no travel_tab given, nothing is switched and the silence is said once"
+action   = "select_travel_tab"
+fixtures = [
+    "tests/fixtures/travel_tab_elsewhere.json",
+    "tests/fixtures/travel_tab_elsewhere.json",
+    "tests/fixtures/travel_tab_elsewhere.json",
+]
+args     = [0]
+expect   = "Success"
+[[case.log_counts]]
+needle = "warn: flight: no travel_tab was given to this step"
+times  = 1
+[[case.log_counts]]
+needle = "click_path("
+times  = 0
+
+# A HANGAR HAS NO OVERVIEW TO HOLD. Nothing is pressed and — the point of the
+# guard — nothing is WAITED for either: without it a docked run would spend the
+# strip's whole minute and then warn about a strip nobody is drawing, every third
+# tick, for as long as the ship sat there.
+[[case]]
+name    = "a docked client is not flying: no press, and no wait for a strip"
+action  = "select_travel_tab"
+fixture = "tests/fixtures/docked_with_route.json"
+args    = [1]
+expect  = "Success"
+log_absent = ["tab strip is not drawn yet", "click_path("]
+
+# In space with the strip not drawn — a session change, the client between things
+# — the wait is std.tabs' own: bounded, said, and nothing pressed on a guess.
+# "Not drawn yet" is never "this client has no tabs".
+[[case]]
+name    = "an overview with no tab strip yet is waited for, not pressed around"
+action  = "select_travel_tab"
+fixture = "tests/fixtures/travel_tab_undrawn.json"
+args    = [1]
+expect  = "Success"
+log_contains = ["info: flight: the overview's tab strip is not drawn yet"]
+[[case.log_counts]]
+needle = "click_path("
+times  = 0

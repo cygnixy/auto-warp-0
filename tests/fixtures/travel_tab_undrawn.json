@@ -1,0 +1,25 @@
+{
+ "shipui": {
+  "indication": {
+   "maneuver_type": null
+  },
+  "hitpoints_percent": {
+   "shield": 1.0,
+   "armor": 1.0,
+   "structure": 1.0
+  },
+  "capacitor": {
+   "percent": 100
+  },
+  "stop_button": {
+   "x": 0,
+   "y": 0,
+   "width": 10,
+   "height": 10
+  }
+ },
+ "overview_windows": {
+  "entries": [],
+  "tabs": null
+ }
+}

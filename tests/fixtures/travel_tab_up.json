@@ -1,0 +1,55 @@
+{
+ "shipui": {
+  "indication": {
+   "maneuver_type": null
+  },
+  "hitpoints_percent": {
+   "shield": 1.0,
+   "armor": 1.0,
+   "structure": 1.0
+  },
+  "capacitor": {
+   "percent": 100
+  },
+  "stop_button": {
+   "x": 0,
+   "y": 0,
+   "width": 10,
+   "height": 10
+  }
+ },
+ "overview_windows": {
+  "tabs": [
+   {
+    "name": "OverviewTab_<color=0xFFFFFFFF>✪ System: System</color>",
+    "is_selected": true,
+    "tab_region": {
+     "x": 1352,
+     "y": 216,
+     "width": 27,
+     "height": 35
+    }
+   },
+   {
+    "name": "OverviewTab_<color=0xFFFF9900>❖ Ships: NPCs (+turrets)</color>",
+    "is_selected": false,
+    "tab_region": {
+     "x": 1397,
+     "y": 216,
+     "width": 27,
+     "height": 35
+    }
+   },
+   {
+    "name": "OverviewTab_<color=0xFFFF5500>➔ Warp: Warp out!</color>",
+    "is_selected": false,
+    "tab_region": {
+     "x": 1442,
+     "y": 216,
+     "width": 27,
+     "height": 35
+    }
+   }
+  ]
+ }
+}

@@ -36,6 +36,21 @@ stealth = false
 bookmark_jump = false
 push_button_yes = false
 
+/* travel_tab — the tab the ship flies by: its place in the overview's strip,
+ * counting from one. THERE IS NO DEFAULT AND NONE MAY BE INVENTED — which preset
+ * sits where is a property of a client somebody set up — so a mission that hands
+ * nothing down gets nothing switched, said once and out loud.
+ *
+ * The requirement is the operator's, on 2026-08-13, and it is about safety. The
+ * fight step of the same mission puts the overview on the tab it FIGHTS by, and
+ * that tab shows whatever the operator's filter shows in the system the ship is
+ * in: pirates in a mission pocket, and at a gate in Niyabainen the empire's own
+ * customs officers and sentry guns — which the fight took as targets, because on
+ * its tab every row is an enemy. The fight step waits for the pocket now; this
+ * bot holds the flying tab for the whole flight, so that the screen the ship
+ * travels under is one somebody chose. */
+travel_tab = 0
+
 /* survey_ship — write the ship's module panel down while flying.
  *
  * Off, and off is the honest default for a bot this shared: a mission with no
@@ -71,6 +86,16 @@ include('fly_route.btree')
        tick waits behind it. Only the acknowledging kind is pressed here -- OK
        and Close, never Yes. */
     dismiss_message_box()
+
+    /* The screen the ship travels under. After the modal, because a modal takes
+       every click there is; before the flight, because the tab is what the
+       operator watches the flight on — and because it costs the flight nothing:
+       this action NEVER answers Running, so the warp of this tick is ordered on
+       this tick. Nothing in this bot reads an overview row, which is the whole
+       reason it may answer Success while its own press is still in flight;
+       mission-combat, where a row IS pressed by the region read this tick, has to
+       hold the tick instead. */
+    select_travel_tab(travel_tab)
 
     /* The outer ->* is memory: once the whole mission — both legs, if there
        are two — is done, it stays done, and a mission restarted mid-flight
