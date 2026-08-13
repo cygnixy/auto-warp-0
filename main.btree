@@ -97,6 +97,25 @@ include('fly_route.btree')
        hold the tick instead. */
     select_travel_tab(travel_tab)
 
+    /* Whether the ship's own health can be read, said once and pressing nothing.
+       The operator's requirement of 2026-08-13, and it is about WHEN the trouble
+       is heard: the health is the only sign a fight has for when to leave, it was
+       missing for the whole run of that day's 11:35, and the first anybody heard
+       of it was the fight step saying so from inside the mission's pocket — four
+       jumps after the last moment anybody could have fixed it. It is a setting,
+       fixed at the keyboard in five seconds, so it is looked at here while the
+       ship is still on its way.
+
+       It only SAYS. A health nobody can read costs a flight nothing — this bot
+       never shoots — and failing the route over a setting only a human can change
+       would punish the mission for its own warning. mission-combat is where the
+       same reading refuses to take a target, because that is where acting without
+       it means fighting to the explosion.
+
+       It never answers Running and never Failure, so it costs the flight of this
+       tick nothing at all. */
+    report_ship_health()
+
     /* The outer ->* is memory: once the whole mission — both legs, if there
        are two — is done, it stays done, and a mission restarted mid-flight
        does not repeat legs it already flew.

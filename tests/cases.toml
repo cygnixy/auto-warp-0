@@ -1510,3 +1510,99 @@ log_contains = ["info: flight: the overview's tab strip is not drawn yet"]
 [[case.log_counts]]
 needle = "click_path("
 times  = 0
+
+# --- report_ship_health ------------------------------------------------------
+#
+# WHETHER THE SHIP'S OWN HEALTH CAN BE READ, said here so that it is heard in
+# time. The reading and the words are std.health's — two bots ask this now, and a
+# second copy of either would drift from the first on the first repair. What this
+# action decides is the consequence, and the consequence of a flight is "carry on".
+#
+# The operator's requirement of 2026-08-13 is about WHEN. The health is the only
+# sign a fight has for when to leave; the run of that day's 11:35 had it missing
+# from the first tick, and the first anybody heard was the fight step saying so
+# from inside the mission's pocket — four jumps past the last moment anybody could
+# have fixed it. It is a setting (ShipUI options -> Display Readout as Percentage),
+# fixed at the keyboard in five seconds.
+
+# The ordinary flight: the health reads, and nothing at all is said about it.
+[[case]]
+name    = "a flight whose ship reads its own health says nothing about it"
+action  = "report_ship_health"
+fixture = "tests/fixtures/drifting_after_undock.json"
+expect  = "Success"
+log_absent = ["Display Readout as Percentage", "has not been drawn yet"]
+
+# The fault, on a frame of a ship in space with no health on it: the setting is
+# named, and the flight carries on. THE FLIGHT IS NOT FAILED — this bot never
+# shoots and could not act on the number if it had it, so stranding a ship
+# mid-route over a setting only a human can change would punish the mission for
+# its own warning.
+[[case]]
+name    = "a ship in space with no health names the setting, and the flight carries on"
+action  = "report_ship_health"
+fixture = "tests/fixtures/in_space_warping.json"
+expect  = "Success"
+log_contains = [
+    "warn: flight: the ship's health does not read: neither the shield nor the armour came back, though the client is drawing the ship.",
+    "Display Readout as Percentage",
+    "the fight at the end of this route will not start without it",
+]
+[[case.log_counts]]
+needle = "click("
+times  = 0
+
+# ONCE, NOT ONCE A TICK. A setting nothing but the operator will change, repeated
+# every tick of a four-jump flight, is the log of 11:35 all over again — and that
+# log is why this task exists. Four ticks, one line.
+[[case]]
+name     = "the setting is named once, however long the flight lasts"
+action   = "report_ship_health"
+fixtures = [
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/in_space_warping.json",
+]
+expect   = "Success"
+[[case.log_counts]]
+needle = "warn: flight: the ship's health does not read"
+times  = 1
+
+# And held only while it lasts: a health that comes back and goes again is news
+# again. Without the mark being spent on the good tick this would say it once and
+# then be silent for the rest of the run.
+[[case]]
+name     = "a health that comes back and goes again is said again"
+action   = "report_ship_health"
+fixtures = [
+    "tests/fixtures/in_space_warping.json",
+    "tests/fixtures/drifting_after_undock.json",
+    "tests/fixtures/in_space_warping.json",
+]
+expect   = "Success"
+[[case.log_counts]]
+needle = "warn: flight: the ship's health does not read"
+times  = 2
+
+# THE THIRD ANSWER, AND IT MUST NOT SOUND LIKE THE SECOND. A hangar has no ship
+# panel to read a health from, and blaming the operator's settings for that would
+# be this project's own besetting fault — an absence taken for a fact — committed
+# inside the code written to cure it. It accuses nobody and it mends itself.
+[[case]]
+name    = "a docked ship is not accused of a setting"
+action  = "report_ship_health"
+fixture = "tests/fixtures/docked_with_route.json"
+expect  = "Success"
+log_contains = ["debug: flight: the ship's health has not been drawn yet"]
+log_absent = ["Display Readout as Percentage"]
+
+# The other way of having no panel, and the one this bot meets on every jump of
+# every route: the client between systems.
+[[case]]
+name    = "a client in a session change is not accused of a setting either"
+action  = "report_ship_health"
+fixture = "tests/fixtures/session_changing.json"
+expect  = "Success"
+log_contains = ["debug: flight: the ship's health has not been drawn yet"]
+log_absent = ["Display Readout as Percentage"]
