@@ -8,12 +8,25 @@ local M = {}
 -- before that is called a fault.
 --
 -- Milliseconds, not ticks, for the reason std.press spells out at the top of
--- press.lua. A minute, and it is generous on purpose: this is not a wait for the
--- client to answer a press but a watch on the mission's own input, and the route
--- panel it reads blanks for whole seconds across a session change. A minute of a
--- mission spent standing is already visible from the outside; less than that
--- risks calling a slow undock an empty mission.
-local PATIENCE_MS = 60000
+-- press.lua.
+--
+-- HALF A MINUTE, AND THE MINUTE IT REPLACES WAS TOO LONG TO BE OF ANY USE. The
+-- run of 2026-08-15 20:26 stood in exactly this emptiness — a fly-home step
+-- handed an empty destination by a step that laid no route — and the operator
+-- stopped it by hand after sixty seconds of one unchanging line. The blackboard
+-- of the last tick before the stop reads wait_somewhere_to_fly 6173 against a
+-- clock at 66000: the budget had 55 milliseconds left to run and one more tick
+-- would have spent it. A budget nobody outlasts is a budget nobody ever sees,
+-- and a run that has to be stopped by hand has no diagnosis in the log.
+--
+-- Thirty seconds is generous for what is actually being waited on. This is not a
+-- wait for the client to answer a press: the route is laid by the step BEFORE
+-- this one, so by the time this flight begins it either exists or it never will,
+-- and the only real wait is the client drawing a panel it was told about — a
+-- tick or two, on the live client of that same evening. The rest of the thirty
+-- seconds is slack for a session change, which blanks the route panel for whole
+-- seconds at a time.
+local PATIENCE_MS = 30000
 
 local WAIT = "somewhere_to_fly"
 

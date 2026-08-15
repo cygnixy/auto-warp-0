@@ -1724,10 +1724,10 @@ times  = 1
 #   flight_is_over?    Success only when the mission entry offers a warp — the
 #                      mission's place is in this system, the ship is where it
 #                      was to be taken, and the tree ends on it
-#   somewhere_to_fly   Failure when a minute of unexplained emptiness is spent —
-#                      the run ends loudly, because Success would claim the ship
-#                      had been delivered and send the fight step warping at a
-#                      place that may not exist
+#   somewhere_to_fly   Failure when half a minute of unexplained emptiness is
+#                      spent — the run ends loudly, because Success would claim
+#                      the ship had been delivered and send the fight step
+#                      warping at a place that may not exist
 #
 # Both read flight.lua, which does the looking; neither guesses.
 
@@ -1854,7 +1854,7 @@ args     = ["", ""]
 expect   = "Success"
 log_absent = ["error:", "warn:", "no destination and no route yet"]
 
-# Nothing to fly and nothing to explain it: while the minute runs, the flight
+# Nothing to fly and nothing to explain it: while the budget runs, the flight
 # below is tried exactly as it would have been, and the line is said once rather
 # than counted up.
 [[case]]
@@ -1866,21 +1866,50 @@ expect  = "Success"
 log_contains = ["info: flight: no destination and no route yet"]
 log_absent = ["error:"]
 
-# AND THE MINUTE HAS AN END, and it is a Failure: Success would say the ship had
+# AND IT IS A QUIET WAIT WHILE IT RUNS, not a complaint that grows. A route laid
+# a tick ago is drawn a tick or two later, and a wait that is going exactly as
+# expected must not read like a bot in trouble: one info line for the whole of
+# it, no warning, no count. The mutation that swaps log.steady for log.repeated
+# reddens here on the third tick.
+[[case]]
+name     = "twenty seconds of emptiness is a wait, said once and without a warning"
+action   = "somewhere_to_fly"
+fixtures = [
+    "tests/fixtures/drifting_route_flown.json",
+    "tests/fixtures/drifting_route_flown.json",
+    "tests/fixtures/drifting_route_flown.json",
+]
+tick_ms  = 10000
+args     = ["", ""]
+expect   = "Success"
+log_contains = ["info: flight: no destination and no route yet"]
+log_absent = ["error:", "warn:", "still trying"]
+[[case.log_counts]]
+needle = "info: flight: no destination and no route yet — waiting for one to appear"
+times  = 1
+
+# AND THE WAIT HAS AN END, and it is a Failure: Success would say the ship had
 # been taken where it was to be taken, and the fight step would warp at a place
 # that may not exist and report the trouble one step late for somebody else's
 # mistake.
+#
+# THIRTY-FIVE SECONDS AND NOT SEVENTY, and the pair of numbers is the case. The
+# run of 20:26 stood in this exact emptiness for sixty seconds and the operator
+# stopped it by hand one tick before the old minute was spent — a budget nobody
+# outlasts is a budget nobody ever sees. Twenty seconds above is still a wait;
+# thirty-five is already too long. Between them the two cases pin the budget to
+# half a minute, and the mutation that puts the minute back reddens here.
 [[case]]
-name     = "an emptiness nobody explains fails the run when its minute is spent"
+name     = "an emptiness nobody explains fails the run when its half minute is spent"
 action   = "somewhere_to_fly"
 fixtures = [
     "tests/fixtures/drifting_route_flown.json",
     "tests/fixtures/drifting_route_flown.json",
 ]
-tick_ms  = 70000
+tick_ms  = 35000
 args     = ["", ""]
 expect   = "Failure"
-log_contains = ["error: flight: this flight was given no destination and there is no route to follow, 60000ms on"]
+log_contains = ["error: flight: this flight was given no destination and there is no route to follow, 30000ms on"]
 
 # The same frame with the button offering a route instead of a warp: nothing
 # explains the emptiness there either, and the same bound holds.
@@ -1891,10 +1920,44 @@ fixtures = [
     "tests/fixtures/mission_elsewhere_no_route.json",
     "tests/fixtures/mission_elsewhere_no_route.json",
 ]
-tick_ms  = 70000
+tick_ms  = 35000
 args     = ["", ""]
 expect   = "Failure"
 log_contains = ["error: flight: this flight was given no destination and there is no route to follow"]
+
+# THE ROUTE THAT ARRIVES LATE IS A ROUTE, and the clock it outlasted is
+# forgotten rather than left standing. Twenty seconds of emptiness, then a route
+# on the panel, then the route gone again: forty seconds all told, which is more
+# than the whole budget — and the second emptiness is a new wait, not the tail of
+# the first. The mutation that drops patience.forget reddens here with a Failure
+# on the last tick.
+[[case]]
+name     = "a route that appears while the clock runs starts the clock over"
+action   = "somewhere_to_fly"
+fixtures = [
+    "tests/fixtures/drifting_route_flown.json",
+    "tests/fixtures/route_collapsed.json",
+    "tests/fixtures/drifting_route_flown.json",
+]
+tick_ms  = 20000
+args     = ["", ""]
+expect   = "Success"
+log_absent = ["error:", "warn:"]
+
+# A destination of this flight's own is not a wait for anything, so no budget of
+# this action's runs against it however long the flight lasts: whether the route
+# to that place is laid yet is set_route's business below.
+[[case]]
+name     = "a flight with a destination is never on the clock"
+action   = "somewhere_to_fly"
+fixtures = [
+    "tests/fixtures/drifting_route_flown.json",
+    "tests/fixtures/drifting_route_flown.json",
+]
+tick_ms  = 70000
+args     = ["Jita", ""]
+expect   = "Success"
+log_absent = ["error:", "warn:", "no destination and no route yet"]
 
 # Something already ordered is something to fly, and the flight below owns its
 # ending: no clock of this action's runs over it at all.
