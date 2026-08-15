@@ -1721,9 +1721,11 @@ times  = 1
 # The second is the rule the whole day defended: an emptiness the client
 # explains is an answer, an emptiness nothing explains is a fault.
 #
-#   flight_is_over?    Success only when the mission entry offers a warp — the
-#                      mission's place is in this system, the ship is where it
-#                      was to be taken, and the tree ends on it
+#   flight_is_over?    Success on the two pictures the client accounts for —
+#                      the mission entry offering a warp because the mission's
+#                      place is in this very system, and the ship standing in a
+#                      station with nowhere left to be taken. Either way it is
+#                      where it was to be taken, and the tree ends on it
 #   somewhere_to_fly   Failure when half a minute of unexplained emptiness is
 #                      spent — the run ends loudly, because Success would claim
 #                      the ship had been delivered and send the fight step
@@ -1731,7 +1733,7 @@ times  = 1
 #
 # Both read flight.lua, which does the looking; neither guesses.
 
-# --- flight_is_over: the one picture that ends the step ---------------------
+# --- flight_is_over: the pictures that end the step -------------------------
 
 [[case]]
 name    = "a mission in this system ends the flight before it began"

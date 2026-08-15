@@ -9,8 +9,8 @@ local M = {}
 -- is the whole reason the reading lives in a module rather than in either of
 -- them:
 --
---   flight_is_over  Success only on WARP — the step is done, and the tree ends
---                   on it
+--   flight_is_over  Success on WARP and on DOCKED — the two pictures the client
+--                   accounts for; the step is done and the tree ends on it
 --   somewhere_to_fly  Failure only on NOTHING outlasting its budget — the run
 --                     ends, loudly, because nobody knows why there is nothing
 --                     to fly
@@ -89,9 +89,18 @@ function M.reading(out_destination, home_destination)
         return M.WARP
     end
 
-    -- Asked last of all, and after the mission entry: a ship in a station with a
-    -- route still to fly is a ship about to undock, and the route above has
-    -- already answered for it.
+    -- Asked last of all, and after the destination as much as after the mission
+    -- entry. A ship in a station with a route still to fly is a ship about to
+    -- undock, and the route above has already answered for it; a ship in a
+    -- station with a place named is a ship that has not set out yet, and the
+    -- destination above has answered for that one. The hangar is an answer only
+    -- when there is nothing left anywhere to take the ship to.
+    --
+    -- And it is the client's own word for it — the station window and the
+    -- buttons in it, read by std.state — not an absence. Between things, in a
+    -- session change, in the middle of a gate, every panel this function reads
+    -- is as blank as it is in a hangar, and those are phases of their own:
+    -- "not drawn yet" must not become "the flight is over".
     if state.phase() == state.DOCKED then
         return M.DOCKED
     end
