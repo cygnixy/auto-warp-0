@@ -2140,6 +2140,65 @@ args    = ["", ""]
 expect  = "Failure"
 log_absent = ["the ship is in a station"]
 
+# A DESTINATION OF THIS FLIGHT'S OWN OUTRANKS THE HANGAR, and this is the case
+# that says so. A station is where a flight ends only when there was nowhere
+# left to take the ship; with a place named, standing in a hangar is work not
+# yet begun — the ship has still to undock and fly there. The mutation that
+# reads the hangar before the name reddens exactly here, and what it would cost
+# is a mission called finished in the station it was told to leave.
+[[case]]
+name    = "a docked ship with somewhere still to go has not arrived"
+action  = "flight_is_over"
+fixture = "tests/fixtures/docked_nothing_to_fly.json"
+args    = ["Jita", ""]
+expect  = "Failure"
+log_absent = ["the ship is in a station"]
+
+# --- and the client between things is not a hangar --------------------------
+#
+# "The ship is in a station" is something the client SAYS — the station window
+# and the buttons in it — and no absence may stand in for it. A session change,
+# a gate just taken, a client that has drawn nothing yet: each of those is a
+# client mid-redraw, and every panel this step reads is blank in all of them,
+# exactly as it is blank in a hangar. The difference is the whole of the
+# reading: "not drawn yet" is not "there is no flight here".
+#
+# What those get is the clock, because they are the emptiness nobody has
+# explained YET, and half a minute is longer than any of them lasts. The
+# mutation that takes an unsettled client for a hangar reddens on all three
+# cases below, and what it would cost is a step reporting a ship delivered in
+# the middle of a jump.
+[[case]]
+name    = "a client that has drawn nothing is not a station"
+action  = "flight_is_over"
+fixture = "tests/fixtures/unknown_nothing_to_fly.json"
+args    = ["", ""]
+expect  = "Failure"
+log_absent = ["the ship is in a station"]
+
+[[case]]
+name    = "a session change is not a station either"
+action  = "flight_is_over"
+fixture = "tests/fixtures/session_nothing_to_fly.json"
+args    = ["", ""]
+expect  = "Failure"
+log_absent = ["the ship is in a station"]
+
+# And the clock runs through it the way it runs in space: the half minute is
+# spent and the run ends with the reason named, rather than being called an
+# arrival because the client was between things when it was asked.
+[[case]]
+name     = "an emptiness the client cannot yet be read on is on the clock like any other"
+action   = "somewhere_to_fly"
+fixtures = [
+    "tests/fixtures/unknown_nothing_to_fly.json",
+    "tests/fixtures/unknown_nothing_to_fly.json",
+]
+tick_ms  = 35000
+args     = ["", ""]
+expect   = "Failure"
+log_contains = ["error: flight: this flight was given no destination and there is no route to follow"]
+
 # --- remember_module_names ---------------------------------------------------
 #
 # The second variable of the survey, added 2026-08-13: whether what a walk
