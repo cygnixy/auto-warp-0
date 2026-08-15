@@ -28,7 +28,7 @@ local M = {}
 -- Everything else is Failure and the flight below is flown. That includes the
 -- emptiness nobody explains: it is not this action's business to end anything
 -- over it — see somewhere_to_fly, which stands in the plain sequence above and
--- fails the run when its minute is spent. The two are deliberately not one
+-- fails the run when its half minute is spent. The two are deliberately not one
 -- action: an emptiness the client accounts for and an emptiness nothing
 -- accounts for must not share an outcome, and here they do not even share a
 -- node.

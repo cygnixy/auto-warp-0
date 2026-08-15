@@ -51,7 +51,7 @@ M.WARP = "warp"
 -- It is the state the return leg of a mission in the agent's own system leaves
 -- behind: cygnixy/agent-missions presses the Dock the mission itself offers, the
 -- ship goes inside, and the flight step after it has nothing left to do. Without
--- this reading that step would spend a minute deciding the emptiness was
+-- this reading that step would spend half a minute deciding the emptiness was
 -- nobody's fault and then fail the run over it.
 M.DOCKED = "docked"
 
