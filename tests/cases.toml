@@ -2300,11 +2300,13 @@ log_contains = [
     "bb_set stopping_order = Boolean(true)",
 ]
 
-# The press is confirmed by a reading and by nothing else: three frames of the
-# live stall in a row, the order still standing on every one of them, and the
-# action is still waiting rather than calling the job done. It also presses ONCE
-# in those three ticks — Stop is a button, and a second press inside the pace
-# lands on a client that has not answered the first.
+# THE PRESS IS CONFIRMED BY A READING AND BY NOTHING ELSE. Three frames of the
+# live stall in a row, at a pace that presses on every one of them, and the order
+# still standing on all three: the action is still waiting rather than calling
+# the job done. A gesture that left our side of the glass says nothing whatever
+# about what the client did with it — that is the lesson of every press in this
+# bot, and here it is the difference between a ship stopped and a ship the flight
+# has walked away from still flying.
 [[case]]
 name = "a press is not proof of a stop: the order still standing is still waited on"
 fixtures = [
@@ -2312,9 +2314,27 @@ fixtures = [
     "tests/fixtures/standing_order_approach.json",
     "tests/fixtures/standing_order_approach.json",
 ]
+tick_ms = 6000
 action = "stop_standing_order"
 expect = "Running"
 log_absent = ["is not taking orders"]
+[[case.log_counts]]
+needle = "click_path(\"shipui.stop_button\""
+times = 3
+
+# And the pace is a pace: at the tick this bot actually runs at, the same three
+# ticks make ONE press. Stop is a button and not an order — a second press inside
+# the pace lands on a panel that has not had time to answer the first, which is
+# the fault of 2026-08-05 that std.press exists for.
+[[case]]
+name = "Stop is pressed once and the client given its chance"
+fixtures = [
+    "tests/fixtures/standing_order_approach.json",
+    "tests/fixtures/standing_order_approach.json",
+    "tests/fixtures/standing_order_approach.json",
+]
+action = "stop_standing_order"
+expect = "Running"
 [[case.log_counts]]
 needle = "click_path(\"shipui.stop_button\""
 times = 1
