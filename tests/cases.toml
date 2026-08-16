@@ -2446,3 +2446,52 @@ action = "stop_standing_order"
 expect = "Failure"
 log_contains = ["warn: flight:", "drawn no Stop button in all that time"]
 log_absent = ["click_path("]
+
+# --- and the order this flight gave itself ----------------------------------
+#
+# THE RUN OF 2026-08-16, 16:02 to 16:05 UTC, which is the fix above eating the
+# flight it was written for. "Jump through stargate" IN EVE IS AN APPROACH: the
+# client takes the order, flies the ship at the gate under an Approach of its
+# own, and jumps when it arrives. The rule "a manoeuvre this flight never
+# ordered comes off the ship" read that Approach as somebody else's and pressed
+# Stop on it — ordered, stopped, ordered, stopped, nine rounds in three minutes,
+# every dumped frame of them reading speed 0.0 with the one route marker to
+# Perimeter still standing. Dock would do the same: it too is carried out as an
+# approach, and so the ship would never reach the station either.
+#
+# WHAT COMES OFF IS THE ORDER THIS FLIGHT FOUND, NEVER THE ONE IT GAVE, and the
+# step's own memory of having sent the ship somewhere is what tells the two
+# apart. It is _state: written where the ship is ordered somewhere and nowhere
+# else, and gone with the step, so the next run finds a board that remembers no
+# order of its own and takes a standing one off exactly as it did before.
+
+[[case]]
+name = "a jump this flight ordered is the client's own Approach, and is left alone"
+fixture = "tests/fixtures/standing_order_approach.json"
+setup_bb = { _state = "warp" }
+action = "stop_standing_order"
+expect = "Failure"
+log_absent = ["click_path(\"shipui.stop_button\"", "which this flight never ordered"]
+
+[[case]]
+name = "a dock this flight ordered is carried out the same way, and is left alone"
+fixture = "tests/fixtures/standing_order_approach.json"
+setup_bb = { _state = "dock" }
+action = "stop_standing_order"
+expect = "Failure"
+log_absent = ["click_path(\"shipui.stop_button\"", "which this flight never ordered"]
+
+# A fresh step, on a board that has been written to but carries no order of this
+# flight's: the standing order comes off, which is the whole reason the action
+# exists. _leg is here to say that it is an ORDER the memory is asked about and
+# not "has anything been written down at all".
+[[case]]
+name = "a step that has ordered nothing takes off the order it finds"
+fixture = "tests/fixtures/standing_order_approach.json"
+setup_bb = { _leg = "home" }
+action = "stop_standing_order"
+expect = "Running"
+log_contains = [
+    "click_path(\"shipui.stop_button\"",
+    "which this flight never ordered",
+]
