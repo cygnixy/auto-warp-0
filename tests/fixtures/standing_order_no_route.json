@@ -1,0 +1,33 @@
+{
+    "station_window": null,
+    "info_panel_container": {
+        "info_panel_route": {
+            "jumps": 0,
+            "next_system": null,
+            "route_element_marker": null
+        }
+    },
+    "session_time_indicator": {
+        "display": false,
+        "hint": "Session changing - Time left: A Short Amount of Time"
+    },
+    "hero_notification": { "texts": [] },
+    "shipui": {
+        "hitpoints_percent": { "armor": 100, "shield": 100, "structure": 100 },
+        "indication": {
+            "maneuver_type": "Approach",
+            "texts": ["Corpior Templar Wreck", "Approaching"]
+        },
+        "speed": 0.0,
+        "stop_button": { "x": 907, "y": 1007, "width": 12, "height": 12 }
+    },
+    "message_boxes": [],
+    "context_menus": [],
+    "standalone_bookmark_window": null,
+    "locations_window": null,
+    "stacking": {
+        "client_area": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+        "modal_active": false,
+        "window_stack": []
+    }
+}

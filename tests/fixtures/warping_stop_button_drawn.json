@@ -1,0 +1,35 @@
+{
+    "station_window": null,
+    "info_panel_container": {
+        "info_panel_route": {
+            "jumps": 1,
+            "next_system": "Perimeter",
+            "route_element_marker": [
+                { "region": { "x": 104, "y": 240, "width": 8, "height": 8 } }
+            ]
+        }
+    },
+    "session_time_indicator": {
+        "display": false,
+        "hint": "Session changing - Time left: A Short Amount of Time"
+    },
+    "hero_notification": { "texts": [] },
+    "shipui": {
+        "hitpoints_percent": { "armor": 100, "shield": 100, "structure": 100 },
+        "indication": {
+            "maneuver_type": "Warp",
+            "texts": ["Destination: Perimeter", "Establishing Warp Vector"]
+        },
+        "speed": null,
+        "stop_button": { "x": 907, "y": 1007, "width": 12, "height": 12 }
+    },
+    "message_boxes": [],
+    "context_menus": [],
+    "standalone_bookmark_window": null,
+    "locations_window": null,
+    "stacking": {
+        "client_area": { "x": 0, "y": 0, "width": 1920, "height": 1080 },
+        "modal_active": false,
+        "window_stack": []
+    }
+}
