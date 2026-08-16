@@ -81,21 +81,36 @@
     is_route_set?()
     push_undock_button()
 }
-/* The survey comes last of the three on purpose. move is the flight itself and
-   outranks everything here; the cloak is next, because a ship that should be
-   hidden should be hidden before it is inventoried; the survey takes what is
-   left, which in warp is every tick. It answers Running for the twenty-odd
-   ticks of a walk, and that is why it may not stand ahead of either: a fallback
-   stops at the first child that is not Failure.
+/* The stopping comes first of the four and the survey last, and both ends of
+   that order were bought with a run.
 
-   Its own two guards — the mission asked for it, and the ship is actually in
-   warp — are inside the action rather than here, unlike the cloak's phase_is
-   just below. Not for taste: an action is what a case can tick, and "asked for
-   but not flying yet" is exactly the state that has to be pinned by one. See
-   survey_ship.lua. */
+   THE STOPPING FIRST, because it is the only one of the four that can act on a
+   ship under somebody else's order, and because the other three cannot. On
+   2026-08-16 an Approach left on the ship by the fight step held this whole
+   fallback: move wants rest, the cloak wants a warp and the survey wants one
+   too, so every branch answered Failure and the flight stood still for nine and
+   a half minutes with its route laid and nothing whatever in the log. Standing
+   here it costs the other three nothing — it answers Failure on every tick that
+   is not that one — and on the ticks it does act it holds the tick, which is
+   right: there is nothing else to be done on a ship that will not take an order.
+
+   THE SURVEY LAST. move is the flight itself and outranks everything here; the
+   cloak is next, because a ship that should be hidden should be hidden before it
+   is inventoried; the survey takes what is left, which in warp is every tick. It
+   answers Running for the twenty-odd ticks of a walk, and that is why it may not
+   stand ahead of either: a fallback stops at the first child that is not Failure.
+
+   The guards of the stopping and of the survey — a manoeuvre this flight never
+   ordered and a route to fly; the mission asked for a survey and the ship is
+   actually in warp — are inside those actions rather than here, unlike the
+   cloak's phase_is just below. Not for taste: an action is what a case can tick,
+   and "the Stop button is on screen but this is a warp" and "asked for but not
+   flying yet" are exactly the states that have to be pinned by one. See
+   stop_standing_order.lua and survey_ship.lua. */
 -> on_space {
     @! phase_is?("docked")
     ? {
+        stop_standing_order()
         move
         @if(stealth) stealth
         survey_ship(survey_ship, remember_module_names)
