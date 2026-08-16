@@ -27,6 +27,22 @@ local M = {}
 -- button, it is the same gesture the operator uses to unpick this by hand, and
 -- pressing it costs a ship that was resting anyway nothing at all.
 --
+-- THE ORDER IT TAKES OFF IS THE ONE IT FOUND, NEVER THE ONE IT GAVE, and that
+-- distinction was bought with the run of 2026-08-16, 16:02 to 16:05 UTC — the
+-- first flight after the paragraphs above were written. "Jump through stargate"
+-- IN EVE IS AN APPROACH: the client takes the order, flies the ship at the gate
+-- under an Approach of its own, and jumps when it arrives. Read as somebody
+-- else's manoeuvre, that Approach was pressed off the ship one second after it
+-- was asked for — ordered, stopped, ordered, stopped, nine rounds in three
+-- minutes, every dumped frame reading speed 0.0 with the one route marker to
+-- Perimeter still standing at the end. Dock is the same shape and would have
+-- cost the same: it too is carried out as an approach.
+--
+-- SO THE MEMORY BELOW DECIDES. Once this flight has sent the ship anywhere in
+-- this step, every Approach after it is the client carrying that out, and there
+-- is nothing here to take off. Until it has, an Approach on the ship came from
+-- outside the step and is exactly what this action is for.
+--
 -- IT IS A NET UNDER cygnixy/mission-combat AND NOT A REPLACEMENT FOR IT. Since
 -- 0.34.0 that step takes its own Approach off when the collecting ends
 -- (loot_the_wrecks.stand_down), which is right — whoever gives a standing order
@@ -93,6 +109,33 @@ local REFUSED = "flight_stop_press"
 -- Not under keep_: an order belongs to the run it was found in.
 local STOPPING = "stopping_order"
 
+-- The step's own memory of having sent the ship somewhere.
+--
+-- _state is written where an order to move is given and nowhere else — by
+-- warp_choice.after_chosen for the three that come off a menu (the gate, the
+-- dock, the warp) and by push_undock_button for the one that comes off a
+-- button. A press is not an order: opening a menu, dismissing a message box,
+-- pressing Stop itself leave it untouched, and so none of them can talk this
+-- action out of its job.
+--
+-- Not under keep_ either, and that is what makes it safe to read here. The
+-- board is wiped between mission steps, so the memory dies with the step that
+-- made it: the next flight starts remembering no order of its own and takes a
+-- standing one off exactly as it did before. A memory that outlived its step
+-- would leave every later flight unable to unstick itself.
+--
+-- It is never unset within a step, and it is meant not to be. Once the ship has
+-- been sent somewhere, whatever it is doing afterwards it is doing because this
+-- flight asked — through the warp, through the gate, into the station — and
+-- there is no tick left in the step on which pressing Stop would be right.
+local ORDERED = "_state"
+
+-- Has this flight ordered the ship anywhere yet in this step?
+local function flight_has_ordered()
+    local ordered = cygnixy.bb_get(ORDERED)
+    return type(ordered) == "string" and ordered ~= ""
+end
+
 -- Everything the stopping kept, dropped.
 --
 -- THE CLOCK ABOVE ALL. A budget left standing would be spent already the next
@@ -123,6 +166,24 @@ function M.main(args)
                 "the manoeuvre this flight never ordered is off the ship — the client " ..
                 "shows " .. phase .. " now, and the flight goes on giving its orders " ..
                 "the way it always has")
+            let_go()
+        end
+        return "Failure"
+    end
+
+    -- THE FIRST HALF OF THE RULE, and the one the loop of 16:02 was missing:
+    -- an Approach that followed an order of this flight's is this flight's own,
+    -- whatever the client calls it. Asked before anything else about the
+    -- picture, because on a step that has ordered the ship somewhere there is
+    -- no manoeuvre this action may touch at all and nothing further worth
+    -- reading.
+    --
+    -- Letting go here as well as below: the stopping can only be under way if
+    -- it began before the order was given, and a budget and a mark left
+    -- standing would put the line about an order coming off the ship over a
+    -- manoeuvre this flight asked for itself.
+    if flight_has_ordered() then
+        if cygnixy.bb_get(STOPPING) == true then
             let_go()
         end
         return "Failure"
