@@ -2272,3 +2272,157 @@ setup_store = { module_names = { "1877" = { name = "Rapid Light Missile Launcher
 expect  = "Running"
 log_contains = ["hover("]
 log_absent = ["taken from the module-name store", "store_set module_names"]
+
+# --- the standing order nobody took off -------------------------------------
+#
+# THE RUN OF 2026-08-16, twice in one morning: 08:07 and 08:42 (UTC). The fight
+# step ordered an Approach at a wreck to collect it, the collecting ended, and
+# the client went on flying the ship at the wreck — Approach in EVE never ends,
+# the ship arrives, presses itself against the thing and keeps "approaching".
+# The flight that runs next gives its orders from rest and from nowhere else, so
+# it read `phase: approaching`, found no branch that fits, and did nothing at
+# all for five and a half minutes the first time and for nine and a half the
+# second, until the operator stopped the ship by hand.
+#
+# The fixtures below are frames of that second stall, taken from the run's own
+# dumps: standing_order_approach is 08:42:36 (Approach on Corpior Templar Wreck,
+# route to Perimeter, one jump), standing_order_gone is 08:52:20 — the frame the
+# order came off on, the ship at rest with the route still set.
+
+[[case]]
+name = "an order this flight never gave is taken off the ship"
+fixture = "tests/fixtures/standing_order_approach.json"
+action = "stop_standing_order"
+expect = "Running"
+log_contains = [
+    "click_path(\"shipui.stop_button\"",
+    "which this flight never ordered",
+    "bb_set stopping_order = Boolean(true)",
+]
+
+# The press is confirmed by a reading and by nothing else: three frames of the
+# live stall in a row, the order still standing on every one of them, and the
+# action is still waiting rather than calling the job done. It also presses ONCE
+# in those three ticks — Stop is a button, and a second press inside the pace
+# lands on a client that has not answered the first.
+[[case]]
+name = "a press is not proof of a stop: the order still standing is still waited on"
+fixtures = [
+    "tests/fixtures/standing_order_approach.json",
+    "tests/fixtures/standing_order_approach.json",
+    "tests/fixtures/standing_order_approach.json",
+]
+action = "stop_standing_order"
+expect = "Running"
+log_absent = ["is not taking orders"]
+[[case.log_counts]]
+needle = "click_path(\"shipui.stop_button\""
+times = 1
+
+# The ship comes out from under it: the flight goes on exactly as it did before
+# this action existed, and the clock the stopping kept is forgotten with it — a
+# budget left standing would report the NEXT stranded order as hopeless on its
+# first tick.
+[[case]]
+name = "rest ends it, and the clock the stopping kept is forgotten"
+fixtures = [
+    "tests/fixtures/standing_order_approach.json",
+    "tests/fixtures/standing_order_gone.json",
+]
+action = "stop_standing_order"
+expect = "Failure"
+log_contains = [
+    "is off the ship",
+    "bb_set wait_flight_stop",
+    "bb_set stopping_order = Boolean(false)",
+]
+
+# And a ship that was at rest all along is not congratulated on it. The line
+# above belongs to an order this action actually took on; said over every quiet
+# tick of every flight it would be noise.
+[[case]]
+name = "a ship that was never stopped by this action is passed over in silence"
+fixture = "tests/fixtures/standing_order_gone.json"
+action = "stop_standing_order"
+expect = "Failure"
+log_absent = ["is off the ship", "click_path(\"shipui.stop_button\""]
+
+# THE BUDGET IS THE WHOLE DIFFERENCE BETWEEN THIS AND THE STALL IT MENDS. A wait
+# with no end is the fault, not the cure: the ship that will not come out from
+# under the order is said out loud, in a line that names what is happening, and
+# the flight stops holding the tick over it.
+[[case]]
+name = "the ship that will not come out from under it is said out loud"
+fixtures = [
+    "tests/fixtures/standing_order_approach.json",
+    "tests/fixtures/standing_order_approach.json",
+    "tests/fixtures/standing_order_approach.json",
+]
+tick_ms = 8000
+action = "stop_standing_order"
+expect = "Failure"
+log_contains = ["warn: flight:", "is not taking orders"]
+
+# --- and the phases where there is nothing to stop --------------------------
+#
+# Every fixture below draws the Stop button, live, at the same place the stall's
+# frames do: the button is on screen through a warp and through a session change
+# too, so "the button is there" is no reason to press it. What decides is the
+# phase, and these are the phases where an order is the client's own business.
+
+[[case]]
+name = "in warp nothing is stopped"
+fixture = "tests/fixtures/warping_stop_button_drawn.json"
+action = "stop_standing_order"
+expect = "Failure"
+log_absent = ["click_path(\"shipui.stop_button\"", "which this flight never ordered"]
+
+[[case]]
+name = "in a session change nothing is stopped"
+fixture = "tests/fixtures/session_change_stop_button_drawn.json"
+action = "stop_standing_order"
+expect = "Failure"
+log_absent = ["click_path(\"shipui.stop_button\"", "which this flight never ordered"]
+
+[[case]]
+name = "a client between things is not a ship to stop"
+fixture = "tests/fixtures/phase_unknown.json"
+action = "stop_standing_order"
+expect = "Failure"
+log_absent = ["click_path(\"shipui.stop_button\"", "which this flight never ordered"]
+
+# The other half of the rule: an order standing on a ship with no route left to
+# fly is nobody's business of this bot's. The flight is over or has not been
+# given anything to do, and a bot that stops ships it has no plans for is a bot
+# taking the operator's own orders off.
+[[case]]
+name = "an order standing with no route to fly is left where it is"
+fixture = "tests/fixtures/standing_order_no_route.json"
+action = "stop_standing_order"
+expect = "Failure"
+log_absent = ["click_path(\"shipui.stop_button\"", "which this flight never ordered"]
+
+# NOT DRAWN YET IS NOT ABSENT. The ship panel arrives in its own time, and a
+# button that is not in the tree this tick is waited for — not concluded from.
+[[case]]
+name = "a Stop button not drawn yet is waited for, not concluded from"
+fixture = "tests/fixtures/standing_order_no_stop_button.json"
+action = "stop_standing_order"
+expect = "Running"
+log_contains = ["has not drawn its Stop button yet"]
+log_absent = ["warn:", "click_path("]
+
+# And a panel that never draws one is a different sentence, said once the budget
+# is spent: the order cannot be taken off from here at all.
+[[case]]
+name = "a Stop button that never arrives is said out loud on the same budget"
+fixtures = [
+    "tests/fixtures/standing_order_no_stop_button.json",
+    "tests/fixtures/standing_order_no_stop_button.json",
+    "tests/fixtures/standing_order_no_stop_button.json",
+]
+tick_ms = 8000
+action = "stop_standing_order"
+expect = "Failure"
+log_contains = ["warn: flight:", "drawn no Stop button in all that time"]
+log_absent = ["click_path("]
