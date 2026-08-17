@@ -21,7 +21,25 @@ local ACKNOWLEDGE = { OK = true, Close = true, Accept = true }
 
 function M.main(args)
     local boxes = cygnixy.eve.message_boxes
-    if not (boxes and #boxes > 0 and boxes[1].buttons) then
+    local modal_active = cygnixy.eve.stacking and cygnixy.eve.stacking.modal_active
+
+    if not (boxes and #boxes > 0 and boxes[1].buttons and #boxes[1].buttons > 0) then
+        if modal_active then
+            if press.pending("modal_escape", 1500) then
+                return "Running"
+            end
+            local pressed, err = pointer.press_key("escape")
+            press.made("modal_escape")
+            if pressed then
+                log.info("client", "a modal overlay is blocking the client — pressed Escape to close it")
+            else
+                log.repeated("modal_escape_press", "warn", "client",
+                    "failed to press Escape: " .. tostring(err))
+            end
+            return "Running"
+        end
+
+        press.done("modal_escape")
         press.done("message_box")
         return "Success"
     end
