@@ -6,88 +6,15 @@ local state = require("std.state")
 
 local M = {}
 
--- Takes off a manoeuvre this flight never ordered, so that it can order
--- anything at all.
---
--- THE RUN OF 2026-08-16, twice in one morning — 08:07 and 08:42 in the log's
--- own UTC. The fight step of the same mission ordered an Approach at a wreck to
--- collect it and the collecting ended; the client went on flying the ship at
--- Corpior Templar Wreck, fifteen metres off, because Approach in EVE NEVER
--- ENDS: the ship arrives, presses itself against the thing, and goes on
--- approaching for as long as anybody lets it. The flight that ran next found
--- `phase: approaching`, and this bot acts from rest and from nowhere else, so
--- every branch of its tree answered Failure and it did nothing whatever —
--- five and a half minutes the first time, nine and a half the second, the route
--- to Perimeter laid and the ship standing still. The order outlives the bot
--- that gave it: the second stall was a fresh run on a fresh mission.
---
--- THE DOCTRINE IS NOT WEAKENED, IT IS SERVED. "An order is given from rest" is
--- the rule of the whole project and it stays. What this action changes is that
--- the rest is now FETCHED rather than waited for: the ship panel has a Stop
--- button, it is the same gesture the operator uses to unpick this by hand, and
--- pressing it costs a ship that was resting anyway nothing at all.
---
--- THE ORDER IT TAKES OFF IS THE ONE IT FOUND, NEVER THE ONE IT GAVE, and that
--- distinction was bought with the run of 2026-08-16, 16:02 to 16:05 UTC — the
--- first flight after the paragraphs above were written. "Jump through stargate"
--- IN EVE IS AN APPROACH: the client takes the order, flies the ship at the gate
--- under an Approach of its own, and jumps when it arrives. Read as somebody
--- else's manoeuvre, that Approach was pressed off the ship one second after it
--- was asked for — ordered, stopped, ordered, stopped, nine rounds in three
--- minutes, every dumped frame reading speed 0.0 with the one route marker to
--- Perimeter still standing at the end. Dock is the same shape and would have
--- cost the same: it too is carried out as an approach.
---
--- SO THE MEMORY BELOW DECIDES. Once this flight has sent the ship anywhere in
--- this step, every Approach after it is the client carrying that out, and there
--- is nothing here to take off. Until it has, an Approach on the ship came from
--- outside the step and is exactly what this action is for.
---
--- IT IS A NET UNDER cygnixy/mission-combat AND NOT A REPLACEMENT FOR IT. Since
--- 0.34.0 that step takes its own Approach off when the collecting ends
--- (loot_the_wrecks.stand_down), which is right — whoever gives a standing order
--- takes it off. This one covers the orders nobody is going to come back for: one
--- left by an older version, one the operator gave by hand, one from a step that
--- died mid-errand. It never asks whose the order was, because it cannot know and
--- because the answer would not change what has to be done.
---
--- WHAT IT WILL NOT TOUCH, and the list is the point of the action rather than a
--- footnote to it: warping, jumping, docking, undocking, a session change, and
--- the unknown. There is nothing to stop in any of them — a warp is not a
--- standing order, it is a journey the client is running — and Stop pressed
--- there would either be refused or would throw away a jump this flight is in
--- the middle of. The phase decides, never the button: the live frames of that
--- morning draw the Stop button through the warp and through the session change
--- just as they draw it through the stall, so "the button is on screen" says
--- nothing at all about whether there is an order to take off.
---
--- Every read of cygnixy.eve is spelled out whole inside M.main: the path lint
--- follows a chain only within the function it starts in.
+-- Cancels external standing maneuvers (e.g. Approach or Orbit) prior to issuing flight orders.
+-- Does not interrupt in-flight warps, jumps, docking, or maneuvers initiated by this flight bot.
 
--- The ship panel's own Stop button, addressed by path and not by region — the
--- rule every press in this bot is made under (see std.pointer): along a path the
--- host works the click point out with whatever lies over the button taken into
--- account, and the ship panel is the one strip of the screen a chat window or an
--- inventory is most likely to be resting on.
 local STOP = "shipui.stop_button"
 
--- How long one press of Stop stands before it is made again, in milliseconds.
---
--- Five seconds, and it is cygnixy/mission-combat's own pace for the same button
--- rather than a number invented here: a reading of the client may be up to 4.8
--- seconds old (measured 2026-08-11), so anything shorter presses a second time
--- at a panel that could not yet be showing the answer to the first.
+-- Pacing cooldown between Stop button click attempts.
 local ORDER_MS = 5000
 
--- How long the ship is given to come out from under the order before the
--- trouble is said out loud, in milliseconds.
---
--- Fifteen seconds — three times the age a reading may have, and three presses.
--- It is a budget for SAYING and not for giving up: past it the button goes on
--- being pressed at the same pace, because there is nothing else this flight can
--- do and no number of attempts makes an order wrong (see std.log on why the
--- count is the news). What it buys is that the operator hears about a client
--- that will not let go, instead of reading five minutes of silence.
+-- Timeout for standing order cancellation before escalating log warnings.
 local STOP_MS = 15000
 
 -- The press, the clock and the lines this action keeps between ticks.

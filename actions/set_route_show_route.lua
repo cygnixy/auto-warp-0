@@ -4,17 +4,8 @@ local press = require("std.press")
 
 local M = {}
 
--- Opens the route block of the info panel, if it is not shown already.
---
--- Everything downstream reads the route from that block: is_route_set, the
--- markers the ship is steered by, the exit condition of the whole flight. When
--- the block is collapsed the parse has no InfoPanelRoute at all, so a route
--- that exists looks exactly like a route that does not — on 2026-08-05 the bot
--- laid a route, could not see it, and stopped in the station believing there
--- was nothing to fly.
---
--- The icon is a toggle, like the magnifier: it is pressed only while the block
--- is absent, and the next tick reads the tree again to see the result.
+-- Ensures the route panel is visible and expanded to expose waypoint markers.
+-- The route icon behaves as a toggle control.
 function M.main(args)
     local panel = cygnixy.eve.info_panel_container
     local route = panel and panel.info_panel_route
@@ -27,11 +18,7 @@ function M.main(args)
         return "Success"
     end
 
-    -- The block is there and the header counts jumps, but no markers are drawn:
-    -- the panel is collapsed, and collapsed it shows nothing to aim at. The
-    -- flight steers by those markers, so the panel is expanded before anything
-    -- else happens. This is the state the bot hung in on 2026-08-05 at 21:13 --
-    -- route laid, panel shut, nothing visible to click.
+    -- Expands collapsed route block when jumps > 0 but waypoint markers are hidden.
     if route and type(jumps) == "number" and jumps > 0 then
         local expand = route.expand
         if not (expand and expand.x ~= nil) then

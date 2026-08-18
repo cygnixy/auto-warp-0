@@ -5,31 +5,13 @@ local press = require("std.press")
 
 local M = {}
 
--- Three attempts: typing leaves for another application as input events, and
--- the client occasionally applies part of the characters later than the
--- rest -- on 2026-08-07 the "Fun" from the middle of a station name ended up
--- at the end, the search found nothing, and the bot spent three hours
--- retyping the field without noticing that the clearing cross was covered by
--- another window. A retry fixes the occasional race; the ceiling stops it
--- from spinning silently when the cause is something else.
+-- Maximum retry attempts for clearing and typing destination into search field.
 local MAX_ATTEMPTS = 3
 
--- Clicks into the search field and types the destination.
+-- Focuses the search input field and types the destination text via Unicode events.
 --
--- The click is what focuses the field: without it the characters reach the
--- game as hotkeys, and EVE has a shortcut for most letters -- the recon that
--- taught us this opened the settings window and an information panel before
--- anyone noticed. Typing goes through cygnixy.type_text, which sends Unicode
--- events: the operator's keyboard layout cannot turn "jita" into something
--- else.
---
--- Typing is a press like any other, and the rule is the same: type once, then
--- let the client answer. It is worse here than elsewhere, because typing does
--- not replace what is in the field -- it adds to it. Without the wait this
--- action typed the destination once a tick, each time onto the end of the
--- last, and the field filled with copies of a station name that could never
--- match the one being looked for. On 2026-08-05 at 20:34 it did that
--- twenty-three times running and the mission never left the hangar.
+-- @param args table args[1] = destination, args[2] = return_destination
+-- @return string "Success", "Running", or "Failure"
 function M.main(args)
     -- args[1] is the outward destination, args[2] the return one; leg.pick
     -- chooses between them by what leg.lua reads off the blackboard.
@@ -56,16 +38,7 @@ function M.main(args)
         return "Running"
     end
 
-    -- Anything at all in the field is in the way, and the cross is how that is
-    -- known: it appears with the first character and goes with the last. The
-    -- text is not always readable -- under a modal it reads as nothing -- and
-    -- typing on the strength of an empty read is what put the destination into
-    -- the field twice on 2026-08-05, until the client refused the search as
-    -- too long and blocked itself with the refusal.
-    -- Anything in the field is in the way: typing adds to it rather than
-    -- replacing it. The text is what says so -- the cross is always there on
-    -- this client, empty field or not, and judging by it left the bot
-    -- clearing nothing for ever.
+    -- Checks if input field already contains stale text that requires clearing.
     local text = search.text
     if type(text) == "string" and text ~= "" then
         local cross = search.clear

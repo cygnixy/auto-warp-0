@@ -16,11 +16,7 @@ function M.main(args)
         return "Failure"
     end
 
-    -- The text is the truth, now that it is read from the field itself and
-    -- not from a label the client may not draw. The cross is not a sign of
-    -- anything: this client keeps that icon inside the edit box whether or
-    -- not there is text to clear, and reading it as "something is in there"
-    -- had the bot clearing an empty field for ever on 2026-08-05 at 21:08.
+    -- Directly checks text content rather than clear button presence.
     local text = search.text
     if type(text) ~= "string" or text == "" then
         press.done("clear_field")

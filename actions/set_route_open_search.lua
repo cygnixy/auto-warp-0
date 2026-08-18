@@ -28,12 +28,7 @@ function M.main(args)
         return "Failure"
     end
 
-    -- A panel on its way open is a panel answering. It slides in, and its
-    -- field slides with it: on 2026-08-06 the field stood at x=98 for one
-    -- press and x=103 for the next, two seconds later, with display false
-    -- throughout -- the flag turns true only once the panel has arrived. The
-    -- first press had worked, and the second landed on something moving. The
-    -- same lesson as the ship's speed: motion is the client obeying.
+    -- Detects search panel slide animation and waits for coordinates to settle.
     local field_x = search and search.field and search.field.x
     local seen = cygnixy.bb_get("search_field_x")
     if type(field_x) == "number" then
@@ -44,17 +39,10 @@ function M.main(args)
         end
     end
 
-    -- The panel is not open and the icon is a toggle: press it once and let
-    -- the client answer. Pressing every tick would open and close it in turn,
-    -- which is how the closing half of this pair spent twenty-two seconds on
-    -- 2026-08-05.
+    -- Pacing cooldown to prevent rapid toggling of search button.
     if press.pending("open_search") then
         return "Running"
     end
-    -- What the panel says about itself at the moment of the press, because on
-    -- 2026-08-06 the search opened on the fourth press and seven seconds after
-    -- the mission began, and nothing in the log said why the first three did
-    -- nothing. Guessing has cost enough today; the next flight will say.
     local icon = icons.search
     log.debug("route", "pressing the magnifier: display=" .. tostring(search and search.display) ..
         ", icon=" .. tostring(icon and icon.x) .. "," .. tostring(icon and icon.y) ..

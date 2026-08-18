@@ -20,9 +20,7 @@ function M.main(args)
         return "Running"
     end
 
-    -- Pressed once, then given its chance: the station window lingers for a
-    -- second after the press, and a second press in that second lands on a
-    -- window already on its way out. It was pressed twice on 2026-08-05.
+    -- Cooldown check to avoid duplicate clicks during station window closing animation.
     if press.pending("undock") then
         return "Running"
     end

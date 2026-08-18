@@ -1,31 +1,8 @@
-/* The mission: set a route, fly it, and — if a return destination is given —
- * turn around and fly it back.
+/* Auto-warp-0 Bot: Autonomous travel navigation and stargate autopilot.
  *
- * destination — the name to search for. Empty means "the route is already
- * set, just fly it", which is exactly what this bot did before it could set
- * routes, so an operator who upgrades and changes nothing gets the old
- * behaviour.
- *
- * destination_kind — which category of the search results the name is looked
- * up in: "system" for a solar system, "station" for a station. The route ends
- * where it is told to end, and flying is the same either way: fly_route picks
- * "Dock" from the route marker's menu just as readily as "Jump Through
- * Stargate".
- *
- * return_destination, return_kind — the same two questions for the way home.
- * An empty return_destination is a one-way mission: it flies out and stops
- * there, which is the behaviour above unchanged. A return_destination given
- * closes the mission instead: once the outward leg is flown, legs_done turns
- * the ship around and set_route is asked for the return place instead of the
- * outward one.
- *
- * There is no second set_route or fly_route below: neurofolia's named
- * subtrees are shared nodes rather than copies (graph.rs:51 adds an edge to
- * the same index however many times the name is written), so a tree cannot
- * fly to two different places by referencing set_route twice. Instead there
- * is one leg at a time, held on the blackboard by leg.lua, and the pair of
- * commands runs once per leg inside a repeat: the outward leg first, and —
- * only if legs_done flips it — the return leg on the next pass. */
+ * Coordinates route traversal, destination searching, in-flight fitting survey,
+ * travel Overview tab maintenance, and standing order clearance.
+ */
 
 destination = ""
 destination_kind = "system"
@@ -35,204 +12,45 @@ return_kind = "station"
 stealth = false
 bookmark_jump = false
 push_button_yes = false
-
-/* travel_tab — the tab the ship flies by: its place in the overview's strip,
- * counting from one. THERE IS NO DEFAULT AND NONE MAY BE INVENTED — which preset
- * sits where is a property of a client somebody set up — so a mission that hands
- * nothing down gets nothing switched, said once and out loud.
- *
- * The requirement is the operator's, on 2026-08-13, and it is about safety. The
- * fight step of the same mission puts the overview on the tab it FIGHTS by, and
- * that tab shows whatever the operator's filter shows in the system the ship is
- * in: pirates in a mission pocket, and at a gate in Niyabainen the empire's own
- * customs officers and sentry guns — which the fight took as targets, because on
- * its tab every row is an enemy. The fight step waits for the pocket now; this
- * bot holds the flying tab for the whole flight, so that the screen the ship
- * travels under is one somebody chose. */
 travel_tab = 0
-
-/* survey_ship — write the ship's module panel down while flying.
- *
- * Off, and off is the honest default for a bot this shared: a mission with no
- * fight ahead of it has no use for the survey, and the walk costs ten hovers.
- * The mission that wants one asks for it (agent-mission-loop does, for its
- * flight step), and the survey is then taken in warp, where the twenty seconds
- * are being spent on flying anyway rather than added to the mission. It is
- * written down under a keep_ key, so it outlives this step and reaches the
- * fight ready-made. See survey in fly_route.btree. */
 survey_ship = false
-
-/* remember_module_names — whether what the survey learns outlives the run.
- *
- * The walk costs ten hovers and buys ten NAMES; a name belongs to the module's
- * TYPE, and the type is read off the panel for free on every tick. So the pairs
- * go into a file the host keeps outside any bot, and a ship whose types are all
- * known is written down without a single hover. See std/modules.lua.
- *
- * Off, and off for the same reason survey_ship is: this bot is shared, and a
- * file on the operator's machine is not something a bot writes because nobody
- * said no. Off means off at both doors — nothing is read and nothing is
- * written — so a mission that upgrades this bot and changes nothing cannot tell
- * the difference.
- *
- * Separate from survey_ship rather than folded into it, because the two answer
- * different questions: whether this flight owes a survey at all, and whether
- * what it learns is kept. A mission may want the first without the second — a
- * ship being refitted between missions is surveyed every time and remembered
- * never. */
 remember_module_names = false
-
 downtime_guard_seconds = 300
 
 include('set_route.btree')
 include('fly_route.btree')
 
-/* journal writes the mission's account of itself and presses nothing. It sits
- * in a plain sequence ahead of the commands so that it runs on every tick of
- * both: inside the memory sequence below it would run once, be remembered as
- * done, and the flight — the part worth reading back — would go unrecorded.
- * It always succeeds, so the commands are reached whatever it sees. */
 -> main {
-    /* The server going away outranks everything: no order is worth giving
-       to a client that is about to lose it, and a "Connection Lost" modal
-       means none can be given at all. Failure here fails the whole tree,
-       which is how a mission stops with a reason instead of running
-       forever against a dead client. */
+    /* Abort if cluster downtime is imminent */
     downtime_guard(downtime_guard_seconds)
 
+    /* Record destination and execution details */
     journal(destination, destination_kind, return_destination)
 
-    /* Whether the ship is getting anywhere at all, and the only guard in this
-       bot that is about the flight as a whole rather than about one gesture.
-
-       AS EARLY AS IT CAN BE, and that placement is the whole of its reach.
-       Twelve actions in this bot can answer Running with no clock of their own —
-       every step of the search that sets a route, the undock, the modal — and
-       any one of them holds this plain sequence for as long as the client
-       refuses to answer. A guard standing behind them would be starved by
-       exactly the branches it exists to catch. Standing here, ahead of
-       everything that can hold a tick, it sees every one of them.
-
-       Never Running, so it costs the tick nothing, and it presses nothing: a
-       message box blocking the client does not blank the panels it reads.
-       Failure, loudly and once, when nothing on the client has changed for a
-       quarter of an hour. See flight_progress.lua for what "nothing" means and
-       why it is that long. */
+    /* Monitor overall flight progress to prevent infinite stalls */
     flight_progress()
 
-    /* And whether anybody knows why there is nothing to fly, when there is
-       nothing to fly.
-
-       HERE, IN THE PLAIN SEQUENCE, BECAUSE ONLY HERE CAN IT END THE RUN. Its
-       Failure fails main; the same Failure inside the fallback below would only
-       send the tick on to the flight, which is the loop that cannot end. And
-       beside flight_progress for the same reason as flight_progress: a dozen
-       actions in this bot answer Running with no clock, and a budget standing
-       behind them would never be spent.
-
-       It fails ONLY the emptiness nothing explains. The emptiness the client
-       accounts for — the mission's place being in this very system — is
-       flight_is_over's business, one node down, and it is a Success there:
-       the ship is where it was to be taken. Success from here on an emptiness
-       nobody understands would say the same thing untruthfully, and the fight
-       step would warp at a place that may not exist. */
+    /* Verify flight destination is valid/meaningful */
     somewhere_to_fly(destination, return_destination)
 
-    /* A modal blocks the whole client, so it goes first and the rest of the
-       tick waits behind it. Only the acknowledging kind is pressed here -- OK
-       and Close, never Yes. */
+    /* Clear blocking message boxes if present */
     dismiss_message_box()
 
-    /* The screen the ship travels under. After the modal, because a modal takes
-       every click there is; before the flight, because the tab is what the
-       operator watches the flight on — and because it costs the flight nothing:
-       this action NEVER answers Running, so the warp of this tick is ordered on
-       this tick. Nothing in this bot reads an overview row, which is the whole
-       reason it may answer Success while its own press is still in flight;
-       mission-combat, where a row IS pressed by the region read this tick, has to
-       hold the tick instead. */
+    /* Ensure Overview is on travel tab for flight safety */
     select_travel_tab(travel_tab)
 
-    /* Whether the ship's own health can be read, said once and pressing nothing.
-       The operator's requirement of 2026-08-13, and it is about WHEN the trouble
-       is heard: the health is the only sign a fight has for when to leave, it was
-       missing for the whole run of that day's 11:35, and the first anybody heard
-       of it was the fight step saying so from inside the mission's pocket — four
-       jumps after the last moment anybody could have fixed it. It is a setting,
-       fixed at the keyboard in five seconds, so it is looked at here while the
-       ship is still on its way.
-
-       It only SAYS. A health nobody can read costs a flight nothing — this bot
-       never shoots — and failing the route over a setting only a human can change
-       would punish the mission for its own warning. mission-combat is where the
-       same reading refuses to take a target, because that is where acting without
-       it means fighting to the explosion.
-
-       It never answers Running and never Failure, so it costs the flight of this
-       tick nothing at all. */
+    /* Verify and report ship HUD health readability */
     report_ship_health()
 
-    /* EITHER THERE IS SOMETHING TO FLY, AND THE BLOCK BELOW FLIES IT, OR THERE
-       IS NOT, AND THE STEP IS DONE.
-
-       The condition comes first because the block below cannot answer it: a
-       flight with no destination and no route to follow makes set_route fail,
-       and @repeat_until_success runs it again, and again, for as long as anybody
-       leaves it — in complete silence. The run of 16:51 stood exactly there,
-       with everything upstream of it correct: the mission was known to be in
-       hand, the route was correctly not laid, and the reason was correctly named
-       in the log. Then nothing, for as long as the operator watched it.
-
-       A step that can neither move nor finish is not allowed to exist. So the
-       question is asked here, where a Success ends the run, rather than inside
-       the loop where an answer has nowhere to go.
-
-       A PLAIN fallback and not a memory one: the question has to be asked again
-       on every tick, because the client's answer to it changes. What keeps it
-       from cutting a flight short on arrival —
-       where the route has emptied itself and the mission entry has begun
-       offering a warp — is the condition's own third branch: once anything has
-       been ordered, it answers "there is something to fly" and the block below
-       owns its ending. See somewhere_to_fly.lua. */
+    /* Execute route flight or finalize immediately if already at destination */
     ? {
-        /* Nothing to fly — but the flight still owes the survey, because there
-           will be no warp to take it in. The ship is standing in space with
-           nothing else to do, which is the only sensible place left for it: in
-           the pocket the same twenty seconds are spent under fire, and in the
-           hangar the slots say something else. The run of 17:11 fought without
-           it — no defence, no weapons, no propulsion, three lines saying so and
-           a target closing.
-
-           A sequence and not one action, because the two halves are two
-           questions: whether this flight is over, and what it owes before it
-           ends. The walk answers Running for a score of ticks and the step goes
-           on ticking through it; when it is done, the step ends. */
+        /* Destination reached: execute static fitting survey if required */
         -> {
             flight_is_over?(destination, return_destination)
             survey_without_flying(survey_ship, remember_module_names)
         }
 
-        /* The outer ->* is memory: once the whole mission — both legs, if there
-           are two — is done, it stays done, and a mission restarted mid-flight
-           does not repeat legs it already flew.
-           The inner repeat_until_success is the loop the turn lives in: each
-           pass sets the route for the current leg and flies it in a fresh
-           memory sequence, then asks legs_done whether another leg remains.
-           legs_done succeeding ends the mission (Success bubbles out of the
-           repeat and the outer ->* forgets nothing further needs doing). legs_done
-           failing — the turn — fails the sequence it sits in, which is exactly
-           what @repeat_until_success is watching for: it runs the sequence again,
-           and because ->* forgets its own progress on completion (not on
-           failure of what follows it), the inner ->* starts the route from
-           scratch. By then leg.lua's _leg already says "home", so set_route and
-           fly_route are asked for the return place.
-
-           Timeline of the turn: on the tick the outward leg's ->* completes with
-           Success, legs_done runs in the same tick, flips _leg to "home", and
-           returns Failure — the sequence around it fails, the repeat stays
-           Running. On the next tick the inner ->* re-enters from its first step,
-           and by then _leg already reads "home", so every set_route action asks
-           for the return destination instead of the outward one. */
+        /* Flight traversal loop across legs */
         ->* {
             @repeat_until_success -> {
                 ->* {

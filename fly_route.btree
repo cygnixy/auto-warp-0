@@ -1,50 +1,7 @@
-/* Strategic command: fly the route that is already set.
+/* Strategic command: Traverses active plotted route.
  *
- * Succeeds when no route remains and, for a leg that ordered a dock, the
- * ship is actually docked — that is what "the route has been flown" looks
- * like from the outside, and a route to a station does not end the same
- * way a route to a system does. A route to a station ends inside it: the
- * last marker offers Dock, and an empty route with the ship still adrift
- * is a leg not yet finished. A route to a system ends in open space with
- * nothing further to press: the route empties itself on arrival and there
- * is no station to wait for.
- *
- * Which of the two applies is read off _state — what was actually ordered,
- * written by warp_choice.after_chosen the moment open_route_menu_and_warp
- * chooses Dock from the route marker's own menu — not off destination_kind
- * or return_kind. Those are the operator's own text fields, and the first
- * live mission this fix was built for set no route itself at all: another
- * bot (agent-missions) laid the route, this one only flew it, and
- * destination_kind sat at its default ("system") whether or not the route
- * it never wrote actually ended at a station. Gating on that default would
- * have declared the mission over the instant the route ran out, in open
- * space, Dock never even ordered — the same silent wrong answer the exit
- * condition used to give the other way round, just for the opposite kind
- * of leg. _state answers the only question that matters and cannot be
- * stale about it: was a dock actually asked for on the way here.
- *
- * Requiring a dock regardless of what was actually ordered left a
- * system-kind leg — the default this bot ships with — circling an empty
- * route forever after a live mission on 2026-08-09 flew exactly that route
- * and arrived. Everything else is Running: the tree keeps ticking and the
- * ship keeps moving.
- *
- * Idempotent by construction: with no route set the exit condition holds on
- * the first tick and the command is done without touching anything.
- *
- * The exit condition below is not reached every tick the way its comment
- * might suggest. It sits as the second child of a plain (memoryless)
- * Sequence, and neurofolia's Sequence stops at the first child that is not
- * Success (sequence.rs) — so on any tick where the body above answers
- * Running (open_route_menu_and_warp does, for as long as there is
- * something to try ordering), this condition is never ticked at all,
- * whatever it would have said. It is reached only on the tick the body's
- * own Fallback fails outright — nothing left anywhere for it to attempt —
- * and @fail_is_success turns that Failure into the Success that lets this
- * Sequence continue (fallback.rs). Confirmed against those two files and
- * against tree.rs, which ticks the root exactly once per iteration: this
- * is not a guess about the DSL's intent, it is what the engine actually
- * does. */
+ * Succeeds when route markers are empty and the ship is at its final destination / docked.
+ */
 
 -> fly_route {
     @repeat_until_success -> {
@@ -57,7 +14,7 @@
                 on_station
             }
         }
-        /* exit condition */
+        /* Exit condition: route cleared and dock/arrival confirmed */
         -> {
             ? {
                 @! is_state?("dock")
@@ -67,64 +24,31 @@
         }
     }
 }
+
 -> push_message_boxes {
     is_message_boxes?()
     push_message_boxes()
 }
-/* Undocking is pressed only from a hangar the client is showing. The three
-   guards this replaces — no session change, in a station, and three seconds
-   since the last press — were all trying to say that, and the timer was there
-   because "in a station" stayed true for a moment after the press. The phase
-   goes to undocking the instant the client announces it. */
+
 -> on_station {
     phase_is?("docked")
     is_route_set?()
     push_undock_button()
 }
-/* The stopping comes first of the four and the survey last, and both ends of
-   that order were bought with a run.
 
-   THE STOPPING FIRST, because it is the only one of the four that can act on a
-   ship under somebody else's order, and because the other three cannot. On
-   2026-08-16 an Approach left on the ship by the fight step held this whole
-   fallback: move wants rest, the cloak wants a warp and the survey wants one
-   too, so every branch answered Failure and the flight stood still for nine and
-   a half minutes with its route laid and nothing whatever in the log. Standing
-   here it costs the other three nothing — it answers Failure on every tick that
-   is not that one — and on the ticks it does act it holds the tick, which is
-   right: there is nothing else to be done on a ship that will not take an order.
-
-   THE SURVEY LAST. move is the flight itself and outranks everything here; the
-   cloak is next, because a ship that should be hidden should be hidden before it
-   is inventoried; the survey takes what is left, which in warp is every tick. It
-   answers Running for the twenty-odd ticks of a walk, and that is why it may not
-   stand ahead of either: a fallback stops at the first child that is not Failure.
-
-   The guards of the stopping and of the survey — a manoeuvre this flight never
-   ordered and a route to fly; the mission asked for a survey and the ship is
-   actually in warp — are inside those actions rather than here, unlike the
-   cloak's phase_is just below. Not for taste: an action is what a case can tick,
-   and "the Stop button is on screen but this is a warp" and "asked for but not
-   flying yet" are exactly the states that have to be pinned by one. See
-   stop_standing_order.lua and survey_ship.lua. */
 -> on_space {
     @! phase_is?("docked")
     ? {
+        /* Clear external/stale maneuvers prior to navigation */
         stop_standing_order()
         move
         @if(stealth) stealth
+        /* Execute ship module survey in warp if enabled */
         survey_ship(survey_ship, remember_module_names)
     }
 }
-/* One phase says all of it: in space, nothing announced, no manoeuvre under
-   way — the ship is free and an order given now will be taken. The five
-   guards this replaces could each say what was not happening; none could say
-   the client was ready, so between them sat a three-second timer guessing. */
+
 -> move {
-    /* session is here on trial: the client is said to refuse context menus
-       while it changes, and the wait costs nine seconds after every jump.
-       The action probes once per session change and reports what happened;
-       if the claim holds, this word comes back out. */
     phase_is?("adrift", "session")
     ? {
         @if(bookmark_jump) dock_bookmark
@@ -132,24 +56,19 @@
         open_route_menu_and_warp()
     }
 }
-/* The wait that stood here as a condition has moved into the action, where
-   every other press in this bot is spaced. The wait itself stays — it guards
-   a toggle rather than an order, and F1 pressed twice uncloaks the ship it
-   just cloaked — but the tree is no place for it: the tree asks what is true,
-   and how long a press is given to land is the action's business. With it
-   goes the last timer told in whole seconds off the wall clock.
 
-   What is left is what a tree is for: not cloaked already, and in warp. */
 -> stealth {
     @! is_stealth?()
     phase_is?("warping")
     stealth()
 }
+
 -> dock_bookmark {
     is_state?("warp")
     is_last_system?()
     open_dock_bookmarks_menu_and_warp()
 }
+
 -> undock_bookmark {
     is_state?("undock")
     open_undock_bookmarks_menu_and_warp()
