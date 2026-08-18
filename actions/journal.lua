@@ -57,13 +57,7 @@ function M.main(args)
         if cygnixy.bb_get("_leg") == nil then
             cygnixy.bb_set("_leg", "out")
         end
-        -- The version line below is the flight delimiter: bot-harness
-        -- `flight` cuts lua.log by "mission: ... on cygnixy ...". Reword it
-        -- and the parser goes blind.
-        --
-        -- The versions first, and in the mission's own log rather than the
-        -- application's: a log read an hour later is read to answer "what was
-        -- flying, and on what", and until 2026-08-05 it could not.
+        -- Log version banner for flight delimiter tracking.
         log.info(
             "mission",
             "auto-warp-0 " .. tostring(cygnixy.bot_version) ..
@@ -75,10 +69,6 @@ function M.main(args)
                 "mission",
                 "bound for " .. destination .. ", looked up among the " .. tostring(kind) .. "s"
             )
-            -- Read by the flight parser too: the "and back to " prefix is
-            -- the anchor bot-harness `flight` looks for. Printed only when a
-            -- return leg was actually requested — a one-way mission stays
-            -- silent about it, and the parser reads that silence as None.
             if text(return_destination) then
                 log.info("mission", "and back to " .. return_destination)
             end
@@ -87,56 +77,25 @@ function M.main(args)
         end
     end
 
-    -- The phase, read from the same module the tree acts on, so the log and
-    -- the behaviour can never disagree about what is going on.
+    -- Phase observation and change logging.
     local phase = state.phase()
 
-    -- The journal is the only thing that runs on every tick in every phase, so
-    -- the order's clock is kept from here. It watches; the bookkeeping rules
-    -- themselves live in order.lua, next to the guard that reads them.
     order.observe(phase)
 
     local was_phase = cygnixy.bb_get(PHASE)
     if phase ~= was_phase then
-        -- Debug, not info: phases change several times a jump and the reader
-        -- following the mission does not need them. The reader hunting a
-        -- fault needs nothing else.
         log.debug("phase", tostring(was_phase == nil and "-" or was_phase) .. " -> " .. phase)
         cygnixy.bb_set(PHASE, phase)
 
-        -- A phase change is proof the client is answering, and the counters
-        -- that turn a repeated line into a warning mean "the same thing to no
-        -- effect". On 2026-08-05 at 18:51 the third order to jump was warned
-        -- about one second after the warp it had caused ended — the orders had
-        -- all worked, on three separate gates, and only the count was kept
-        -- across them. Any change of phase clears it; a bot that is truly
-        -- stuck changes phase not at all.
         log.forget("chose")
         log.forget("route_menu")
 
-        -- A new phase earns a fresh attempt at ordering straight away, rather
-        -- than waiting out the spacing left over from the phase before.
         cygnixy.bb_set("press_session_probe", 0)
-
-        -- And a new session change is worth one line about waiting it out.
         cygnixy.bb_set("said_session_early", 0)
 
-        -- An order ends where the client says it ended, and only some phases
-        -- say that. Which ones, and why docking and arriving at a gate are not
-        -- among them, is written down in order.lua beside the rest of the
-        -- order's bookkeeping: on 2026-08-05 at 21:03 the phase flickered
-        -- docking -> adrift -> docking and the bot ordered Dock a second time
-        -- into a ship already on its way in.
         order.ends_with_phase(phase)
     end
 
-    -- The unknown is the one phase in which this bot does nothing at all: no
-    -- branch of the flight tree runs in it. Passing through it is ordinary —
-    -- the client blanks its panels between systems — but staying in it is the
-    -- shape a hang takes, and on 2026-08-06 at 14:32 it took exactly that
-    -- shape for eighty-two seconds without a word. Counted rather than timed:
-    -- three ticks of it is a passage, eighty is a fault, and the count says
-    -- which without anyone having to choose a number of seconds.
     if phase == state.UNKNOWN then
         log.steady("phase_unknown", "debug", "flight",
             "the client is saying nothing about where the ship is")
@@ -196,9 +155,7 @@ function M.main(args)
     local markers = (route and route.route_element_marker) and #route.route_element_marker or 0
     local before = cygnixy.bb_get(ROUTE) or 0
 
-    -- Silence is not an empty route. The panel blanks for a moment while the
-    -- client changes session, and on 2026-08-05 that made the journal announce
-    -- the route a second time, mid-flight, as though it had just been set.
+    -- Suppress false route-cleared events during session changes.
     if markers == 0 and not state.settled(phase) then
         markers = before
     end

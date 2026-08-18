@@ -183,10 +183,7 @@ function M.main(args)
         return "Running"
     end
 
-    -- ONCE, AND THEN THE CLIENT IS GIVEN ITS CHANCE. Stop is a button and not an
-    -- order: a second press inside the pace lands on a panel that has not had
-    -- time to answer the first, and the run of 2026-08-05 is what that costs —
-    -- forty-three presses in twenty-two seconds, each undoing the last.
+    -- Rate-limit Stop clicks to prevent toggling the order before the client responds.
     if not press.pending(PRESS, ORDER_MS) then
         local pressed, reason = pointer.click(STOP)
         press.made(PRESS)

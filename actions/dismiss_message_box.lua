@@ -4,19 +4,8 @@ local press = require("std.press")
 
 local M = {}
 
--- Acknowledges a modal the client has put up, and only acknowledges it.
---
--- "OK" and "Close" say "I have read this"; "Yes" says "do it". Only the first
--- kind is pressed here, without asking anyone, because a modal blocks the
--- whole client and a bot that cannot dismiss it can do nothing at all. The
--- consenting kind stays behind the push_button_yes flag where the operator put
--- it.
---
--- On 2026-08-05 the client answered an over-long search with "Information:
--- Search String Too Long". Nothing in the bot pressed OK — push_message_boxes
--- knows only "Yes", and it runs only during the flight — so the modal stood
--- there while set_route typed into a field it could no longer read, for four
--- minutes, until the operator stopped the mission.
+-- Acknowledges standard informational modals (OK/Close/Accept).
+-- Consenting buttons (Yes/No) are guarded by user flags.
 local ACKNOWLEDGE = { OK = true, Close = true, Accept = true }
 
 function M.main(args)
