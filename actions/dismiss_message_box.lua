@@ -1,3 +1,5 @@
+local act = require("std.act")
+local dialog = require("std.dialog")
 local log = require("std.log")
 local pointer = require("std.pointer")
 local press = require("std.press")
@@ -9,10 +11,10 @@ local M = {}
 local ACKNOWLEDGE = { OK = true, Close = true, Accept = true }
 
 function M.main(args)
-    local boxes = cygnixy.eve.message_boxes
-    local modal_active = cygnixy.eve.stacking and cygnixy.eve.stacking.modal_active
+    local boxes = dialog.boxes()
+    local modal_active = dialog.modal_active()
 
-    if not (boxes and #boxes > 0 and boxes[1].buttons and #boxes[1].buttons > 0) then
+    if not (boxes and boxes[1].buttons and #boxes[1].buttons > 0) then
         if modal_active then
             if press.pending("modal_escape", 1500) then
                 return "Running"
@@ -36,17 +38,15 @@ function M.main(args)
     for _, button in ipairs(boxes[1].buttons) do
         local node, label = button[1], button[2]
         if ACKNOWLEDGE[label] and node and node.region then
-            if press.pending("message_box") then
-                return "Running"
-            end
-            local pressed, err = pointer.click(node.region)
-            press.made("message_box")
-            if not pressed then
+            local outcome, err = act.click("message_box", node.region)
+            if outcome == act.WAITING or outcome == act.REFUSED then
                 log.repeated("message_box", "debug", "client",
                     "the message box was not dismissed: " .. tostring(err))
                 return "Running"
             end
-            log.info("client", "dismissed a message box with \"" .. label .. "\"")
+            if outcome == act.CLICKED then
+                log.info("client", "dismissed a message box with \"" .. label .. "\"")
+            end
             return "Running"
         end
     end

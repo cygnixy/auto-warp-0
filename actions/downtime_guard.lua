@@ -1,3 +1,4 @@
+local dialog = require("std.dialog")
 local log = require("std.log")
 local downtime = require("std.downtime")
 
@@ -15,15 +16,9 @@ local M = {}
 -- args[1] is the threshold in seconds (downtime_guard_seconds). 0 reacts
 -- to Connection Lost only.
 function M.main(args)
-    local boxes = cygnixy.eve.message_boxes
-    if boxes then
-        for _, box in ipairs(boxes) do
-            local buttons = box.buttons
-            if buttons and #buttons == 1 and buttons[1][2] == "Quit" then
-                log.error("downtime", "connection lost: the client offers only Quit")
-                return "Failure"
-            end
-        end
+    if dialog.quit_box() then
+        log.error("downtime", "connection lost: the client offers only Quit")
+        return "Failure"
     end
 
     local left = downtime.seconds_left()
