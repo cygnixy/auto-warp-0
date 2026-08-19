@@ -9,6 +9,22 @@ local warp_choice = require("warp_choice")
 
 local M = {}
 
+-- The bb key that says the young-session line has already been logged this
+-- session change. Owned here, next to the code that sets and reads it, so
+-- that journal — which must clear it on every phase change — reaches for
+-- this name instead of keeping a second, foreign copy of the string.
+M.SESSION_SAID = "said_session_early"
+
+-- Clears both marks a phase change makes stale: the standing mid-session
+-- probe (owned by std.press under its own "session_probe" key) and the
+-- once-per-session-change line above. The two resets belong together
+-- because both exist only to be forgotten at the same moment — a phase
+-- change — and this is the one place that knows both names.
+function M.forget_session_probe()
+    press.done("session_probe")
+    cygnixy.bb_set(M.SESSION_SAID, 0)
+end
+
 -- Markers are addressed by path rather than by the regions read out of them:
 -- along a path the click point is worked out with the windows lying over the
 -- info panel taken into account, and a marker is eight pixels across — a window
@@ -81,8 +97,8 @@ function M.main(args)
         -- into a warning, teaches the reader to ignore warnings.
         local left = state.session_seconds_left()
         if left ~= nil and left > SESSION_READY_S then
-            if (cygnixy.bb_get("said_session_early") or 0) ~= 1 then
-                cygnixy.bb_set("said_session_early", 1)
+            if (cygnixy.bb_get(M.SESSION_SAID) or 0) ~= 1 then
+                cygnixy.bb_set(M.SESSION_SAID, 1)
                 log.debug("flight",
                     "waiting out the young session change: the client offers no way to travel yet")
             end

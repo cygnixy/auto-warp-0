@@ -2,6 +2,7 @@ local leg = require("leg")
 local log = require("std.log")
 local state = require("std.state")
 local order = require("std.order")
+local open_route_menu_and_warp = require("open_route_menu_and_warp")
 
 local M = {}
 
@@ -90,8 +91,9 @@ function M.main(args)
         log.forget("chose")
         log.forget("route_menu")
 
-        cygnixy.bb_set("press_session_probe", 0)
-        cygnixy.bb_set("said_session_early", 0)
+        -- Both marks belong to open_route_menu_and_warp; it owns the reset
+        -- because it owns the names.
+        open_route_menu_and_warp.forget_session_probe()
 
         order.ends_with_phase(phase)
     end
