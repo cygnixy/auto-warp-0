@@ -6,8 +6,8 @@
 -> fly_route {
     @repeat_until_success -> {
         @fail_is_success -> {
-            @! is_docking?()
-            @! is_undocking?()
+            @! phase_is?("docking")
+            @! phase_is?("undocking")
             ? {
                 @if(push_button_yes) push_message_boxes
                 on_space

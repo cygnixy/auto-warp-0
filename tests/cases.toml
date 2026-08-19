@@ -30,19 +30,22 @@ expect = "Success"
 [[case]]
 name = "warping is recognised"
 fixture = "tests/fixtures/in_space_warping.json"
-action = "is_warp"
+action = "phase_is"
+args = ["warping"]
 expect = "Success"
 
 [[case]]
 name = "warping is not a jump"
 fixture = "tests/fixtures/in_space_warping.json"
-action = "is_jump"
+action = "phase_is"
+args = ["jumping"]
 expect = "Failure"
 
 [[case]]
 name = "approaching counts as movement"
 fixture = "tests/fixtures/approaching_station.json"
-action = "is_approach"
+action = "phase_is"
+args = ["approaching"]
 expect = "Success"
 
 [[case]]
