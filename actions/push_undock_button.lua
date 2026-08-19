@@ -1,7 +1,6 @@
+local act = require("std.act")
 local log = require("std.log")
-local press = require("std.press")
 local state = require("std.state")
-local pointer = require("std.pointer")
 
 local M = {}
 
@@ -21,14 +20,12 @@ function M.main(args)
     end
 
     -- Cooldown check to avoid duplicate clicks during station window closing animation.
-    if press.pending("undock") then
-        return "Running"
-    end
-    local pressed, err = pointer.click(UNDOCK)
-    press.made("undock")
-    if not pressed then
-        log.repeated("undock", "warn", "flight",
-            "the undock button was not pressed: " .. tostring(err))
+    local outcome, err = act.click("undock", UNDOCK)
+    if outcome ~= act.CLICKED then
+        if outcome == act.WAITING or outcome == act.REFUSED then
+            log.repeated("undock", "warn", "flight",
+                "the undock button was not pressed: " .. tostring(err))
+        end
         return "Running"
     end
 

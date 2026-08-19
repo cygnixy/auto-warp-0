@@ -1,4 +1,5 @@
 local leg = require("leg")
+local route = require("std.route")
 local state = require("std.state")
 
 local M = {}
@@ -67,11 +68,8 @@ function M.reading(out_destination, home_destination)
     end
 
     local panel = cygnixy.eve.info_panel_container
-    local route = panel and panel.info_panel_route
-    local jumps = route and route.jumps
-    local markers = route and route.route_element_marker
-    if (type(jumps) == "number" and jumps > 0)
-        or (type(markers) == "table" and #markers > 0) then
+
+    if route.has_route() then
         return M.ROUTE
     end
 

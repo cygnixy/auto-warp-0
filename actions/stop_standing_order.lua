@@ -1,7 +1,8 @@
+local act = require("std.act")
 local log = require("std.log")
 local patience = require("std.patience")
-local pointer = require("std.pointer")
-local press = require("std.press")
+local route = require("std.route")
+local scope = require("std.scope")
 local state = require("std.state")
 
 local M = {}
@@ -69,13 +70,9 @@ end
 -- time an order strands this flight, and the second one would be called
 -- hopeless on its first tick without a single press having been given a chance.
 local function let_go()
-    cygnixy.bb_set(STOPPING, false)
-    patience.forget(WAIT)
-    press.done(PRESS)
-    log.forget(SAID)
-    log.forget(LOUD)
-    log.forget(NO_BUTTON)
-    log.forget(REFUSED)
+    local marks = { clocks = { WAIT }, presses = { PRESS }, lines = { SAID, LOUD, NO_BUTTON, REFUSED }, board = {} }
+    marks.board[STOPPING] = false
+    scope.forget(marks)
 end
 
 function M.main(args)
@@ -125,12 +122,7 @@ function M.main(args)
     -- reasons for at length: a collapsed route panel draws no markers while its
     -- header still counts the jumps, and an expanded one has been seen carrying
     -- markers with no count at all.
-    local panel = cygnixy.eve.info_panel_container
-    local route = panel and panel.info_panel_route
-    local jumps = route and route.jumps
-    local markers = route and route.route_element_marker
-    local somewhere_to_go = (type(jumps) == "number" and jumps > 0)
-        or (type(markers) == "table" and #markers > 0)
+    local somewhere_to_go = route.has_route()
     if not somewhere_to_go then
         if cygnixy.bb_get(STOPPING) == true then
             let_go()
@@ -184,17 +176,14 @@ function M.main(args)
     end
 
     -- Rate-limit Stop clicks to prevent toggling the order before the client responds.
-    if not press.pending(PRESS, ORDER_MS) then
-        local pressed, reason = pointer.click(STOP)
-        press.made(PRESS)
-        if not pressed then
-            -- The host refused the gesture — the operator is working in another
-            -- window, most likely. Nothing of ours reached the client, so this
-            -- is not the client refusing to stop, and it is said as its own
-            -- sentence.
-            log.repeated(REFUSED, "warn", "flight",
-                "Stop was not pressed: " .. tostring(reason))
-        end
+    local outcome, reason = act.click(PRESS, STOP, { pace_ms = ORDER_MS })
+    if outcome == act.WAITING or outcome == act.REFUSED then
+        -- The host refused the gesture — the operator is working in another
+        -- window, most likely. Nothing of ours reached the client, so this
+        -- is not the client refusing to stop, and it is said as its own
+        -- sentence.
+        log.repeated(REFUSED, "warn", "flight",
+            "Stop was not pressed: " .. tostring(reason))
     end
 
     if deaf then

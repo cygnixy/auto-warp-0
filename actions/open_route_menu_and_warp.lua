@@ -4,6 +4,7 @@ local state = require("std.state")
 local order = require("std.order")
 local guard = require("guard")
 local pointer = require("std.pointer")
+local std_route = require("std.route")
 local warp_choice = require("warp_choice")
 
 local M = {}
@@ -106,7 +107,8 @@ function M.main(args)
 
     local panel = cygnixy.eve.info_panel_container
     local route = panel and panel.info_panel_route
-    if not (route and route.route_element_marker and #route.route_element_marker > 0) then
+    local markers = std_route.markers()
+    if not (markers ~= nil and markers > 0) then
         -- Said aloud, because a wordless Running is indistinguishable in the
         -- log from a bot doing its job: the hang of 12:44 left sixty-two
         -- seconds of nothing at all. Only while the panels can be believed --
@@ -125,7 +127,7 @@ function M.main(args)
     end
     log.forget("no_markers")
 
-    local paths = marker_paths(#route.route_element_marker)
+    local paths = marker_paths(markers)
     local entry, err = pointer.open_menu_and_choose(paths, warp_choice.choices)
     if entry == nil then
         log.repeated("route_menu", "debug", "flight",
