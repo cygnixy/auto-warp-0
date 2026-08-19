@@ -1,5 +1,5 @@
 local log = require("std.log")
-local pointer = require("std.pointer")
+local act = require("std.act")
 local press = require("std.press")
 
 local M = {}
@@ -31,21 +31,11 @@ function M.main(args)
     end
 
     -- One press, then the client's answer: the cross clears the field; pressing it again while the client redraws hits whatever replaces it.
-    if press.pending("clear_field") then
-        return "Running"
-    end
-    local cleared, err = pointer.click("info_panel_search.clear")
-    press.made("clear_field")
-    if not cleared then
-        if pointer.transient(err) then
-            log.repeated("clear_field", "debug", "route",
-                "waiting for the foreground before clearing the search field")
-            return "Running"
-        end
-        log.error("route", "clearing the search field failed: " .. tostring(err))
-        return "Failure"
-    end
-    return "Running"
+    return act.click_or_fail("clear_field", "info_panel_search.clear", {
+        subject = "route",
+        waiting = "waiting for the foreground before clearing the search field",
+        failed = "clearing the search field failed: ",
+    })
 end
 
 return M

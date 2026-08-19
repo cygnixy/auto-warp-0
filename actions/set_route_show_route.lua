@@ -1,5 +1,5 @@
 local log = require("std.log")
-local pointer = require("std.pointer")
+local act = require("std.act")
 local press = require("std.press")
 
 local M = {}
@@ -25,12 +25,8 @@ function M.main(args)
             log.error("route", "the route block is collapsed and offers no way to expand it")
             return "Failure"
         end
-        if press.pending("expand_route") then
-            return "Running"
-        end
-        local opened, expand_error = pointer.click(expand)
-        press.made("expand_route")
-        if not opened then
+        local outcome, expand_error = act.click("expand_route", expand)
+        if outcome == act.WAITING or outcome == act.REFUSED then
             log.repeated("expand_route", "debug", "route",
                 "the route block was not expanded: " .. tostring(expand_error))
         end
@@ -51,21 +47,11 @@ function M.main(args)
     end
 
     -- One press, then the client's answer: the route block icon is a toggle: pressing it again hides what it just showed.
-    if press.pending("show_route") then
-        return "Running"
-    end
-    local clicked, err = pointer.click("info_panel_container.icons.route")
-    press.made("show_route")
-    if not clicked then
-        if pointer.transient(err) then
-            log.repeated("show_route", "debug", "route",
-                "waiting for the foreground before opening the route block")
-            return "Running"
-        end
-        log.error("route", "opening the route block failed: " .. tostring(err))
-        return "Failure"
-    end
-    return "Running"
+    return act.click_or_fail("show_route", "info_panel_container.icons.route", {
+        subject = "route",
+        waiting = "waiting for the foreground before opening the route block",
+        failed = "opening the route block failed: ",
+    })
 end
 
 return M

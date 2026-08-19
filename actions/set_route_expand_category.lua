@@ -1,6 +1,6 @@
 local leg = require("leg")
 local log = require("std.log")
-local pointer = require("std.pointer")
+local act = require("std.act")
 local press = require("std.press")
 local search = require("std.search")
 
@@ -41,21 +41,11 @@ function M.main(args)
     end
 
     -- One press, then the client's answer: a category header is a toggle: pressing it again collapses what it just opened.
-    if press.pending("expand") then
-        return "Running"
-    end
-    local clicked, err = pointer.click(header.region)
-    press.made("expand")
-    if not clicked then
-        if pointer.transient(err) then
-            log.repeated("expand", "debug", "route",
-                "waiting for the foreground before expanding the category")
-            return "Running"
-        end
-        log.error("route", "expanding the category failed: " .. tostring(err))
-        return "Failure"
-    end
-    return "Running"
+    return act.click_or_fail("expand", header.region, {
+        subject = "route",
+        waiting = "waiting for the foreground before expanding the category",
+        failed = "expanding the category failed: ",
+    })
 end
 
 return M

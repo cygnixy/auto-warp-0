@@ -1,6 +1,6 @@
 local leg = require("leg")
 local log = require("std.log")
-local pointer = require("std.pointer")
+local act = require("std.act")
 local search = require("std.search")
 local press = require("std.press")
 
@@ -85,21 +85,11 @@ function M.main(args)
     end
 
     -- One press, then the client's answer: collapsing again mid-redraw lands on a list that has moved under the cursor.
-    if press.pending("collapse") then
-        return "Running"
-    end
-    local clicked, err = pointer.click(results.collapse_all)
-    press.made("collapse")
-    if not clicked then
-        if pointer.transient(err) then
-            log.repeated("collapse", "debug", "route",
-                "waiting for the foreground before collapsing the groups")
-            return "Running"
-        end
-        log.error("route", "collapsing the groups failed: " .. tostring(err))
-        return "Failure"
-    end
-    return "Running"
+    return act.click_or_fail("collapse", results.collapse_all, {
+        subject = "route",
+        waiting = "waiting for the foreground before collapsing the groups",
+        failed = "collapsing the groups failed: ",
+    })
 end
 
 return M

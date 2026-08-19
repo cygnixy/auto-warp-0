@@ -1,5 +1,5 @@
 local log = require("std.log")
-local pointer = require("std.pointer")
+local act = require("std.act")
 local press = require("std.press")
 
 local M = {}
@@ -39,12 +39,8 @@ function M.main(args)
         -- The window is still there, but the last press may not have been
         -- answered yet, and a second one would land on whatever the client
         -- puts in its place.
-        if press.pending("close_results") then
-            return "Running"
-        end
-        local clicked, err = pointer.click(close)
-        press.made("close_results")
-        if not clicked then
+        local outcome, err = act.click("close_results", close)
+        if outcome == act.WAITING or outcome == act.REFUSED then
             log.repeated("close_results", "debug", "route",
                 "the results window was not closed: " .. tostring(err))
         end

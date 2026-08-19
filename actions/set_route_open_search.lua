@@ -1,6 +1,6 @@
 local log = require("std.log")
 local press = require("std.press")
-local pointer = require("std.pointer")
+local act = require("std.act")
 
 local M = {}
 
@@ -48,21 +48,13 @@ function M.main(args)
         ", icon=" .. tostring(icon and icon.x) .. "," .. tostring(icon and icon.y) ..
         ", field=" .. tostring(search and search.field and search.field.x))
 
-    local clicked, err = pointer.click("info_panel_container.icons.search")
-    press.made("open_search")
-    if not clicked then
-        if pointer.transient(err) then
-            log.repeated("open_search", "debug", "route",
-                "waiting for the foreground before opening the search")
-            return "Running"
-        end
-        log.error("route", "opening the search failed: " .. tostring(err))
-        return "Failure"
-    end
-
     -- The panel opens a frame later; the tree is re-read on the next tick and
     -- the first condition above will see it.
-    return "Running"
+    return act.click_or_fail("open_search", "info_panel_container.icons.search", {
+        subject = "route",
+        waiting = "waiting for the foreground before opening the search",
+        failed = "opening the search failed: ",
+    })
 end
 
 return M
