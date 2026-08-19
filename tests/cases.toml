@@ -66,6 +66,18 @@ fixture = "tests/fixtures/docked_with_route.json"
 action = "is_message_boxes"
 expect = "Failure"
 
+[[case]]
+name = "the route panel naming the system the ship is already in is the last system"
+fixture = "tests/fixtures/session_route_arrived.json"
+action = "is_last_system"
+expect = "Success"
+
+[[case]]
+name = "two unread panels are not a match by coincidence: neither has named a system yet"
+fixture = "tests/fixtures/route_panels_present_but_unread.json"
+action = "is_last_system"
+expect = "Failure"
+
 # --- actions ---------------------------------------------------------------
 
 [[case]]
@@ -787,10 +799,10 @@ action = "is_route_set"
 expect = "Running"
 
 [[case]]
-name = "a blank panel with the client settled is an answer: there is no route"
+name = "a panel the client has not drawn at all is not yet an answer, settled or not"
 fixture = "tests/fixtures/route_block_hidden.json"
 action = "is_route_set"
-expect = "Failure"
+expect = "Running"
 
 [[case]]
 name = "the route is not announced twice because the panel blinked"
@@ -1042,6 +1054,15 @@ log_contains = ["type_text(\"Jita\")"]
 [[case]]
 name = "a route is set even when the panel that would show it is shut"
 fixture = "tests/fixtures/route_collapsed.json"
+action = "is_route_set"
+expect = "Success"
+
+[[case]]
+name = "collapsed panel with markers is a route"
+# A route is jumps counted OR markers drawn, per std.route.has_route(): a
+# header that has not yet counted the jumps (still 0) does not un-say the
+# markers it is already drawing beside it.
+fixture = "tests/fixtures/route_collapsed_zero_jumps.json"
 action = "is_route_set"
 expect = "Success"
 

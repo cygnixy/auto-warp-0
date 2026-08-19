@@ -105,8 +105,6 @@ function M.main(args)
         log.debug("flight", "the route panel has caught up and held; trying it mid-session")
     end
 
-    local panel = cygnixy.eve.info_panel_container
-    local route = panel and panel.info_panel_route
     local markers = std_route.markers()
     if not (markers ~= nil and markers > 0) then
         -- Said aloud, because a wordless Running is indistinguishable in the
@@ -118,8 +116,11 @@ function M.main(args)
             log.repeated("no_markers", "debug", "flight",
                 "the route panel shows no marker to order from")
 
-            -- If no markers and next_system is null/empty, fail to allow route exit checks.
-            if type(route.next_system) ~= "string" then
+            -- If no markers and next_system is null/empty, fail to allow route
+            -- exit checks. std.route.next_system() reads an empty string the
+            -- same as no answer at all, so a client that draws the field but
+            -- leaves it blank no longer holds this Running for ever.
+            if std_route.next_system() == nil then
                 return "Failure"
             end
         end

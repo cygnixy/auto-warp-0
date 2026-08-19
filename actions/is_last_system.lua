@@ -1,14 +1,16 @@
+local route = require("std.route")
+
 local M = {}
 
+-- Whether the route panel names the very system the ship is in, read
+-- through std.route.at_final_system() instead of a second hand-written
+-- comparison of the same two fields. nil (either side unread) is not
+-- arrival: it used to compare equal to itself and pass this off as
+-- Success, a latent bug now closed by treating anything short of a
+-- confirmed "true" as Failure.
 function M.main(args)
-    if cygnixy.eve.info_panel_container then
-        local info_panel = cygnixy.eve.info_panel_container.info_panel_location_info
-        local route = cygnixy.eve.info_panel_container.info_panel_route
-        if info_panel and route then
-            if route.next_system == info_panel.current_solar_system_name then
-                return "Success"
-            end
-        end
+    if route.at_final_system() then
+        return "Success"
     end
     return "Failure"
 end
