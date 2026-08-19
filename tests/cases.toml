@@ -1338,33 +1338,32 @@ log_contains = ["no results"]
 # warp, where the twenty seconds it costs are being spent on flying anyway.
 #
 # The walk itself is cygnixy/std's std.survey, and agent-missions calls the same
-# one from an action of the same name. What is decided here is when: this bot is
-# shared -- other missions fly with it, and a fight's business is none of theirs
-# -- so the survey is off unless the mission asks for it, and it does not begin
-# before the ship is actually flying.
+# one from an action of the same name. What is decided here is when: it does not
+# begin before the ship is actually flying, and it is on by default -- the same
+# polarity agent-missions uses for its own switch. A mission turns it off by
+# name; it does not have to ask for it by name to get it.
 
-# Off is the default, and off means nothing happens: no hover, and not a word
-# in the log. Any neighbouring mission that upgrades this bot and changes
-# nothing must not be able to tell the difference.
+# Off is said explicitly: args[1] == false skips with a line naming why, so a
+# mission that turned the survey off can be told apart, in the log, from one
+# that never touched the question.
 [[case]]
-name    = "with the survey off, a flight in warp hovers nothing and says nothing"
+name    = "with the survey off, a flight in warp hovers nothing but says why"
 action  = "survey_ship"
 fixture = "tests/fixtures/ship_slots_warping.json"
 args    = [false]
 expect  = "Success"
-log_absent = ["hover", "ship:"]
+log_contains = ["info: ship: the survey is left to whoever flies: survey_ship is off"]
+log_absent = ["hover"]
 
-# A variable that never arrives reads as off, and that is the opposite of
-# agent-missions' answer to the same nil: there the survey is the bot's own job
-# and nil means "nobody said, take it"; here it is a favour to a mission that
-# asked, and a mission that did not ask gets a flight, not ten hovers.
+# A variable that never arrives reads as a yes, the same as agent-missions'
+# answer to the same nil: nobody having said no, the walk begins.
 [[case]]
-name    = "no variable at all leaves the flight exactly as it was"
+name    = "no variable at all is not a no: the walk begins all the same"
 action  = "survey_ship"
 fixture = "tests/fixtures/ship_slots_warping.json"
 args    = []
-expect  = "Success"
-log_absent = ["hover", "ship:"]
+expect  = "Running"
+log_contains = ["hover(1065, 935)"]
 
 # Asked for, and the ship is in warp: the walk begins on the first slot. The
 # coordinate is the same F1 the walk's own cases in cygnixy/std hover, because
