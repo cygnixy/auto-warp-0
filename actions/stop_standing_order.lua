@@ -4,6 +4,7 @@ local patience = require("std.patience")
 local route = require("std.route")
 local scope = require("std.scope")
 local state = require("std.state")
+local text = require("std.text")
 
 local M = {}
 
@@ -61,7 +62,7 @@ local ORDERED = "_state"
 -- Has this flight ordered the ship anywhere yet in this step?
 local function flight_has_ordered()
     local ordered = cygnixy.bb_get(ORDERED)
-    return type(ordered) == "string" and ordered ~= ""
+    return text.present(ordered)
 end
 
 -- Everything the stopping kept, dropped.

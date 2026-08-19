@@ -3,6 +3,7 @@ local log = require("std.log")
 local act = require("std.act")
 local search = require("std.search")
 local press = require("std.press")
+local text = require("std.text")
 
 local M = {}
 
@@ -70,7 +71,7 @@ function M.main(args)
 
     -- The row is here already. Collapsing now would hide the very thing the
     -- search was for.
-    if type(destination) == "string" and destination ~= "" then
+    if text.present(destination) then
         local row = search.find_entry(entries, destination)
         if row ~= nil then
             press.done("collapse")

@@ -1,4 +1,5 @@
 local leg = require("leg")
+local text = require("std.text")
 
 local M = {}
 
@@ -11,7 +12,7 @@ local M = {}
 -- leg.pick chooses between them.
 function M.main(args)
     local destination = leg.pick(args and args[1], args and args[2])
-    if type(destination) == "string" and destination ~= "" then
+    if text.present(destination) then
         return "Success"
     end
     return "Failure"

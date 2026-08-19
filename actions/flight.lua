@@ -1,6 +1,7 @@
 local leg = require("leg")
 local route = require("std.route")
 local state = require("std.state")
+local text = require("std.text")
 
 local M = {}
 
@@ -63,7 +64,7 @@ local WARP_OFFERED = "Warp to Location"
 
 function M.reading(out_destination, home_destination)
     local destination = leg.pick(out_destination, home_destination)
-    if type(destination) == "string" and destination ~= "" then
+    if text.present(destination) then
         return M.DESTINATION
     end
 
@@ -74,7 +75,7 @@ function M.reading(out_destination, home_destination)
     end
 
     local ordered = cygnixy.bb_get("_state")
-    if type(ordered) == "string" and ordered ~= "" then
+    if text.present(ordered) then
         return M.ORDERED
     end
 
