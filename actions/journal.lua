@@ -145,6 +145,18 @@ function M.main(args)
             else
                 log.info("flight", "docked at " .. where)
             end
+            -- The persistent half of "where is home". The operator's slot
+            -- variables died with a reselect on 2026-08-20 13:35 and the
+            -- rescue step ran with its destination empty; what survives every
+            -- restart and reselect is the store, and in the mission loop the
+            -- station this bot last docked at IS home — the loop docks there
+            -- at the end of every iteration. Written only off a station name
+            -- the client actually gave; a dock recorded as a system name is
+            -- no address to fly to. rawget, for std/modules.lua's reason: the
+            -- cygnixy table answers missing fields with an error, not nil.
+            if station ~= nil and rawget(cygnixy, "store_set") ~= nil then
+                cygnixy.store_set("last_docked_station", station)
+            end
         end
     end
     if now_place ~= nil then

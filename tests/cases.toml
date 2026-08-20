@@ -2590,3 +2590,52 @@ args    = ["Launcher"]
 setup_bb = { keep_ship_survey = { slots = { "F1" = { name = "5x Rapid Light Missile Launcher II", activatable = true } } } }
 expect  = "Success"
 log_absent = ["open_menu"]
+
+# --- the store's memory of home ----------------------------------------------
+#
+# The operator's slot variables died with a reselect on 2026-08-20 13:35: the
+# rescue step ran with its destination empty, no route stood (the failed step
+# never laid one), and the ship stayed in the pocket while the run stopped.
+# What survives every restart and reselect is the STORE, and the one address a
+# rescue wants is the station this bot last docked at — the mission loop docks
+# at home at the end of every iteration, so the last dock IS home.
+
+[[case]]
+name = "a dock writes the station down for the rescue that comes after a restart"
+fixtures = [
+    "tests/fixtures/journal_space_jita.json",
+    "tests/fixtures/journal_space_perimeter.json",
+    "tests/fixtures/journal_docked_arrived.json",
+]
+action = "journal"
+args = ["Hykkota V - Moon 17", "station"]
+expect = "Success"
+log_contains = ["store_set last_docked_station"]
+
+[[case]]
+name     = "a station-bound flight given nothing takes the last docked station from the store"
+action   = "somewhere_to_fly"
+fixture  = "tests/fixtures/drifting_route_flown.json"
+args     = ["", "", "station"]
+setup_store = { last_docked_station = "Perimeter II - Moon 1 - Caldari Navy Assembly Plant" }
+expect   = "Success"
+log_contains = [
+    "warn: flight: this flight was given no destination and no route stands — the last station this bot docked at, Perimeter II - Moon 1 - Caldari Navy Assembly Plant, is written down in the store, and the flight goes there rather than nowhere",
+    "bb_set _recovered_destination",
+]
+
+# A system-bound flight is left to fail exactly as before: its emptiness means
+# the step that was to lay the route did not, and flying somewhere else would
+# dress that fault up as a flight.
+[[case]]
+name     = "a system-bound flight given nothing is not sent to a station"
+action   = "somewhere_to_fly"
+fixtures = [
+    "tests/fixtures/drifting_route_flown.json",
+    "tests/fixtures/drifting_route_flown.json",
+]
+tick_ms  = 35000
+args     = ["", "", "system"]
+setup_store = { last_docked_station = "Perimeter II - Moon 1 - Caldari Navy Assembly Plant" }
+expect   = "Failure"
+log_absent = ["rather than nowhere"]

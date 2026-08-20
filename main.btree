@@ -32,7 +32,7 @@ include('fly_route.btree')
     flight_progress()
 
     /* Verify flight destination is valid/meaningful */
-    somewhere_to_fly(destination, return_destination)
+    somewhere_to_fly(destination, return_destination, destination_kind)
 
     /* Clear blocking message boxes if present */
     dismiss_message_box()
