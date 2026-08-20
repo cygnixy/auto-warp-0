@@ -2518,3 +2518,75 @@ log_contains = [
     "click_path(\"shipui.stop_button\"",
     "which this flight never ordered",
 ]
+
+# --- reload_weapons -----------------------------------------------------------
+#
+# Topping the magazines up on the way, once per flight. Until 2026-08-20 nothing
+# on the flight home touched them: a launcher that had fired the pocket dry flew
+# home empty and began the next mission that way. The frames are mission-combat's
+# own reload frames, measured by the operator on 2026-08-14: with one round gone
+# the module's menu begins with `Reload all`, with the magazine full it does not,
+# and the entry's presence IS the client's answer to "is there anything to load".
+# There is deliberately no threshold here — see the head of the action — so the
+# client is asked once per weapon per flight, in a warp, where the guns are
+# silent anyway.
+
+[[case]]
+name    = "a magazine short of full is topped up on the warp leg"
+action  = "reload_weapons"
+fixture = "tests/fixtures/combat_reload_partial_in_warp.json"
+args    = ["Launcher"]
+setup_bb = { keep_ship_survey = { slots = { "F1" = { name = "5x Rapid Light Missile Launcher II", activatable = true } } } }
+expect  = "Success"
+log_contains = [
+    "open_menu chose \"Reload all\"",
+    "offered Reload all in its menu — that entry is the client saying the magazine is not full, so it was chosen, and it fills on the way",
+]
+
+# The client is asked ONCE per flight: the answer holds, because nothing empties
+# a magazine between two warps of one flight. The same frame twice, and the menu
+# is opened exactly once.
+[[case]]
+name     = "a weapon that has answered is not asked again on the same flight"
+action   = "reload_weapons"
+fixtures = [
+    "tests/fixtures/combat_reload_partial_in_warp.json",
+    "tests/fixtures/combat_reload_partial_in_warp.json",
+]
+tick_ms  = 31000
+args     = ["Launcher"]
+setup_bb = { keep_ship_survey = { slots = { "F1" = { name = "5x Rapid Light Missile Launcher II", activatable = true } } } }
+expect   = "Success"
+[[case.log_counts]]
+needle = "open_menu right_click"
+times  = 1
+
+# A menu with no Reload all in it is a full magazine, said in the client's own
+# words — and that answer holds for the flight exactly as a reload does.
+[[case]]
+name     = "a full magazine is left alone, and the client is what says it is full"
+action   = "reload_weapons"
+fixtures = [
+    "tests/fixtures/combat_reload_full_in_warp.json",
+    "tests/fixtures/combat_reload_full_in_warp.json",
+]
+tick_ms  = 31000
+args     = ["Launcher"]
+setup_bb = { keep_ship_survey = { slots = { "F1" = { name = "5x Rapid Light Missile Launcher II", activatable = true } } } }
+expect   = "Success"
+log_contains = ["is full: its menu offers no Reload all"]
+log_absent = ["open_menu chose"]
+[[case.log_counts]]
+needle = "open_menu right_click"
+times  = 1
+
+# A ship standing still is left alone: the reload belongs to a warp, where the
+# mouse and the guns are both free.
+[[case]]
+name    = "a ship not in warp is left alone"
+action  = "reload_weapons"
+fixture = "tests/fixtures/combat_reload_partial_magazine.json"
+args    = ["Launcher"]
+setup_bb = { keep_ship_survey = { slots = { "F1" = { name = "5x Rapid Light Missile Launcher II", activatable = true } } } }
+expect  = "Success"
+log_absent = ["open_menu"]

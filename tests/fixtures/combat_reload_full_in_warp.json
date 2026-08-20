@@ -1,0 +1,3774 @@
+{
+  "agent_conversation_windows": [],
+  "agents_panel": null,
+  "bookmark_location_window": null,
+  "character_sheet_window": null,
+  "chat_window_stacks": [],
+  "combat_messages": {
+    "entries": [
+      {
+        "slot": "N0",
+        "text": null
+      },
+      {
+        "slot": "L0",
+        "text": null
+      },
+      {
+        "slot": "N1",
+        "text": null
+      },
+      {
+        "slot": "L1",
+        "text": null
+      },
+      {
+        "slot": "N2",
+        "text": null
+      },
+      {
+        "slot": "L2",
+        "text": null
+      },
+      {
+        "slot": "N3",
+        "text": null
+      },
+      {
+        "slot": "L3",
+        "text": null
+      },
+      {
+        "slot": "N4",
+        "text": null
+      },
+      {
+        "slot": "L4",
+        "text": null
+      },
+      {
+        "slot": "N5",
+        "text": "<color=0xff00ffff><b>0</b> "
+      },
+      {
+        "slot": "L5",
+        "text": "<color=0x77ffffff><font size=10>to</font> <b><color=0xffffffff>Veldspar</b><font size=10><color=0x77ffffff> - Hits"
+      }
+    ]
+  },
+  "compression_window": null,
+  "context_menus": [
+    {
+      "entries": [
+        {
+          "enabled": true,
+          "region": {
+            "height": 22,
+            "width": 283,
+            "x": 1083,
+            "y": 870
+          },
+          "text": "Show Info"
+        },
+        {
+          "enabled": true,
+          "region": {
+            "height": 22,
+            "width": 283,
+            "x": 1083,
+            "y": 905
+          },
+          "text": "Unload to Cargo"
+        },
+        {
+          "enabled": true,
+          "region": {
+            "height": 22,
+            "width": 283,
+            "x": 1083,
+            "y": 927
+          },
+          "text": "Set Auto-Reload Off"
+        },
+        {
+          "enabled": true,
+          "region": {
+            "height": 22,
+            "width": 283,
+            "x": 1083,
+            "y": 949
+          },
+          "text": "Turn On Overload"
+        },
+        {
+          "enabled": true,
+          "region": {
+            "height": 22,
+            "width": 283,
+            "x": 1083,
+            "y": 971
+          },
+          "text": "Overload Rack"
+        },
+        {
+          "enabled": true,
+          "region": {
+            "height": 22,
+            "width": 283,
+            "x": 1083,
+            "y": 993
+          },
+          "text": "Stop Overloading Rack"
+        },
+        {
+          "enabled": true,
+          "region": {
+            "height": 22,
+            "width": 283,
+            "x": 1083,
+            "y": 1015
+          },
+          "text": "Set Auto-Repeat Off"
+        },
+        {
+          "enabled": true,
+          "region": {
+            "height": 22,
+            "width": 283,
+            "x": 1083,
+            "y": 1050
+          },
+          "text": "Clear group"
+        }
+      ]
+    }
+  ],
+  "directional_scanner_window": {
+    "scan_results": [],
+    "scroll_node": {
+      "height": 337,
+      "width": 570,
+      "x": 1334,
+      "y": 743
+    },
+    "visibility": {
+      "fraction": 0.937,
+      "largest_visible": {
+        "height": 337,
+        "width": 498,
+        "x": 1374,
+        "y": 743
+      },
+      "occluded_by": [
+        {
+          "by": "menuview",
+          "region": {
+            "height": 275,
+            "width": 40,
+            "x": 1334,
+            "y": 805
+          },
+          "tp_name": "ContextMenu",
+          "z": 1
+        },
+        {
+          "by": "BadgeMasterContainer",
+          "region": {
+            "height": 20,
+            "width": 24,
+            "x": 1880,
+            "y": 1038
+          },
+          "tp_name": "BadgeMasterContainer",
+          "z": 2
+        },
+        {
+          "by": "NotificationContainer",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 1872,
+            "y": 1032
+          },
+          "tp_name": "NotificationContainer",
+          "z": 3
+        }
+      ],
+      "region": {
+        "height": 337,
+        "width": 570,
+        "x": 1334,
+        "y": 743
+      }
+    }
+  },
+  "drones_window": null,
+  "fitting_window": null,
+  "fleet_window": null,
+  "heat_status_tooltip": null,
+  "hero_notification": {
+    "texts": [],
+    "visibility": {
+      "fraction": 0.96,
+      "largest_visible": {
+        "height": 805,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        },
+        {
+          "by": "menuview",
+          "region": {
+            "height": 275,
+            "width": 299,
+            "x": 1075,
+            "y": 805
+          },
+          "tp_name": "ContextMenu",
+          "z": 1
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "info_panel_container": {
+    "icons": {
+      "agent_missions": null,
+      "all": [
+        {
+          "name": null,
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 104,
+            "y": 50
+          },
+          "texture_path": "res:/UI/Texture/Classes/InfoPanels/search.png"
+        },
+        {
+          "name": null,
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 124,
+            "y": 50
+          },
+          "texture_path": "res:/UI/Texture/Classes/InfoPanels/LocationInfo.png"
+        },
+        {
+          "name": null,
+          "region": {
+            "height": 16,
+            "width": 16,
+            "x": 144,
+            "y": 50
+          },
+          "texture_path": "res:/UI/Texture/Classes/InfoPanels/Route.png"
+        }
+      ],
+      "daily_challenge": null,
+      "location_info": {
+        "height": 16,
+        "width": 16,
+        "x": 124,
+        "y": 50
+      },
+      "route": {
+        "height": 16,
+        "width": 16,
+        "x": 144,
+        "y": 50
+      },
+      "search": {
+        "height": 16,
+        "width": 16,
+        "x": 104,
+        "y": 50
+      }
+    },
+    "info_panel_agent_missions": null,
+    "info_panel_location_info": {
+      "current_solar_system_id": 30000144,
+      "current_solar_system_name": "Perimeter",
+      "expanded_content": {
+        "current_station_name": null
+      },
+      "list_surroundings_button": {
+        "height": 28,
+        "width": 28,
+        "x": 76,
+        "y": 71
+      },
+      "security_status_percent": 0.9
+    },
+    "info_panel_route": {
+      "expand": {
+        "height": 28,
+        "width": 28,
+        "x": 48,
+        "y": 189
+      },
+      "jumps": 0,
+      "next_system": null,
+      "route_element_marker": null
+    },
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 195,
+        "width": 312,
+        "x": 48,
+        "y": 50
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 195,
+        "width": 312,
+        "x": 48,
+        "y": 50
+      }
+    }
+  },
+  "info_panel_search": {
+    "clear": {
+      "height": -8,
+      "width": 256,
+      "x": 104,
+      "y": 73
+    },
+    "display": false,
+    "field": {
+      "height": -8,
+      "width": 256,
+      "x": 104,
+      "y": 73
+    },
+    "text": "",
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 28,
+        "width": 312,
+        "x": 48,
+        "y": 71
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 28,
+        "width": 312,
+        "x": 48,
+        "y": 71
+      }
+    }
+  },
+  "inventory_windows": null,
+  "key_activation_window": null,
+  "layer_abovemain": {
+    "visibility": {
+      "fraction": 0.96,
+      "largest_visible": {
+        "height": 805,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        },
+        {
+          "by": "menuview",
+          "region": {
+            "height": 275,
+            "width": 299,
+            "x": 1075,
+            "y": 805
+          },
+          "tp_name": "ContextMenu",
+          "z": 1
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "locations_window": null,
+  "market_orders_window": null,
+  "message_boxes": [],
+  "module_button_tooltip": null,
+  "neocom": {
+    "buttons": {
+      "AurumStoreBtnDataNode": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 980
+      },
+      "ProjectDiscovery": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 624
+      },
+      "agency": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 192
+      },
+      "airCareerProgram": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 144
+      },
+      "assets": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 384
+      },
+      "charSheetBtn": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 48
+      },
+      "chat": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 720
+      },
+      "clockCont": {
+        "height": 20,
+        "width": 48,
+        "x": 0,
+        "y": 1060
+      },
+      "eveMenuBtn": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 0
+      },
+      "fitting": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 528
+      },
+      "help": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 672
+      },
+      "inventory": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 336
+      },
+      "job_board": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 240
+      },
+      "mail": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 288
+      },
+      "map_beta": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 576
+      },
+      "market": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 480
+      },
+      "newRedeemableItemsNotification": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 932
+      },
+      "shipTree": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 768
+      },
+      "skillsBtn": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 96
+      },
+      "uicontrols.Window": {
+        "height": 765,
+        "width": 48,
+        "x": 0,
+        "y": 144
+      },
+      "wallet": {
+        "height": 48,
+        "width": 48,
+        "x": 0,
+        "y": 432
+      }
+    },
+    "clock": {
+      "parsed_text": "20:28",
+      "text": "<b>20:28</b>"
+    },
+    "icon_inventory": {
+      "height": 40,
+      "width": 40,
+      "x": 4,
+      "y": 340
+    },
+    "visibility": {
+      "fraction": 0.98,
+      "largest_visible": {
+        "height": 1036,
+        "width": 48,
+        "x": 0,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 48,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "overview_windows": {
+    "entries": [
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "639",
+          "Distance": "27 km",
+          "Icon": "1,06",
+          "Name": "Hobgoblin I",
+          "Size": "30 m",
+          "Type": "Hobgoblin I"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "flagIcon",
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "27 km",
+        "object_distance_in_meters": 27000,
+        "object_name": "Hobgoblin I",
+        "object_type": "Hobgoblin I",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 550,
+          "x": 1294,
+          "y": 328
+        },
+        "texts_left_to_right": [
+          "1,06",
+          "639",
+          "30 m",
+          "Hobgoblin I",
+          "Hobgoblin I",
+          "27 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "0",
+          "Distance": "27 km",
+          "Icon": "0,01",
+          "Name": "Test Pilot",
+          "Size": "508 m",
+          "Type": "Pioneer"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite",
+          "flagIcon"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "27 km",
+        "object_distance_in_meters": 27000,
+        "object_name": "Test Pilot",
+        "object_type": "Pioneer",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 550,
+          "x": 1294,
+          "y": 352
+        },
+        "texts_left_to_right": [
+          "0,01",
+          "0",
+          "508 m",
+          "Pioneer",
+          "Test Pilot",
+          "27 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "639",
+          "Distance": "26 km",
+          "Icon": "1,43",
+          "Name": "Hobgoblin I",
+          "Size": "30 m",
+          "Type": "Hobgoblin I"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "flagIcon",
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26 km",
+        "object_distance_in_meters": 26000,
+        "object_name": "Hobgoblin I",
+        "object_type": "Hobgoblin I",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 550,
+          "x": 1294,
+          "y": 304
+        },
+        "texts_left_to_right": [
+          "1,43",
+          "639",
+          "30 m",
+          "Hobgoblin I",
+          "Hobgoblin I",
+          "26 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "0,00",
+          "Distance": "23 km",
+          "Name": "Second Pilot",
+          "Size": "404 m",
+          "Type": "Retriever",
+          "Velocity (m/s)": "0"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite",
+          "flagIcon"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "23 km",
+        "object_distance_in_meters": 23000,
+        "object_name": "Second Pilot",
+        "object_type": "Retriever",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 352
+        },
+        "texts_left_to_right": [
+          "0,00",
+          "0",
+          "404 m",
+          "Retriever",
+          "Second Pilot",
+          "23 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "83 km",
+          "Caldari Trading Station",
+          "Perimeter VI - Ytiri Storage",
+          "15,5 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "16 km",
+          "Customs Office",
+          "Customs Office (Perimeter VII) [Omega And Friends Medialabs]",
+          "12,1 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "16 km",
+          "Customs Office",
+          "Customs Office (Perimeter III) [Omega And Friends Medialabs]",
+          "15,1 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "16 km",
+          "Customs Office",
+          "Customs Office (Perimeter IV) [Omega And Friends Medialabs]",
+          "13,4 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "16 km",
+          "Customs Office",
+          "Customs Office (Perimeter X) [Omega And Friends Medialabs]",
+          "6 266 514 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "7 064 m",
+          "Stargate (Caldari System)",
+          "Maurasi",
+          "6 288 915 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "28 km",
+          "Stargate (Caldari Border)",
+          "Iyen-Oursta",
+          "29,2 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "7 064 m",
+          "Stargate (Caldari System)",
+          "Urlen",
+          "21,3 AU"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "7 064 m",
+          "Damaged Stargate (Caldari System)",
+          "Jita",
+          "6 280 706 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "7 064 m",
+          "Stargate (Caldari System)",
+          "Niyabainen",
+          "6 242 609 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "496 m",
+          "Asteroid",
+          "Veldspar II-Grade",
+          "27 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "472 m",
+          "Asteroid",
+          "Veldspar",
+          "28 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "764 m",
+          "Asteroid",
+          "Veldspar",
+          "27 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "399 m",
+          "Asteroid",
+          "Veldspar II-Grade",
+          "26 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {},
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite",
+          "flagIcon"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": null,
+        "object_distance_in_meters": null,
+        "object_name": null,
+        "object_type": null,
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 3408,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "170 km",
+          "Fortizar",
+          "Perimeter - Tranquility Trading Tower",
+          "6 280 710 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "-",
+          "Distance": "2 357 m",
+          "Name": "Perimeter X - Asteroid Belt 1",
+          "Size": "2 m",
+          "Type": "Asteroid Belt",
+          "Velocity (m/s)": "-"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "2 357 m",
+        "object_distance_in_meters": 2357,
+        "object_name": "Perimeter X - Asteroid Belt 1",
+        "object_type": "Asteroid Belt",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 280
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "2 m",
+          "Asteroid Belt",
+          "Perimeter X - Asteroid Belt 1",
+          "2 357 m"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "0,00",
+          "Distance": "22 km",
+          "Name": "Poksu Mineral Group Retriever",
+          "Size": "404 m",
+          "Type": "♦ Retriever",
+          "Velocity (m/s)": "0"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "22 km",
+        "object_distance_in_meters": 22000,
+        "object_name": "Poksu Mineral Group Retriever",
+        "object_type": "♦ Retriever",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 304
+        },
+        "texts_left_to_right": [
+          "0,00",
+          "0",
+          "404 m",
+          "♦ Retriever",
+          "Poksu Mineral Group Retriever",
+          "22 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "0,00",
+          "Distance": "22 km",
+          "Name": "Poksu Mineral Group Retriever",
+          "Size": "404 m",
+          "Type": "♦ Retriever",
+          "Velocity (m/s)": "0"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "22 km",
+        "object_distance_in_meters": 22000,
+        "object_name": "Poksu Mineral Group Retriever",
+        "object_type": "♦ Retriever",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 328
+        },
+        "texts_left_to_right": [
+          "0,00",
+          "0",
+          "404 m",
+          "♦ Retriever",
+          "Poksu Mineral Group Retriever",
+          "22 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "0,00",
+          "Distance": "23 km",
+          "Name": "Poksu Mineral Group Retriever",
+          "Size": "404 m",
+          "Type": "♦ Retriever",
+          "Velocity (m/s)": "0"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "23 km",
+        "object_distance_in_meters": 23000,
+        "object_name": "Poksu Mineral Group Retriever",
+        "object_type": "♦ Retriever",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 376
+        },
+        "texts_left_to_right": [
+          "0,00",
+          "0",
+          "404 m",
+          "♦ Retriever",
+          "Poksu Mineral Group Retriever",
+          "23 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "0,00",
+          "Distance": "24 km",
+          "Name": "Poksu Mineral Group Retriever",
+          "Size": "404 m",
+          "Type": "♦ Retriever",
+          "Velocity (m/s)": "0"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "24 km",
+        "object_distance_in_meters": 24000,
+        "object_name": "Poksu Mineral Group Retriever",
+        "object_type": "♦ Retriever",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 400
+        },
+        "texts_left_to_right": [
+          "0,00",
+          "0",
+          "404 m",
+          "♦ Retriever",
+          "Poksu Mineral Group Retriever",
+          "24 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "0,00",
+          "Distance": "24 km",
+          "Name": "Poksu Mineral Group Retriever",
+          "Size": "404 m",
+          "Type": "♦ Retriever",
+          "Velocity (m/s)": "0"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "24 km",
+        "object_distance_in_meters": 24000,
+        "object_name": "Poksu Mineral Group Retriever",
+        "object_type": "♦ Retriever",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 424
+        },
+        "texts_left_to_right": [
+          "0,00",
+          "0",
+          "404 m",
+          "♦ Retriever",
+          "Poksu Mineral Group Retriever",
+          "24 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "0,00",
+          "Distance": "24 km",
+          "Name": "Poksu Mineral Group Retriever",
+          "Size": "404 m",
+          "Type": "♦ Retriever",
+          "Velocity (m/s)": "0"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "24 km",
+        "object_distance_in_meters": 24000,
+        "object_name": "Poksu Mineral Group Retriever",
+        "object_type": "♦ Retriever",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 448
+        },
+        "texts_left_to_right": [
+          "0,00",
+          "0",
+          "404 m",
+          "♦ Retriever",
+          "Poksu Mineral Group Retriever",
+          "24 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "-",
+          "Distance": "25 km",
+          "Name": "Veldspar",
+          "Size": "507 m",
+          "Type": "Asteroid",
+          "Velocity (m/s)": "-"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "25 km",
+        "object_distance_in_meters": 25000,
+        "object_name": "Veldspar",
+        "object_type": "Asteroid",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 472
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "507 m",
+          "Asteroid",
+          "Veldspar",
+          "25 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "-",
+          "Distance": "26 km",
+          "Name": "Scordite II-Grade",
+          "Size": "274 m",
+          "Type": "Asteroid",
+          "Velocity (m/s)": "-"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26 km",
+        "object_distance_in_meters": 26000,
+        "object_name": "Scordite II-Grade",
+        "object_type": "Asteroid",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 496
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "274 m",
+          "Asteroid",
+          "Scordite II-Grade",
+          "26 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "-",
+          "Distance": "26 km",
+          "Name": "Veldspar",
+          "Size": "407 m",
+          "Type": "Asteroid",
+          "Velocity (m/s)": "-"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26 km",
+        "object_distance_in_meters": 26000,
+        "object_name": "Veldspar",
+        "object_type": "Asteroid",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 520
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "407 m",
+          "Asteroid",
+          "Veldspar",
+          "26 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "-",
+          "Distance": "26 km",
+          "Name": "Veldspar",
+          "Size": "495 m",
+          "Type": "Asteroid",
+          "Velocity (m/s)": "-"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": true,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite",
+          "targetedByMeIndicator",
+          "myActiveTargetIndicator"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26 km",
+        "object_distance_in_meters": 26000,
+        "object_name": "Veldspar",
+        "object_type": "Asteroid",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 544
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "495 m",
+          "Asteroid",
+          "Veldspar",
+          "26 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "-",
+          "Distance": "26 km",
+          "Name": "Veldspar II-Grade",
+          "Size": "695 m",
+          "Type": "Asteroid",
+          "Velocity (m/s)": "-"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26 km",
+        "object_distance_in_meters": 26000,
+        "object_name": "Veldspar II-Grade",
+        "object_type": "Asteroid",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 592
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "695 m",
+          "Asteroid",
+          "Veldspar II-Grade",
+          "26 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "-",
+          "Distance": "26 km",
+          "Name": "Veldspar",
+          "Size": "579 m",
+          "Type": "Asteroid",
+          "Velocity (m/s)": "-"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26 km",
+        "object_distance_in_meters": 26000,
+        "object_name": "Veldspar",
+        "object_type": "Asteroid",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 664
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "579 m",
+          "Asteroid",
+          "Veldspar",
+          "26 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "-",
+          "Distance": "26 km",
+          "Name": "Scordite II-Grade",
+          "Size": "291 m",
+          "Type": "Asteroid",
+          "Velocity (m/s)": "-"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26 km",
+        "object_distance_in_meters": 26000,
+        "object_name": "Scordite II-Grade",
+        "object_type": "Asteroid",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 568
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "291 m",
+          "Asteroid",
+          "Scordite II-Grade",
+          "26 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "-",
+          "Distance": "26 km",
+          "Name": "Veldspar",
+          "Size": "433 m",
+          "Type": "Asteroid",
+          "Velocity (m/s)": "-"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26 km",
+        "object_distance_in_meters": 26000,
+        "object_name": "Veldspar",
+        "object_type": "Asteroid",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 688
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "433 m",
+          "Asteroid",
+          "Veldspar",
+          "26 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "-",
+          "Distance": "26 km",
+          "Name": "Veldspar",
+          "Size": "606 m",
+          "Type": "Asteroid",
+          "Velocity (m/s)": "-"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26 km",
+        "object_distance_in_meters": 26000,
+        "object_name": "Veldspar",
+        "object_type": "Asteroid",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 712
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "606 m",
+          "Asteroid",
+          "Veldspar",
+          "26 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "-",
+          "Distance": "26 km",
+          "Name": "Scordite",
+          "Size": "258 m",
+          "Type": "Asteroid",
+          "Velocity (m/s)": "-"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26 km",
+        "object_distance_in_meters": 26000,
+        "object_name": "Scordite",
+        "object_type": "Asteroid",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 640
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "258 m",
+          "Asteroid",
+          "Scordite",
+          "26 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "-",
+          "Distance": "26 km",
+          "Name": "Veldspar",
+          "Size": "485 m",
+          "Type": "Asteroid",
+          "Velocity (m/s)": "-"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26 km",
+        "object_distance_in_meters": 26000,
+        "object_name": "Veldspar",
+        "object_type": "Asteroid",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 712
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "485 m",
+          "Asteroid",
+          "Veldspar",
+          "26 km"
+        ]
+      },
+      {
+        "bg_color_fills_percent": [],
+        "cells_texts": {
+          "Angular Velocity (deg/s)": "-",
+          "Distance": "26 km",
+          "Name": "Veldspar II-Grade",
+          "Size": "373 m",
+          "Type": "Asteroid",
+          "Velocity (m/s)": "-"
+        },
+        "common_indications": {
+          "is_jamming_me": false,
+          "is_warp_disrupting_me": false,
+          "targeted_by_me": false,
+          "targeting": false
+        },
+        "icon_sprite_color_percent": null,
+        "names_under_space_object_icon": [
+          "iconSprite"
+        ],
+        "object_alliance": null,
+        "object_corporation": null,
+        "object_distance": "26 km",
+        "object_distance_in_meters": 26000,
+        "object_name": "Veldspar II-Grade",
+        "object_type": "Asteroid",
+        "opacity_percent": null,
+        "right_aligned_icons_hints": [],
+        "row_region": {
+          "height": 24,
+          "width": 534,
+          "x": 1294,
+          "y": 616
+        },
+        "texts_left_to_right": [
+          "-",
+          "-",
+          "373 m",
+          "Asteroid",
+          "Veldspar II-Grade",
+          "26 km"
+        ]
+      }
+    ],
+    "entries_headers": [
+      [
+        "Icon",
+        {
+          "height": 24,
+          "width": 22,
+          "x": 1294,
+          "y": 256
+        }
+      ],
+      [
+        "Distance",
+        {
+          "height": 16,
+          "width": 68,
+          "x": 1324,
+          "y": 260
+        }
+      ],
+      [
+        "Name",
+        {
+          "height": 16,
+          "width": 100,
+          "x": 1404,
+          "y": 260
+        }
+      ],
+      [
+        "Type",
+        {
+          "height": 16,
+          "width": 100,
+          "x": 1516,
+          "y": 260
+        }
+      ],
+      [
+        "Size",
+        {
+          "height": 16,
+          "width": 68,
+          "x": 1628,
+          "y": 260
+        }
+      ],
+      [
+        "Velocity (m/s)",
+        {
+          "height": 16,
+          "width": 46,
+          "x": 1708,
+          "y": 260
+        }
+      ],
+      [
+        "Angular Velocity (deg/s)",
+        {
+          "height": 16,
+          "width": 46,
+          "x": 1766,
+          "y": 260
+        }
+      ]
+    ],
+    "scroll_controls": null,
+    "tabs": [
+      {
+        "is_selected": false,
+        "name": "OverviewTab_DefaultPreset_639452",
+        "tab_region": {
+          "height": 32,
+          "width": 43,
+          "x": 1294,
+          "y": 216
+        }
+      },
+      {
+        "is_selected": false,
+        "name": "OverviewTab_DefaultPreset_639437",
+        "tab_region": {
+          "height": 32,
+          "width": 46,
+          "x": 1361,
+          "y": 216
+        }
+      },
+      {
+        "is_selected": false,
+        "name": "OverviewTab_DefaultPreset_639442",
+        "tab_region": {
+          "height": 32,
+          "width": 35,
+          "x": 1431,
+          "y": 216
+        }
+      },
+      {
+        "is_selected": false,
+        "name": "OverviewTab_DefaultPreset_639448",
+        "tab_region": {
+          "height": 32,
+          "width": 44,
+          "x": 1490,
+          "y": 216
+        }
+      },
+      {
+        "is_selected": true,
+        "name": "OverviewTab_DefaultPreset_639443",
+        "tab_region": {
+          "height": 32,
+          "width": 13,
+          "x": 1558,
+          "y": 216
+        }
+      },
+      {
+        "is_selected": false,
+        "name": "OverviewTab_PVE",
+        "tab_region": {
+          "height": 32,
+          "width": 19,
+          "x": 1595,
+          "y": 216
+        }
+      },
+      {
+        "is_selected": false,
+        "name": "OverviewTab_Stations",
+        "tab_region": {
+          "height": 32,
+          "width": 45,
+          "x": 1638,
+          "y": 216
+        }
+      }
+    ],
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 553,
+        "width": 586,
+        "x": 1276,
+        "y": 190
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 553,
+        "width": 586,
+        "x": 1276,
+        "y": 190
+      }
+    }
+  },
+  "probe_scanner": null,
+  "quick_message": null,
+  "repair_shop": null,
+  "search_results": null,
+  "selected_item_window": {
+    "buttons": {
+      "selectedItemApproach": {
+        "height": 32,
+        "width": 32,
+        "x": 1352,
+        "y": 140
+      },
+      "selectedItemKeepAtRange": {
+        "height": 32,
+        "width": 32,
+        "x": 1460,
+        "y": 140
+      },
+      "selectedItemLookAt": {
+        "height": 32,
+        "width": 32,
+        "x": 1532,
+        "y": 140
+      },
+      "selectedItemOrbit": {
+        "height": 32,
+        "width": 32,
+        "x": 1424,
+        "y": 140
+      },
+      "selectedItemSetInterest": {
+        "height": 32,
+        "width": 32,
+        "x": 1568,
+        "y": 140
+      },
+      "selectedItemShowInfo": {
+        "height": 32,
+        "width": 32,
+        "x": 1604,
+        "y": 140
+      },
+      "selectedItemUnLockTarget": {
+        "height": 32,
+        "width": 32,
+        "x": 1496,
+        "y": 140
+      },
+      "selectedItemWarpTo": {
+        "height": 32,
+        "width": 32,
+        "x": 1388,
+        "y": 140
+      }
+    },
+    "texts": [
+      "No Object Selected",
+      "Selected Item",
+      "26 km",
+      "Veldspar"
+    ],
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 190,
+        "width": 586,
+        "x": 1334,
+        "y": 0
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 190,
+        "width": 586,
+        "x": 1334,
+        "y": 0
+      }
+    }
+  },
+  "session_time_indicator": {
+    "display": false,
+    "hint": "Session changing - Time left: Less than one second",
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 24,
+        "width": 24,
+        "x": 64,
+        "y": 47
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 24,
+        "width": 24,
+        "x": 64,
+        "y": 47
+      }
+    }
+  },
+  "shipui": {
+    "capacitor": {
+      "level_from_pmarks_percent": null,
+      "pmarks": [
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": null
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        },
+        {
+          "color_percent": {
+            "a": 1.0,
+            "b": null,
+            "g": null,
+            "r": null
+          }
+        }
+      ],
+      "ui_node": {
+        "height": 60,
+        "width": 60,
+        "x": 931,
+        "y": 949
+      }
+    },
+    "heat_gauges": {
+      "gauges": [
+        {
+          "heat_percent": null,
+          "rotation_percent": null
+        },
+        {
+          "heat_percent": null,
+          "rotation_percent": null
+        },
+        {
+          "heat_percent": null,
+          "rotation_percent": null
+        }
+      ]
+    },
+    "hitpoints_percent": {
+      "armor": 100,
+      "shield": 100,
+      "structure": 100
+    },
+    "indication": {
+      "maneuver_type": "Warp",
+      "texts": [
+        "Warp Drive Active"
+      ]
+    },
+    "max_speed_button": {
+      "height": 12,
+      "width": 12,
+      "x": 1000,
+      "y": 1007
+    },
+    "module_buttons": [
+      {
+        "charges": 20,
+        "is_active": false,
+        "is_busy": true,
+        "is_cycle_ramp_visible": true,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "shortcut": "F1",
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1033,
+          "y": 903
+        },
+        "type_id": 1877,
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1041,
+          "y": 911
+        }
+      },
+      {
+        "charges": null,
+        "is_active": null,
+        "is_busy": false,
+        "is_cycle_ramp_visible": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "shortcut": "Alt-F1",
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1058,
+          "y": 947
+        },
+        "type_id": 3841,
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1066,
+          "y": 955
+        }
+      },
+      {
+        "charges": null,
+        "is_active": null,
+        "is_busy": false,
+        "is_cycle_ramp_visible": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "shortcut": "Alt-F2",
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1109,
+          "y": 947
+        },
+        "type_id": 3841,
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1117,
+          "y": 955
+        }
+      },
+      {
+        "charges": null,
+        "is_active": null,
+        "is_busy": false,
+        "is_cycle_ramp_visible": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "shortcut": "Alt-F3",
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1160,
+          "y": 947
+        },
+        "type_id": 6005,
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1168,
+          "y": 955
+        }
+      },
+      {
+        "charges": null,
+        "is_active": null,
+        "is_busy": false,
+        "is_cycle_ramp_visible": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "shortcut": "Alt-F4",
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1211,
+          "y": 947
+        },
+        "type_id": 2281,
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1219,
+          "y": 955
+        }
+      },
+      {
+        "charges": null,
+        "is_active": null,
+        "is_busy": false,
+        "is_cycle_ramp_visible": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "shortcut": "Alt-F5",
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1262,
+          "y": 947
+        },
+        "type_id": 2281,
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1270,
+          "y": 955
+        }
+      },
+      {
+        "charges": null,
+        "is_active": null,
+        "is_busy": false,
+        "is_cycle_ramp_visible": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "shortcut": "Ctrl-F1",
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1033,
+          "y": 991
+        },
+        "type_id": 22291,
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1041,
+          "y": 999
+        }
+      },
+      {
+        "charges": null,
+        "is_active": null,
+        "is_busy": false,
+        "is_cycle_ramp_visible": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "shortcut": "Ctrl-F2",
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1084,
+          "y": 991
+        },
+        "type_id": 22291,
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1092,
+          "y": 999
+        }
+      },
+      {
+        "charges": null,
+        "is_active": null,
+        "is_busy": false,
+        "is_cycle_ramp_visible": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "shortcut": "Ctrl-F3",
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1135,
+          "y": 991
+        },
+        "type_id": 22291,
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1143,
+          "y": 999
+        }
+      },
+      {
+        "charges": null,
+        "is_active": null,
+        "is_busy": false,
+        "is_cycle_ramp_visible": false,
+        "is_hilite_visible": false,
+        "ramp_rotation_milli": null,
+        "shortcut": "Ctrl-F4",
+        "slot_ui_node": {
+          "height": 64,
+          "width": 64,
+          "x": 1186,
+          "y": 991
+        },
+        "type_id": 35771,
+        "ui_node": {
+          "height": 48,
+          "width": 48,
+          "x": 1194,
+          "y": 999
+        }
+      }
+    ],
+    "module_buttons_rows": {
+      "bottom": [
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_cycle_ramp_visible": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1033,
+            "y": 991
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1041,
+            "y": 999
+          }
+        },
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_cycle_ramp_visible": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1084,
+            "y": 991
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1092,
+            "y": 999
+          }
+        },
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_cycle_ramp_visible": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1135,
+            "y": 991
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1143,
+            "y": 999
+          }
+        },
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_cycle_ramp_visible": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1186,
+            "y": 991
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1194,
+            "y": 999
+          }
+        }
+      ],
+      "middle": [
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_cycle_ramp_visible": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1058,
+            "y": 947
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1066,
+            "y": 955
+          }
+        },
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_cycle_ramp_visible": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1109,
+            "y": 947
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1117,
+            "y": 955
+          }
+        },
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_cycle_ramp_visible": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1160,
+            "y": 947
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1168,
+            "y": 955
+          }
+        },
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_cycle_ramp_visible": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1211,
+            "y": 947
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1219,
+            "y": 955
+          }
+        },
+        {
+          "is_active": null,
+          "is_busy": false,
+          "is_cycle_ramp_visible": false,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1262,
+            "y": 947
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1270,
+            "y": 955
+          }
+        }
+      ],
+      "top": [
+        {
+          "is_active": false,
+          "is_busy": true,
+          "is_cycle_ramp_visible": true,
+          "is_hilite_visible": false,
+          "ramp_rotation_milli": null,
+          "slot_ui_node": {
+            "height": 64,
+            "width": 64,
+            "x": 1033,
+            "y": 903
+          },
+          "ui_node": {
+            "height": 48,
+            "width": 48,
+            "x": 1041,
+            "y": 911
+          }
+        }
+      ]
+    },
+    "offensive_buff_button_names": [],
+    "speed": 0.0,
+    "squadrons_ui": {
+      "squadrons": []
+    },
+    "stop_button": {
+      "height": 12,
+      "width": 12,
+      "x": 907,
+      "y": 1007
+    },
+    "visibility": {
+      "fraction": 0.614,
+      "largest_visible": {
+        "height": 631,
+        "width": 1276,
+        "x": 0,
+        "y": 0
+      },
+      "occluded_by": [
+        {
+          "by": "ResourceLoadingIndicator",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 12,
+            "y": 1036
+          },
+          "tp_name": "ResourceLoadingIndicator",
+          "z": 0
+        },
+        {
+          "by": "menuview",
+          "region": {
+            "height": 275,
+            "width": 299,
+            "x": 1075,
+            "y": 805
+          },
+          "tp_name": "ContextMenu",
+          "z": 1
+        },
+        {
+          "by": "BadgeMasterContainer",
+          "region": {
+            "height": 20,
+            "width": 40,
+            "x": 1880,
+            "y": 1038
+          },
+          "tp_name": "BadgeMasterContainer",
+          "z": 2
+        },
+        {
+          "by": "NotificationContainer",
+          "region": {
+            "height": 32,
+            "width": 32,
+            "x": 1872,
+            "y": 1032
+          },
+          "tp_name": "NotificationContainer",
+          "z": 3
+        },
+        {
+          "by": "ChatWindowStack",
+          "region": {
+            "height": 307,
+            "width": 184,
+            "x": 48,
+            "y": 773
+          },
+          "tp_name": "ChatWindowStack",
+          "z": 4
+        },
+        {
+          "by": "selecteditemview",
+          "region": {
+            "height": 190,
+            "width": 586,
+            "x": 1334,
+            "y": 0
+          },
+          "tp_name": "SelectedItemWnd",
+          "z": 5
+        },
+        {
+          "by": "overview",
+          "region": {
+            "height": 553,
+            "width": 586,
+            "x": 1276,
+            "y": 190
+          },
+          "tp_name": "OverviewWindow",
+          "z": 6
+        },
+        {
+          "by": "directionalScannerWindow",
+          "region": {
+            "height": 337,
+            "width": 570,
+            "x": 1334,
+            "y": 743
+          },
+          "tp_name": "DirectionalScanner",
+          "z": 7
+        },
+        {
+          "by": "standaloneBookmarkWnd",
+          "region": {
+            "height": 142,
+            "width": 312,
+            "x": 48,
+            "y": 631
+          },
+          "tp_name": "StandaloneBookmarkWnd",
+          "z": 8
+        }
+      ],
+      "region": {
+        "height": 1080,
+        "width": 1920,
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "stacking": {
+    "client_area": {
+      "height": 1080,
+      "width": 1920,
+      "x": 0,
+      "y": 0
+    },
+    "modal_active": false,
+    "window_stack": [
+      {
+        "name": null,
+        "region": {
+          "height": 32,
+          "width": 32,
+          "x": 12,
+          "y": 1036
+        },
+        "tp_name": "ResourceLoadingIndicator",
+        "window": null,
+        "z": 0
+      },
+      {
+        "name": "menuview",
+        "region": {
+          "height": 275,
+          "width": 299,
+          "x": 1075,
+          "y": 805
+        },
+        "tp_name": "ContextMenu",
+        "window": null,
+        "z": 1
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 20,
+          "width": 100,
+          "x": 1880,
+          "y": 1038
+        },
+        "tp_name": "BadgeMasterContainer",
+        "window": null,
+        "z": 2
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 32,
+          "width": 32,
+          "x": 1872,
+          "y": 1032
+        },
+        "tp_name": "NotificationContainer",
+        "window": null,
+        "z": 3
+      },
+      {
+        "name": "ChatWindowStack",
+        "region": {
+          "height": 307,
+          "width": 184,
+          "x": 48,
+          "y": 773
+        },
+        "tp_name": "ChatWindowStack",
+        "window": "chat_window_stacks[0]",
+        "z": 4
+      },
+      {
+        "name": "selecteditemview",
+        "region": {
+          "height": 190,
+          "width": 586,
+          "x": 1334,
+          "y": 0
+        },
+        "tp_name": "SelectedItemWnd",
+        "window": "selected_item_window",
+        "z": 5
+      },
+      {
+        "name": "overview",
+        "region": {
+          "height": 553,
+          "width": 586,
+          "x": 1276,
+          "y": 190
+        },
+        "tp_name": "OverviewWindow",
+        "window": "overview_windows",
+        "z": 6
+      },
+      {
+        "name": "directionalScannerWindow",
+        "region": {
+          "height": 337,
+          "width": 570,
+          "x": 1334,
+          "y": 743
+        },
+        "tp_name": "DirectionalScanner",
+        "window": "directional_scanner_window",
+        "z": 7
+      },
+      {
+        "name": "standaloneBookmarkWnd",
+        "region": {
+          "height": 142,
+          "width": 312,
+          "x": 48,
+          "y": 631
+        },
+        "tp_name": "StandaloneBookmarkWnd",
+        "window": "standalone_bookmark_window",
+        "z": 8
+      },
+      {
+        "name": "hudContainer",
+        "region": {
+          "height": 200,
+          "width": 1200,
+          "x": 360,
+          "y": 880
+        },
+        "tp_name": "HudContainer",
+        "window": null,
+        "z": 9
+      },
+      {
+        "name": null,
+        "region": {
+          "height": 1080,
+          "width": 48,
+          "x": 0,
+          "y": 0
+        },
+        "tp_name": "NeocomContainer",
+        "window": "neocom",
+        "z": 10
+      },
+      {
+        "name": "sidePanel",
+        "region": {
+          "height": 1068,
+          "width": 312,
+          "x": 48,
+          "y": 12
+        },
+        "tp_name": "Container",
+        "window": null,
+        "z": 11
+      }
+    ]
+  },
+  "standalone_bookmark_window": {
+    "entries": [],
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 142,
+        "width": 312,
+        "x": 48,
+        "y": 631
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 142,
+        "width": 312,
+        "x": 48,
+        "y": 631
+      }
+    }
+  },
+  "station_window": null,
+  "survey_scan_window": null,
+  "targets": [
+    {
+      "assigned_container_node": {
+        "height": 32,
+        "width": 110,
+        "x": 1209,
+        "y": 132
+      },
+      "assigned_icons": [],
+      "bar_and_image_cont": {
+        "height": 100,
+        "width": 110,
+        "x": 1209,
+        "y": 0
+      },
+      "is_active_target": true,
+      "is_being_removed": false,
+      "texts_top_to_bottom": [
+        "<center>Veldspar",
+        "",
+        "",
+        "<center>26 km"
+      ]
+    }
+  ],
+  "telecom": null,
+  "timer_container": {
+    "is_jump_cloak_active": false,
+    "visibility": {
+      "fraction": 1.0,
+      "largest_visible": {
+        "height": 32,
+        "width": 312,
+        "x": 104,
+        "y": 12
+      },
+      "occluded_by": [],
+      "region": {
+        "height": 32,
+        "width": 312,
+        "x": 104,
+        "y": 12
+      }
+    }
+  },
+  "watchlist_panel": null
+}

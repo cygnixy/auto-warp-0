@@ -15,6 +15,7 @@ push_button_yes = false
 travel_tab = 0
 survey_ship = false
 remember_module_names = false
+weapon_modules = ""
 downtime_guard_seconds = 300
 
 include('set_route.btree')
@@ -41,6 +42,9 @@ include('fly_route.btree')
 
     /* Verify and report ship HUD health readability */
     report_ship_health()
+
+    /* Top up weapon magazines while a warp leg lasts */
+    reload_weapons(weapon_modules)
 
     /* Execute route flight or finalize immediately if already at destination */
     ? {
